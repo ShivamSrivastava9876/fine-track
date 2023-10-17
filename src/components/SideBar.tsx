@@ -7,6 +7,7 @@ import ProductsIcon from "../../public/assets/Icons/products_icon.svg";
 import ReportsIcon from "../../public/assets/Icons/reports_icon.svg";
 import LogoutIcon from "../../public/assets/Icons/logout_icon.svg";
 import Head from "next/head";
+import Link from "next/link";
 
 const SideBar = () => {
   return (
@@ -20,7 +21,7 @@ const SideBar = () => {
           rel="stylesheet"
         />
       </Head>
-      <div className="bg-gray-800 ">
+      <div className="bg-[#3E301A]">
         {/* Side bar logo */}
         <div className="flex items-center justify-center w-12 h-24 mx-auto mt-4">
           <Image
@@ -33,24 +34,24 @@ const SideBar = () => {
         </div>
 
         <div className="w-full flex flex-col  justify-between mt-8">
-          <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white ">
+          <Link
+            href="/"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white "
+          >
             <Image src={DashboardIcon} alt="dashboard-icon" />
 
             <span className=" text-base font-montserrat text-blue-200 font-normal ">
               Dashboard
             </span>
-          </div>
-          <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer">
+          </Link>
+          <Link
+            href="/users"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer"
+          >
             <Image src={UserIcon} alt="user-icon" />
 
             <span className=" text-base text-blue-200 font-normal">Users</span>
-          </div>
-          <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer">
-            <Image src={ProductsIcon} alt="products-icon" />
-            <span className=" text-base text-blue-200 font-normal">
-              Products
-            </span>
-          </div>
+          </Link>
           <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer">
             <Image src={CategoryIcon} alt="category-icon" />
 
@@ -58,6 +59,13 @@ const SideBar = () => {
               Categories
             </span>
           </div>
+          <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer">
+            <Image src={ProductsIcon} alt="products-icon" />
+            <span className=" text-base text-blue-200 font-normal">
+              Products
+            </span>
+          </div>
+
           <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer">
             <Image src={ReportsIcon} alt="product-icon" />
 

@@ -28,12 +28,14 @@ const Login = () => {
         onSubmit={handleLogin}
         className="p-8 rounded shadow-md w-[555px]   "
       >
-        {/* <h2 className="text-2xl mb-6 font-semibold">Login</h2> */}
+        <div className="mb-4 space-y-1">
+          <h2 className=" text-[#F3D46F] font-normal text-base">ACCOUNT</h2>
+        </div>
         <div className="mb-4  ">
           <input
             type="text"
-            className="w-full py-2 px-8 border border-[#9C9C9C] rounded outline-none
-            bg-[#3E301A] text-white"
+            className="w-full py-2 px-8 border border-[#9C9C9C] rounded-xl outline-none
+            bg-[#3E301A] text-[#F3D46F]"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="User Name"
@@ -42,7 +44,7 @@ const Login = () => {
         <div className="mb-2 ">
           <input
             type="password"
-            className="w-full py-2 px-8 border rounded outline-none border-[#9C9C9C] bg-[#3E301A] text-white"
+            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] bg-[#3E301A] text-white"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
