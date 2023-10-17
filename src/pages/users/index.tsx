@@ -1,10 +1,13 @@
 import Layout from "@/components/Layout";
+import UserTables from "@/components/UserTables";
 
 const Users = () => {
   return (
-    <div>
-      <Layout>Hello layout</Layout>
-    </div>
+    <Layout>
+      <div className="p-8">
+        <UserTables />
+      </div>
+    </Layout>
   );
 };
 
