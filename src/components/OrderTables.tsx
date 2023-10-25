@@ -10,7 +10,17 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 
 interface Column {
-  id: "srNo" | "userName" | "email" | "password" | "actions";
+  id:
+    | "HuId"
+    | "productId"
+    | "product"
+    | "quantity"
+    | "stoneWeight"
+    | "grossWeight"
+    | "puritySpc"
+    | "price"
+    | "total"
+    | "actions";
   label: string;
   minWidth?: number;
   align?: "left";
@@ -18,32 +28,56 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: "srNo", label: "Sr no", minWidth: 50 },
-  { id: "userName", label: "Name", minWidth: 250 },
-  { id: "email", label: "Email", minWidth: 300 },
-  { id: "password", label: "Password", minWidth: 250 },
-  { id: "actions", label: "", minWidth: 200 },
+  { id: "HuId", label: "HU ID", minWidth: 80 },
+  { id: "productId", label: "Product ID", minWidth: 100 },
+  { id: "product", label: "Product", minWidth: 150 },
+  { id: "quantity", label: "Quantity", minWidth: 50 },
+  { id: "stoneWeight", label: "Stone weight(gm)", minWidth: 150 },
+  { id: "grossWeight", label: "Gross weight(gm)", minWidth: 150 },
+  { id: "puritySpc", label: "Purity spc", minWidth: 100 },
+  { id: "price", label: "Price", minWidth: 50 },
+  { id: "total", label: "Total", minWidth: 50 },
+  { id: "actions", label: "", minWidth: 150 },
 ];
 
 interface Data {
-  srNo: number;
-  userName: string;
-  email: string;
-  password: string;
+  HuId: number;
+  productId: number;
+  product: string;
+  quantity: number;
+  stoneWeight: number;
+  grossWeight: number;
+  puritySpc: number;
+  price: number;
+  total: number;
 }
 
 const createData = (
-  srNo: number,
-  userName: string,
-  email: string,
-  password: string
+  HuId: number,
+  productId: number,
+  product: string,
+  quantity: number,
+  stoneWeight: number,
+  grossWeight: number,
+  puritySpc: number,
+  price: number,
+  total: number
 ): Data => {
-  return { srNo, userName, email, password };
+  return {
+    HuId,
+    productId,
+    product,
+    quantity,
+    stoneWeight,
+    grossWeight,
+    puritySpc,
+    price,
+    total,
+  };
 };
 
 const rows: Data[] = [
-  createData(1, "User1", "user1@example.com", "password123"),
-  createData(2, "User2", "user2@example.com", "securepass"),
+  createData(1, 23, "Gold", 1, 20, 22, 2, 20000, 20000)
   // Add more mock data as needed
 ];
 

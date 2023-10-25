@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const SideBar = () => {
   return (
-    <>
+    <div className="w-16.3125">
       {/* Head Component */}
       <Head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,10 +33,12 @@ const SideBar = () => {
           />
         </div>
 
-        <div className="w-full flex flex-col  justify-between mt-8">
+        <div className="w-full flex flex-col justify-between mt-8">
           <Link
             href="/"
-            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white "
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
           >
             <Image src={DashboardIcon} alt="dashboard-icon" />
 
@@ -46,27 +48,53 @@ const SideBar = () => {
           </Link>
           <Link
             href="/users"
-            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
           >
             <Image src={UserIcon} alt="user-icon" />
 
             <span className=" text-base text-blue-200 font-normal">Users</span>
           </Link>
-          <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer">
+          <Link
+            href="/category"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+          >
             <Image src={CategoryIcon} alt="category-icon" />
 
             <span className=" text-base text-blue-200 font-normal">
               Categories
             </span>
-          </div>
-          <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer">
+          </Link>
+          <Link
+            href="/orders"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+          >
+            <Image src={UserIcon} alt="user-icon" />
+
+            <span className=" text-base text-blue-200 font-normal">Orders</span>
+          </Link>
+          <Link
+            href="/products"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+          >
             <Image src={ProductsIcon} alt="products-icon" />
             <span className=" text-base text-blue-200 font-normal">
               Products
             </span>
-          </div>
+          </Link>
 
-          <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer">
+          <div
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+          >
             <Image src={ReportsIcon} alt="product-icon" />
 
             <span className=" text-base text-blue-200 font-normal">
@@ -80,7 +108,7 @@ const SideBar = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

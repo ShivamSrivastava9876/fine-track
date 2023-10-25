@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 
 interface Column {
-  id: "srNo" | "userName" | "email" | "password" | "actions";
+  id: "srNo" | "category" | "actions";
   label: string;
   minWidth?: number;
   align?: "left";
@@ -19,31 +19,21 @@ interface Column {
 
 const columns: readonly Column[] = [
   { id: "srNo", label: "Sr no", minWidth: 50 },
-  { id: "userName", label: "Name", minWidth: 250 },
-  { id: "email", label: "Email", minWidth: 300 },
-  { id: "password", label: "Password", minWidth: 250 },
+  { id: "category", label: "Category name", minWidth: 800 },
   { id: "actions", label: "", minWidth: 200 },
 ];
 
 interface Data {
   srNo: number;
-  userName: string;
-  email: string;
-  password: string;
+  category: string;
 }
 
-const createData = (
-  srNo: number,
-  userName: string,
-  email: string,
-  password: string
-): Data => {
-  return { srNo, userName, email, password };
+const createData = (srNo: number, category: string): Data => {
+  return { srNo, category };
 };
 
 const rows: Data[] = [
-  createData(1, "User1", "user1@example.com", "password123"),
-  createData(2, "User2", "user2@example.com", "securepass"),
+    createData(1, "Bracelet")
   // Add more mock data as needed
 ];
 
