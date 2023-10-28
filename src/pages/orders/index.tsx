@@ -3,7 +3,7 @@ import OrderTables from "@/components/OrderTables";
 import OrderButtons from "@/components/OrderButtons";
 import { useState } from "react";
 
-const Products = () => {
+const Orders = () => {
   const [addProduct, setAddProduct] = useState(false);
 
   return (
@@ -16,5 +16,5 @@ const Products = () => {
   );
 };
 
-export default Products;
+export default Orders;
 

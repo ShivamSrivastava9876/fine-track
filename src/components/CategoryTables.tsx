@@ -18,7 +18,7 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: "srNo", label: "Sr no", minWidth: 50 },
+  { id: "srNo", label: "Sr no", minWidth: 80 },
   { id: "category", label: "Category name", minWidth: 800 },
   { id: "actions", label: "", minWidth: 200 },
 ];
@@ -37,7 +37,7 @@ const rows: Data[] = [
   // Add more mock data as needed
 ];
 
-export default function UserTables() {
+export default function CategoryTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

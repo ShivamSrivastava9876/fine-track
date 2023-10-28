@@ -5,8 +5,8 @@ import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 const Header = () => {
   return (
     <div className="w-full bg-white h-20 p-4 flex justify-between items-center shadow-md">
-      <div className="text-2xl font-medium text-black font-mono">
-        <h2>Hello John! 🖐️</h2>
+      <div className="text-2xl font-medium text-black">
+        <h2>Hello John!</h2>
       </div>
 
       <div className="flex items-center w-96 border-2 border-solid border-gray-300 rounded-full px-4 py-2">

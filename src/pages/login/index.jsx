@@ -1,15 +1,22 @@
 import { useState } from "react";
 import Logo from "../../../public/assets/LOGO.png";
+import { useSelector, useDispatch } from 'react-redux';
+import { loginUserAsync } from '../../redux/slice/login/loginSlice';
+import { selectUser } from '../../redux/slice/login/loginSlice';
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const [usernameEntered, setUsernameEntered] = useState("");
+  const [passwordEntered, setPasswordEntered] = useState("");
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    // Handle login logic here
+    console.log(usernameEntered, passwordEntered);
+    dispatch(loginUserAsync({username: usernameEntered, password: passwordEntered}))
   };
 
   return (
@@ -36,17 +43,17 @@ const Login = () => {
             type="text"
             className="w-full py-2 px-8 border border-[#9C9C9C] rounded-xl outline-none
             bg-[#3E301A] text-[#F3D46F]"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={usernameEntered}
+            onChange={(e) => setUsernameEntered(e.target.value)}
             placeholder="User Name"
           />
         </div>
         <div className="mb-2 ">
           <input
-            type="password"
+            type="passwordEntered"
             className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] bg-[#3E301A] text-white"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={passwordEntered}
+            onChange={(e) => setPasswordEntered(e.target.value)}
             placeholder="Password"
           />
         </div>

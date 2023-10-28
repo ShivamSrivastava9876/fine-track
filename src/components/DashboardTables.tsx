@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -10,17 +12,7 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 
 interface Column {
-  id:
-    | "HuId"
-    | "productId"
-    | "product"
-    | "quantity"
-    | "stoneWeight"
-    | "grossWeight"
-    | "puritySpc"
-    | "price"
-    | "total"
-    | "actions";
+  id: "srNo" | "productName" | "quantity" | "price" | "total" | "actions";
   label: string;
   minWidth?: number;
   align?: "left";
@@ -28,60 +20,39 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: "HuId", label: "HU ID", minWidth: 80 },
-  { id: "productId", label: "Product ID", minWidth: 100 },
-  { id: "product", label: "Product", minWidth: 150 },
-  { id: "quantity", label: "Quantity", minWidth: 50 },
-  { id: "stoneWeight", label: "Stone weight(gm)", minWidth: 150 },
-  { id: "grossWeight", label: "Gross weight(gm)", minWidth: 150 },
-  { id: "puritySpc", label: "Purity spc", minWidth: 100 },
-  { id: "price", label: "Price", minWidth: 50 },
-  { id: "total", label: "Total", minWidth: 50 },
-  { id: "actions", label: "", minWidth: 150 },
+  { id: "srNo", label: "Sr no", minWidth: 80 },
+  { id: "productName", label: "Product name", minWidth: 250 },
+  { id: "quantity", label: "Quantity", minWidth: 80 },
+  { id: "price", label: "Price", minWidth: 80 },
+  { id: "total", label: "Total", minWidth: 250 },
+  { id: "actions", label: "", minWidth: 200 },
 ];
 
 interface Data {
-  HuId: number;
-  productId: number;
-  product: string;
+  srNo: number;
+  productName: string;
   quantity: number;
-  stoneWeight: number;
-  grossWeight: number;
-  puritySpc: number;
   price: number;
   total: number;
 }
 
 const createData = (
-  HuId: number,
-  productId: number,
-  product: string,
-  quantity: number,
-  stoneWeight: number,
-  grossWeight: number,
-  puritySpc: number,
-  price: number,
-  total: number
+    srNo: number,
+    productName: string,
+    quantity: number,
+    price: number,
+    total: number
 ): Data => {
-  return {
-    HuId,
-    productId,
-    product,
-    quantity,
-    stoneWeight,
-    grossWeight,
-    puritySpc,
-    price,
-    total,
-  };
+  return { srNo, productName, quantity, price, total };
 };
 
 const rows: Data[] = [
-  createData(1, 23, "Gold", 1, 20, 22, 2, 20000, 20000)
+  createData(1, "Product 1", 1, 24000, 24000),
+  createData(2, "Product 2", 2, 24000, 24000)
   // Add more mock data as needed
 ];
 
-export default function OrderTables() {
+export default function DashboardTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -97,7 +68,7 @@ export default function OrderTables() {
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
+    <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full my-4">
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -131,7 +102,7 @@ export default function OrderTables() {
                             // Render Edit and Delete buttons
                             <div className="space-x-2">
                               <Button variant="contained" color="primary">
-                                Edit
+                                Approve
                               </Button>
                               <Button variant="contained" color="secondary">
                                 Delete

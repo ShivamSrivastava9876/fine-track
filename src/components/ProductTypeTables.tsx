@@ -10,17 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 
 interface Column {
-  id:
-    | "HuId"
-    | "productId"
-    | "product"
-    | "quantity"
-    | "stoneWeight"
-    | "grossWeight"
-    | "puritySpc"
-    | "price"
-    | "total"
-    | "actions";
+  id: "category" | "productType" | "actions";
   label: string;
   minWidth?: number;
   align?: "left";
@@ -28,60 +18,31 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: "HuId", label: "HU ID", minWidth: 80 },
-  { id: "productId", label: "Product ID", minWidth: 100 },
-  { id: "product", label: "Product", minWidth: 150 },
-  { id: "quantity", label: "Quantity", minWidth: 50 },
-  { id: "stoneWeight", label: "Stone weight(gm)", minWidth: 150 },
-  { id: "grossWeight", label: "Gross weight(gm)", minWidth: 150 },
-  { id: "puritySpc", label: "Purity spc", minWidth: 100 },
-  { id: "price", label: "Price", minWidth: 50 },
-  { id: "total", label: "Total", minWidth: 50 },
-  { id: "actions", label: "", minWidth: 150 },
+  { id: "category", label: "Category", minWidth: 80 },
+  { id: "productType", label: "Product type", minWidth: 800 },
+  { id: "actions", label: "", minWidth: 100 }
 ];
 
 interface Data {
-  HuId: number;
-  productId: number;
-  product: string;
-  quantity: number;
-  stoneWeight: number;
-  grossWeight: number;
-  puritySpc: number;
-  price: number;
-  total: number;
+  category: string;
+  productType: string;
 }
 
 const createData = (
-  HuId: number,
-  productId: number,
-  product: string,
-  quantity: number,
-  stoneWeight: number,
-  grossWeight: number,
-  puritySpc: number,
-  price: number,
-  total: number
+  category: string,
+  productType: string
 ): Data => {
   return {
-    HuId,
-    productId,
-    product,
-    quantity,
-    stoneWeight,
-    grossWeight,
-    puritySpc,
-    price,
-    total,
+    category, productType
   };
 };
 
 const rows: Data[] = [
-  createData(1, 23, "Gold", 1, 20, 22, 2, 20000, 20000)
+  createData("Gold", "Chain")
   // Add more mock data as needed
 ];
 
-export default function OrderTables() {
+export default function ProductTypeTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

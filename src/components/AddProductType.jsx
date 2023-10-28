@@ -1,0 +1,127 @@
+import { useState } from "react";
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+
+const AddCategory = ({addProductType, setAddProductType}) => {
+    const [newCategory, setNewCategory] = useState("");
+    const [productType, setProductType] = useState("");
+    const [openCategory, setOpenCategory] = useState(false);
+
+  const handleAddProductType = (e) => {
+    e.preventDefault();
+    //Handle logic here
+  };
+
+  const handleClose = () => {
+    setAddProductType(!addProductType)
+  }
+
+  const handleCategory = () => {
+    setOpenCategory(!openCategory);
+  };
+
+  const handleOptionClick = (option) => {
+    setNewCategory(option);
+    setOpenCategory(!openCategory);
+  };
+
+  return (
+    <div className="flex justify-center m-8 relative">
+      <button
+        className="absolute top-0 right-0 p-0.5 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
+        onClick={handleClose}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+      <form
+        onSubmit={handleAddProductType}
+        className="p-8 rounded shadow-md flex flex-col w-35rem h-28rem bg-white"
+      >
+        <div className="mb-4 space-y-1">
+          <h2 className=" text-[#0a0a0a] text-center font-normal text-base text-16px w-161">
+            Add product type
+          </h2>
+        </div>
+        <div class="relative inline-block text-left mb-2">
+          <button class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+            {newCategory || "Select category"}
+            {/* Arrow icon (tailwindcss/heroicons) */}
+            <svg
+              onClick={handleCategory}
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 ml-2 -mr-1 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </button>
+
+          {openCategory && (
+            <div class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div class="py-1">
+                <div
+                  href="#"
+                  onClick={() => handleOptionClick("Option 1")}
+                  class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
+                >
+                  Option 1
+                </div>
+                <div
+                  href="#"
+                  onClick={() => handleOptionClick("Option 2")}
+                  class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
+                >
+                  Option 2
+                </div>
+                <div
+                  href="#"
+                  onClick={() => handleOptionClick("Option 3")}
+                  class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
+                >
+                  Option 3
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        <div className="mb-4 ">
+          <input
+            type="text"
+            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            value={productType}
+            onChange={(e) => setProductType(e.target.value)}
+            placeholder="Product type"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
+        >
+          Add
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default AddCategory;

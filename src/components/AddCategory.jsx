@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 
-const AddCategory = ({addCategory, setAddCategory}) => {
+const AddCategory = ({ addCategory, setAddCategory }) => {
   const [newCategory, setNewCategory] = useState("");
 
   const handleAddCategory = (e) => {
@@ -10,8 +10,8 @@ const AddCategory = ({addCategory, setAddCategory}) => {
   };
 
   const handleClose = () => {
-    setAddCategory(!addCategory)
-  }
+    setAddCategory(!addCategory);
+  };
 
   return (
     <div className="flex justify-center m-8 relative">
@@ -46,7 +46,7 @@ const AddCategory = ({addCategory, setAddCategory}) => {
         <div className="mb-4 ">
           <input
             type="text"
-            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-21.375 h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={newCategory}
             onChange={(e) => setNewCategory(e.target.value)}
             placeholder="New category"
@@ -55,7 +55,7 @@ const AddCategory = ({addCategory, setAddCategory}) => {
 
         <button
           type="submit"
-          className="w-full rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
+          className="w-21.375 h-3.3125 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
         >
           Add
         </button>

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -8,59 +10,44 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import { useDispatch } from "react-redux";
+import { userDetailsAsync } from "@/redux/slice/user/userSlice";
 
-interface Column {
-  id: "srNo" | "userName" | "email" | "password" | "actions";
-  label: string;
-  minWidth?: number;
-  align?: "left";
-  format?: (value: number) => string;
-}
+const createData = (srNo, userName, email, mobile) => {
+  return { srNo, userName, email, mobile };
+};
 
-const columns: readonly Column[] = [
-  { id: "srNo", label: "Sr no", minWidth: 50 },
+const columns = [
+  { id: "srNo", label: "Sr no", minWidth: 100 },
   { id: "userName", label: "Name", minWidth: 250 },
   { id: "email", label: "Email", minWidth: 300 },
   { id: "password", label: "Password", minWidth: 250 },
   { id: "actions", label: "", minWidth: 200 },
 ];
 
-interface Data {
-  srNo: number;
-  userName: string;
-  email: string;
-  password: string;
-}
-
-const createData = (
-  srNo: number,
-  userName: string,
-  email: string,
-  password: string
-): Data => {
-  return { srNo, userName, email, password };
-};
-
-const rows: Data[] = [
-  createData(1, "User1", "user1@example.com", "password123"),
-  createData(2, "User2", "user2@example.com", "securepass"),
+const rows = [
+  createData(1, "User1", "user1@example.com", 7722772277),
+  createData(2, "User2", "user2@example.com", 7722772277),
   // Add more mock data as needed
 ];
 
 export default function UserTables() {
+  const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  React.useEffect(() => {
+    dispatch(userDetailsAsync());
+  }, [dispatch]);
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">

@@ -9,7 +9,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className=" bg-gray-100">
       <div className="flex min-h-screen">
-        <div className="bg-[#3E301A] min-h-screen w-16.3125 h-64.25">
+        <div className="bg-[#3E301A] min-h-screen w-16.3125">
           <SideBar />
         </div>
         <div className="w-full bg-gray-100">

@@ -1,20 +1,21 @@
 import Layout from "@/components/Layout";
-import ProductButtons from "@/components/ProductButtons";
-import ProductTables from "@/components/ProductTables";
-import AddProduct from "@/components/AddProduct"
+import DashboardData from "@/components/DashboardData";
+import DashboardButtons from "@/components/DashboardButtons";
+import DashboardTables from "@/components/DashboardTables";
 import { useState } from "react";
 
-const Products = () => {
-  const [addProduct, setAddProduct] = useState(false);
+const Dashboard = () => {
 
   return (
     <Layout>
       <div className="p-8">
-        
+        <DashboardData />
+        <DashboardButtons />
+        <DashboardTables />
       </div>
     </Layout>
   );
 };
 
-export default Products;
+export default Dashboard;
 

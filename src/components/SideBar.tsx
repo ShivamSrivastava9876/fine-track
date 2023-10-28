@@ -2,6 +2,7 @@ import SidebarLogo from "../../public/assets/LOGO.png";
 import Image from "next/image";
 import DashboardIcon from "../../public/assets/Icons/dashboard_icon.svg";
 import UserIcon from "../../public/assets/Icons/user_icon.svg";
+import OrderIcon from "../../public/assets/Icons/orders.png";
 import CategoryIcon from "../../public/assets/Icons/category_icon.svg";
 import ProductsIcon from "../../public/assets/Icons/products_icon.svg";
 import ReportsIcon from "../../public/assets/Icons/reports_icon.svg";
@@ -35,7 +36,7 @@ const SideBar = () => {
 
         <div className="w-full flex flex-col justify-between mt-8">
           <Link
-            href="/"
+            href="/dashboard"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -69,14 +70,15 @@ const SideBar = () => {
             </span>
           </Link>
           <Link
-            href="/orders"
+            href="/productType"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
           >
-            <Image src={UserIcon} alt="user-icon" />
-
-            <span className=" text-base text-blue-200 font-normal">Orders</span>
+            <Image src={ProductsIcon} alt="products-icon" />
+            <span className=" text-base text-blue-200 font-normal">
+              Product type
+            </span>
           </Link>
           <Link
             href="/products"
@@ -90,7 +92,19 @@ const SideBar = () => {
             </span>
           </Link>
 
-          <div
+          <Link
+            href="/orders"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+          >
+            <Image src={UserIcon} alt="user-icon" />
+
+            <span className=" text-base text-blue-200 font-normal">Orders</span>
+          </Link>
+
+          <Link
+            href="/"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -100,7 +114,17 @@ const SideBar = () => {
             <span className=" text-base text-blue-200 font-normal">
               Reports
             </span>
-          </div>
+          </Link>
+          <Link
+            href="/"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+          >
+            <Image src={ReportsIcon} alt="product-icon" />
+
+            <span className=" text-base text-blue-200 font-normal">Review</span>
+          </Link>
           <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer ">
             <Image src={LogoutIcon} alt="logout-icon" />
 

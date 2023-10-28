@@ -10,17 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 
 interface Column {
-  id:
-    | "HuId"
-    | "productId"
-    | "product"
-    | "quantity"
-    | "stoneWeight"
-    | "grossWeight"
-    | "puritySpc"
-    | "price"
-    | "total"
-    | "actions";
+  id: "HuId" | "productId" | "product" | "quantity" | "stoneWeight" | "grossWeight" | "puritySpc" | "price" | "total" | "actions";
   label: string;
   minWidth?: number;
   align?: "left";
@@ -81,7 +71,7 @@ const rows: Data[] = [
   // Add more mock data as needed
 ];
 
-export default function UserTables() {
+export default function ProductTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
