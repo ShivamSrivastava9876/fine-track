@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -9,56 +11,48 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 
-interface Column {
-  id: "category" | "productType" | "actions";
-  label: string;
-  minWidth?: number;
-  align?: "left";
-  format?: (value: number) => string;
-}
-
-const columns: readonly Column[] = [
-  { id: "category", label: "Category", minWidth: 80 },
-  { id: "productType", label: "Product type", minWidth: 800 },
-  { id: "actions", label: "", minWidth: 100 }
+const columns = [
+  { id: "srNo", label: "Sr no", minWidth: 80 },
+  { id: "productName", label: "Product name", minWidth: 250 },
+  { id: "quantity", label: "Quantity", minWidth: 80 },
+  { id: "price", label: "Price", minWidth: 80 },
+  { id: "total", label: "Total", minWidth: 250 },
+  { id: "actions", label: "", minWidth: 200 },
 ];
 
-interface Data {
-  category: string;
-  productType: string;
-}
-
 const createData = (
-  category: string,
-  productType: string
-): Data => {
-  return {
-    category, productType
-  };
+    srNo,
+    productName,
+    quantity,
+    price,
+    total
+) => {
+  return { srNo, productName, quantity, price, total };
 };
 
-const rows: Data[] = [
-  createData("Gold", "Chain")
+const rows = [
+  createData(1, "Product 1", 1, 24000, 24000),
+  createData(2, "Product 2", 2, 24000, 24000)
   // Add more mock data as needed
 ];
 
-export default function ProductTypeTables() {
+export default function DashboardTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
+    <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full my-4">
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -92,7 +86,7 @@ export default function ProductTypeTables() {
                             // Render Edit and Delete buttons
                             <div className="space-x-2">
                               <Button variant="contained" color="primary">
-                                Edit
+                                Approve
                               </Button>
                               <Button variant="contained" color="secondary">
                                 Delete

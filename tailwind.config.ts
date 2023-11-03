@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+const { fontFamily } = require('tailwindcss/defaultConfig');
 
 const config: Config = {
   content: [
@@ -24,7 +25,11 @@ const config: Config = {
         '7.3125': '7.3125rem',
         '3.3125': '3.3125rem',
         '1.375': '1.375rem',
-      }, 
+      },
+      fontFamily: {
+        ...fontFamily,
+        'poppins': ['Poppins'], // Replace 'Poppins' with your desired font name
+      },
     },
   },
   plugins: [],

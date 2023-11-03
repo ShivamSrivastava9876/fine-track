@@ -3,9 +3,19 @@ import ProductButtons from "@/components/ProductButtons";
 import ProductTables from "@/components/ProductTables";
 import AddProduct from "@/components/AddProduct"
 import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 const Products = () => {
   const [addProduct, setAddProduct] = useState(false);
+  const router = useRouter(); 
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      router.push('/login'); // Redirect to login page if token is not found
+    }
+  }, []); 
 
   return (
     <Layout>

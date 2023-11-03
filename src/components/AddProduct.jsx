@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddProduct = ({ addProduct, setAddProduct }) => {
+  const dispatch = useDispatch();
+
   const [huId, setHuId] = useState("");
   const [productId, setProductId] = useState("");
   const [productName, setProductName] = useState("");
@@ -16,6 +20,12 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   const [productType, setProductType] = useState("");
   const [openCategory, setOpenCategory] = useState(false);
   const [openProductType, setOpenProductType] = useState(false);
+
+  //Handling category dropdown
+  useEffect(() => {
+    dispatch(getCategoriesAsync())
+  }, [dispatch])
+  const categoryList = useSelector(getCategoryList);
 
   const handleClose = () => {
     setAddProduct(!addProduct);
@@ -77,12 +87,12 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
           className="p-8 flex flex-col items-center w-35rem h-28rem bg-white"
         >
           <div id="textFields" className="grid grid-cols-2 gap-4">
-            <div class="relative inline-block text-left mb-2">
+            <div onClick={handleCategory} class="relative inline-block text-left mb-2">
               <button class="inline-flex items-center justify-center px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                 {category || "Select category"}
                 {/* Arrow icon (tailwindcss/heroicons) */}
                 <svg
-                  onClick={handleCategory}
+                  
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-5 h-5 ml-2 -mr-1 text-gray-400"
                   fill="none"
@@ -99,30 +109,18 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               </button>
 
               {openCategory && (
-                <div class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div class="origin-top-right absolute right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  
+                  {categoryList.map((category) => (
                   <div class="py-1">
                     <div
                       href="#"
-                      onClick={() => handleCategoryClick("Option 1")}
+                      onClick={() => handleCategoryClick(category.category_name)}
                       class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
                     >
-                      Option 1
+                      {category.category_name}
                     </div>
-                    <div
-                      href="#"
-                      onClick={() => handleCategoryClick("Option 2")}
-                      class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                    >
-                      Option 2
-                    </div>
-                    <div
-                      href="#"
-                      onClick={() => handleCategoryClick("Option 3")}
-                      class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                    >
-                      Option 3
-                    </div>
-                  </div>
+                  </div>))}
                 </div>
               )}
             </div>

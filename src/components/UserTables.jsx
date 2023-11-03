@@ -10,8 +10,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
-import { useDispatch } from "react-redux";
-import { userDetailsAsync } from "@/redux/slice/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserData, userDetailsAsync } from "@/redux/slice/user/userSlice";
 
 const createData = (srNo, userName, email, mobile) => {
   return { srNo, userName, email, mobile };
@@ -20,21 +20,16 @@ const createData = (srNo, userName, email, mobile) => {
 const columns = [
   { id: "srNo", label: "Sr no", minWidth: 100 },
   { id: "userName", label: "Name", minWidth: 250 },
-  { id: "email", label: "Email", minWidth: 300 },
-  { id: "password", label: "Password", minWidth: 250 },
+  { id: "email", label: "Email", minWidth: 350 },
+  { id: "mobile", label: "Mobile number", minWidth: 200 },
   { id: "actions", label: "", minWidth: 200 },
-];
-
-const rows = [
-  createData(1, "User1", "user1@example.com", 7722772277),
-  createData(2, "User2", "user2@example.com", 7722772277),
-  // Add more mock data as needed
 ];
 
 export default function UserTables() {
   const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = React.useState([]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -49,10 +44,27 @@ export default function UserTables() {
     dispatch(userDetailsAsync());
   }, [dispatch]);
 
+  const userData = useSelector(selectUserData)[0];
+
+  React.useEffect(() => {
+    if (userData && Array.isArray(userData)) {
+    const newRows = userData.map((data) => {
+      return createData(
+        data.id,
+        data.first_name + " " + data.last_name || "",
+        data.email || "",
+        data.mobile || ""
+      );
+    });
+
+    setRows(newRows)
+  }
+  }, [userData]);
+  
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+      <TableContainer sx={{ maxHeight: 440 }} className="font-Poppins">
+        <Table stickyHeader aria-label="sticky table" className="font-Poppins">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -81,12 +93,12 @@ export default function UserTables() {
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.id === "actions" ? (
-                            // Render Edit and Delete buttons
+                            // Edit and Delete buttons
                             <div className="space-x-2">
-                              <Button variant="contained" color="primary">
+                              <Button className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Edit
                               </Button>
-                              <Button variant="contained" color="secondary">
+                              <Button className="bg-red-400 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Delete
                               </Button>
                             </div>

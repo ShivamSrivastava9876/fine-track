@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
 
-const AddCategory = ({addProductType, setAddProductType}) => {
-    const [newCategory, setNewCategory] = useState("");
-    const [productType, setProductType] = useState("");
-    const [openCategory, setOpenCategory] = useState(false);
+const AddCategory = ({ addProductType, setAddProductType }) => {
+  const dispatch = useDispatch();
+  const [newCategory, setNewCategory] = useState("");
+  const [productType, setProductType] = useState("");
+  const [openCategory, setOpenCategory] = useState(false);
+
+  useEffect(() => {
+    dispatch(getCategoriesAsync())
+  }, [dispatch])
+
+  const categoryList = useSelector(getCategoryList);
 
   const handleAddProductType = (e) => {
     e.preventDefault();
@@ -17,6 +26,7 @@ const AddCategory = ({addProductType, setAddProductType}) => {
 
   const handleCategory = () => {
     setOpenCategory(!openCategory);
+    console.log(categoryList)
   };
 
   const handleOptionClick = (option) => {
@@ -54,12 +64,11 @@ const AddCategory = ({addProductType, setAddProductType}) => {
             Add product type
           </h2>
         </div>
-        <div class="relative inline-block text-left mb-2">
+        <div onClick={handleCategory} class="relative inline-block text-left mb-2">
           <button class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
             {newCategory || "Select category"}
             {/* Arrow icon (tailwindcss/heroicons) */}
             <svg
-              onClick={handleCategory}
               xmlns="http://www.w3.org/2000/svg"
               class="w-5 h-5 ml-2 -mr-1 text-gray-400"
               fill="none"
@@ -76,32 +85,18 @@ const AddCategory = ({addProductType, setAddProductType}) => {
           </button>
 
           {openCategory && (
-            <div class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-              <div class="py-1">
-                <div
-                  href="#"
-                  onClick={() => handleOptionClick("Option 1")}
-                  class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                >
-                  Option 1
-                </div>
-                <div
-                  href="#"
-                  onClick={() => handleOptionClick("Option 2")}
-                  class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                >
-                  Option 2
-                </div>
-                <div
-                  href="#"
-                  onClick={() => handleOptionClick("Option 3")}
-                  class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                >
-                  Option 3
-                </div>
-              </div>
-            </div>
-          )}
+            <div class="origin-top-right absolute right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              {categoryList.map((category) => (
+                <div class="py-1">
+                  <div
+                    href="#"
+                    onClick={() => handleOptionClick(category.category_name)}
+                    class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
+                  >
+                    {category.category_name}
+                  </div>
+                </div>))}
+            </div>)}
         </div>
         <div className="mb-4 ">
           <input

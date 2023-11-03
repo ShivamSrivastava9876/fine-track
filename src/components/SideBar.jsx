@@ -9,8 +9,20 @@ import ReportsIcon from "../../public/assets/Icons/reports_icon.svg";
 import LogoutIcon from "../../public/assets/Icons/logout_icon.svg";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { logoutUserAsync } from "@/redux/slice/login/loginSlice";
 
 const SideBar = () => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    
+    router.push('/login');
+    dispatch(logoutUserAsync());
+  }
+
   return (
     <div className="w-16.3125">
       {/* Head Component */}
@@ -125,7 +137,7 @@ const SideBar = () => {
 
             <span className=" text-base text-blue-200 font-normal">Review</span>
           </Link>
-          <div className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer ">
+          <div onClick={handleLogout} className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer ">
             <Image src={LogoutIcon} alt="logout-icon" />
 
             <span className=" text-base text-blue-200 font-normal">Logout</span>

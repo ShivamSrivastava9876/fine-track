@@ -1,33 +1,62 @@
 import { useState } from "react";
 import Logo from "../../../public/assets/LOGO.png";
-import { useSelector, useDispatch } from 'react-redux';
-import { loginUserAsync } from '../../redux/slice/login/loginSlice';
-import { selectUser } from '../../redux/slice/login/loginSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { loginUserAsync, selectErrorMessage } from "../../redux/slice/login/loginSlice";
+import { selectUser } from "../../redux/slice/login/loginSlice";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const user = useSelector(selectUser);
+  const errorMessage = useSelector(selectErrorMessage);
   const [usernameEntered, setUsernameEntered] = useState("");
   const [passwordEntered, setPasswordEntered] = useState("");
+  const [showErrorBox, setShowErrorBox] = useState(false);
+
+  const hideError = () => {
+    
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
     console.log(usernameEntered, passwordEntered);
-    dispatch(loginUserAsync({username: usernameEntered, password: passwordEntered}))
+    dispatch(
+      loginUserAsync({ username: usernameEntered, password: passwordEntered })
+    ).then((result) => {
+      // Check if createUserAsync was successful
+      if (loginUserAsync.fulfilled.match(result)) {
+        router.push('/dashboard')
+      }
+    });
   };
 
   return (
+
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#3E301A]">
+      {/* error */}
+      {errorMessage && (<div
+        className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        role="alert"
+      >
+        <strong className="font-bold">Error!</strong>
+        <span className="ml-2"> {errorMessage}</span>
+        <button
+          onClick={hideError}
+          className="relative top-0.5 bottom-0 left-1"
+        >
+          <span className="text-red-500 text-2xl">×</span>
+        </button>
+      </div>)}
       <div className="flex items-center justify-center w-[134px] h-[230px] mx-auto mt-4">
         <Image
           src={Logo}
           alt="logo"
           objectFit="contain"
           objectPosition="center"
-          // layout="fill"
+        // layout="fill"
         />
       </div>
 
@@ -45,7 +74,7 @@ const Login = () => {
             bg-[#3E301A] text-[#F3D46F]"
             value={usernameEntered}
             onChange={(e) => setUsernameEntered(e.target.value)}
-            placeholder="User Name"
+            placeholder="Username"
           />
         </div>
         <div className="mb-2 ">
@@ -69,6 +98,8 @@ const Login = () => {
           Login
         </button>
       </form>
+
+
     </div>
   );
 };

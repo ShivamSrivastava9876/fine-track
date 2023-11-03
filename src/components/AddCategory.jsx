@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { useDispatch } from "react-redux";
+import { createCategoryAsync, getCategoriesAsync } from "@/redux/slice/category/categorySlice";
 
 const AddCategory = ({ addCategory, setAddCategory }) => {
+  const dispatch = useDispatch();
   const [newCategory, setNewCategory] = useState("");
 
   const handleAddCategory = (e) => {
     e.preventDefault();
-    //Handle logic here
+    dispatch(createCategoryAsync({category_name: newCategory})).then((result) => {
+      if (createCategoryAsync.fulfilled.match(result)) {
+        dispatch(getCategoriesAsync());
+        setNewCategory("");
+      }
+    })
   };
 
   const handleClose = () => {

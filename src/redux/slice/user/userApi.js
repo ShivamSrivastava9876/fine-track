@@ -4,10 +4,9 @@ export async function userDetails() {
       return localStorage.getItem("token");
     }
     const token = getToken();
-    console.log(token);
     const header = {
       "content-type": "application/json",
-      Authorization: `Bearer ${token}`,
+      Authorization: `Token ${token}`,
     };
     const response = await fetch(
       "http://192.168.29.138:8000/admin_panel/userdetail/",
@@ -21,20 +20,31 @@ export async function userDetails() {
       const data = await response.json();
       return { data };
     }
-  } catch (error) {
-    throw error;
+    else {
+      const error = await response.text();
+      return { error };
+    }
+  }
+  catch (error) {
+    return { error };
   }
 }
 
-export async function createUser() {
+export async function createUser(createUserInfo) {
   try {
+    function getToken() {
+      return localStorage.getItem("token");
+    }
+    const token = getToken();
+    const header = {
+      "content-type": "application/json",
+      Authorization: `Token ${token}`,
+    };
     const response = await fetch(
       "http://192.168.29.138:8000/admin_panel/create-new-user/",
       {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: header,
         body: JSON.stringify(createUserInfo),
       }
     );
@@ -42,11 +52,13 @@ export async function createUser() {
     if (response.ok) {
       const data = await response.json();
       return { data };
-    } else {
-      const error = response.text();
-      throw error;
     }
-  } catch (error) {
-    throw error;
+    else {
+      const error = await response.text();
+      return { error };
+    }
+  } 
+  catch (error) {
+    return { error };
   }
 }

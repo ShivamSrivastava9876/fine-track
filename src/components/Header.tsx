@@ -9,27 +9,29 @@ const Header = () => {
         <h2>Hello John!</h2>
       </div>
 
-      <div className="flex items-center w-96 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
-        <input
-          type="search"
-          placeholder="Search"
-          className="w-full h-full outline-none bg-transparent text-blue-gray-700"
-        />
-        <div className="ml-2">
+      <div className="flex w-2/5 justify-between">
+        <div className="flex items-center w-96 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+          <input
+            type="search"
+            placeholder="Search"
+            className="w-full h-full outline-none bg-transparent text-blue-gray-700"
+          />
+          <div className="ml-2">
+            <Image
+              src={SearchIcon}
+              alt="search-icon"
+              className="cursor-pointer"
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-center items-center rounded-full">
           <Image
-            src={SearchIcon}
-            alt="search-icon"
-            className="cursor-pointer"
+            src={ProfilePhoto}
+            alt="profile-photo"
+            className="rounded-full w-50 h-50"
           />
         </div>
-      </div>
-
-      <div className="rounded-full">
-        <Image
-          src={ProfilePhoto}
-          alt="profile-photo"
-          className="rounded-full "
-        />
       </div>
     </div>
   );

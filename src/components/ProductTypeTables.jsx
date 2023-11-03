@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -10,65 +8,69 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductTypeAsync, getProductTypeList } from "@/redux/slice/productType/productTypeSlice";
 
-interface Column {
-  id: "srNo" | "productName" | "quantity" | "price" | "total" | "actions";
-  label: string;
-  minWidth?: number;
-  align?: "left";
-  format?: (value: number) => string;
-}
-
-const columns: readonly Column[] = [
-  { id: "srNo", label: "Sr no", minWidth: 80 },
-  { id: "productName", label: "Product name", minWidth: 250 },
-  { id: "quantity", label: "Quantity", minWidth: 80 },
-  { id: "price", label: "Price", minWidth: 80 },
-  { id: "total", label: "Total", minWidth: 250 },
-  { id: "actions", label: "", minWidth: 200 },
+const columns = [
+  { id: "srNo", label: "Sr No", minWidth: 80 },
+  { id: "category", label: "Category", minWidth: 100 },
+  { id: "productType", label: "Product type", minWidth: 600 },
+  { id: "actions", label: "", minWidth: 100 }
 ];
 
-interface Data {
-  srNo: number;
-  productName: string;
-  quantity: number;
-  price: number;
-  total: number;
-}
-
-const createData = (
-    srNo: number,
-    productName: string,
-    quantity: number,
-    price: number,
-    total: number
-): Data => {
-  return { srNo, productName, quantity, price, total };
+const createData = (srNo, category, productType) => {
+  return {
+    srNo, category, productType
+  };
 };
 
-const rows: Data[] = [
-  createData(1, "Product 1", 1, 24000, 24000),
-  createData(2, "Product 2", 2, 24000, 24000)
+const rows = [
+  createData(1, 1, "Gold", "Chain")
   // Add more mock data as needed
 ];
 
-export default function DashboardTables() {
+export default function ProductTypeTables() {
+  const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rows, setRows] = React.useState([]);
+  const productTypeList = useSelector(getProductTypeList);
+  console.log(productTypeList);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
+  React.useEffect(() => {
+    dispatch(getProductTypeAsync())
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    if (productTypeList && Array.isArray(productTypeList)) {
+      let srNo = 1;
+      const newRows = productTypeList.map((data) => {
+        const newRow = createData(
+          srNo,
+          data.category || "",
+          data.product_type || ""
+        );
+        srNo = srNo+1;
+        return newRow;
+      });
+
+      setRows(newRows)
+    }
+  }, [productTypeList]);
+
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full my-4">
+    <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -101,19 +103,19 @@ export default function DashboardTables() {
                           {column.id === "actions" ? (
                             // Render Edit and Delete buttons
                             <div className="space-x-2">
-                              <Button variant="contained" color="primary">
-                                Approve
+                              <Button className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                Edit
                               </Button>
-                              <Button variant="contained" color="secondary">
+                              <Button className="bg-red-400 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Delete
                               </Button>
                             </div>
                           ) : // Render other columns
-                          column.format && typeof value === "number" ? (
-                            column.format(value)
-                          ) : (
-                            value
-                          )}
+                            column.format && typeof value === "number" ? (
+                              column.format(value)
+                            ) : (
+                              value
+                            )}
                         </TableCell>
                       );
                     })}

@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { useDispatch } from "react-redux";
+import {
+  createUserAsync,
+  userDetailsAsync,
+} from "@/redux/slice/user/userSlice";
 
-const AddUser = ({addUser, setAddUser}) => {
+const AddUser = ({ addUser, setAddUser }) => {
+  const dispatch = useDispatch();
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [mobileNo, setMobileNo] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -14,7 +23,29 @@ const AddUser = ({addUser, setAddUser}) => {
     e.preventDefault();
     if (password === confirmPassword) {
       setMessage("");
-      // Logic to handle submit
+      dispatch(
+        createUserAsync({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          mobile: mobileNo,
+          password: password,
+        })
+      ).then((result) => {
+        // Check if createUserAsync was successful
+        if (createUserAsync.fulfilled.match(result)) {
+          // Dispatch userDetailsAsync only if user creation is successful
+          dispatch(userDetailsAsync());
+
+          // Clear the form fields by updating state variables to empty values
+          setFirstName("");
+          setLastName("");
+          setEmail("");
+          setMobileNo("");
+          setPassword("");
+          setConfirmPassword("");
+        }
+      });
     } else {
       setMessage("Password does not match");
     }
@@ -29,8 +60,8 @@ const AddUser = ({addUser, setAddUser}) => {
   };
 
   const handleClose = () => {
-    setAddUser(!addUser)
-  }
+    setAddUser(!addUser);
+  };
 
   return (
     <div className="flex justify-center m-8 relative">
@@ -61,6 +92,24 @@ const AddUser = ({addUser, setAddUser}) => {
           <h2 className=" text-[#0a0a0a] text-center font-normal text-base text-16px w-161">
             User Details
           </h2>
+        </div>
+        <div className="mb-4 ">
+          <input
+            type="text"
+            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            placeholder="First name"
+          />
+        </div>
+        <div className="mb-4 ">
+          <input
+            type="text"
+            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            placeholder="Last name"
+          />
         </div>
         <div className="mb-4 ">
           <input
