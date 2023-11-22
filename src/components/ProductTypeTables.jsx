@@ -9,7 +9,9 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductTypeAsync, getProductTypeList } from "@/redux/slice/productType/productTypeSlice";
+import { deleteProductTypeAsync, getProductTypeAsync, getProductTypeList, updateProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
+import EditFormProductType from "./EditFormProductType";
+import DeleteOption from "./DeleteOption";
 
 const columns = [
   { id: "srNo", label: "Sr No", minWidth: 80 },
@@ -18,28 +20,86 @@ const columns = [
   { id: "actions", label: "", minWidth: 100 }
 ];
 
-const createData = (srNo, category, productType) => {
+const createData = (srNo, id, category, productType) => {
   return {
-    srNo, category, productType
+    srNo, id, category, productType
   };
 };
 
-const rows = [
-  createData(1, 1, "Gold", "Chain")
-  // Add more mock data as needed
-];
-
 export default function ProductTypeTables() {
   const dispatch = useDispatch();
+  const [category, setCategory] = React.useState("");
+  const [productType, setProductType] = React.useState("");
+  const [image, setImage] = React.useState(null);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [editedRow, setEditedRow] = React.useState(null);
+  // const [edited, setEdited] = React.useState("");
   const [rows, setRows] = React.useState([]);
+  const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
+  const [openCategory, setOpenCategory] = React.useState(false);
+
+
   const productTypeList = useSelector(getProductTypeList);
-  console.log(productTypeList);
+
+  const handleUpdateProductType = (e) => {
+    e.preventDefault();
+    console.log(category, productType, image, editedRow)
+    dispatch(updateProductTypeAsync({ category: category, product_type: productType, image: image, productTypeId: editedRow })).then((result) => {
+      if (updateProductTypeAsync.fulfilled.match(result)) {
+        dispatch(getProductTypeAsync());
+        setCategory("");
+        setProductType("");
+        setImage(null);
+        setEditedRow(null);
+      }
+    });
+  };
+
+  const handleDelete = (selectedRowId) => {
+    console.log("select", selectedRowId)
+    const productTypeId = selectedRowId;
+    dispatch(deleteProductTypeAsync(productTypeId)).then((result) => {
+      if (deleteProductTypeAsync.fulfilled.match(result)) {
+        dispatch(getProductTypeAsync());
+      }
+    })
+  }
+
+  //To open or close the category dropdown
+  const handleCategory = (e) => {
+    console.log(e);
+    setOpenCategory(!openCategory);
+  };
+
+  //To save new category
+  const handleOptionClick = (option) => {
+    setCategory(option);
+    setOpenCategory(!openCategory);
+  };
+
+  const handleEdit = (rowId, rowCategory) => {
+    setEditedRow(rowId);
+  }
+
+  const handleCancel = () => {
+    setCategory("");
+    setProductType("");
+    setImage(null);
+    setEditedRow(null);
+  }
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
+
+  const handleDeletePopup = (selectedRowId) => {
+    setSelectedRowToDelete(selectedRowId)
+  }
+
+  const handleDeleteCancel = () => {
+    setSelectedRowToDelete(null);
+  }
 
   const handleChangeRowsPerPage = (
     event
@@ -58,13 +118,14 @@ export default function ProductTypeTables() {
       const newRows = productTypeList.map((data) => {
         const newRow = createData(
           srNo,
+          data.id,
           data.category || "",
           data.product_type || ""
         );
-        srNo = srNo+1;
+        srNo = srNo + 1;
         return newRow;
       });
-
+      console.log(rows);
       setRows(newRows)
     }
   }, [productTypeList]);
@@ -103,12 +164,23 @@ export default function ProductTypeTables() {
                           {column.id === "actions" ? (
                             // Render Edit and Delete buttons
                             <div className="space-x-2">
-                              <Button className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                                Edit
-                              </Button>
-                              <Button className="bg-red-400 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                                Delete
-                              </Button>
+
+                              {editedRow === row.id ? (
+                                <div className="space-x-2">
+                                  <EditFormProductType openCategory={openCategory} handleCategory={handleCategory} handleOptionClick={handleOptionClick} handleUpdateProductType={handleUpdateProductType} isOpen={true} category={category} productType={productType} handleCancel={handleCancel} setProductType={setProductType} setImage={setImage} />
+                                </div>
+                              ) : (
+                                <div className="space-x-2">
+                                  <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                    Edit
+                                  </Button>
+                                  <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                    Delete
+                                  </Button>
+                                  {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "product type" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
+
+                                </div>
+                              )}
                             </div>
                           ) : // Render other columns
                             column.format && typeof value === "number" ? (

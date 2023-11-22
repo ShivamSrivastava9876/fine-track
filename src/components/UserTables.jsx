@@ -20,9 +20,9 @@ const createData = (srNo, userName, email, mobile) => {
 const columns = [
   { id: "srNo", label: "Sr no", minWidth: 100 },
   { id: "userName", label: "Name", minWidth: 250 },
-  { id: "email", label: "Email", minWidth: 350 },
-  { id: "mobile", label: "Mobile number", minWidth: 200 },
-  { id: "actions", label: "", minWidth: 200 },
+  { id: "email", label: "Email", minWidth: 450 },
+  { id: "mobile", label: "Mobile number", minWidth: 250 },
+  { id: "actions", label: "", minWidth: 150 },
 ];
 
 export default function UserTables() {
@@ -95,10 +95,10 @@ export default function UserTables() {
                           {column.id === "actions" ? (
                             // Edit and Delete buttons
                             <div className="space-x-2">
-                              <Button className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                              {/* <Button className="bg-blue-400 hover:bg-blue-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Edit
-                              </Button>
-                              <Button className="bg-red-400 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                              </Button> */}
+                              <Button className="bg-red-400 hover:bg-red-600 text-white  py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Delete
                               </Button>
                             </div>

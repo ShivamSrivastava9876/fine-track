@@ -5,12 +5,12 @@ export async function getCategory() {
         }
         const token = getToken();
         const header = {
-            "content-type": "application/json",
+            "Content-type": "application/json",
             Authorization: `Token ${token}`
         }
 
         const response = await fetch(
-            'http://192.168.29.138:8000/admin_panel/category-list/',
+            'http://192.168.29.154:8000/admin_panel/category-list/',
             {
                 method: "GET",
                 headers: header
@@ -37,12 +37,12 @@ export async function createCategory(categoryInfo) {
         }
         const token = getToken();
         const header = {
-            "content-type": "application/json",
+            "Content-type": "application/json",
             Authorization: `Token ${token}`
         }
 
         const response = await fetch(
-            'http://192.168.29.138:8000/admin_panel/create-category/',
+            'http://192.168.29.154:8000/admin_panel/create-category/',
             {
                 method: "POST",
                 headers: header,
@@ -71,12 +71,12 @@ export async function editCategory(editCategoryInfo, categoryId) {
         }
         const token = getToken();
         const header = {
-            "content-type": "application/json",
+            "Content-type": "application/json",
             Authorization: `Token ${token}`
         }
 
         const response = await fetch(
-            `http://192.168.29.138:8000/admin_panel/${categoryId}/update-category/`,
+            `http://192.168.29.154:8000/admin_panel/${categoryId}/update-category/`,
             {
                 method: "PUT",
                 headers: header,
@@ -105,12 +105,12 @@ export async function deleteCategory (categoryId) {
         }
         const token = getToken();
         const header = {
-            "content-type": "application/json",
+            "Content-type": "application/json",
             Authorization: `token ${token}`
         }
 
         const response = await fetch(
-            `http://192.168.29.138:8000/admin_panel/${categoryId}/delete-category/`,
+            `http://192.168.29.154:8000/admin_panel/${categoryId}/delete-category/`,
             {
                 method: "DELETE",
                 headers: header
@@ -130,3 +130,38 @@ export async function deleteCategory (categoryId) {
         return { error };
     }
 }
+
+export async function searchCategory(searchCategoryInfo) {
+    try {
+      function getToken() {
+        return localStorage.getItem("token");
+      }
+      const token = getToken();
+      const header = {
+        "Content-type": "application/json",
+        Authorization: `Token ${token}`,
+      };
+      const response = await fetch(
+        `http://192.168.29.154:8000/admin_panel/category-list/?search=${searchCategoryInfo}`,
+        {
+          method: "GET",
+          headers: header
+        }
+      );
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+        return { data };
+      }
+      else {
+        const error = await response.text();
+        return { error };
+      }
+    } 
+    catch (error) {
+      return { error };
+    }
+  }
+
+ 

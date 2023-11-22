@@ -74,8 +74,6 @@ export default function CategoryTables() {
     setEdited("");
   }
 
-  
-
   const handleCategoryChange = (event) => {
     setEdited(event.target.value);
   }
@@ -93,7 +91,7 @@ export default function CategoryTables() {
 
   React.useEffect(() => {
     dispatch(getCategoriesAsync())
-  }, [dispatch])
+  }, [dispatch]);
 
   React.useEffect(() => {
     if (categoryList && Array.isArray(categoryList)) {
@@ -147,10 +145,10 @@ export default function CategoryTables() {
                             <div className="space-x-2">
                               {editedRow === row.Id ? (
                                 <div className="space-x-2">
-                                  {/* <Button onClick={handleSave} className="bg-blue-400 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                  {/* <Button onClick={handleSave} className="bg-blue-400 hover:bg-blue-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                     Save
                                   </Button>
-                                  <Button onClick={handleCancel} className="bg-red-400 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                  <Button onClick={handleCancel} className="bg-red-400 hover:bg-red-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                     Cancel
                                   </Button> */}
                                   <EditForm isOpen={true} handleSave={handleSave} handleCancel={handleCancel} handleCategoryChange={handleCategoryChange} edited={edited} edits={edits} title="category"/>

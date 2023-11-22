@@ -5,11 +5,11 @@ export async function userDetails() {
     }
     const token = getToken();
     const header = {
-      "content-type": "application/json",
+      "Content-type": "application/json",
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://192.168.29.138:8000/admin_panel/userdetail/",
+      "http://192.168.29.154:8000/admin_panel/userdetail/",
       {
         method: "GET",
         headers: header,
@@ -37,11 +37,11 @@ export async function createUser(createUserInfo) {
     }
     const token = getToken();
     const header = {
-      "content-type": "application/json",
+      "Content-type": "application/json",
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://192.168.29.138:8000/admin_panel/create-new-user/",
+      "http://192.168.29.154:8000/admin_panel/create-new-user/",
       {
         method: "POST",
         headers: header,
@@ -51,6 +51,39 @@ export async function createUser(createUserInfo) {
 
     if (response.ok) {
       const data = await response.json();
+      return { data };
+    }
+    else {
+      const error = await response.text();
+      return { error };
+    }
+  } 
+  catch (error) {
+    return { error };
+  }
+}
+
+export async function searchUser(searchUserInfo) {
+  try {
+    function getToken() {
+      return localStorage.getItem("token");
+    }
+    const token = getToken();
+    const header = {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`,
+    };
+    const response = await fetch(
+      `http://192.168.29.154:8000/admin_panel/userdetail/?search=${searchUserInfo}`,
+      {
+        method: "GET",
+        headers: header
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
       return { data };
     }
     else {

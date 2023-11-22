@@ -10,7 +10,7 @@ const EditForm = ({ edits, title, handleSave, handleCancel, edited, handleCatego
             <div className={`fixed inset-0 z-40 bg-black opacity-40 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
 
             <div className='flex flex-col justify-between items-center fixed inset-60 z-50 bg-white border border-blue-500 rounded p-4 mx-auto w-1/3'>
-                <h2 className='flex items-center m-4 text-3xl font-bold'>Update {title}</h2>
+                <h2 className='flex items-center m-4 text-2xl font-bold'>Update {title}</h2>
 
                 {edits.map((edit) => {
                     return (

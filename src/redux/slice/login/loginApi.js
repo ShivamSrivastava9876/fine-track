@@ -1,10 +1,10 @@
 export async function loginUser(loginInfo) {
   try {
     const response = await fetch(
-      "http://192.168.29.138:8000/admin_panel/login/",
+      "http://192.168.29.154:8000/admin_panel/login/",
       {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers: { "Content-type": "application/json" },
         body: JSON.stringify(loginInfo),
       }
     );
@@ -30,11 +30,11 @@ export async function logoutUser() {
     }
     const token = getToken();
     const header = {
-      "content-type": "application/json",
+      "Content-type": "application/json",
       Authorization: `Token ${token}`
     }
     const response = await fetch(
-      "http://192.168.29.138:8000/admin_panel/logout/",
+      "http://192.168.29.154:8000/admin_panel/logout/",
       {
         method: "POST",
         headers: header

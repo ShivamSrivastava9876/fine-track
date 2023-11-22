@@ -1,21 +1,38 @@
 // components/UserComponent.js
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import Image from "next/image";
+import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
+import { useDispatch } from "react-redux";
+import { searchCategoryAsync } from "@/redux/slice/category/categorySlice";
 
-interface CategoryButtonsProps {
-    addCategory: boolean;
-    setAddCategory: (value: boolean) => void;
-}
-
-const CategoryComponent: React.FC<CategoryButtonsProps> = ({
+const CategoryComponent = ({
   addCategory,
   setAddCategory,
 }) => {
+
+  const dispatch = useDispatch();
+  const [searchParameter, setSearchParameter] = useState("");
+
   const handleAddCategory = () => {
     setAddCategory(!addCategory);
   };
 
+  const handleCategorySearch = (e) => {
+    e.preventDefault();
+    console.log("search is working", searchParameter)
+    dispatch(searchCategoryAsync(searchParameter)).then((result) => {
+      if (searchCategoryAsync.fulfilled.match(result)) {
+        // setSearchParameter("");
+      }
+    })
+  }
+
+  const handleSearchParameter = (searchParameter) => {
+    setSearchParameter(searchParameter);
+  }
+
   return (
-    <div className="flex items-center justify-between w-full mb-8">
+    <div className="flex items-center justify-between flex-wrap w-full mb-8">
       {/* Left-hand side Buttons */}
       <div className="flex items-center space-x-4 relative">
         {/* Button 1 */}
@@ -66,12 +83,24 @@ const CategoryComponent: React.FC<CategoryButtonsProps> = ({
       <h1 className="text-2xl mx-2 font-bold">Categories</h1>
 
       {/* Right-hand side Search Box */}
-      <input
-        type="search"
-        placeholder="Search"
-        className="px-4 py-2 border border-gray-300 rounded-2xl focus:outline-none w-80 outline-none"
-        // style={{ width: "200px" }}
-      />
+      <form onSubmit={(e) => handleCategorySearch(e)} className="flex items-center w-96 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+        <input
+          type="search"
+          placeholder="Search"
+          value={searchParameter}
+          onChange={(e) => handleSearchParameter(e.target.value)}
+          className="w-full h-full outline-none bg-transparent text-blue-gray-700"
+        />
+        <div className="ml-2">
+          <Image
+            onClick={handleCategorySearch}
+            src={SearchIcon}
+            alt="search-icon"
+            className="cursor-pointer"
+          />
+        </div>
+        {/* <input type="submit"></input> */}
+      </form>
     </div>
   );
 };

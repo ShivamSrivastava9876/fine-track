@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { userDetails, createUser } from "./userApi";
+import { userDetails, createUser, searchUser } from "./userApi";
 
 const initialState = {
   status: "idle",
@@ -29,7 +29,21 @@ export const createUserAsync = createAsyncThunk(
     catch (error) {
       return error;
     }
-  });
+  }
+);
+
+export const searchUserAsync = createAsyncThunk(
+  "user/searchUser",
+  async (searchUserInfo) => {
+    try {
+      const response = await searchUser(searchUserInfo);
+      return response.data.data;
+    }
+    catch (error) {
+      return error;
+    }
+  }
+);
 
 export const userSlice = createSlice({
   name: "user",
@@ -41,7 +55,7 @@ export const userSlice = createSlice({
     });
     builder.addCase(userDetailsAsync.fulfilled, (state, action) => {
       state.status = "idle";
-      if (action.payload.data) {
+      if (action.payload) {
         state.userData.splice(0, 1, action.payload.data);
       }
     });
@@ -57,6 +71,18 @@ export const userSlice = createSlice({
     builder.addCase(createUserAsync.rejected, (state, action) => {
       state.status = "idle";
       state.createUserError = action.payload;
+    });
+    builder.addCase(searchUserAsync.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(searchUserAsync.fulfilled, (state, action) => {
+      state.status = "idle";
+      if (action.payload) {
+        state.userData.splice(0, 1, action.payload);
+      }
+    });
+    builder.addCase(searchUserAsync.rejected, (state, action) => {
+      state.error = action.payload;
     });
   },
 });

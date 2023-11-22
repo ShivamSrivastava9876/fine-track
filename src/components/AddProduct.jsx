@@ -1,4 +1,6 @@
 import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
+import { createProductAsync, getProductAsync } from "@/redux/slice/product/productSlice";
+import { getProductTypeAsync, getProductTypeList, getSelectedProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +13,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   const [model, setModel] = useState("");
   const [subModel, setSubModel] = useState("");
   const [stoneWeight, setStoneWeight] = useState("");
-  const [addImage, setAddImage] = useState("");
+  const [image, setImage] = useState("");
   const [grossWeight, setGrossWeight] = useState("");
   const [puritySpc, setPuritySpc] = useState("");
   const [price, setPrice] = useState("");
@@ -20,12 +22,34 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   const [productType, setProductType] = useState("");
   const [openCategory, setOpenCategory] = useState(false);
   const [openProductType, setOpenProductType] = useState(false);
+  const [description, setDescription] = useState("");
+
+
+
+  //Handling image file
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage(selectedFile);
+  }
 
   //Handling category dropdown
+  // useEffect(() => {
+  //   dispatch(getCategoriesAsync()).then((result) => {
+  //     if (getCategoriesAsync.fulfilled.match(result)) {
+  //       dispatch(getProductTypeAsync())
+  //     }
+  //   })
+  // }, [dispatch])
+
   useEffect(() => {
-    dispatch(getCategoriesAsync())
-  }, [dispatch])
+    dispatch(getCategoriesAsync()).then((result) => {
+      if (getCategoriesAsync.fulfilled.match(result) && category !== "") {
+        dispatch(getSelectedProductTypeAsync(category))
+      }
+    })
+  }, [dispatch, category])
   const categoryList = useSelector(getCategoryList);
+  const productTypeList = useSelector(getProductTypeList);
 
   const handleClose = () => {
     setAddProduct(!addProduct);
@@ -33,7 +57,26 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
 
   const handleProductSubmit = (e) => {
     e.preventDefault();
-    //write logic here
+    //logic for add product
+    dispatch(createProductAsync({category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, gross_wt: grossWeight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true})).then((result) => {
+      if (createProductAsync.fulfilled.match(result)) {
+        dispatch(getProductAsync());
+        setHuId("");
+        setProductId("");
+        setProductName("");
+        setModel("");
+        setSubModel("");
+        setStoneWeight("");
+        setImage("");
+        setGrossWeight("");
+        setPuritySpc("");
+        setPrice("");
+        setQuantity("");
+        setCategory("");
+        setProductType("");
+        setDescription("");
+      }
+    })
   };
 
   const handleCategory = () => {
@@ -87,12 +130,12 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
           className="p-8 flex flex-col items-center w-35rem h-28rem bg-white"
         >
           <div id="textFields" className="grid grid-cols-2 gap-4">
-            <div onClick={handleCategory} class="relative inline-block text-left mb-2">
-              <button class="inline-flex items-center justify-center px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+            <div onClick={handleCategory} class="relative inline-block cursor-pointer text-left mb-2">
+              <div class="inline-flex items-center justify-center px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                 {category || "Select category"}
                 {/* Arrow icon (tailwindcss/heroicons) */}
                 <svg
-                  
+
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-5 h-5 ml-2 -mr-1 text-gray-400"
                   fill="none"
@@ -106,30 +149,30 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     d="M19 9l-7 7-7-7"
                   ></path>
                 </svg>
-              </button>
+              </div>
 
               {openCategory && (
                 <div class="origin-top-right absolute right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                  
+
                   {categoryList.map((category) => (
-                  <div class="py-1">
-                    <div
-                      href="#"
-                      onClick={() => handleCategoryClick(category.category_name)}
-                      class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                    >
-                      {category.category_name}
-                    </div>
-                  </div>))}
+                    <div class="py-1">
+                      <div
+                        href="#"
+                        onClick={() => handleCategoryClick(category.category_name)}
+                        class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
+                      >
+                        {category.category_name}
+                      </div>
+                    </div>))}
                 </div>
               )}
             </div>
-            <div class="relative inline-block text-left mb-2">
-              <button class="inline-flex items-center justify-center px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+            <div onClick={handleProductType} class="relative inline-block cursor-pointer text-left mb-2">
+              <div class="inline-flex items-center justify-center px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                 {productType || "Select product type"}
                 {/* Arrow icon (tailwindcss/heroicons) */}
                 <svg
-                  onClick={handleProductType}
+                  
                   xmlns="http://www.w3.org/2000/svg"
                   class="w-5 h-5 ml-2 -mr-1 text-gray-400"
                   fill="none"
@@ -143,33 +186,21 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     d="M19 9l-7 7-7-7"
                   ></path>
                 </svg>
-              </button>
+              </div>
 
               {openProductType && (
-                <div class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                  <div class="py-1">
-                    <div
-                      href="#"
-                      onClick={() => handleProductTypeClick("Option 1")}
-                      class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                    >
-                      Option 1
-                    </div>
-                    <div
-                      href="#"
-                      onClick={() => handleProductTypeClick("Option 2")}
-                      class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                    >
-                      Option 2
-                    </div>
-                    <div
-                      href="#"
-                      onClick={() => handleProductTypeClick("Option 3")}
-                      class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
-                    >
-                      Option 3
-                    </div>
-                  </div>
+                <div class="origin-top-right absolute right-16 mt-2 w-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+
+                  {productTypeList.map((productType) => (
+                    <div class="py-1">
+                      <div
+                        href="#"
+                        onClick={() => handleProductTypeClick(productType.product_type)}
+                        class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
+                      >
+                        {productType.product_type}
+                      </div>
+                    </div>))}
                 </div>
               )}
             </div>
@@ -227,14 +258,13 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 placeholder="Stone weight"
               />
             </div>
-            <div className="mb-4 ">
+            <div className="mb-2 h-10">
               <input
-                type="text"
-                className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                //add image upload function
-                value={addImage}
-                onChange={(e) => setAddImage(e.target.value)}
-                placeholder="Add image"
+                type="file"
+                className="w-full py-2 px-8 h-10 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                // value={image}
+                onChange={handleFileChange}
+                placeholder="Image"
               />
             </div>
 
@@ -272,6 +302,15 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 placeholder="Quantity"
+              />
+            </div>
+            <div className="mb-4 ">
+              <input
+                type="text"
+                className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                placeholder="Description"
               />
             </div>
           </div>

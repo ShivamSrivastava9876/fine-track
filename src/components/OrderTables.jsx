@@ -9,25 +9,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 
-interface Column {
-  id:
-    | "HuId"
-    | "productId"
-    | "product"
-    | "quantity"
-    | "stoneWeight"
-    | "grossWeight"
-    | "puritySpc"
-    | "price"
-    | "total"
-    | "actions";
-  label: string;
-  minWidth?: number;
-  align?: "left";
-  format?: (value: number) => string;
-}
-
-const columns: readonly Column[] = [
+const columns = [
   { id: "HuId", label: "HU ID", minWidth: 80 },
   { id: "productId", label: "Product ID", minWidth: 100 },
   { id: "product", label: "Product", minWidth: 150 },
@@ -40,29 +22,17 @@ const columns: readonly Column[] = [
   { id: "actions", label: "", minWidth: 150 },
 ];
 
-interface Data {
-  HuId: number;
-  productId: number;
-  product: string;
-  quantity: number;
-  stoneWeight: number;
-  grossWeight: number;
-  puritySpc: number;
-  price: number;
-  total: number;
-}
-
 const createData = (
-  HuId: number,
-  productId: number,
-  product: string,
-  quantity: number,
-  stoneWeight: number,
-  grossWeight: number,
-  puritySpc: number,
-  price: number,
-  total: number
-): Data => {
+  HuId,
+  productId,
+  product,
+  quantity,
+  stoneWeight,
+  grossWeight,
+  puritySpc,
+  price,
+  total
+) => {
   return {
     HuId,
     productId,
@@ -76,7 +46,7 @@ const createData = (
   };
 };
 
-const rows: Data[] = [
+const rows = [
   createData(1, 23, "Gold", 1, 20, 22, 2, 20000, 20000)
   // Add more mock data as needed
 ];
@@ -85,12 +55,12 @@ export default function OrderTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event
   ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -130,10 +100,8 @@ export default function OrderTables() {
                           {column.id === "actions" ? (
                             // Render Edit and Delete buttons
                             <div className="space-x-2">
-                              <Button variant="contained" color="primary">
-                                Edit
-                              </Button>
-                              <Button variant="contained" color="secondary">
+                              
+                              <Button className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Delete
                               </Button>
                             </div>

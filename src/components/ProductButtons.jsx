@@ -1,18 +1,36 @@
 // components/UserComponent.js
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import Image from "next/image";
+import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
+import { useDispatch } from "react-redux";
+import { searchProductAsync } from "@/redux/slice/product/productSlice";
 
-interface ProductButtonsProps {
-  addProduct: boolean;
-  setAddProduct: (value: boolean) => void;
-}
-
-const ProductComponent: React.FC<ProductButtonsProps> = ({
+const ProductComponent = ({
   addProduct,
   setAddProduct,
 }) => {
+
+  const dispatch = useDispatch();
+  const [searchParameter, setSearchParameter] = useState("");
+
   const handleAddProduct = () => {
     setAddProduct(!addProduct);
   };
+
+  const handleProductSearch = (e) => {
+    e.preventDefault();
+    console.log("search is working", searchParameter)
+    dispatch(searchProductAsync(searchParameter)).then((result) => {
+      if (searchProductAsync.fulfilled.match(result)) {
+        // dispatch(searchUserAsync(searchParameter))
+        // setSearchParameter("");
+      }
+    })
+  }
+
+  const handleSearchParameter = (searchParameter) => {
+    setSearchParameter(searchParameter);
+  }
 
   return (
     <div className="flex items-center justify-between w-full mb-8">
@@ -66,12 +84,23 @@ const ProductComponent: React.FC<ProductButtonsProps> = ({
       <h1 className="text-2xl mx-4 font-bold">Products</h1>
 
       {/* Right-hand side Search Box */}
-      <input
-        type="search"
-        placeholder="Search"
-        className="px-4 py-2 border border-gray-300 rounded-2xl focus:outline-none w-80 outline-none"
-        // style={{ width: "200px" }}
-      />
+      <form onSubmit={(e) => handleProductSearch(e)} className="flex items-center w-96 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+        <input
+          type="search"
+          placeholder="Search"
+          value={searchParameter}
+          onChange={(e) => handleSearchParameter(e.target.value)}
+          className="w-full h-full outline-none bg-transparent text-blue-gray-700"
+        />
+        <div className="ml-2">
+          <Image
+            onClick={handleProductSearch}
+            src={SearchIcon}
+            alt="search-icon"
+            className="cursor-pointer"
+          />
+        </div>
+      </form>
     </div>
   );
 };

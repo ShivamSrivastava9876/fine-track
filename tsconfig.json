@@ -37,7 +37,7 @@
     "src/pages/AddUsers/AddUsers.jsx",
     "src/pages/login/index.jsx",
     ".next/types/**/*.ts"
-, "src/components/UserTables.jsx", "src/components/CategoryTables.jsx", "src/components/ProductTypeTables.jsx", "src/components/SideBar.jsx", "src/components/DashboardTables.jsx", "src/pages/_app.jsx"  ],
+, "src/components/UserTables.jsx", "src/components/CategoryTables.jsx", "src/components/ProductTypeTables.jsx", "src/components/SideBar.jsx", "src/components/DashboardTables.jsx", "src/pages/_app.jsx", "src/components/ProductTables.jsx", "src/components/UserButtons.jsx", "src/components/CategoryButtons.jsx", "src/components/ProductTypeButtons.jsx", "src/components/ProductButtons.jsx", "src/components/OrderTables.jsx"  ],
   "exclude": [
     "node_modules"
   ]

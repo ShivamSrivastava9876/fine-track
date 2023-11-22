@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createCategory, deleteCategory, editCategory, getCategory } from "./categoryApi";
+import { createCategory, deleteCategory, editCategory, getCategory, searchCategory } from "./categoryApi";
 
 const initialState = {
     status: 'idle',
@@ -13,7 +13,7 @@ export const getCategoriesAsync = createAsyncThunk(
         try {
             const response = await getCategory();
             return response.data;
-        } 
+        }
         catch (error) {
             return error;
         }
@@ -26,7 +26,7 @@ export const createCategoryAsync = createAsyncThunk(
         try {
             const response = await createCategory(categoryInfo);
             return response.data;
-        } 
+        }
         catch (error) {
             return error;
         }
@@ -40,7 +40,7 @@ export const editCategoryAsync = createAsyncThunk(
             const categoryId = editCategoryInfo.id;
             const response = await editCategory(editCategoryInfo, categoryId);
             return response.data;
-        } 
+        }
         catch (error) {
             return error;
         }
@@ -53,13 +53,26 @@ export const deleteCategoryAsync = createAsyncThunk(
         try {
             const categoryId = deleteCategoryInfo.id;
             const response = await deleteCategory(categoryId)
-            return response.data;
+            return response.data.data;
         }
         catch (error) {
             return error;
         }
     }
 )
+
+export const searchCategoryAsync = createAsyncThunk(
+    "category/searchCategory",
+    async (searchCategoryInfo) => {
+        try {
+            const response = await searchCategory(searchCategoryInfo);
+            return response.data.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
 
 const categorySlice = createSlice({
     name: "category",
@@ -72,7 +85,7 @@ const categorySlice = createSlice({
             })
             .addCase(getCategoriesAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
-                if (action.payload.data) {
+                if (action.payload) {
                     state.categoryData.splice(0, 1, action.payload);
                     state.categoryData = state.categoryData[0].data;
                 }
@@ -93,10 +106,10 @@ const categorySlice = createSlice({
             .addCase(editCategoryAsync.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(editCategoryAsync.fulfilled, (state,action) => {
+            .addCase(editCategoryAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
             })
-            .addCase(editCategoryAsync.rejected, (state,action) => {
+            .addCase(editCategoryAsync.rejected, (state, action) => {
                 state.status = 'idle';
             })
             .addCase(deleteCategoryAsync.pending, (state, action) => {
@@ -108,6 +121,19 @@ const categorySlice = createSlice({
             .addCase(deleteCategoryAsync.rejected, (state, action) => {
                 state.status = 'idle';
             })
+            .addCase(searchCategoryAsync.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(searchCategoryAsync.fulfilled, (state, action) => {
+                state.status = "idle";
+                if (action.payload) {
+                    state.categoryData = action.payload;
+                    // state.categoryData = state.categoryData[0].data;
+                }
+            })
+            .addCase(searchCategoryAsync.rejected, (state, action) => {
+                state.error = action.payload;
+            });
     }
 })
 

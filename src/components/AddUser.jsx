@@ -37,7 +37,7 @@ const AddUser = ({ addUser, setAddUser }) => {
           // Dispatch userDetailsAsync only if user creation is successful
           dispatch(userDetailsAsync());
 
-          // Clear the form fields by updating state variables to empty values
+          // Clearing the form fields by updating state variables to empty values
           setFirstName("");
           setLastName("");
           setEmail("");

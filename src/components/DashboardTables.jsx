@@ -10,6 +10,8 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { approveOrderAsync, getApprovalList, getApproveListAsync } from "@/redux/slice/order/orderSlice";
 
 const columns = [
   { id: "srNo", label: "Sr no", minWidth: 80 },
@@ -21,24 +23,23 @@ const columns = [
 ];
 
 const createData = (
-    srNo,
-    productName,
-    quantity,
-    price,
-    total
+  srNo,
+  productName,
+  quantity,
+  price,
+  total,
+  id
 ) => {
-  return { srNo, productName, quantity, price, total };
+  return { srNo, productName, quantity, price, total, id };
 };
 
-const rows = [
-  createData(1, "Product 1", 1, 24000, 24000),
-  createData(2, "Product 2", 2, 24000, 24000)
-  // Add more mock data as needed
-];
-
 export default function DashboardTables() {
+  const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
+  const [rows, setRows] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const approvalList = useSelector(getApprovalList);
+  console.log("approvallist", approvalList)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -50,6 +51,39 @@ export default function DashboardTables() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  React.useEffect(() => {
+    dispatch(getApproveListAsync())
+  }, [dispatch]);
+
+  React.useEffect(() => {
+    if (approvalList && Array.isArray(approvalList)) {
+      let srNo = 1;
+      const newRows = approvalList.map((data) => {
+        const newRow = createData(
+          srNo,
+          data.product.product_name || "",
+          data.quantity || "",
+          data.price || "",
+          data.order.total_price || "",
+          data.id,
+        );
+        srNo = srNo + 1;
+        return newRow;
+      });
+
+      setRows(newRows)
+    }
+  }, [approvalList]);
+
+  const handleApprove = (orderId) => {
+    // console.log(orderId)
+    dispatch(approveOrderAsync({ orderId: orderId, orderInfo: { "status": "approved" } })).then((result) => {
+      if (approveOrderAsync.fulfilled.match(result)) {
+        dispatch(getApproveListAsync());
+      }
+    })
+  }
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full my-4">
@@ -85,19 +119,19 @@ export default function DashboardTables() {
                           {column.id === "actions" ? (
                             // Render Edit and Delete buttons
                             <div className="space-x-2">
-                              <Button variant="contained" color="primary">
+                              <Button onClick={() => handleApprove(row.id)} className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Approve
                               </Button>
-                              <Button variant="contained" color="secondary">
+                              <Button className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Delete
                               </Button>
                             </div>
                           ) : // Render other columns
-                          column.format && typeof value === "number" ? (
-                            column.format(value)
-                          ) : (
-                            value
-                          )}
+                            column.format && typeof value === "number" ? (
+                              column.format(value)
+                            ) : (
+                              value
+                            )}
                         </TableCell>
                       );
                     })}
