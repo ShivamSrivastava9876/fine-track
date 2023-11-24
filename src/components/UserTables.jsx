@@ -11,10 +11,11 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserData, userDetailsAsync } from "@/redux/slice/user/userSlice";
+import { deleteUserAsync, selectUserData, userDetailsAsync } from "@/redux/slice/user/userSlice";
+import DeleteOption from "./DeleteOption";
 
-const createData = (srNo, userName, email, mobile) => {
-  return { srNo, userName, email, mobile };
+const createData = (srNo, id, userName, email, mobile) => {
+  return { srNo, id, userName, email, mobile };
 };
 
 const columns = [
@@ -30,6 +31,7 @@ export default function UserTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
+  const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -40,6 +42,24 @@ export default function UserTables() {
     setPage(0);
   };
 
+  const handleDelete = (selectedRowId) => {
+    console.log("select", selectedRowId)
+    const userId = selectedRowId;
+    dispatch(deleteUserAsync(userId)).then((result) => {
+      if (deleteUserAsync.fulfilled.match(result)) {
+        dispatch(userDetailsAsync());
+      }
+    })
+  }
+  
+  const handleDeleteCancel = () => {
+    setSelectedRowToDelete(null);
+  }
+  
+  const handleDeletePopup = (selectedRowId) => {
+    setSelectedRowToDelete(selectedRowId)
+  }
+
   React.useEffect(() => {
     dispatch(userDetailsAsync());
   }, [dispatch]);
@@ -48,19 +68,22 @@ export default function UserTables() {
 
   React.useEffect(() => {
     if (userData && Array.isArray(userData)) {
-    const newRows = userData.map((data) => {
-      return createData(
-        data.id,
-        data.first_name + " " + data.last_name || "",
-        data.email || "",
-        data.mobile || ""
-      );
-    });
-
-    setRows(newRows)
-  }
+      let srNo = 1;
+      const newRows = userData.map((data) => {
+        const newRow = createData(
+          srNo,
+          data.id,
+          data.first_name + " " + data.last_name || "",
+          data.email || "",
+          data.mobile || ""
+        );
+        srNo = srNo + 1;
+        return newRow;
+      });
+      setRows(newRows)
+    }
   }, [userData]);
-  
+
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
       <TableContainer sx={{ maxHeight: 440 }} className="font-Poppins">
@@ -98,16 +121,17 @@ export default function UserTables() {
                               {/* <Button className="bg-blue-400 hover:bg-blue-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Edit
                               </Button> */}
-                              <Button className="bg-red-400 hover:bg-red-600 text-white  py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                              <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Delete
                               </Button>
+                              {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "user" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
                             </div>
                           ) : // Render other columns
-                          column.format && typeof value === "number" ? (
-                            column.format(value)
-                          ) : (
-                            value
-                          )}
+                            column.format && typeof value === "number" ? (
+                              column.format(value)
+                            ) : (
+                              value
+                            )}
                         </TableCell>
                       );
                     })}

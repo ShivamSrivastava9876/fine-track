@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
 import { getProductTypeAsync, getProductTypeList, getSelectedProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
 
-const EditFormProduct = ({ originalPrice, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
+const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
     const dispatch = useDispatch();
 
     const modalClasses = isOpen ? 'block' : 'hidden';
@@ -201,6 +201,7 @@ const EditFormProduct = ({ originalPrice, handleCategoryClick, handleUpdateProdu
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                // defaultValue={row.price}
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
                                 placeholder="Price"

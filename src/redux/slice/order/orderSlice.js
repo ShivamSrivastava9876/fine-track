@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { approveOrder, getApproveList } from "./orderApi";
+import { approveOrder, getApproveList, getOrder } from "./orderApi";
 
 const initialState = {
     status: "idle",
     approveOrderData: [],
+    orderData: [],
     error: null
 }
 
@@ -25,6 +26,20 @@ export const approveOrderAsync = createAsyncThunk(
     async (orderApproval) => {
         try {
             const response = await approveOrder(orderApproval);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+)
+
+export const getOrderListAsync = createAsyncThunk(
+    "order/get",
+    async () => {
+        try {
+            const response = await getOrder();
+            console.log("order response", response)
             return response.data;
         }
         catch (error) {
@@ -61,8 +76,23 @@ const orderSlice = createSlice({
             .addCase(approveOrderAsync.rejected, (state) => {
                 state.status = 'idle';
             })
+            .addCase(getOrderListAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getOrderListAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.orderData.splice(0, 1, action.payload);
+                    state.orderData = state.orderData[0].data;
+                    // state.orderData.push(action.payload);
+                }
+            })
+            .addCase(getOrderListAsync.rejected, (state, action) => {
+                state.status = action.payload;
+            })
     }
 })
 
 export const getApprovalList = (state) => state.order.approveOrderData;
+export const getOrderList = (state) => state.order.orderData;
 export default orderSlice.reducer;

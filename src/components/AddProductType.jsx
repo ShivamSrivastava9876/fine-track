@@ -20,14 +20,13 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
   const handleAddProductType = (e) => {
     e.preventDefault();
     console.log(image);
-    dispatch(createProductTypeAsync({category: newCategory, product_type: productType, image: image})).then((result) => {
+    dispatch(createProductTypeAsync({ category: newCategory, product_type: productType, image: image })).then((result) => {
       if (createProductTypeAsync.fulfilled.match(result)) {
         dispatch(getProductTypeAsync());
         setNewCategory("");
         setProductType("");
         setImage(null);
       }
-      
     });
   };
 
@@ -73,15 +72,15 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
       </button>
       <form
         onSubmit={handleAddProductType}
-        className="p-8 rounded shadow-md flex flex-col w-35rem h-28rem bg-white"
+        className="p-8 shadow-md flex flex-col justify-center items-center rounded-2xl w-34.125 bg-white"
       >
         <div className="mb-4 space-y-1">
-          <h2 className=" text-[#0a0a0a] text-center font-normal text-base text-16px w-161">
+          <h2 className=" text-[#0a0a0a] text-center font-normal text-base text-16px h-4 w-10.0625">
             Add product type
           </h2>
         </div>
-        <div onClick={handleCategory} class="relative inline-block cursor-pointer text-left mb-2 h-10">
-          <div class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+        <div onClick={handleCategory} class="relative inline-block cursor-pointer text-left mt-5 w-21.375 h-3.3125">
+          <div class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border h-3.3125 border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
             {newCategory || "Select category"}
             {/* Arrow icon (tailwindcss/heroicons) */}
             <svg
@@ -114,19 +113,19 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
                 </div>))}
             </div>)}
         </div>
-        <div className="mb-2 h-10">
+        <div className="mt-5 w-21.375 h-3.3125">
           <input
             type="text"
-            className="w-full py-2 px-8 h-10 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-full py-2 px-8 h-3.3125 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={productType}
             onChange={(e) => setProductType(e.target.value)}
             placeholder="Product type"
           />
         </div>
-        <div className="mb-2 h-10">
+        <div className="mt-5 w-21.375 h-3.3125">
           <input
             type="file" multiple
-            className="w-full py-2 px-8 h-10 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-full py-2 px-8 h-3.3125 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             // value={image}
             onChange={handleFileChange}
           />
@@ -134,7 +133,7 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
 
         <button
           type="submit"
-          className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
+          className="w-21.375 h-3.3125 mt-5 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
         >
           Add
         </button>

@@ -27,6 +27,8 @@ export default function CategoryTables() {
   const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
   const [rows, setRows] = React.useState([]);
+  const [category, setCategory] = React.useState("");
+  const [image, setImage] = React.useState(null);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [editedRow, setEditedRow] = React.useState(null);
   const [edited, setEdited] = React.useState("");
@@ -34,18 +36,19 @@ export default function CategoryTables() {
   const categoryList = useSelector(getCategoryList);
   console.log(categoryList);
 
-  const edits = [{name: "Category"}];
+  // const edits = [{name: "Category"}];
 
   const handleEdit = (rowId, rowCategory) => {
     setEditedRow(rowId);
   }
 
-  const handleSave = () => {
+  const handleUpdateCategory = (rowCategory) => {
     const categoryId = editedRow;
-    dispatch(editCategoryAsync({ "category_name": edited, id: categoryId })).then((result) => {
+    const updatedCategory = category !== "" ? category : rowCategory;
+    dispatch(editCategoryAsync({ category: updatedCategory, image, id: categoryId })).then((result) => {
       if (editCategoryAsync.fulfilled.match(result)) {
         dispatch(getCategoriesAsync());
-        setEdited("");
+        setEditedRow("");
       }
     })
     setEditedRow(null);
@@ -151,7 +154,7 @@ export default function CategoryTables() {
                                   <Button onClick={handleCancel} className="bg-red-400 hover:bg-red-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                     Cancel
                                   </Button> */}
-                                  <EditForm isOpen={true} handleSave={handleSave} handleCancel={handleCancel} handleCategoryChange={handleCategoryChange} edited={edited} edits={edits} title="category"/>
+                                  <EditForm row={row} isOpen={true} handleUpdateCategory={handleUpdateCategory} handleCancel={handleCancel} handleCategoryChange={handleCategoryChange} category={category} setCategory={setCategory} setImage={setImage} edited={edited} />
                                 </div>
                               ) : (
                                 <div className="space-x-2">

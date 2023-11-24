@@ -86,53 +86,53 @@ const AddUser = ({ addUser, setAddUser }) => {
       </button>
       <form
         onSubmit={handleAddUser}
-        className="p-8 rounded shadow-md flex flex-col w-35rem h-28rem bg-white"
+        className="p-8 shadow-md flex flex-col items-center justify-center rounded-2xl w-34.125 bg-white"
       >
         <div className="mb-4 space-y-1">
           <h2 className=" text-[#0a0a0a] text-center font-normal text-base text-16px w-161">
             User Details
           </h2>
         </div>
-        <div className="mb-4 ">
+        <div className="mb-4 w-21.375 h-3.3125">
           <input
             type="text"
-            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             placeholder="First name"
           />
         </div>
-        <div className="mb-4 ">
+        <div className="mb-4 w-21.375 h-3.3125">
           <input
             type="text"
-            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             placeholder="Last name"
           />
         </div>
-        <div className="mb-4 ">
+        <div className="mb-4 w-21.375 h-3.3125">
           <input
             type="text"
-            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
         </div>
-        <div className="mb-4 ">
+        <div className="mb-4 w-21.375 h-3.3125">
           <input
             type="text"
-            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={mobileNo}
             onChange={(e) => setMobileNo(e.target.value)}
             placeholder="Mobile number"
           />
         </div>
-        <div className="mb-4 relative">
+        <div className="mb-4 w-21.375 h-3.3125 relative">
           <input
             type={passwordVisible ? "text" : "password"}
-            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
@@ -149,10 +149,10 @@ const AddUser = ({ addUser, setAddUser }) => {
             )}
           </button>
         </div>
-        <div className="mb-4 relative">
+        <div className="mb-4 w-21.375 h-3.3125 relative">
           <input
             type={confirmPasswordVisible ? "text" : "password"}
-            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             placeholder="Confirm password"
@@ -172,7 +172,7 @@ const AddUser = ({ addUser, setAddUser }) => {
 
         <button
           type="submit"
-          className="w-full rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
+          className="w-21.375 h-3.3125 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
         >
           Add
         </button>

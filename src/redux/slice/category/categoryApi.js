@@ -37,16 +37,17 @@ export async function createCategory(categoryInfo) {
         }
         const token = getToken();
         const header = {
-            "Content-type": "application/json",
             Authorization: `Token ${token}`
         }
-
+        const formData = new FormData();
+        formData.append("category_name", categoryInfo.category_name);
+        formData.append("image", categoryInfo.image);
         const response = await fetch(
             'http://192.168.29.154:8000/admin_panel/create-category/',
             {
                 method: "POST",
                 headers: header,
-                body: JSON.stringify(categoryInfo)
+                body: formData
             }
         )
 
@@ -64,23 +65,24 @@ export async function createCategory(categoryInfo) {
     }
 }
 
-export async function editCategory(editCategoryInfo, categoryId) {
+export async function editCategory(categoryInfo) {
     try {
         function getToken() {
             return localStorage.getItem("token");
         }
         const token = getToken();
         const header = {
-            "Content-type": "application/json",
             Authorization: `Token ${token}`
         }
-
+        const formData = new FormData();
+        formData.append("category_name", categoryInfo.category);
+        formData.append("image", categoryInfo.image);
         const response = await fetch(
-            `http://192.168.29.154:8000/admin_panel/${categoryId}/update-category/`,
+            `http://192.168.29.154:8000/admin_panel/${categoryInfo.id}/update-category/`,
             {
                 method: "PUT",
                 headers: header,
-                body: JSON.stringify(editCategoryInfo)
+                body: formData
             }
         )
 

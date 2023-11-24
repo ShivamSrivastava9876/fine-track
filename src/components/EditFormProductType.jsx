@@ -3,7 +3,7 @@ import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
 
-const EditFormProductType = ({ openCategory, handleCategory, handleOptionClick, handleUpdateProductType, isOpen, handleCancel, category, productType, setProductType, setImage }) => {
+const EditFormProductType = ({ row, openCategory, handleCategory, handleOptionClick, handleUpdateProductType, isOpen, handleCancel, category, productType, setProductType, setImage }) => {
     const dispatch = useDispatch();
 
     const modalClasses = isOpen ? 'block' : 'hidden';
@@ -28,7 +28,7 @@ const EditFormProductType = ({ openCategory, handleCategory, handleOptionClick, 
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        handleUpdateProductType(e);
+                        handleUpdateProductType(e, row.productType, row.category);
                     }}
                     className="p-8 rounded shadow-md flex flex-col justify-center w-35rem h-28rem bg-white border border-blue-500"
                 >
@@ -75,9 +75,10 @@ const EditFormProductType = ({ openCategory, handleCategory, handleOptionClick, 
                         <input
                             type="text"
                             className="w-full py-2 px-8 h-10 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                            defaultValue={row.productType}
                             value={productType}
                             onChange={(e) => setProductType(e.target.value)}
-                            placeholder="Product type"
+                            placeholder={row.productType}
                         />
                     </div>
                     <div className="mb-2 h-10">

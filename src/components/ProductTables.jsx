@@ -101,7 +101,7 @@ export default function ProductTables() {
       }
     })
   }
-
+  
   const handleDelete = (selectedRowId) => {
     console.log("select", selectedRowId)
     const productId = selectedRowId;
@@ -237,7 +237,7 @@ export default function ProductTables() {
 
                               {editedRow === row.id ? (
                                 <div className="space-x-2">
-                                  <EditFormProduct handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} originalPrice={row.price} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
+                                  <EditFormProduct handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
                                 </div>
                               ) : (
                                 <div className="space-x-2">

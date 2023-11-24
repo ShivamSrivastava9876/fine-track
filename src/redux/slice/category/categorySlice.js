@@ -37,8 +37,8 @@ export const editCategoryAsync = createAsyncThunk(
     "category/edit",
     async (editCategoryInfo) => {
         try {
-            const categoryId = editCategoryInfo.id;
-            const response = await editCategory(editCategoryInfo, categoryId);
+            // console.log("editCategoryInfo", editCategoryInfo.category, editCategoryInfo.image, editCategoryInfo.id)
+            const response = await editCategory(editCategoryInfo);
             return response.data;
         }
         catch (error) {

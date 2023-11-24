@@ -42,10 +42,12 @@ export default function ProductTypeTables() {
 
   const productTypeList = useSelector(getProductTypeList);
 
-  const handleUpdateProductType = (e) => {
+  const handleUpdateProductType = (e, rowProductType, rowCategory) => {
     e.preventDefault();
-    console.log(category, productType, image, editedRow)
-    dispatch(updateProductTypeAsync({ category: category, product_type: productType, image: image, productTypeId: editedRow })).then((result) => {
+    console.log(category, productType, image, editedRow);
+    const updatedCategory = category !== "" ? category : rowCategory;
+    const updatedProductType = productType !== "" ? productType : rowProductType;
+    dispatch(updateProductTypeAsync({ category: updatedCategory, product_type: updatedProductType, image: image, productTypeId: editedRow })).then((result) => {
       if (updateProductTypeAsync.fulfilled.match(result)) {
         dispatch(getProductTypeAsync());
         setCategory("");
@@ -167,7 +169,7 @@ export default function ProductTypeTables() {
 
                               {editedRow === row.id ? (
                                 <div className="space-x-2">
-                                  <EditFormProductType openCategory={openCategory} handleCategory={handleCategory} handleOptionClick={handleOptionClick} handleUpdateProductType={handleUpdateProductType} isOpen={true} category={category} productType={productType} handleCancel={handleCancel} setProductType={setProductType} setImage={setImage} />
+                                  <EditFormProductType openCategory={openCategory} handleCategory={handleCategory} handleOptionClick={handleOptionClick} handleUpdateProductType={handleUpdateProductType} isOpen={true} row={row} category={category} productType={productType} handleCancel={handleCancel} setProductType={setProductType} setImage={setImage} />
                                 </div>
                               ) : (
                                 <div className="space-x-2">

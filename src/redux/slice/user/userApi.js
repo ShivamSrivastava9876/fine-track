@@ -57,7 +57,7 @@ export async function createUser(createUserInfo) {
       const error = await response.text();
       return { error };
     }
-  } 
+  }
   catch (error) {
     return { error };
   }
@@ -90,8 +90,40 @@ export async function searchUser(searchUserInfo) {
       const error = await response.text();
       return { error };
     }
-  } 
+  }
   catch (error) {
     return { error };
   }
 }
+
+export async function deleteUser(userId) {
+  try {
+    function getToken() {
+      return localStorage.getItem("token");
+    }
+    const token = getToken();
+    const header = {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`
+    }
+    const response = await fetch(
+      `http://192.168.29.154:8000/admin_panel/${userId}/delete-user/`,
+      {
+        method: 'DELETE',
+        headers: header
+      }
+    )
+    if (response.ok) {
+      const data = await response.json();
+      return { data };
+    }
+    else {
+      const error = await response.text();
+      return { error };
+    }
+
+  }
+  catch (error) {
+    return { error }
+  }
+};

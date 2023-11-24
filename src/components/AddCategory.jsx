@@ -6,10 +6,11 @@ import { createCategoryAsync, getCategoriesAsync } from "@/redux/slice/category/
 const AddCategory = ({ addCategory, setAddCategory }) => {
   const dispatch = useDispatch();
   const [newCategory, setNewCategory] = useState("");
+  const [image, setImage] = useState(null);
 
   const handleAddCategory = (e) => {
     e.preventDefault();
-    dispatch(createCategoryAsync({category_name: newCategory})).then((result) => {
+    dispatch(createCategoryAsync({category_name: newCategory, image: image})).then((result) => {
       if (createCategoryAsync.fulfilled.match(result)) {
         dispatch(getCategoriesAsync());
         setNewCategory("");
@@ -20,6 +21,11 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
   const handleClose = () => {
     setAddCategory(!addCategory);
   };
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setImage(selectedFile);
+  }
 
   return (
     <div className="flex justify-center m-8 relative">
@@ -44,20 +50,28 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
       </button>
       <form
         onSubmit={handleAddCategory}
-        className="p-8 rounded shadow-md flex flex-col w-35rem h-28rem bg-white"
+        className="p-8 shadow-md flex flex-col items-center justify-center rounded-2xl w-34.125 bg-white"
       >
         <div className="mb-4 space-y-1">
           <h2 className=" text-[#0a0a0a] text-center font-normal text-base text-16px w-161">
             Add category
           </h2>
         </div>
-        <div className="mb-4 ">
+        <div className="mb-4 w-21.375 h-3.3125">
           <input
             type="text"
             className="w-21.375 h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
             value={newCategory}
             onChange={(e) => setNewCategory(e.target.value)}
             placeholder="New category"
+          />
+        </div>
+        <div className="mb-2 w-21.375 h-3.3125">
+          <input
+            type="file"
+            className="w-full py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+            // value={image}
+            onChange={handleFileChange}
           />
         </div>
 

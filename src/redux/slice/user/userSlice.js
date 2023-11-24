@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { userDetails, createUser, searchUser } from "./userApi";
+import { userDetails, createUser, searchUser, deleteUser } from "./userApi";
 
 const initialState = {
   status: "idle",
@@ -37,6 +37,19 @@ export const searchUserAsync = createAsyncThunk(
   async (searchUserInfo) => {
     try {
       const response = await searchUser(searchUserInfo);
+      return response.data.data;
+    }
+    catch (error) {
+      return error;
+    }
+  }
+);
+
+export const deleteUserAsync = createAsyncThunk(
+  "user/deleteUser",
+  async (userId) => {
+    try {
+      const response = await deleteUser(userId);
       return response.data.data;
     }
     catch (error) {
