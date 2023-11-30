@@ -11,7 +11,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { approveOrderAsync, getApprovalList, getApproveListAsync } from "@/redux/slice/order/orderSlice";
+import { approveOrderAsync, declineOrderAsync, getApprovalList, getApproveListAsync, getDashboardDetailsAsync } from "@/redux/slice/order/orderSlice";
 
 const columns = [
   { id: "srNo", label: "Sr no", minWidth: 80 },
@@ -81,11 +81,24 @@ export default function DashboardTables() {
     dispatch(approveOrderAsync({ orderId: orderId, orderInfo: { "status": "approved" } })).then((result) => {
       if (approveOrderAsync.fulfilled.match(result)) {
         dispatch(getApproveListAsync());
+        dispatch(getDashboardDetailsAsync());
+      }
+    })
+  }
+
+  const handleCancel = (orderId) => {
+    // console.log(orderId)
+    dispatch(declineOrderAsync({ orderId: orderId, orderInfo: { "status": "decline" } })).then((result) => {
+      if (declineOrderAsync.fulfilled.match(result)) {
+        dispatch(getApproveListAsync());
+        dispatch(getDashboardDetailsAsync());
       }
     })
   }
 
   return (
+    <>
+    <h1 className="my-2 font-bold">New orders</h1>
     <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full my-4">
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -119,11 +132,11 @@ export default function DashboardTables() {
                           {column.id === "actions" ? (
                             // Render Edit and Delete buttons
                             <div className="space-x-2">
-                              <Button onClick={() => handleApprove(row.id)} className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                              <Button onClick={() => handleApprove(row.id)} className="bg-orange-400 hover:bg-orange-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Approve
                               </Button>
-                              <Button className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                                Delete
+                              <Button onClick={() => handleCancel(row.id)} className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                Decline
                               </Button>
                             </div>
                           ) : // Render other columns
@@ -164,5 +177,6 @@ export default function DashboardTables() {
         </button>
       </div> */}
     </Paper>
+    </>
   );
 }

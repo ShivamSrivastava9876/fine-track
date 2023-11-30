@@ -1,12 +1,12 @@
 // components/UserComponent.js
 import { ReactNode } from "react";
 
-const DashboardComponent = () => {
-
+const OrderComponent = () => {
+  
   return (
     <div className="flex items-center justify-between w-full mb-8">
       {/* Left-hand side Buttons */}
-      <div className="flex items-center space-x-4 relative">
+      {/* <div className="flex items-center space-x-4 relative"> */}
         {/* Button 1 */}
         {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
           <svg
@@ -25,7 +25,13 @@ const DashboardComponent = () => {
           </svg>
           Filters
         </button> */}
-      </div>
+
+        {/* Dropdown */}
+        
+      {/* </div> */}
+
+      {/* User Title */}
+      <h1 className="text-2xl mx-4 font-bold">Cancelled orders</h1>
 
       {/* Right-hand side Search Box */}
       {/* <input
@@ -38,4 +44,4 @@ const DashboardComponent = () => {
   );
 };
 
-export default DashboardComponent;
+export default OrderComponent;

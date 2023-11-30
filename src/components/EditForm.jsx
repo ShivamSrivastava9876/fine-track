@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from "@mui/material/Button";
 
-const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, setCategory, setImage }) => {
+const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, setCategory, image, setImage }) => {
     const modalClasses = isOpen ? 'block' : 'hidden';
 
     //To save new image
@@ -75,6 +75,7 @@ const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, s
                         <input
                             type="file"
                             className="w-full py-2 px-8 h-10 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                            // defaultValue={row.image}
                             // value={image}
                             onChange={handleFileChange}
                         />

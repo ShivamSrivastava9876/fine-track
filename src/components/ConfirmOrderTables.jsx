@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -11,84 +9,93 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserAsync, selectUserData, userDetailsAsync } from "@/redux/slice/user/userSlice";
-import DeleteOption from "./DeleteOption";
-import { MdEdit, MdDelete } from 'react-icons/md';
-
-const createData = (srNo, id, userName, email, mobile) => {
-  return { srNo, id, userName, email, mobile };
-};
+import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
 
 const columns = [
-  { id: "srNo", label: "Sr no", minWidth: 100 },
-  { id: "userName", label: "Name", minWidth: 250 },
-  { id: "email", label: "Email", minWidth: 450 },
-  { id: "mobile", label: "Mobile number", minWidth: 280 },
-  { id: "actions", label: "", minWidth: 100 },
+  { id: "HuId", label: "HU ID", minWidth: 80 },
+  { id: "productId", label: "Product ID", minWidth: 100 },
+  { id: "product", label: "Product", minWidth: 150 },
+  { id: "user", label: "User", minWidth: 200 },
+  { id: "quantity", label: "Quantity", minWidth: 50 },
+  { id: "puritySpc", label: "Purity spc", minWidth: 100 },
+  { id: "price", label: "Price", minWidth: 50 },
+  { id: "total", label: "Total", minWidth: 50 },
+  // { id: "actions", label: "", minWidth: 150 },
 ];
 
-export default function UserTables() {
+const createData = (
+  HuId,
+  productId,
+  product,
+  user,
+  quantity,
+  puritySpc,
+  price,
+  total
+) => {
+  return {
+    HuId,
+    productId,
+    product,
+    user,
+    quantity,
+    puritySpc,
+    price,
+    total,
+  };
+};
+
+export default function ConfirmOrderTables() {
   const dispatch = useDispatch();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
-  const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const orderList = useSelector(getConfirmOrderData);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (
+    event
+  ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
-  const handleDelete = (selectedRowId) => {
-    console.log("select", selectedRowId)
-    const userId = selectedRowId;
-    dispatch(deleteUserAsync(userId)).then((result) => {
-      if (deleteUserAsync.fulfilled.match(result)) {
-        dispatch(userDetailsAsync());
-      }
-    })
-  }
-  
-  const handleDeleteCancel = () => {
-    setSelectedRowToDelete(null);
-  }
-  
-  const handleDeletePopup = (selectedRowId) => {
-    setSelectedRowToDelete(selectedRowId)
-  }
+  React.useEffect(() => {
+    console.log("confirm order working")
+    dispatch(getConfirmOrderAsync())
+  }, [dispatch])
 
   React.useEffect(() => {
-    dispatch(userDetailsAsync());
-  }, [dispatch]);
-
-  const userData = useSelector(selectUserData)[0];
-
-  React.useEffect(() => {
-    if (userData && Array.isArray(userData)) {
+    console.log("orderList", orderList);
+    if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
-      const newRows = userData.map((data) => {
+      const newRows = orderList.map((data) => {
         const newRow = createData(
-          srNo,
-          data.id,
-          data.first_name + " " + data.last_name || "",
-          data.email || "",
-          data.mobile || ""
+          data.product.hu_id || "",
+          data.product.product_id || "",
+          data.product.product_name || "",
+          data.order.user || "",
+          data.quantity || "",
+          data.product.purity_spec || "",
+          data.price|| "",
+          data.order.total_price  || ""
         );
         srNo = srNo + 1;
         return newRow;
       });
+
       setRows(newRows)
     }
-  }, [userData]);
+  }, [orderList]);
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
-      <TableContainer sx={{ maxHeight: 440 }} className="font-Poppins">
-        <Table stickyHeader aria-label="sticky table" className="font-Poppins">
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
@@ -117,16 +124,12 @@ export default function UserTables() {
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {column.id === "actions" ? (
-                            // Edit and Delete buttons
+                            // Render Edit and Delete buttons
                             <div className="space-x-2">
-                              {/* <Button className="bg-blue-400 hover:bg-blue-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                                Edit
-                              </Button> */}
-                              {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
+
+                              {/* <Button className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Delete
                               </Button> */}
-                              <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color:'red'}} />
-                              {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "user" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
                             </div>
                           ) : // Render other columns
                             column.format && typeof value === "number" ? (

@@ -39,8 +39,17 @@ export async function createProduct(newProductInfo) {
         const header = {
             Authorization: `Token ${token}`
         }
-        console.log("category ",newProductInfo.category)
-        console.log("product type ",newProductInfo.product_type)
+        const images = newProductInfo.image;
+        console.log("newProductInfo.image", newProductInfo.image);
+        // const allImages = new FormData();
+        const allImages = [];
+        for (let i = 0; i < images.length; i++) {
+            allImages.push(images[i]);
+        }
+        console.log("allImages", allImages);
+
+        // console.log("category ",newProductInfo.category)
+        // console.log("product type ",newProductInfo.product_type)
         const formData = new FormData();
         formData.append("category", newProductInfo.category);
         formData.append("product_type", newProductInfo.product_type);
@@ -54,7 +63,10 @@ export async function createProduct(newProductInfo) {
         formData.append("purity_spec", newProductInfo.purity_spec);
         formData.append("price", newProductInfo.price);
         formData.append("quantity", newProductInfo.quantity);
-        formData.append("image", newProductInfo.image);
+        for (let i = 0; i < allImages.length; i++) {
+            formData.append('images', allImages[i]);
+        }
+        // formData.append('images', allImages);
         formData.append("description", newProductInfo.description);
         formData.append("is_available", newProductInfo.is_available);
         const response = await fetch(
@@ -82,7 +94,7 @@ export async function createProduct(newProductInfo) {
 
 export async function updateProduct(updateProductInfo) {
     try {
-        
+
         function getToken() {
             return localStorage.getItem("token");
         }
@@ -90,8 +102,15 @@ export async function updateProduct(updateProductInfo) {
         const header = {
             Authorization: `Token ${token}`
         }
-        console.log("update", updateProductInfo.productId)
-        
+        const images = updateProductInfo.image;
+        console.log("updateProductInfo.image", updateProductInfo.image);
+        // const allImages = new FormData();
+        const allImages = [];
+        for (let i = 0; i < images.length; i++) {
+            allImages.push(images[i]);
+        }
+        console.log("allImages", allImages);
+
         //also get productId in updateProductInfo
         const formData = new FormData();
         formData.append("category", updateProductInfo.category);
@@ -106,10 +125,12 @@ export async function updateProduct(updateProductInfo) {
         formData.append("purity_spec", updateProductInfo.purity_spec);
         formData.append("price", updateProductInfo.price);
         formData.append("quantity", updateProductInfo.quantity);
-        formData.append("image", updateProductInfo.image);
+        for (let i = 0; i < allImages.length; i++) {
+            formData.append('images', allImages[i]);
+        }
         formData.append("description", updateProductInfo.description);
         formData.append("is_available", updateProductInfo.is_available);
-        
+
         const response = await fetch(
             `http://192.168.29.154:8000/admin_panel/update/${updateProductInfo.productId}/product-item/`,
             {

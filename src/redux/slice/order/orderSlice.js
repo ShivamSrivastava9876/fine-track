@@ -1,10 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { approveOrder, getApproveList, getOrder } from "./orderApi";
+import { approveOrder, declineOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDailyReportData, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getOrder, searchOrder } from "./orderApi";
 
 const initialState = {
     status: "idle",
     approveOrderData: [],
     orderData: [],
+    confirmOrderData: [],
+    deliveredOrderData: [],
+    cancelledOrderData: [],
+    declinedOrderData: [],
+    dashboardDetails: null,
     error: null
 }
 
@@ -34,6 +39,19 @@ export const approveOrderAsync = createAsyncThunk(
     }
 )
 
+export const declineOrderAsync = createAsyncThunk(
+    "order/declineOrder/update",
+    async (orderDecline) => {
+        try {
+            const response = await declineOrder(orderDecline);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+)
+
 export const getOrderListAsync = createAsyncThunk(
     "order/get",
     async () => {
@@ -47,6 +65,97 @@ export const getOrderListAsync = createAsyncThunk(
         }
     }
 )
+
+export const searchOrderAsync = createAsyncThunk(
+    "order/searchOrder",
+    async (searchOrderInfo) => {
+        try {
+            const response = await searchOrder(searchOrderInfo);
+            return response.data.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getConfirmOrderAsync = createAsyncThunk(
+    "order/confirmOrder",
+    async () => {
+        try {
+            const response = await getConfirmOrder();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getDeliveredOrderAsync = createAsyncThunk(
+    "order/deliveredOrder",
+    async () => {
+        try {
+            const response = await getDeliveredOrder();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getCancelledOrderAsync = createAsyncThunk(
+    "order/cancelledOrder",
+    async () => {
+        try {
+            const response = await getCancelledOrder();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getDeclinedOrderAsync = createAsyncThunk(
+    "order/declinedOrder",
+    async () => {
+        try {
+            const response = await getDeclinedOrder();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getDashboardDetailsAsync = createAsyncThunk(
+    "order/dashboardDetails",
+    async () => {
+        try {
+            const response = await getDashboardDetails();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getDailyReportDataAsync = createAsyncThunk(
+    "order/dashboardDetails",
+    async () => {
+        try {
+            const response = await getDailyReportData();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
 
 const orderSlice = createSlice({
     name: "order",
@@ -65,7 +174,7 @@ const orderSlice = createSlice({
                 }
             })
             .addCase(getApproveListAsync.rejected, (state, action) => {
-                state.status = action.payload;
+                state.status = 'idle';
             })
             .addCase(approveOrderAsync.pending, (state) => {
                 state.status = 'loading';
@@ -74,6 +183,15 @@ const orderSlice = createSlice({
                 state.status = 'idle';
             })
             .addCase(approveOrderAsync.rejected, (state) => {
+                state.status = 'idle';
+            })
+            .addCase(declineOrderAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(declineOrderAsync.fulfilled, (state) => {
+                state.status = 'idle';
+            })
+            .addCase(declineOrderAsync.rejected, (state) => {
                 state.status = 'idle';
             })
             .addCase(getOrderListAsync.pending, (state) => {
@@ -88,11 +206,91 @@ const orderSlice = createSlice({
                 }
             })
             .addCase(getOrderListAsync.rejected, (state, action) => {
-                state.status = action.payload;
+                state.status = 'idle';
+            })
+            .addCase(searchOrderAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchOrderAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.orderData = action.payload;
+                }
+            })
+            .addCase(searchOrderAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getConfirmOrderAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getConfirmOrderAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.confirmOrderData.splice(0, 1, action.payload);
+                    state.confirmOrderData = state.confirmOrderData[0].data;
+                }
+            })
+            .addCase(getConfirmOrderAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getDeliveredOrderAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getDeliveredOrderAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.deliveredOrderData.splice(0, 1, action.payload);
+                    state.deliveredOrderData = state.deliveredOrderData[0].data;
+                }
+            })
+            .addCase(getDeliveredOrderAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getCancelledOrderAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getCancelledOrderAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.cancelledOrderData.splice(0, 1, action.payload);
+                    state.cancelledOrderData = state.cancelledOrderData[0].data;
+                }
+            })
+            .addCase(getCancelledOrderAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getDeclinedOrderAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getDeclinedOrderAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.declinedOrderData.splice(0, 1, action.payload);
+                    state.declinedOrderData = state.declinedOrderData[0].data;
+                }
+            })
+            .addCase(getDeclinedOrderAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getDashboardDetailsAsync.pending, (state) => {
+                state.status = "loading"
+            })
+            .addCase(getDashboardDetailsAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.dashboardDetails = action.payload;
+            })
+            .addCase(getDashboardDetailsAsync.rejected, (state, action) => {
+                state.status = 'idle'
+                state.error = action.payload
             })
     }
 })
 
 export const getApprovalList = (state) => state.order.approveOrderData;
 export const getOrderList = (state) => state.order.orderData;
+export const getConfirmOrderData = (state) => state.order.confirmOrderData;
+export const getDeliveredOrderData = (state) => state.order.deliveredOrderData;
+export const getCancelledOrderData = (state) => state.order.cancelledOrderData;
+export const getDeclinedOrderData = (state) => state.order.declinedOrderData;
+export const getDashboardData = (state) => state.order.dashboardDetails;
 export default orderSlice.reducer;

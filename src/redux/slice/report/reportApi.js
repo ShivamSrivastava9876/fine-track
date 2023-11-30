@@ -1,4 +1,4 @@
-export async function getApproveList() {
+export async function getDailyReport() {
     try {
         function getToken() {
             return localStorage.getItem("token");
@@ -8,149 +8,17 @@ export async function getApproveList() {
             "Content-type": "application/json",
             Authorization: `Token ${token}`
         }
+
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/approve-order-list/',
-            {
-                method: 'GET',
-                headers: header
-            }
-        )
-        if (response.ok) {
-            const data = await response.json();
-            return { data };
-        }
-        else {
-            const error = await response.text();
-            return { error };
-        }
-
-    }
-    catch (error) {
-        return { error }
-    }
-};
-
-export async function approveOrder(orderApproval) {
-    try {
-        function getToken() {
-            return localStorage.getItem("token");
-        }
-        const token = getToken();
-        const header = {
-            "Content-type": "application/json",
-            Authorization: `Token ${token}`
-        }
-        const response = await fetch(
-            `http://192.168.29.154:8000/admin_panel/order-to-approve/${orderApproval.orderId}/`,
-            {
-                method: 'PUT',
-                headers: header,
-                body: JSON.stringify(orderApproval.orderInfo)
-            }
-        )
-        if (response.ok) {
-            const data = await response.json();
-            return { data };
-        }
-        else {
-            const error = await response.text();
-            return { error };
-        }
-
-    }
-    catch (error) {
-        return { error }
-    }
-}
-
-export async function declineOrder(orderDecline) {
-    try {
-        function getToken() {
-            return localStorage.getItem("token");
-        }
-        const token = getToken();
-        const header = {
-            "Content-type": "application/json",
-            Authorization: `Token ${token}`
-        }
-        const response = await fetch(
-            `http://192.168.29.154:8000/admin_panel/order-to-approve/${orderDecline.orderId}/`,
-            {
-                method: 'PUT',
-                headers: header,
-                body: JSON.stringify(orderDecline.orderInfo)
-            }
-        )
-        if (response.ok) {
-            const data = await response.json();
-            return { data };
-        }
-        else {
-            const error = await response.text();
-            return { error };
-        }
-
-    }
-    catch (error) {
-        return { error }
-    }
-}
-
-export async function getOrder() {
-    try {
-        function getToken() {
-            return localStorage.getItem("token");
-        }
-        const token = getToken();
-        const header = {
-            // "Content-type": "application/json",
-            Authorization: `Token ${token}`
-        }
-        console.log("order api")
-        const response = await fetch(
-            'http://192.168.29.154:8000/orders/orderitem-list/',
-            {
-                method: 'GET',
-                headers: header
-            }
-        )
-        if (response.ok) {
-            const data = await response.json();
-            return { data };
-        }
-        else {
-            const error = await response.text();
-            return { error };
-        }
-
-    }
-    catch (error) {
-        return { error }
-    }
-};
-
-export async function searchOrder(searchOrderInfo) {
-    try {
-        function getToken() {
-            return localStorage.getItem("token");
-        }
-        const token = getToken();
-        const header = {
-            "Content-type": "application/json",
-            Authorization: `Token ${token}`,
-        };
-        const response = await fetch(
-            `http://192.168.29.154:8000/orders/orderitem-search/?search=${searchOrderInfo}`,
+            'http://192.168.29.154:8000/report/daily-report/',
             {
                 method: "GET",
                 headers: header
             }
-        );
-
+        )
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
-            return { data };
+            return { data }
         }
         else {
             const error = await response.text();
@@ -162,7 +30,103 @@ export async function searchOrder(searchOrderInfo) {
     }
 }
 
-export async function getConfirmOrder() {
+export async function getWeeklyReport() {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+
+        const response = await fetch(
+            'http://192.168.29.154:8000/report/weekly-report/',
+            {
+                method: "GET",
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data }
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+    }
+    catch (error) {
+        return { error };
+    }
+}
+
+export async function getMonthlyReport() {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+
+        const response = await fetch(
+            'http://192.168.29.154:8000/report/monthly-report/',
+            {
+                method: "GET",
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data }
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+    }
+    catch (error) {
+        return { error };
+    }
+}
+
+export async function getYearlyReport() {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+
+        const response = await fetch(
+            'http://192.168.29.154:8000/report/yearly-report/',
+            {
+                method: "GET",
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data }
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+    }
+    catch (error) {
+        return { error };
+    }
+}
+
+export async function getDailyReportData() {
     try {
         function getToken() {
             return localStorage.getItem("token");
@@ -173,7 +137,7 @@ export async function getConfirmOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/cofirm-order-list/',
+            'http://192.168.29.154:8000/report/daily-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -194,7 +158,7 @@ export async function getConfirmOrder() {
     }
 };
 
-export async function getDeliveredOrder() {
+export async function getWeeklyReportData() {
     try {
         function getToken() {
             return localStorage.getItem("token");
@@ -205,7 +169,7 @@ export async function getDeliveredOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/delivered-order-list/',
+            'http://192.168.29.154:8000/report/weekly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -226,7 +190,7 @@ export async function getDeliveredOrder() {
     }
 };
 
-export async function getCancelledOrder() {
+export async function getMonthlyReportData() {
     try {
         function getToken() {
             return localStorage.getItem("token");
@@ -237,7 +201,7 @@ export async function getCancelledOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/cancelled-order-list/',
+            'http://192.168.29.154:8000/report/monthly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -257,68 +221,3 @@ export async function getCancelledOrder() {
         return { error }
     }
 };
-
-export async function getDeclinedOrder() {
-    try {
-        function getToken() {
-            return localStorage.getItem("token");
-        }
-        const token = getToken();
-        const header = {
-            // "Content-type": "application/json",
-            Authorization: `Token ${token}`
-        }
-        const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/decline-order-list/',
-            {
-                method: 'GET',
-                headers: header
-            }
-        )
-        if (response.ok) {
-            const data = await response.json();
-            return { data };
-        }
-        else {
-            const error = await response.text();
-            return { error };
-        }
-
-    }
-    catch (error) {
-        return { error }
-    }
-};
-
-export async function getDashboardDetails() {
-    try {
-        function getToken() {
-            return localStorage.getItem("token");
-        }
-        const token = getToken();
-        const header = {
-            // "Content-type": "application/json",
-            Authorization: `Token ${token}`
-        }
-        const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/dashboard-details/',
-            {
-                method: 'GET',
-                headers: header
-            }
-        )
-        if (response.ok) {
-            const data = await response.json();
-            return { data };
-        }
-        else {
-            const error = await response.text();
-            return { error };
-        }
-
-    }
-    catch (error) {
-        return { error }
-    }
-};
-

@@ -5,11 +5,11 @@ import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 const Header = () => {
   return (
     <div className="w-full bg-white h-20 p-4 flex justify-between items-center shadow-md">
-      <div className="text-2xl font-medium text-black">
+      <div className="text-2xl font-bold text-black">
         <h2>Hello admin</h2>
       </div>
 
-      <div className="flex w-2/5 justify-end">
+      {/* <div className="flex w-2/5 justify-end">
         <div className="flex justify-center items-center rounded-full">
           <Image
             src={ProfilePhoto}
@@ -17,7 +17,7 @@ const Header = () => {
             className="rounded-full w-50 h-50"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

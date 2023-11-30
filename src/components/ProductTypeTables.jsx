@@ -8,6 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import { MdEdit, MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProductTypeAsync, getProductTypeAsync, getProductTypeList, updateProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
 import EditFormProductType from "./EditFormProductType";
@@ -38,24 +39,31 @@ export default function ProductTypeTables() {
   const [rows, setRows] = React.useState([]);
   const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
   const [openCategory, setOpenCategory] = React.useState(false);
-
+  const [error, setError] = React.useState(false);
 
   const productTypeList = useSelector(getProductTypeList);
 
   const handleUpdateProductType = (e, rowProductType, rowCategory) => {
-    e.preventDefault();
-    console.log(category, productType, image, editedRow);
-    const updatedCategory = category !== "" ? category : rowCategory;
-    const updatedProductType = productType !== "" ? productType : rowProductType;
-    dispatch(updateProductTypeAsync({ category: updatedCategory, product_type: updatedProductType, image: image, productTypeId: editedRow })).then((result) => {
-      if (updateProductTypeAsync.fulfilled.match(result)) {
-        dispatch(getProductTypeAsync());
-        setCategory("");
-        setProductType("");
-        setImage(null);
-        setEditedRow(null);
-      }
-    });
+    if (image) {
+      e.preventDefault();
+      console.log(category, productType, image, editedRow);
+      const updatedCategory = category !== "" ? category : rowCategory;
+      const updatedProductType = productType !== "" ? productType : rowProductType;
+      dispatch(updateProductTypeAsync({ category: updatedCategory, product_type: updatedProductType, image: image, productTypeId: editedRow })).then((result) => {
+        if (updateProductTypeAsync.fulfilled.match(result)) {
+          dispatch(getProductTypeAsync());
+          setCategory("");
+          setProductType("");
+          setImage(null);
+          setEditedRow(null);
+        }
+      });
+    }
+    else {
+      e.preventDefault();
+      setError(true)
+    }
+
   };
 
   const handleDelete = (selectedRowId) => {
@@ -110,6 +118,10 @@ export default function ProductTypeTables() {
     setPage(0);
   };
 
+  const hideError = () => {
+    setError(false);
+  }
+
   React.useEffect(() => {
     dispatch(getProductTypeAsync())
   }, [dispatch]);
@@ -133,83 +145,103 @@ export default function ProductTypeTables() {
   }, [productTypeList]);
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{
-                    minWidth: column.minWidth,
-                    backgroundColor: "#F8F8F8",
-                    color: "#4D586A",
-                  }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.srNo}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.id === "actions" ? (
-                            // Render Edit and Delete buttons
-                            <div className="space-x-2">
+    <>
+      {error && <div
+        // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
+        role="alert"
+        style={{zIndex: 1000}}
+      >
+        <strong className="font-bold">Error!</strong>
+        <span className="ml-2">Upload the image</span>
+        <button
+          onClick={hideError}
+          className="relative top-0.5 bottom-0 left-1"
+        >
+          <span className="text-red-500 text-2xl">×</span>
+        </button>
+      </div>}
+      <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{
+                      minWidth: column.minWidth,
+                      backgroundColor: "#F8F8F8",
+                      color: "#4D586A",
+                    }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.srNo}>
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.id === "actions" ? (
+                              // Render Edit and Delete buttons
+                              <div className="space-x-2">
 
-                              {editedRow === row.id ? (
-                                <div className="space-x-2">
-                                  <EditFormProductType openCategory={openCategory} handleCategory={handleCategory} handleOptionClick={handleOptionClick} handleUpdateProductType={handleUpdateProductType} isOpen={true} row={row} category={category} productType={productType} handleCancel={handleCancel} setProductType={setProductType} setImage={setImage} />
-                                </div>
-                              ) : (
-                                <div className="space-x-2">
-                                  <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                {editedRow === row.id ? (
+                                  <div className="space-x-2">
+                                    <EditFormProductType openCategory={openCategory} handleCategory={handleCategory} handleOptionClick={handleOptionClick} handleUpdateProductType={handleUpdateProductType} isOpen={true} row={row} category={category} productType={productType} handleCancel={handleCancel} setProductType={setProductType} setImage={setImage} />
+                                  </div>
+                                ) : (
+                                  <div className="space-x-2 flex">
+                                    {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
                                     Edit
-                                  </Button>
-                                  <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                                  </Button> */}
+                                    <MdEdit onClick={() => handleEdit(row.id, row.category)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
+
+                                    {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
                                     Delete
-                                  </Button>
-                                  {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "product type" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
+                                  </Button> */}
+                                    <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
 
-                                </div>
+                                    {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "product type" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
+
+                                  </div>
+                                )}
+                              </div>
+                            ) : // Render other columns
+                              column.format && typeof value === "number" ? (
+                                column.format(value)
+                              ) : (
+                                value
                               )}
-                            </div>
-                          ) : // Render other columns
-                            column.format && typeof value === "number" ? (
-                              column.format(value)
-                            ) : (
-                              value
-                            )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
 
-      {/* <div className="space-x-4">
+        {/* <div className="space-x-4">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onPageChange={handleChangePage}
@@ -221,6 +253,7 @@ export default function ProductTypeTables() {
           Previous
         </button>
       </div> */}
-    </Paper>
+      </Paper>
+    </>
   );
 }

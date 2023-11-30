@@ -116,7 +116,7 @@ const SideBar = () => {
           </Link>
 
           <Link
-            href="/"
+            href="/report"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"

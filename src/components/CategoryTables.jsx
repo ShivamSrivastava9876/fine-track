@@ -8,6 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
+import { MdEdit, MdDelete } from 'react-icons/md';
+// import { FaEdit } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategoryAsync, editCategoryAsync, getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
 import EditForm from "./EditForm";
@@ -15,8 +18,8 @@ import DeleteOption from "./DeleteOption";
 
 const columns = [
   { id: "srNo", label: "Sr No", minWidth: 80 },
-  { id: "category", label: "Category name", minWidth: 600 },
-  { id: "actions", label: "", minWidth: 200 },
+  { id: "category", label: "Category name", minWidth: 1000 },
+  { id: "actions", label: "", minWidth: 100 },
 ];
 
 const createData = (srNo, Id, category) => {
@@ -33,6 +36,7 @@ export default function CategoryTables() {
   const [editedRow, setEditedRow] = React.useState(null);
   const [edited, setEdited] = React.useState("");
   const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
+  const [error, setError] = React.useState(false);
   const categoryList = useSelector(getCategoryList);
   console.log(categoryList);
 
@@ -43,21 +47,28 @@ export default function CategoryTables() {
   }
 
   const handleUpdateCategory = (rowCategory) => {
-    const categoryId = editedRow;
-    const updatedCategory = category !== "" ? category : rowCategory;
-    dispatch(editCategoryAsync({ category: updatedCategory, image, id: categoryId })).then((result) => {
-      if (editCategoryAsync.fulfilled.match(result)) {
-        dispatch(getCategoriesAsync());
-        setEditedRow("");
-      }
-    })
-    setEditedRow(null);
+    if (image) {
+      const categoryId = editedRow;
+      const updatedCategory = category !== "" ? category : rowCategory;
+      dispatch(editCategoryAsync({ category: updatedCategory, image, id: categoryId })).then((result) => {
+        if (editCategoryAsync.fulfilled.match(result)) {
+          dispatch(getCategoriesAsync());
+          setCategory("");
+          setImage(null);
+          setEditedRow("");
+        }
+      })
+      setEditedRow(null);
+    }
+    else {
+      setError(true)
+    }
   }
 
   const handleDelete = (selectedRowId) => {
-    
+
     const categoryId = selectedRowId;
-    dispatch(deleteCategoryAsync({id: categoryId})).then((result) => {
+    dispatch(deleteCategoryAsync({ id: categoryId })).then((result) => {
       if (deleteCategoryAsync.fulfilled.match(result)) {
         dispatch(getCategoriesAsync());
       }
@@ -67,7 +78,7 @@ export default function CategoryTables() {
   const handleDeletePopup = (selectedRowId) => {
     setSelectedRowToDelete(selectedRowId)
   }
-  
+
   const handleDeleteCancel = () => {
     setSelectedRowToDelete(null);
   }
@@ -92,6 +103,10 @@ export default function CategoryTables() {
     setPage(0);
   };
 
+  const hideError = () => {
+    setError(false);
+  }
+
   React.useEffect(() => {
     dispatch(getCategoriesAsync())
   }, [dispatch]);
@@ -105,7 +120,7 @@ export default function CategoryTables() {
           data.id,
           data.category_name || ""
         );
-        srNo = srNo+1;
+        srNo = srNo + 1;
         return newRow;
       });
 
@@ -114,89 +129,100 @@ export default function CategoryTables() {
   }, [categoryList]);
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{
-                    minWidth: column.minWidth,
-                    backgroundColor: "#F8F8F8",
-                    color: "#4D586A",
-                  }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.Id}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {column.id === "actions" ? (
-                            <div className="space-x-2">
-                              {editedRow === row.Id ? (
-                                <div className="space-x-2">
-                                  {/* <Button onClick={handleSave} className="bg-blue-400 hover:bg-blue-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                                    Save
-                                  </Button>
-                                  <Button onClick={handleCancel} className="bg-red-400 hover:bg-red-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                                    Cancel
-                                  </Button> */}
-                                  <EditForm row={row} isOpen={true} handleUpdateCategory={handleUpdateCategory} handleCancel={handleCancel} handleCategoryChange={handleCategoryChange} category={category} setCategory={setCategory} setImage={setImage} edited={edited} />
-                                </div>
-                              ) : (
-                                <div className="space-x-2">
-                                  <Button onClick={() => handleEdit(row.Id, row.category)} className="bg-blue-400 hover:bg-blue-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
-                                    Edit
-                                  </Button>
-                                  <Button onClick={() => handleDeletePopup(row.Id)} className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+    <>
+      {error && <div
+        // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
+        role="alert"
+        style={{zIndex: 1000}}
+      >
+        <strong className="font-bold">Error!</strong>
+        <span className="ml-2">Upload the image</span>
+        <button
+          onClick={hideError}
+          className="relative top-0.5 bottom-0 left-1"
+        >
+          <span className="text-red-500 text-2xl">×</span>
+        </button>
+      </div>}
+      <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{
+                      minWidth: column.minWidth,
+                      backgroundColor: "#F8F8F8",
+                      color: "#4D586A",
+                    }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={row.Id}>
+                      {columns.map((column) => {
+                        const value = row[column.id];
+                        return (
+                          <TableCell key={column.id} align={column.align}>
+                            {column.id === "actions" ? (
+                              <div className="space-x-2">
+                                {editedRow === row.Id ? (
+                                  <div className="space-x-2">
+                                    <EditForm row={row} isOpen={true} handleUpdateCategory={handleUpdateCategory} handleCancel={handleCancel} handleCategoryChange={handleCategoryChange} category={category} setCategory={setCategory} image={image} setImage={setImage} edited={edited} />
+                                  </div>
+                                ) : (
+                                  <div className="space-x-2 flex">
+                                    {/* <Button onClick={() => handleEdit(row.Id, row.category)} className="border-black text-white rounded"></Button> */}
+                                    <MdEdit onClick={() => handleEdit(row.Id, row.category)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
+
+                                    {/* <Button onClick={() => handleDeletePopup(row.Id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
                                     Delete
-                                  </Button>
-                                  {selectedRowToDelete === row.Id && <DeleteOption deleteDetails={{title: "category"}} rowId={row.Id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel}/>}
+                                  </Button> */}
+                                    <MdDelete onClick={() => handleDeletePopup(row.Id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
+                                    {selectedRowToDelete === row.Id && <DeleteOption deleteDetails={{ title: "category" }} rowId={row.Id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
 
-                                </div>
-                              )}
-                            </div>
-                          ) : (
-                            // Render other columns
-                            column.format && typeof value === "number" ? (
-                              column.format(value)
+                                  </div>
+                                )}
+                              </div>
                             ) : (
-                              value
-                            )
-                          )}
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+                              // Render other columns
+                              column.format && typeof value === "number" ? (
+                                column.format(value)
+                              ) : (
+                                value
+                              )
+                            )}
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
 
-      {/* <div className="space-x-4">
+        {/* <div className="space-x-4">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onPageChange={handleChangePage}
@@ -208,6 +234,7 @@ export default function CategoryTables() {
           Previous
         </button>
       </div> */}
-    </Paper>
+      </Paper>
+    </>
   );
 }

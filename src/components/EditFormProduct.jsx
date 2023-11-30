@@ -22,7 +22,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
 
     //To save new image
     const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0];
+        const selectedFile = e.target.files;
         setImage(selectedFile);
     }
 
@@ -34,7 +34,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        handleUpdateProduct(e);
+                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description);
                     }}
                     className="p-8 rounded shadow-md flex flex-col justify-center w-auto h-28rem bg-white border border-blue-500"
                 >
@@ -119,59 +119,66 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.HuId}
                                 value={huId}
                                 onChange={(e) => setHuId(e.target.value)}
-                                placeholder="HU id"
+                                placeholder={row.HuId}
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.productId}
                                 value={productId}
                                 onChange={(e) => setProductId(e.target.value)}
-                                placeholder="Product id"
+                                placeholder={row.productId}
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.model}
                                 value={model}
                                 onChange={(e) => setModel(e.target.value)}
-                                placeholder="Model"
+                                placeholder={row.model}
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.subModel}
                                 value={subModel}
                                 onChange={(e) => setSubModel(e.target.value)}
-                                placeholder="Sub model"
+                                placeholder={row.subModel}
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.product}
                                 value={productName}
                                 onChange={(e) => setProductName(e.target.value)}
-                                placeholder="Product name"
+                                placeholder={row.product}
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.stoneWeight}
                                 value={stoneWeight}
                                 onChange={(e) => setStoneWeight(e.target.value)}
-                                placeholder="Stone weight"
+                                placeholder={row.stoneWeight}
                             />
                         </div>
                         <div className="mb-2 h-10">
                             <input
                                 type="file"
+                                multiple
                                 className="w-full py-2 px-8 h-10 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                 // value={image}
                                 onChange={handleFileChange}
@@ -183,47 +190,51 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.grossWeight}
                                 value={grossWeight}
                                 onChange={(e) => setGrossWeight(e.target.value)}
-                                placeholder="Gross weight"
+                                placeholder={row.grossWeight}
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.puritySpc}
                                 value={puritySpc}
                                 onChange={(e) => setPuritySpc(e.target.value)}
-                                placeholder="Purity spc"
+                                placeholder={row.puritySpc}
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                // defaultValue={row.price}
+                                defaultValue={row.price}
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
-                                placeholder="Price"
-                                // field named original price is there in the prop of this form but not used yet
+                                placeholder={row.price}
+                            // field named original price is there in the prop of this form but not used yet
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.quantity}
                                 value={quantity}
                                 onChange={(e) => setQuantity(e.target.value)}
-                                placeholder="Quantity"
+                                placeholder={row.quantity}
                             />
                         </div>
                         <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.description}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                placeholder="Description"
+                                placeholder={row.description}
                             />
                         </div>
                     </div>
