@@ -79,7 +79,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 </div>)}
                         </div>
                         <div onClick={handleProductType} class="relative inline-block cursor-pointer text-left mb-2">
-                            <div class="inline-flex items-center justify-center px-4 py-2 w-full h-9 rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+                            <div class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                                 {productType || "Select product type"}
                                 {/* Arrow icon (tailwindcss/heroicons) */}
                                 <svg

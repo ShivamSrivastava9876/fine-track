@@ -94,7 +94,7 @@ const AddUser = ({ addUser, setAddUser }) => {
             User Details
           </h2>
         </div>
-        <div className="mb-4 w-21.375 h-3.3125">
+        <div className="mb-4 md:w-21.375 md:h-3.3125">
           <input
             type="text"
             className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -103,7 +103,7 @@ const AddUser = ({ addUser, setAddUser }) => {
             placeholder="First name"
           />
         </div>
-        <div className="mb-4 w-21.375 h-3.3125">
+        <div className="mb-4 md:w-21.375 md:h-3.3125">
           <input
             type="text"
             className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -112,7 +112,7 @@ const AddUser = ({ addUser, setAddUser }) => {
             placeholder="Last name"
           />
         </div>
-        <div className="mb-4 w-21.375 h-3.3125">
+        <div className="mb-4 md:w-21.375 md:h-3.3125">
           <input
             type="text"
             className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -121,7 +121,7 @@ const AddUser = ({ addUser, setAddUser }) => {
             placeholder="Email"
           />
         </div>
-        <div className="mb-4 w-21.375 h-3.3125">
+        <div className="mb-4 md:w-21.375 md:h-3.3125">
           <input
             type="text"
             className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -130,7 +130,7 @@ const AddUser = ({ addUser, setAddUser }) => {
             placeholder="Mobile number"
           />
         </div>
-        <div className="mb-4 w-21.375 h-3.3125 relative">
+        <div className="mb-4 md:w-21.375 md:h-3.3125 relative">
           <input
             type={passwordVisible ? "text" : "password"}
             className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -150,7 +150,7 @@ const AddUser = ({ addUser, setAddUser }) => {
             )}
           </button>
         </div>
-        <div className="mb-4 w-21.375 h-3.3125 relative">
+        <div className="mb-4 md:w-21.375 md:h-3.3125 relative">
           <input
             type={confirmPasswordVisible ? "text" : "password"}
             className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -173,7 +173,7 @@ const AddUser = ({ addUser, setAddUser }) => {
 
         <button
           type="submit"
-          className="w-21.375 h-3.3125 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
+          className="rounded-xl bg-[#DF8E51] h-3.3125 w-10.0625 md:w-21.375 m-4 text-white py-2 transition duration-300"
         >
           Add
         </button>
