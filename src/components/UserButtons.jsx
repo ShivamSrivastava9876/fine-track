@@ -40,7 +40,7 @@ const UserComponent = ({
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
-        <div className="flex items-center mx-2 mt-2 space-x-4 relative">
+        <div className="flex items-center mx-2 space-x-4 relative">
           {/* Button 1 */}
           {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
           <svg

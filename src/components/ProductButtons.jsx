@@ -39,7 +39,7 @@ const ProductComponent = ({
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
-        <div className="flex items-center space-x-4 mx-2 mt-2 relative">
+        <div className="flex items-center space-x-4 mx-2 relative">
           {/* Button 1 */}
           {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
           <svg

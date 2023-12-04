@@ -39,7 +39,7 @@ const CategoryComponent = ({
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
-        <div className="flex items-center mx-2 mt-2 space-x-4 relative">
+        <div className="flex items-center mx-2 space-x-4 relative">
 
           {/* Button */}
           <button
