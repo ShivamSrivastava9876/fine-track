@@ -10,36 +10,37 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
+import { getYearlyReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
 
 const columns = [
-  { id: "HuId", label: "HU ID", minWidth: 80 },
+  // { id: "HuId", label: "HU ID", minWidth: 80 },
   { id: "productId", label: "Product ID", minWidth: 100 },
   { id: "product", label: "Product", minWidth: 150 },
   { id: "user", label: "User", minWidth: 200 },
+  { id: "date", label: "Date", minWidth: 200 },
   { id: "quantity", label: "Quantity", minWidth: 50 },
-  { id: "puritySpc", label: "Purity spc", minWidth: 100 },
+  // { id: "puritySpc", label: "Purity spc", minWidth: 100 },
   { id: "price", label: "Price", minWidth: 50 },
   { id: "total", label: "Total", minWidth: 50 },
   // { id: "actions", label: "", minWidth: 150 },
 ];
 
 const createData = (
-  HuId,
+  
   productId,
   product,
   user,
+  date,
   quantity,
-  puritySpc,
   price,
   total
 ) => {
   return {
-    HuId,
     productId,
     product,
     user,
+    date,
     quantity,
-    puritySpc,
     price,
     total,
   };
@@ -51,7 +52,7 @@ export default function YearlyDetailsTables() {
   const [rows, setRows] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const orderList = useSelector(getConfirmOrderData);
+  const orderList = useSelector(getYearlyReportList);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -66,7 +67,7 @@ export default function YearlyDetailsTables() {
 
   React.useEffect(() => {
     console.log("confirm order working")
-    dispatch(getConfirmOrderAsync())
+    dispatch(getYearlyReportDataAsync())
   }, [dispatch])
 
   React.useEffect(() => {
@@ -74,13 +75,20 @@ export default function YearlyDetailsTables() {
     if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
       const newRows = orderList.map((data) => {
+        const date = data.order.order_date;
+        
+        const newDate = new Date(date)
+        const formattedDate = newDate.toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'long',
+          year: '2-digit',
+        });
         const newRow = createData(
-          data.product.hu_id || "",
           data.product.product_id || "",
           data.product.product_name || "",
           data.order.user || "",
+          formattedDate || "",
           data.quantity || "",
-          data.product.purity_spec || "",
           data.price || "",
           data.order.total_price || ""
         );

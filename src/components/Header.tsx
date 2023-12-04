@@ -4,7 +4,7 @@ import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 
 const Header = () => {
   return (
-    <div className="w-full bg-white h-20 p-4 flex justify-between items-center shadow-md">
+    <div className="w-full bg-white h-20 p-4 flex justify-center items-center shadow-md">
       <div className="text-2xl font-bold text-black">
         <h2>Hello admin</h2>
       </div>

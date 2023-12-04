@@ -65,29 +65,30 @@ const AddUser = ({ addUser, setAddUser }) => {
 
   return (
     <div className="flex justify-center m-8 relative">
-      <button
-        className="absolute top-0 right-0 p-0.5 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
-        onClick={handleClose}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-6 h-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
+
       <form
         onSubmit={handleAddUser}
         className="p-8 shadow-md flex flex-col items-center justify-center rounded-2xl w-34.125 bg-white"
       >
+        <button
+          className="absolute top-2 right-0 md:right-0 md:p-0.5 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
+          onClick={handleClose}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
         <div className="mb-4 space-y-1">
           <h2 className=" text-[#0a0a0a] text-center font-normal text-base text-16px w-161">
             User Details

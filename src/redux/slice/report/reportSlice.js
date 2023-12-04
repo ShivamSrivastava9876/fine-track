@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getDailyReport, getDailyReportData, getMonthlyReport, getMonthlyReportData, getWeeklyReport, getWeeklyReportData } from "./reportApi";
+import { getDailyReport, getDailyReportData, getMonthlyReport, getMonthlyReportData, getWeeklyReport, getWeeklyReportData, getYearlyReport, getYearlyReportData } from "./reportApi";
 
 const initialState = {
     status: 'idle',
@@ -7,6 +7,7 @@ const initialState = {
     dailyReportData: [],
     weeklyReportData: [],
     monthlyReportData: [],
+    yearlyReportData: [],
     error: null
 }
 
@@ -53,7 +54,7 @@ export const getYearlyReportAsync = createAsyncThunk(
     "report/yearly/get",
     async () => {
         try {
-            const response = await getMonthlyReport();
+            const response = await getYearlyReport();
             return response.data;
         }
         catch (error) {
@@ -93,6 +94,19 @@ export const getMonthlyReportDataAsync = createAsyncThunk(
     async () => {
         try {
             const response = await getMonthlyReportData();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getYearlyReportDataAsync = createAsyncThunk(
+    "report/YearlyData",
+    async () => {
+        try {
+            const response = await getYearlyReportData();
             return response.data;
         }
         catch (error) {
@@ -190,6 +204,19 @@ const reportSlice = createSlice({
             .addCase(getMonthlyReportDataAsync.rejected, (state, action) => {
                 state.status = 'idle';
             })
+            .addCase(getYearlyReportDataAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getYearlyReportDataAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.yearlyReportData.splice(0, 1, action.payload);
+                    state.yearlyReportData = state.yearlyReportData[0].data;
+                }
+            })
+            .addCase(getYearlyReportDataAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
     }
 })
 
@@ -198,3 +225,4 @@ export const getReportData = (state) => state.report.reportData;
 export const getDailyReportList = (state) => state.report.dailyReportData;
 export const getWeeklyReportList = (state) => state.report.weeklyReportData;
 export const getMonthlyReportList = (state) => state.report.monthlyReportData;
+export const getYearlyReportList = (state) => state.report.yearlyReportData;

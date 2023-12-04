@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { Chart } from "chart.js/auto";
 import { useDispatch, useSelector } from "react-redux";
-import { getDailyReportAsync, getMonthlyReportAsync, getReportData, getWeeklyReportAsync } from "../redux/slice/report/reportSlice";
+import { getDailyReportAsync, getMonthlyReportAsync, getReportData, getWeeklyReportAsync, getYearlyReportAsync } from "../redux/slice/report/reportSlice";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -34,6 +34,7 @@ function ReportBarGraph() {
     }
 
     const handleYearlyData = () => {
+        dispatch(getYearlyReportAsync())
         setActive("yearly")
     }
 

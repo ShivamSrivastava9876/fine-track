@@ -34,11 +34,15 @@ const UserComponent = ({
   }
 
   return (
-    <div className="flex items-center justify-between w-full mb-8">
-      {/* Left-hand side Buttons */}
-      <div className="flex items-center space-x-4 relative">
-        {/* Button 1 */}
-        {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
+    <div className="flex items-center justify-between flex-wrap w-full mb-8">
+      {/* User Title */}
+      <h1 className="text-2xl mx-2 m-2 font-bold">Users</h1>
+
+      <div className="flex flex-row flex-wrap">
+        {/* Right-hand side Buttons */}
+        <div className="flex items-center mx-2 mt-2 space-x-4 relative">
+          {/* Button 1 */}
+          {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-6 h-6 mr-2"
@@ -56,53 +60,51 @@ const UserComponent = ({
           Filters
         </button> */}
 
-        {/* Button 2 */}
-        <button
-          className={`flex items-center px-4 py-2 bg-[#DB8A4D] text-white rounded-xl shadow transition-transform duration-300 transform ${addUser ? 'invisible' : ''
-            }`}
-          onClick={handleAddUser}
-        >
-
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+          {/* Button 2 */}
+          <button
+            className={`flex items-center px-4 py-2 bg-[#DB8A4D] text-white rounded-full shadow transition-transform duration-300 transform ${addUser ? 'invisible' : ''
+              }`}
+            onClick={handleAddUser}
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-            />
-          </svg>
-          Add user
-        </button>
-      </div>
 
-      {/* User Title */}
-      <h1 className="text-2xl mx-4 font-bold">Users</h1>
-
-      {/* Right-hand side Search Box */}
-      <form onSubmit={(e) => handleUserSearch(e)} className="flex items-center w-96 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
-        <input
-          type="search"
-          placeholder="Search"
-          value={searchParameter}
-          onChange={(e) => handleSearchParameter(e.target.value)}
-          className="w-full h-full outline-none bg-transparent text-blue-gray-700"
-        />
-        <div className="ml-2">
-          <Image
-            onClick={handleUserSearch}
-            src={SearchIcon}
-            alt="search-icon"
-            className="cursor-pointer"
-          />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+            Add user
+          </button>
         </div>
-        {/* <input type="submit"></input> */}
-      </form>
+
+        {/* Right-hand side Search Box */}
+        <form onSubmit={(e) => handleUserSearch(e)} className="flex items-center w-80 border-2 m-2 border-solid border-gray-300 rounded-full px-4 py-2">
+          <input
+            type="search"
+            placeholder="Search"
+            value={searchParameter}
+            onChange={(e) => handleSearchParameter(e.target.value)}
+            className="w-full h-full outline-none bg-transparent text-blue-gray-700"
+          />
+          <div className="ml-2">
+            <Image
+              onClick={handleUserSearch}
+              src={SearchIcon}
+              alt="search-icon"
+              className="cursor-pointer"
+            />
+          </div>
+          {/* <input type="submit"></input> */}
+        </form>
+      </div>
     </div>
   );
 };
