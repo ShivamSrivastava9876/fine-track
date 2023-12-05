@@ -44,6 +44,7 @@ export default function CategoryTables() {
 
   const handleEdit = (rowId, rowCategory) => {
     setEditedRow(rowId);
+    setCategory(rowCategory);
   }
 
   const handleUpdateCategory = (rowCategory) => {

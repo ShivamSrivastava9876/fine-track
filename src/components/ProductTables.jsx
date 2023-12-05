@@ -38,7 +38,9 @@ const createData = (
   id,
   model,
   subModel,
-  description
+  description,
+  category,
+  productType
 ) => {
   return {
     HuId,
@@ -52,7 +54,9 @@ const createData = (
     id,
     model,
     subModel,
-    description
+    description,
+    category,
+    productType
   };
 };
 
@@ -85,7 +89,7 @@ export default function ProductTables() {
   const [rows, setRows] = React.useState([]);
   const productList = useSelector(getProductList);
 
-  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription) => {
+  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType) => {
     if (image) {
       e.preventDefault();
       const updatedHuId = huId !== "" ? huId : rowHuId;
@@ -99,8 +103,10 @@ export default function ProductTables() {
       const updatedQuantity = quantity !== "" ? quantity : rowQuantity;
       const updatedPrice = price !== "" ? price : rowPrice;
       const updatedDescription = description !== "" ? description : rowDescription;
+      const updatedCategory = category !== "" ? category : rowCategory;
+      const updatedProductType = productType !== "" ? productType : rowProductType;
 
-      dispatch(updateProductAsync({ productId: editedRow, category: category, product_type: productType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image, is_available: true })).then((result) => {
+      dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image, is_available: true })).then((result) => {
         if (updateProductAsync.fulfilled.match(result)) {
           dispatch(getProductAsync());
           setHuId("");
@@ -156,9 +162,20 @@ export default function ProductTables() {
     setOpenCategory(!openCategory);
   };
 
-  const handleEdit = (rowId, rowCategory) => {
+  const handleEdit = (rowId, rowCategory, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription ) => {
     // console.log(rowCategory);
     setEditedRow(rowId);
+    setHuId(rowHuId);
+    setProductId(rowProductId);
+    setModel(rowModel);
+    setSubModel(rowSubModel);
+    setProductName(rowProduct);
+    setStoneWeight(rowStoneWeight);
+    setGrossWeight(rowGrossWeight);
+    setPuritySpc(rowPuritySpc);
+    setPrice(rowPrice);
+    setQuantity(rowQuantity);
+    setDescription(rowDescription);
   }
 
   const handleProductType = () => {
@@ -225,7 +242,9 @@ export default function ProductTables() {
           data.id,
           data.model || "",
           data.sub_model || "",
-          data.description || ""
+          data.description || "",
+          data.category || "",
+          data.product_type || ""
         );
         srNo = srNo + 1;
         return newRow;
@@ -295,7 +314,7 @@ export default function ProductTables() {
                                     {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
                                     Edit
                                   </Button> */}
-                                    <MdEdit onClick={() => handleEdit(row.id, row.category)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
+                                    <MdEdit onClick={() => handleEdit(row.id, row.category, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
                                     {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
                                     Delete
                                   </Button> */}

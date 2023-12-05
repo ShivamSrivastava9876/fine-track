@@ -35,7 +35,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                     onSubmit={(e) => {
                         e.preventDefault();
                         console.log("apna row", row);
-                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description);
+                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType);
                     }}
                     className="p-8 rounded shadow-md flex flex-col justify-center w-auto h-28rem bg-white border border-blue-500"
                 >
@@ -47,7 +47,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                     <div className="grid grid-cols-2 gap-2">
                         <div class="relative cursor-pointer inline-block text-left mb-2 h-10">
                             <div onClick={handleCategory} class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                                {category || "Select category"}
+                                {category || row.category || "Select category"}
                                 {/* Arrow icon (tailwindcss/heroicons) */}
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -81,7 +81,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                         </div>
                         <div onClick={handleProductType} class="relative inline-block cursor-pointer text-left mb-2">
                             <div class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                                {productType || "Select product type"}
+                                {productType || row.productType || "Select product type"}
                                 {/* Arrow icon (tailwindcss/heroicons) */}
                                 <svg
 

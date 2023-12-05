@@ -39,7 +39,7 @@ const EditFormProductType = ({ row, openCategory, handleCategory, handleOptionCl
                     </div>
                     <div class="relative cursor-pointer inline-block text-left mb-2 h-10">
                         <div onClick={handleCategory} class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                            {category || "Select category"}
+                            { category || row.category || "Select category"}
                             {/* Arrow icon (tailwindcss/heroicons) */}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"

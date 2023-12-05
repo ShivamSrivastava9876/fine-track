@@ -88,8 +88,10 @@ export default function ProductTypeTables() {
     setOpenCategory(!openCategory);
   };
 
-  const handleEdit = (rowId, rowCategory) => {
+  const handleEdit = (rowId, rowCategory, rowProductType) => {
     setEditedRow(rowId);
+    // setCategory(rowCategory);
+    setProductType(rowProductType)
   }
 
   const handleCancel = () => {
@@ -204,7 +206,7 @@ export default function ProductTypeTables() {
                                     {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
                                     Edit
                                   </Button> */}
-                                    <MdEdit onClick={() => handleEdit(row.id, row.category)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
+                                    <MdEdit onClick={() => handleEdit(row.id, row.category, row.product_type)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
 
                                     {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
                                     Delete
