@@ -1,7 +1,7 @@
 export async function loginUser(loginInfo) {
   try {
     const response = await fetch(
-      "http://192.168.29.154:8000/admin_panel/login/",
+      "http://195.35.22.200:8000/admin_panel/login/",
       {
         method: "POST",
         headers: { "Content-type": "application/json" },
@@ -34,7 +34,7 @@ export async function logoutUser() {
       Authorization: `Token ${token}`
     }
     const response = await fetch(
-      "http://192.168.29.154:8000/admin_panel/logout/",
+      "http://195.35.22.200:8000/admin_panel/logout/",
       {
         method: "POST",
         headers: header

@@ -9,7 +9,7 @@ export async function userDetails() {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://192.168.29.154:8000/admin_panel/userdetail/",
+      "http://195.35.22.200:8000/admin_panel/userdetail/",
       {
         method: "GET",
         headers: header,
@@ -41,7 +41,7 @@ export async function createUser(createUserInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://192.168.29.154:8000/admin_panel/create-new-user/",
+      "http://195.35.22.200:8000/admin_panel/create-new-user/",
       {
         method: "POST",
         headers: header,
@@ -74,7 +74,7 @@ export async function searchUser(searchUserInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      `http://192.168.29.154:8000/admin_panel/userdetail/?search=${searchUserInfo}`,
+      `http://195.35.22.200:8000/admin_panel/userdetail/?search=${searchUserInfo}`,
       {
         method: "GET",
         headers: header
@@ -107,7 +107,7 @@ export async function deleteUser(userId) {
       Authorization: `Token ${token}`
     }
     const response = await fetch(
-      `http://192.168.29.154:8000/admin_panel/${userId}/delete-user/`,
+      `http://195.35.22.200:8000/admin_panel/${userId}/delete-user/`,
       {
         method: 'DELETE',
         headers: header

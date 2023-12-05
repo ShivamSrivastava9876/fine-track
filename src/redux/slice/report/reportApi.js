@@ -10,7 +10,7 @@ export async function getDailyReport() {
         }
 
         const response = await fetch(
-            'http://192.168.29.154:8000/report/daily-report/',
+            'http://195.35.22.200:8000/report/daily-report/',
             {
                 method: "GET",
                 headers: header
@@ -42,7 +42,7 @@ export async function getWeeklyReport() {
         }
 
         const response = await fetch(
-            'http://192.168.29.154:8000/report/weekly-report/',
+            'http://195.35.22.200:8000/report/weekly-report/',
             {
                 method: "GET",
                 headers: header
@@ -74,7 +74,7 @@ export async function getMonthlyReport() {
         }
 
         const response = await fetch(
-            'http://192.168.29.154:8000/report/monthly-report/',
+            'http://195.35.22.200:8000/report/monthly-report/',
             {
                 method: "GET",
                 headers: header
@@ -106,7 +106,7 @@ export async function getYearlyReport() {
         }
 
         const response = await fetch(
-            'http://192.168.29.154:8000/report/yearly-report/',
+            'http://195.35.22.200:8000/report/yearly-report/',
             {
                 method: "GET",
                 headers: header
@@ -137,7 +137,7 @@ export async function getDailyReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/report/daily-list-report/',
+            'http://195.35.22.200:8000/report/daily-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -169,7 +169,7 @@ export async function getWeeklyReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/report/weekly-list-report/',
+            'http://195.35.22.200:8000/report/weekly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -201,7 +201,7 @@ export async function getMonthlyReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/report/monthly-list-report/',
+            'http://195.35.22.200:8000/report/monthly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -233,7 +233,7 @@ export async function getYearlyReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/report/yearly-list-report/',
+            'http://195.35.22.200:8000/report/yearly-list-report/',
             {
                 method: 'GET',
                 headers: header

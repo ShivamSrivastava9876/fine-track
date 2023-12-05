@@ -9,7 +9,7 @@ export async function getApproveList() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/approve-order-list/',
+            'http://195.35.22.200:8000/admin_panel/approve-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -41,7 +41,7 @@ export async function approveOrder(orderApproval) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://192.168.29.154:8000/admin_panel/order-to-approve/${orderApproval.orderId}/`,
+            `http://195.35.22.200:8000/admin_panel/order-to-approve/${orderApproval.orderId}/`,
             {
                 method: 'PUT',
                 headers: header,
@@ -74,7 +74,7 @@ export async function declineOrder(orderDecline) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://192.168.29.154:8000/admin_panel/order-to-approve/${orderDecline.orderId}/`,
+            `http://195.35.22.200:8000/admin_panel/order-to-approve/${orderDecline.orderId}/`,
             {
                 method: 'PUT',
                 headers: header,
@@ -108,7 +108,7 @@ export async function getOrder() {
         }
         console.log("order api")
         const response = await fetch(
-            'http://192.168.29.154:8000/orders/orderitem-list/',
+            'http://195.35.22.200:8000/orders/orderitem-list/',
             {
                 method: 'GET',
                 headers: header
@@ -140,7 +140,7 @@ export async function searchOrder(searchOrderInfo) {
             Authorization: `Token ${token}`,
         };
         const response = await fetch(
-            `http://192.168.29.154:8000/orders/orderitem-search/?search=${searchOrderInfo}`,
+            `http://195.35.22.200:8000/orders/orderitem-search/?search=${searchOrderInfo}`,
             {
                 method: "GET",
                 headers: header
@@ -173,7 +173,7 @@ export async function getConfirmOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/cofirm-order-list/',
+            'http://195.35.22.200:8000/admin_panel/cofirm-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -205,7 +205,7 @@ export async function getDeliveredOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/delivered-order-list/',
+            'http://195.35.22.200:8000/admin_panel/delivered-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -237,7 +237,7 @@ export async function getCancelledOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/cancelled-order-list/',
+            'http://195.35.22.200:8000/admin_panel/cancelled-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -269,7 +269,7 @@ export async function getDeclinedOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/decline-order-list/',
+            'http://195.35.22.200:8000/admin_panel/decline-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -301,7 +301,7 @@ export async function getDashboardDetails() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://192.168.29.154:8000/admin_panel/dashboard-details/',
+            'http://195.35.22.200:8000/admin_panel/dashboard-details/',
             {
                 method: 'GET',
                 headers: header

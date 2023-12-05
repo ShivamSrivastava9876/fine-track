@@ -48,8 +48,7 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
         role="alert"
         style={{ zIndex: 1000 }}
       >
-        <strong className="font-bold">Error!</strong>
-        <span className="ml-2">Upload the image</span>
+        <strong className="font-bold">Error! Upload the image</strong>
         <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"

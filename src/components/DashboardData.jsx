@@ -18,7 +18,7 @@ const DashboardData = () => {
   return (
     <div className="mt-2 mb-8">
       <h1 className="text-2xl mx-2 my-2 font-bold">Dashboard</h1>
-      <div id="dashboardDataFields" className="grid grid-cols-3 gap-5">
+      <div id="dashboardDataFields" className="grid grid-cols-2 md:grid-cols-3 gap-5">
         <Link href="/users"
           id="totalUsers"
           className="flex w-17.0125 h-24 px-4 py-2 bg-white border border-gray-300 rounded-2xl focus:outline-none outline-none hover:bg-gray-100"
@@ -28,7 +28,7 @@ const DashboardData = () => {
           </div>
           <div id="details" className="flex flex-col mx-2 my-2">
             <span className="">Total users</span>
-            <span id="data" className="font-bold ">
+            <span id="data" className="font-bold">
               {dashboardDetails?.all_users}
             </span>
           </div>
