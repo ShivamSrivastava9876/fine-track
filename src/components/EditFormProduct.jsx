@@ -34,6 +34,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
+                        console.log("apna row", row);
                         handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description);
                     }}
                     className="p-8 rounded shadow-md flex flex-col justify-center w-auto h-28rem bg-white border border-blue-500"
@@ -67,7 +68,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                             {openCategory && (
                                 <div class="origin-top-right absolute right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                     {categoryList.map((category) => (
-                                        <div class="py-1">
+                                        <div key={category.id} class="py-1">
                                             <div
                                                 href="#"
                                                 onClick={() => handleCategoryClick(category.category_name)}
@@ -103,7 +104,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 <div class="origin-top-right absolute right-16 mt-2 w-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                                     {productTypeList.map((productType) => (
-                                        <div class="py-1">
+                                        <div key={productType.id} class="py-1">
                                             <div
                                                 href="#"
                                                 onClick={() => handleProductTypeClick(productType.product_type)}

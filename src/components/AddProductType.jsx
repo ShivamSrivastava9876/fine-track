@@ -130,7 +130,7 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
               {openCategory && (
                 <div class="origin-top-right absolute z-20 right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                   {categoryList.map((category) => (
-                    <div class="py-1">
+                    <div key={category.id} class="py-1">
                       <div
                         href="#"
                         onClick={() => handleOptionClick(category.category_name)}

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { approveOrder, declineOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDailyReportData, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getOrder, searchOrder } from "./orderApi";
+import { approveOrder, declineOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getOrder, searchOrder } from "./orderApi";
 
 const initialState = {
     status: "idle",

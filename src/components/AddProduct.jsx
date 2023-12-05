@@ -182,7 +182,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   <div class="origin-top-right absolute z-20 right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                     {categoryList.map((category) => (
-                      <div class="py-1">
+                      <div key={category.id} class="py-1">
                         <div
                           href="#"
                           onClick={() => handleCategoryClick(category.category_name)}
@@ -219,7 +219,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   <div class="origin-top-right absolute z-10 right-16 mt-2 w-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                     {productTypeList.map((productType) => (
-                      <div class="py-1">
+                      <div key={productType.id} class="py-1">
                         <div
                           href="#"
                           onClick={() => handleProductTypeClick(productType.product_type)}
