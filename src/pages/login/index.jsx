@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { useMediaQuery } from "react-responsive";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Login = () => {
   const [showErrorBox, setShowErrorBox] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const apk = useSelector(selectApkLink);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   console.log("apkkkk", apk)
   
   useEffect(() => {
@@ -123,8 +125,8 @@ const Login = () => {
           Login
         </button>
       </form>
-      {apk && <Link href={apk} className="fixed bottom-4 right-5 h-20 w-21.375 rounded-full hover:bg-slate-600 bg-black text-white flex items-center justify-center">
-        <div className="flex items-center justify-center ml-2 mb-4 w-1/4 h-4/5 mx-auto mt-4">
+      {apk && <Link href={apk} className="fixed bottom-4 right-5 h-20 w-20 md:w-21.375 rounded-full hover:bg-slate-900 bg-black text-white flex items-center justify-center">
+        <div className="flex items-center justify-center md:ml-2 mb-4 md:w-1/4 h-4/5 mx-auto mt-4">
           <Image
             src={AndroidLogo}
             alt="logo"
@@ -134,9 +136,9 @@ const Login = () => {
           // layout="fill"
           />
         </div>
-        <div className="w-3/4 md:visible flex justify-center m-1 ml-4 font-medium text-white">
+        {!isMobile && <div className="md:w-3/4 flex justify-center m-1 ml-4 font-medium text-white">
           <h1>Click here to download the mangalam jewellers android app</h1>
-        </div>
+        </div>}
       </Link>}
 
 
