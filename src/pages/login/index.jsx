@@ -68,7 +68,7 @@ const Login = () => {
 
       <form
         onSubmit={handleLogin}
-        className="p-8 rounded shadow-md md:w-[555px]   "
+        className="p-8 rounded md:w-[555px]   "
       >
         <div className="mb-4 space-y-1">
           <h2 className=" text-[#F3D46F] font-normal text-base">ACCOUNT</h2>

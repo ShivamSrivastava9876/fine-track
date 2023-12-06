@@ -4,6 +4,7 @@ import Image from "next/image";
 import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import { useDispatch } from "react-redux";
 import { searchProductAsync } from "@/redux/slice/product/productSlice";
+import Link from "next/link";
 
 const ProductComponent = ({
   addProduct,
@@ -39,6 +40,7 @@ const ProductComponent = ({
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
+        <Link href="#addProduct" className="flex items-center relative">
         <div className="flex items-center space-x-4 mx-2 relative">
           {/* Button 1 */}
           {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
@@ -82,6 +84,7 @@ const ProductComponent = ({
             Add product
           </button>
         </div>
+        </Link>
 
         {/* Right-hand side Search Box */}
         <form onSubmit={(e) => handleProductSearch(e)} className="flex items-center w-80 m-2 border-2 border-solid border-gray-300 rounded-full px-4 py-2">

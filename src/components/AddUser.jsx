@@ -64,7 +64,7 @@ const AddUser = ({ addUser, setAddUser }) => {
   };
 
   return (
-    <div className="flex justify-center m-8 relative">
+    <div id="addUser" className="flex justify-center m-8 relative">
 
       <form
         onSubmit={handleAddUser}

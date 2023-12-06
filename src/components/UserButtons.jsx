@@ -4,7 +4,8 @@ import Image from "next/image";
 import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import { useDispatch } from "react-redux";
 import { searchUserAsync, userDetailsAsync } from "@/redux/slice/user/userSlice";
-
+import { Link as ScrollLink } from 'react-scroll';
+import Link from "next/link";
 
 const UserComponent = ({
   addUser,
@@ -61,28 +62,34 @@ const UserComponent = ({
         </button> */}
 
           {/* Button 2 */}
-          <button
-            className={`flex items-center px-4 py-2 bg-[#DB8A4D] text-white rounded-full shadow transition-transform duration-300 transform ${addUser ? 'invisible' : ''
-              }`}
-            onClick={handleAddUser}
-          >
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+          <Link
+            href="#addUser">
+            {/* to="addUser"
+            smooth={true}
+            duration={500}> */}
+            <button
+              className={`flex items-center px-4 py-2 bg-[#DB8A4D] text-white rounded-full shadow transition-transform duration-300 transform ${addUser ? 'invisible' : ''
+                }`}
+              onClick={handleAddUser}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-            Add user
-          </button>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6 mr-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+              Add user
+            </button>
+          </Link>
         </div>
 
         {/* Right-hand side Search Box */}
