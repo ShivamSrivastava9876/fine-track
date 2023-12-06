@@ -91,48 +91,44 @@ export default function ProductTables() {
   const [rows, setRows] = React.useState([]);
   const productList = useSelector(getProductList);
 
-  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType) => {
-    if (image) {
-      e.preventDefault();
-      const updatedHuId = huId !== "" ? huId : rowHuId;
-      const updatedProductId = productId !== "" ? productId : rowProductId;
-      const updatedModel = model !== "" ? model : rowModel;
-      const updatedSubModel = subModel !== "" ? subModel : rowSubModel;
-      const updatedProduct = productName !== "" ? productName : rowProduct;
-      const updatedStoneWeight = stoneWeight !== "" ? stoneWeight : rowStoneWeight;
-      const updatedGrossWeight = grossWeight !== "" ? grossWeight : rowGrossWeight;
-      const updatedPuritySpc = puritySpc !== "" ? puritySpc : rowPuritySpc;
-      const updatedQuantity = quantity !== "" ? quantity : rowQuantity;
-      const updatedPrice = price !== "" ? price : rowPrice;
-      const updatedDescription = description !== "" ? description : rowDescription;
-      const updatedCategory = category !== "" ? category : rowCategory;
-      const updatedProductType = productType !== "" ? productType : rowProductType;
+  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType, rowImage) => {
+    e.preventDefault();
+    console.log("eeeeeee2", image)
+    const updatedImage = image !== null ? image : rowImage;
+    const updatedHuId = huId !== "" ? huId : rowHuId;
+    const updatedProductId = productId !== "" ? productId : rowProductId;
+    const updatedModel = model !== "" ? model : rowModel;
+    const updatedSubModel = subModel !== "" ? subModel : rowSubModel;
+    const updatedProduct = productName !== "" ? productName : rowProduct;
+    const updatedStoneWeight = stoneWeight !== "" ? stoneWeight : rowStoneWeight;
+    const updatedGrossWeight = grossWeight !== "" ? grossWeight : rowGrossWeight;
+    const updatedPuritySpc = puritySpc !== "" ? puritySpc : rowPuritySpc;
+    const updatedQuantity = quantity !== "" ? quantity : rowQuantity;
+    const updatedPrice = price !== "" ? price : rowPrice;
+    const updatedDescription = description !== "" ? description : rowDescription;
+    const updatedCategory = category !== "" ? category : rowCategory;
+    const updatedProductType = productType !== "" ? productType : rowProductType;
 
-      dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image, is_available: true })).then((result) => {
-        if (updateProductAsync.fulfilled.match(result)) {
-          dispatch(getProductAsync());
-          setHuId("");
-          setProductId("");
-          setProductName("");
-          setModel("");
-          setSubModel("");
-          setStoneWeight("");
-          setImage(null);
-          setGrossWeight("");
-          setPuritySpc("");
-          setPrice("");
-          setQuantity("");
-          setCategory("");
-          setProductType("");
-          setDescription("");
-          setEditedRow(null);
-        }
-      })
-    }
-    else {
-      e.preventDefault();
-      setError(true)
-    }
+    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
+      if (updateProductAsync.fulfilled.match(result)) {
+        dispatch(getProductAsync());
+        setHuId("");
+        setProductId("");
+        setProductName("");
+        setModel("");
+        setSubModel("");
+        setStoneWeight("");
+        setImage(null);
+        setGrossWeight("");
+        setPuritySpc("");
+        setPrice("");
+        setQuantity("");
+        setCategory("");
+        setProductType("");
+        setDescription("");
+        setEditedRow(null);
+      }
+    })
   }
 
   const handleDelete = (selectedRowId) => {
@@ -162,8 +158,7 @@ export default function ProductTables() {
     setOpenCategory(!openCategory);
   };
 
-  const handleEdit = (rowImage, rowId, rowCategory, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription ) => {
-    // console.log(rowCategory);
+  const handleEdit = (rowImage, rowId, rowCategory, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription) => {
     setEditedRow(rowId);
     setHuId(rowHuId);
     setProductId(rowProductId);
@@ -176,6 +171,7 @@ export default function ProductTables() {
     setPrice(rowPrice);
     setQuantity(rowQuantity);
     setDescription(rowDescription);
+    console.log("rowrow1", rowImage)
     setImage(rowImage);
   }
 
@@ -229,8 +225,9 @@ export default function ProductTables() {
     console.log("productList1", productList);
     if (productList && Array.isArray(productList)) {
       let srNo = 1;
+      console.log("propro", productList)
       const newRows = productList.map((data) => {
-        console.log(model)
+        console.log("productImages",data.product_images)
         const newRow = createData(
           data.hu_id || "",
           data.product_id || "",
@@ -246,7 +243,7 @@ export default function ProductTables() {
           data.description || "",
           data.category || "",
           data.product_type || "",
-          data.product_images || ""
+          data.product_images
         );
         srNo = srNo + 1;
         return newRow;
@@ -258,7 +255,7 @@ export default function ProductTables() {
 
   return (
     <>
-      {error && <div
+      {/* {error && <div
         // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
         className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
         role="alert"
@@ -272,7 +269,7 @@ export default function ProductTables() {
         >
           <span className="text-red-500 text-2xl">×</span>
         </button>
-      </div>}
+      </div>} */}
       <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">

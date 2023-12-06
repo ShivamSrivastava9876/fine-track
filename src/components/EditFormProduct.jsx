@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
 import { getProductTypeAsync, getProductTypeList, getSelectedProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
 
-const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
+const EditFormProduct = ({ productImage, row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
     const dispatch = useDispatch();
 
     const modalClasses = isOpen ? 'block' : 'hidden';
@@ -35,7 +35,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                     onSubmit={(e) => {
                         e.preventDefault();
                         console.log("apna row", row);
-                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType);
+                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType, row.image);
                     }}
                     className="p-8 rounded shadow-md flex flex-col justify-center w-auto h-28rem bg-white border border-blue-500"
                 >
@@ -123,7 +123,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.HuId}
                                 value={huId}
                                 onChange={(e) => setHuId(e.target.value)}
-                                placeholder={row.HuId}
+                                placeholder="Hu ID"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -133,7 +133,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.productId}
                                 value={productId}
                                 onChange={(e) => setProductId(e.target.value)}
-                                placeholder={row.productId}
+                                placeholder="Product ID"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -143,7 +143,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.model}
                                 value={model}
                                 onChange={(e) => setModel(e.target.value)}
-                                placeholder={row.model}
+                                placeholder="Model"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -153,7 +153,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.subModel}
                                 value={subModel}
                                 onChange={(e) => setSubModel(e.target.value)}
-                                placeholder={row.subModel}
+                                placeholder="Sub model"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -163,7 +163,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.product}
                                 value={productName}
                                 onChange={(e) => setProductName(e.target.value)}
-                                placeholder={row.product}
+                                placeholder="Product"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -173,7 +173,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.stoneWeight}
                                 value={stoneWeight}
                                 onChange={(e) => setStoneWeight(e.target.value)}
-                                placeholder={row.stoneWeight}
+                                placeholder="Stone weight"
                             />
                         </div>
                         <div className="mb-4">
@@ -194,7 +194,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.grossWeight}
                                 value={grossWeight}
                                 onChange={(e) => setGrossWeight(e.target.value)}
-                                placeholder={row.grossWeight}
+                                placeholder="Gross weight"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -204,7 +204,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.puritySpc}
                                 value={puritySpc}
                                 onChange={(e) => setPuritySpc(e.target.value)}
-                                placeholder={row.puritySpc}
+                                placeholder="Purity spc"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -214,7 +214,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.price}
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
-                                placeholder={row.price}
+                                placeholder="Price"
                             // field named original price is there in the prop of this form but not used yet
                             />
                         </div>
@@ -225,7 +225,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.quantity}
                                 value={quantity}
                                 onChange={(e) => setQuantity(e.target.value)}
-                                placeholder={row.quantity}
+                                placeholder="Quantity"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -235,7 +235,7 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 defaultValue={row.description}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
-                                placeholder={row.description}
+                                placeholder="Description"
                             />
                         </div>
                     </div>

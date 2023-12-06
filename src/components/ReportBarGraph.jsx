@@ -72,6 +72,16 @@ function ReportBarGraph() {
             console.log("keys", keys);
             console.log("values", values);
         }
+        if (reportData && reportData.yearly_report) {
+            setTitle("Yearly")
+            const keys = Object.keys(reportData.yearly_report);
+            setKeysData(keys);
+
+            const values = Object.values(reportData.yearly_report);
+            setValuesData(values);
+            console.log("keys", keys);
+            console.log("values", values);
+        }
     }, [reportData]);
 
     useEffect(() => {
