@@ -132,10 +132,10 @@ export default function DashboardTables() {
                           {column.id === "actions" ? (
                             // Render Edit and Delete buttons
                             <div className="space-x-2">
-                              <Button onClick={() => handleApprove(row.id)} className="bg-orange-400 hover:bg-orange-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                              <Button onClick={() => handleApprove(row.id)} className="bg-orange-400 hover:bg-orange-600 text-white py-2 px-4 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Approve
                               </Button>
-                              <Button onClick={() => handleCancel(row.id)} className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out">
+                              <Button onClick={() => handleCancel(row.id)} className="bg-red-400 hover:bg-red-600 text-white py-2 px-4 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Decline
                               </Button>
                             </div>

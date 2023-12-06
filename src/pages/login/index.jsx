@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../../public/assets/LOGO.png";
+import AndroidLogo from "../../../public/assets/android_logo.png";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUserAsync, selectErrorMessage } from "../../redux/slice/login/loginSlice";
+import { apkDownloadAsync, loginUserAsync, selectApkLink, selectErrorMessage } from "../../redux/slice/login/loginSlice";
 import { selectUser } from "../../redux/slice/login/loginSlice";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,9 +18,15 @@ const Login = () => {
   const [passwordEntered, setPasswordEntered] = useState("");
   const [showErrorBox, setShowErrorBox] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const apk = useSelector(selectApkLink);
+  console.log("apkkkk", apk)
+  
+  useEffect(() => {
+    dispatch(apkDownloadAsync());
+  },[dispatch]);
 
   const hideError = () => {
-    
+
   };
 
   const handleLogin = (e) => {
@@ -111,11 +118,26 @@ const Login = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-[#DF8E51] text-white py-2 rounded  transition duration-300"
+          className="w-full hover:bg-[#96653d] bg-[#DF8E51] text-white py-2 rounded  transition duration-300"
         >
           Login
         </button>
       </form>
+      {apk && <Link href={apk} className="fixed bottom-4 right-5 h-20 w-21.375 rounded-full hover:bg-slate-600 bg-black text-white flex items-center justify-center">
+        <div className="flex items-center justify-center ml-2 mb-4 w-1/4 h-4/5 mx-auto mt-4">
+          <Image
+            src={AndroidLogo}
+            alt="logo"
+            objectFit="contain"
+            objectPosition="center"
+            className="h-full"
+          // layout="fill"
+          />
+        </div>
+        <div className="w-3/4 md:visible flex justify-center m-1 ml-4 font-medium text-white">
+          <h1>Click here to download the mangalam jewellers android app</h1>
+        </div>
+      </Link>}
 
 
     </div>

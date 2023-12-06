@@ -176,11 +176,11 @@ const EditFormProduct = ({ row, handleCategoryClick, handleUpdateProduct, openPr
                                 placeholder={row.stoneWeight}
                             />
                         </div>
-                        <div className="mb-2 h-10">
+                        <div className="mb-4">
                             <input
                                 type="file"
                                 multiple
-                                className="w-full py-2 px-8 h-10 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                 // value={image}
                                 onChange={handleFileChange}
                                 placeholder="Image"

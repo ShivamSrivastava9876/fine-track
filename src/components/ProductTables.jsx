@@ -40,7 +40,8 @@ const createData = (
   subModel,
   description,
   category,
-  productType
+  productType,
+  productImage
 ) => {
   return {
     HuId,
@@ -56,7 +57,8 @@ const createData = (
     subModel,
     description,
     category,
-    productType
+    productType,
+    productImage
   };
 };
 
@@ -69,7 +71,7 @@ export default function ProductTables() {
   const [model, setModel] = React.useState("");
   const [subModel, setSubModel] = React.useState("");
   const [stoneWeight, setStoneWeight] = React.useState("");
-  const [image, setImage] = React.useState("");
+  const [image, setImage] = React.useState(null);
   const [grossWeight, setGrossWeight] = React.useState("");
   const [puritySpc, setPuritySpc] = React.useState("");
   const [price, setPrice] = React.useState("");
@@ -133,8 +135,6 @@ export default function ProductTables() {
     }
   }
 
-
-
   const handleDelete = (selectedRowId) => {
     console.log("select", selectedRowId)
     const productId = selectedRowId;
@@ -162,7 +162,7 @@ export default function ProductTables() {
     setOpenCategory(!openCategory);
   };
 
-  const handleEdit = (rowId, rowCategory, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription ) => {
+  const handleEdit = (rowImage, rowId, rowCategory, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription ) => {
     // console.log(rowCategory);
     setEditedRow(rowId);
     setHuId(rowHuId);
@@ -176,6 +176,7 @@ export default function ProductTables() {
     setPrice(rowPrice);
     setQuantity(rowQuantity);
     setDescription(rowDescription);
+    setImage(rowImage);
   }
 
   const handleProductType = () => {
@@ -244,7 +245,8 @@ export default function ProductTables() {
           data.sub_model || "",
           data.description || "",
           data.category || "",
-          data.product_type || ""
+          data.product_type || "",
+          data.product_images || ""
         );
         srNo = srNo + 1;
         return newRow;
@@ -307,14 +309,14 @@ export default function ProductTables() {
 
                                 {editedRow === row.id ? (
                                   <div className="space-x-2">
-                                    <EditFormProduct handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
+                                    <EditFormProduct productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
                                   </div>
                                 ) : (
                                   <div className="space-x-2 flex">
                                     {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
                                     Edit
                                   </Button> */}
-                                    <MdEdit onClick={() => handleEdit(row.id, row.category, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
+                                    <MdEdit onClick={() => handleEdit(row.productImage, row.id, row.category, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
                                     {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
                                     Delete
                                   </Button> */}

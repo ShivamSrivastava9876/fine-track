@@ -1,8 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loginUser, logoutUser } from "./loginApi";
+import { apkDownload, loginUser, logoutUser } from "./loginApi";
 
 const initialState = {
   status: "idle",
+  apkData: null,
+  apkLink: null,
   userId: null,
   accessToken: null,
   errorMessage: null,
@@ -38,6 +40,25 @@ export const logoutUserAsync = createAsyncThunk(
       const response = await logoutUser();
       if (response.data) {
         localStorage.removeItem("token");
+        return response.data;
+      }
+      else if (response.error) {
+        return response.error;
+      }
+
+    }
+    catch (error) {
+      return error;
+    }
+  }
+);
+
+export const apkDownloadAsync = createAsyncThunk(
+  "login/apkDownload",
+  async () => {
+    try {
+      const response = await apkDownload();
+      if (response.data) {
         return response.data;
       }
       else if (response.error) {
@@ -87,10 +108,23 @@ export const loginSlice = createSlice({
         state.status = "idle";
         state.errorMessage = action.payload;
       })
+      .addCase(apkDownloadAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(apkDownloadAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.apkData = action.payload;
+        state.apkLink = action.payload.data[0].apk;
+      })
+      .addCase(apkDownloadAsync.rejected, (state, action) => {
+        state.status = "idle";
+        state.errorMessage = action.payload;
+      })
   },
 });
 
 export const selectAccessToken = (state) => state.login.accessToken;
 export const selectErrorMessage = (state) => state.login.errorMessage;
 export const selectUser = (state) => state.login.userId;
+export const selectApkLink = (state) => state.login.apkLink;
 export default loginSlice.reducer;

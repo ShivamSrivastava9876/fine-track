@@ -54,3 +54,33 @@ export async function logoutUser() {
     return { error };
   }
 }
+
+export async function apkDownload() {
+  try {
+    function getToken() {
+      return localStorage.getItem("token");
+    }
+    const token = getToken();
+    // const header = {
+    //   Authorization: `Token ${token}`
+    // }
+    const response = await fetch(
+      "http://195.35.22.200:8000/users/app-version/",
+      {
+        method: "GET"
+      }
+    );
+
+    if (response.ok) {
+      const data = await response.json();
+      return { data };
+
+    } else {
+      const error = await response.json();
+      return { error };
+    }
+  }
+  catch (error) {
+    return { error };
+  }
+}
