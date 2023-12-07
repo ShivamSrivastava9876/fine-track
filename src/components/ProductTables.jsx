@@ -80,6 +80,8 @@ export default function ProductTables() {
   const [productType, setProductType] = React.useState("");
   const [description, setDescription] = React.useState("");
 
+  const [files, setFiles] = React.useState("");
+
   const [openCategory, setOpenCategory] = React.useState(false);
   const [openProductType, setOpenProductType] = React.useState(false);
   const [editedRow, setEditedRow] = React.useState(null);
@@ -171,8 +173,9 @@ export default function ProductTables() {
     setPrice(rowPrice);
     setQuantity(rowQuantity);
     setDescription(rowDescription);
-    console.log("rowrow1", rowImage)
+    console.log("rowrow1", rowImage);
     setImage(rowImage);
+    setFiles(rowImage.length);
   }
 
   const handleProductType = () => {
@@ -200,6 +203,7 @@ export default function ProductTables() {
     setProductType("");
     setDescription("");
     setEditedRow(null);
+    setFiles("");
   }
 
   const handleChangePage = (event, newPage) => {
@@ -306,7 +310,7 @@ export default function ProductTables() {
 
                                 {editedRow === row.id ? (
                                   <div className="space-x-2">
-                                    <EditFormProduct productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
+                                    <EditFormProduct files={files} setFiles={setFiles} productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
                                   </div>
                                 ) : (
                                   <div className="space-x-2 flex">

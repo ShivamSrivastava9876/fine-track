@@ -3,8 +3,9 @@ import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
 import { getProductTypeAsync, getProductTypeList, getSelectedProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
+import { FiImage } from 'react-icons/fi';
 
-const EditFormProduct = ({ productImage, row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
+const EditFormProduct = ({ files, setFiles, productImage, row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
     const dispatch = useDispatch();
 
     const modalClasses = isOpen ? 'block' : 'hidden';
@@ -23,7 +24,12 @@ const EditFormProduct = ({ productImage, row, handleCategoryClick, handleUpdateP
     //To save new image
     const handleFileChange = (e) => {
         const selectedFile = e.target.files;
+        const filesLength = selectedFile.length;
+        console.log("selectedFiles", selectedFile);
+
+        setFiles(filesLength)
         setImage(selectedFile);
+        console.log("file length", files);
     }
 
     return (
@@ -176,7 +182,7 @@ const EditFormProduct = ({ productImage, row, handleCategoryClick, handleUpdateP
                                 placeholder="Stone weight"
                             />
                         </div>
-                        <div className="mb-4">
+                        {/* <div className="mb-4">
                             <input
                                 type="file"
                                 multiple
@@ -185,6 +191,18 @@ const EditFormProduct = ({ productImage, row, handleCategoryClick, handleUpdateP
                                 onChange={handleFileChange}
                                 placeholder="Image"
                             />
+                        </div> */}
+                        <div className="mb-4 flex justify-center items-center">
+                            <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
+                                <FiImage className="mr-2" /> {files !== '' ? `${files} files` : 'Add image - click here'}
+                                <input
+                                    type="file"
+                                    id="fileInput"
+                                    multiple
+                                    className="hidden"
+                                    onChange={handleFileChange}
+                                />
+                            </label>
                         </div>
 
                         <div className="mb-4 ">

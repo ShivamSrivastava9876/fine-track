@@ -22,10 +22,10 @@ const Login = () => {
   const apk = useSelector(selectApkLink);
   const isMobile = useMediaQuery({ maxWidth: 767 });
   console.log("apkkkk", apk)
-  
+
   useEffect(() => {
     dispatch(apkDownloadAsync());
-  },[dispatch]);
+  }, [dispatch]);
 
   const hideError = () => {
 
@@ -125,6 +125,9 @@ const Login = () => {
           Login
         </button>
       </form>
+      <Link href="/termsAndConditions" id="termsAndConditions" className="absolute bottom-2 text-[#F3D46F] text-sm">
+        <div>Terms and conditions*</div>
+      </Link>
       {apk && <Link href={apk} className="fixed bottom-4 right-5 h-20 w-20 md:w-21.375 rounded-full hover:bg-slate-900 bg-black text-white flex items-center justify-center">
         <div className="flex items-center justify-center md:ml-2 mb-4 md:w-1/4 h-4/5 mx-auto mt-4">
           <Image

@@ -3,6 +3,7 @@ import { createProductAsync, getProductAsync } from "@/redux/slice/product/produ
 import { getProductTypeAsync, getProductTypeList, getSelectedProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FiImage } from 'react-icons/fi';
 
 const AddProduct = ({ addProduct, setAddProduct }) => {
   const dispatch = useDispatch();
@@ -23,14 +24,20 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   const [openCategory, setOpenCategory] = useState(false);
   const [openProductType, setOpenProductType] = useState(false);
   const [description, setDescription] = useState("");
+  const [files, setFiles] = useState("");
 
   const [error, setError] = useState(false);
 
   //Handling image file
   const handleFileChange = (e) => {
+    
     const selectedFile = e.target.files;
-    console.log(selectedFile);
+    const filesLength = selectedFile.length;
+    console.log("selectedFiles",selectedFile);
+    
+    setFiles(filesLength)
     setImage(selectedFile);
+    console.log("file length", files);
   }
 
   //Handling category dropdown
@@ -285,7 +292,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   placeholder="Stone weight"
                 />
               </div>
-              <div className="mb-4 md:w-21.375">
+              {/* <div className="mb-4 md:w-21.375">
                 <input
                   type="file" multiple
                   className="w-full py-2 px-8 h-10 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -293,6 +300,18 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   onChange={handleFileChange}
                   placeholder="Image"
                 />
+              </div> */}
+              <div className="mb-4 flex justify-center items-center">
+                <label htmlFor="fileInput" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
+                <FiImage className="mr-2" /> {files !== '' ? `${files} files` : 'Add image - click here'}
+                  <input
+                    type="file"
+                    id="fileInput"
+                    multiple
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
+                </label>
               </div>
 
               <div className="mb-4 md:w-21.375">
