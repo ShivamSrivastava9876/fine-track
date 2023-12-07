@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from "@mui/material/Button";
+import { FiImage } from 'react-icons/fi';
 
 const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, setCategory, image, setImage }) => {
     const modalClasses = isOpen ? 'block' : 'hidden';
@@ -66,19 +67,21 @@ const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, s
                             className="w-full py-2 px-8 h-10 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                             defaultValue={row.category}
                             value={category}
-                            onChange={(e) =>setCategory(e.target.value)}
-                            placeholder={row.category}
+                            onChange={(e) => setCategory(e.target.value)}
+                            placeholder="Category name"
                         />
                     </div>
-                    
-                    <div className="mb-2 h-10">
-                        <input
-                            type="file"
-                            className="w-full py-2 px-8 h-10 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                            // defaultValue={row.image}
-                            // value={image}
-                            onChange={handleFileChange}
-                        />
+
+                    <div className="mb-4 flex justify-center items-center">
+                        <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
+                            <FiImage className="mr-2" /> {image !== null ? 'New image uploaded' : 'Click here to update image'}
+                            <input
+                                type="file"
+                                id="fileInput"
+                                className="hidden"
+                                onChange={handleFileChange}
+                            />
+                        </label>
                     </div>
 
                     <div className="flex flex-row space-x-2 m-2">

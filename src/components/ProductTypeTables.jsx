@@ -199,7 +199,7 @@ export default function ProductTypeTables() {
 
                                 {editedRow === row.id ? (
                                   <div className="space-x-2">
-                                    <EditFormProductType openCategory={openCategory} handleCategory={handleCategory} handleOptionClick={handleOptionClick} handleUpdateProductType={handleUpdateProductType} isOpen={true} row={row} category={category} productType={productType} handleCancel={handleCancel} setProductType={setProductType} setImage={setImage} />
+                                    <EditFormProductType image={image} openCategory={openCategory} handleCategory={handleCategory} handleOptionClick={handleOptionClick} handleUpdateProductType={handleUpdateProductType} isOpen={true} row={row} category={category} productType={productType} handleCancel={handleCancel} setProductType={setProductType} setImage={setImage} />
                                   </div>
                                 ) : (
                                   <div className="space-x-2 flex">

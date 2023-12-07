@@ -87,6 +87,7 @@ export default function CategoryTables() {
   const handleCancel = () => {
     setEditedRow(null);
     setEdited("");
+    setImage(null);
   }
 
   const handleCategoryChange = (event) => {

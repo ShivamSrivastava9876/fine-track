@@ -131,7 +131,7 @@ export default function DashboardTables() {
                         <TableCell key={column.id} align={column.align}>
                           {column.id === "actions" ? (
                             // Render Edit and Delete buttons
-                            <div className="space-x-2">
+                            <div className="space-x-2 flex">
                               <Button onClick={() => handleApprove(row.id)} className="bg-orange-400 hover:bg-orange-600 text-white py-2 px-4 rounded-full shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Approve
                               </Button>

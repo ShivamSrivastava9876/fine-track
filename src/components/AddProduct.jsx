@@ -303,7 +303,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               </div> */}
               <div className="mb-4 flex justify-center items-center">
                 <label htmlFor="fileInput" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
-                <FiImage className="mr-2" /> {files !== '' ? `${files} files` : 'Add image - click here'}
+                <FiImage className="mr-2" /> {files !== '' ? `${files} images` : 'Upload images'}
                   <input
                     type="file"
                     id="fileInput"

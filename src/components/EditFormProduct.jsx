@@ -194,7 +194,7 @@ const EditFormProduct = ({ files, setFiles, productImage, row, handleCategoryCli
                         </div> */}
                         <div className="mb-4 flex justify-center items-center">
                             <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
-                                <FiImage className="mr-2" /> {files !== '' ? `${files} files` : 'Add image - click here'}
+                                <FiImage className="mr-2" /> {files !== '' ? `${files} images` : 'Click here to update images'}
                                 <input
                                     type="file"
                                     id="fileInput"

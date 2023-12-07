@@ -2,6 +2,7 @@ import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
 import { useDispatch } from "react-redux";
 import { createCategoryAsync, getCategoriesAsync } from "@/redux/slice/category/categorySlice";
+import { FiImage } from 'react-icons/fi';
 
 const AddCategory = ({ addCategory, setAddCategory }) => {
   const dispatch = useDispatch();
@@ -96,13 +97,16 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
                 placeholder="New category"
               />
             </div>
-            <div className="mb-4 md:w-21.375">
-              <input
-                type="file"
-                className="w-full py-2 px-8 h-3.3125 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                // value={image}
-                onChange={handleFileChange}
-              />
+            <div className="mb-4 flex justify-center items-center">
+              <label htmlFor="fileInput" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
+                <FiImage className="mr-2" /> {image !== null ? 'Image uploaded' : 'Upload image'}
+                <input
+                  type="file"
+                  id="fileInput"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
+              </label>
             </div>
           </div>
 
