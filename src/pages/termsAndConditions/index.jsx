@@ -5,10 +5,11 @@ const termsAndConditions = () => {
                 <h1 className="text-2xl font-bold text-black">Privacy policy for Mangalam Jewellers</h1>
 
                 <p>
-                    Welcome to the Mangalam Jewelers mobile application (the "App"). This Privacy Policy outlines how Mangalam
-                    Jewelers ("we," "our," or "us") collects, uses, discloses, and protects the personal information of users
-                    ("you" or "your") who use the App. By downloading, accessing, or using the App, you agree to the terms of this
+                    Welcome to the Mangalam Jewelers mobile application (the &quot;App&quot;). This Privacy Policy outlines how Mangalam
+                    Jewelers (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) collects, uses, discloses, and protects the personal information of users
+                    (&quot;you&quot; or &quot;your&quot;) who use the App. By downloading, accessing, or using the App, you agree to the terms of this
                     Privacy Policy.
+
                 </p>
 
                 <strong>
@@ -50,7 +51,7 @@ const termsAndConditions = () => {
                     <li>
                         <strong className="font-bold">Non-personal information:</strong>
                         <ul className="list-disc pl-8">
-                            <li>To improve the App's functionality and user experience.</li>
+                            <li>To improve the App&apos;s functionality and user experience.</li>
                             <li>To analyze trends and gather demographic information for marketing purposes.</li>
                         </ul>
                     </li>
@@ -179,7 +180,7 @@ const termsAndConditions = () => {
 
                 <p>
                     Once your order is shipped, you will receive a confirmation email with a tracking number. You can track your order
-                    through our website or the designated carrier's website.
+                    through our website or the designated carrier&apos;s website.
                 </p>
                 <hr className="my-4 border-t-2 border-gray-300" />
             </div>
@@ -215,7 +216,7 @@ const termsAndConditions = () => {
                 <h2 className="font-bold">Definitions</h2>
 
                 <p>
-                    "Agreement" shall mean the terms and conditions as detailed herein, including those incorporated by reference and
+                    &quot;Agreement&quot; shall mean the terms and conditions as detailed herein, including those incorporated by reference and
                     including all schedules, appendices, annexures, Privacy Policy, and will include the references to this Agreement as
                     amended, novated, supplemented, varied, or replaced/substituted from time to time.
                 </p>
