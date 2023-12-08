@@ -87,6 +87,7 @@ export default function ProductTables() {
   const [editedRow, setEditedRow] = React.useState(null);
   const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
   const [error, setError] = React.useState(false);
+  const [updateSuccess, setUpdateSuccess] = React.useState(false);
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -129,6 +130,11 @@ export default function ProductTables() {
         setProductType("");
         setDescription("");
         setEditedRow(null);
+
+        setUpdateSuccess(true);
+        setTimeout(() => {
+          setUpdateSuccess(false);
+        }, 3000)
       }
     })
   }
@@ -221,6 +227,10 @@ export default function ProductTables() {
     setError(false);
   }
 
+  const hideUpdateSuccess = () => {
+    setUpdateSuccess(false);
+  }
+
   React.useEffect(() => {
     dispatch(getProductAsync());
   }, [dispatch])
@@ -259,6 +269,20 @@ export default function ProductTables() {
 
   return (
     <>
+      {updateSuccess && <div
+        // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        className="bg-blue-100 flex justify-between items-center border border-blue-400 text-blue-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
+        role="success"
+        style={{ zIndex: 1001 }}
+      >
+        <strong className="font-bold">Product updated successfully</strong>
+        <button
+          onClick={hideUpdateSuccess}
+          className="relative top-0.5 bottom-0 left-1"
+        >
+          <span className="text-blue-500 text-2xl">×</span>
+        </button>
+      </div>}
       {/* {error && <div
         // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
         className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"

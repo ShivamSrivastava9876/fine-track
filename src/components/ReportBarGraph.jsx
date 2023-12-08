@@ -100,32 +100,32 @@ function ReportBarGraph() {
                             label: title,
                             data: valuesData,
                             backgroundColor: [
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
-                                "rgb(59, 130, 246, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
+                                "rgb(219, 138, 77, 0.6)",
                             ],
                             borderColor: [
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
-                                "rgb(59, 130, 246)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
+                                "rgb(219, 138, 77)",
                             ],
                             borderWidth: 1,
                         },
@@ -161,10 +161,10 @@ function ReportBarGraph() {
             {/* Bar chart */}
             <h1 className="w-[150px] mx-auto mb-5 flex justify-center text-2xl font-bold capitalize ">Report</h1>
             <div className="flex justify-center space-x-1 ">
-                <button onClick={handleDailyData} className={`px-4 py-2 ${active === "daily" ? "bg-blue-800" : "bg-blue-500"}  hover:bg-blue-800 border border-black text-white rounded`}>Daily</button>
-                <button onClick={handleWeeklyData} className={`px-4 py-2 ${active === "weekly" ? "bg-blue-800" : "bg-blue-500"}  hover:bg-blue-800 border border-black text-white rounded`}>Weekly</button>
-                <button onClick={handleMonthlyData} className={`px-4 py-2 ${active === "monthly" ? "bg-blue-800" : "bg-blue-500"}  hover:bg-blue-800 border border-black text-white rounded`}>Monthly</button>
-                <button onClick={handleYearlyData} className={`px-4 py-2 ${active === "yearly" ? "bg-blue-800" : "bg-blue-500"}  hover:bg-blue-800 border border-black text-white rounded`}>Yearly</button>
+                <button onClick={handleDailyData} className={`px-4 py-2 ${active === "daily" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Daily</button>
+                <button onClick={handleWeeklyData} className={`px-4 py-2 ${active === "weekly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Weekly</button>
+                <button onClick={handleMonthlyData} className={`px-4 py-2 ${active === "monthly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Monthly</button>
+                <button onClick={handleYearlyData} className={`px-4 py-2 ${active === "yearly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Yearly</button>
             </div>
             <h1 className="w-[150px] mx-auto m-5 flex justify-center text-s font-bold ">{title} report</h1>
             <div className="w-4/5 mx-auto mt-4 flex flex-col">

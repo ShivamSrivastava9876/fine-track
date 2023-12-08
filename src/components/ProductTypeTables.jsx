@@ -40,30 +40,28 @@ export default function ProductTypeTables() {
   const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
   const [openCategory, setOpenCategory] = React.useState(false);
   const [error, setError] = React.useState(false);
+  const [updateSuccess, setUpdateSuccess] = React.useState(false);
 
   const productTypeList = useSelector(getProductTypeList);
 
   const handleUpdateProductType = (e, rowProductType, rowCategory) => {
-    if (image) {
-      e.preventDefault();
-      console.log(category, productType, image, editedRow);
-      const updatedCategory = category !== "" ? category : rowCategory;
-      const updatedProductType = productType !== "" ? productType : rowProductType;
-      dispatch(updateProductTypeAsync({ category: updatedCategory, product_type: updatedProductType, image: image, productTypeId: editedRow })).then((result) => {
-        if (updateProductTypeAsync.fulfilled.match(result)) {
-          dispatch(getProductTypeAsync());
-          setCategory("");
-          setProductType("");
-          setImage(null);
-          setEditedRow(null);
-        }
-      });
-    }
-    else {
-      e.preventDefault();
-      setError(true)
-    }
-
+    e.preventDefault();
+    console.log(category, productType, image, editedRow);
+    const updatedCategory = category !== "" ? category : rowCategory;
+    const updatedProductType = productType !== "" ? productType : rowProductType;
+    dispatch(updateProductTypeAsync({ category: updatedCategory, product_type: updatedProductType, image: image, productTypeId: editedRow })).then((result) => {
+      if (updateProductTypeAsync.fulfilled.match(result)) {
+        dispatch(getProductTypeAsync());
+        setCategory("");
+        setProductType("");
+        setImage(null);
+        setEditedRow(null);
+        setUpdateSuccess(true);
+        setTimeout(() => {
+          setUpdateSuccess(false);
+        }, 3000)
+      }
+    });
   };
 
   const handleDelete = (selectedRowId) => {
@@ -124,6 +122,10 @@ export default function ProductTypeTables() {
     setError(false);
   }
 
+  const hideUpdateSuccess = () => {
+    setUpdateSuccess(false);
+  }
+
   React.useEffect(() => {
     dispatch(getProductTypeAsync())
   }, [dispatch]);
@@ -148,19 +150,18 @@ export default function ProductTypeTables() {
 
   return (
     <>
-      {error && <div
+      {updateSuccess && <div
         // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
-        role="alert"
-        style={{zIndex: 1000}}
+        className="bg-blue-100 flex justify-between items-center border border-blue-400 text-blue-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
+        role="success"
+        style={{ zIndex: 1001 }}
       >
-        <strong className="font-bold">Error!</strong>
-        <span className="ml-2">Upload the image</span>
+        <strong className="font-bold">Product type updated successfully</strong>
         <button
-          onClick={hideError}
+          onClick={hideUpdateSuccess}
           className="relative top-0.5 bottom-0 left-1"
         >
-          <span className="text-red-500 text-2xl">×</span>
+          <span className="text-blue-500 text-2xl">×</span>
         </button>
       </div>}
       <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">

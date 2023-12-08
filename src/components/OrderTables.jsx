@@ -19,8 +19,9 @@ const columns = [
   { id: "stoneWeight", label: "Stone weight(gm)", minWidth: 150 },
   { id: "grossWeight", label: "Gross weight(gm)", minWidth: 150 },
   { id: "puritySpc", label: "Purity spc", minWidth: 100 },
-  { id: "price", label: "Price", minWidth: 50 },
-  { id: "total", label: "Total", minWidth: 50 },
+  { id: "price", label: "Product price", minWidth: 120 },
+  { id: "total", label: "Total price", minWidth: 100 },
+  { id: "status", label: "Status", minWidth: 100 },
   // { id: "actions", label: "", minWidth: 150 },
 ];
 
@@ -33,7 +34,8 @@ const createData = (
   grossWeight,
   puritySpc,
   price,
-  total
+  total,
+  status
 ) => {
   return {
     HuId,
@@ -45,6 +47,7 @@ const createData = (
     puritySpc,
     price,
     total,
+    status
   };
 };
 
@@ -86,7 +89,8 @@ export default function OrderTables() {
           data.product_details.gross_wt || "",
           data.product_details.purity_spec || "",
           data.product_details.price || "",
-          data.price || ""
+          data.price || "",
+          data.status || ""
         );
         srNo = srNo + 1;
         return newRow;

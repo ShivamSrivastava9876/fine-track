@@ -37,6 +37,8 @@ export default function CategoryTables() {
   const [edited, setEdited] = React.useState("");
   const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
   const [error, setError] = React.useState(false);
+
+  const [updateSuccess, setUpdateSuccess] = React.useState(false);
   const categoryList = useSelector(getCategoryList);
   console.log(categoryList);
 
@@ -48,22 +50,21 @@ export default function CategoryTables() {
   }
 
   const handleUpdateCategory = (rowCategory) => {
-    if (image) {
-      const categoryId = editedRow;
-      const updatedCategory = category !== "" ? category : rowCategory;
-      dispatch(editCategoryAsync({ category: updatedCategory, image, id: categoryId })).then((result) => {
-        if (editCategoryAsync.fulfilled.match(result)) {
-          dispatch(getCategoriesAsync());
-          setCategory("");
-          setImage(null);
-          setEditedRow("");
-        }
-      })
-      setEditedRow(null);
-    }
-    else {
-      setError(true)
-    }
+    const categoryId = editedRow;
+    const updatedCategory = category !== "" ? category : rowCategory;
+    dispatch(editCategoryAsync({ category: updatedCategory, image, id: categoryId })).then((result) => {
+      if (editCategoryAsync.fulfilled.match(result)) {
+        dispatch(getCategoriesAsync());
+        setCategory("");
+        setImage(null);
+        setEditedRow("");
+        setUpdateSuccess(true);
+        setTimeout(() => {
+          setUpdateSuccess(false);
+        }, 3000)
+      }
+    })
+    setEditedRow(null);
   }
 
   const handleDelete = (selectedRowId) => {
@@ -109,6 +110,10 @@ export default function CategoryTables() {
     setError(false);
   }
 
+  const hideUpdateSuccess = () => {
+    setUpdateSuccess(false);
+  }
+
   React.useEffect(() => {
     dispatch(getCategoriesAsync())
   }, [dispatch]);
@@ -132,19 +137,18 @@ export default function CategoryTables() {
 
   return (
     <>
-      {error && <div
+      {updateSuccess && <div
         // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
-        role="alert"
-        style={{zIndex: 1000}}
+        className="bg-blue-100 flex justify-between items-center border border-blue-400 text-blue-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
+        role="success"
+        style={{ zIndex: 1001 }}
       >
-        <strong className="font-bold">Error!</strong>
-        <span className="ml-2">Upload the image</span>
+        <strong className="font-bold">Category updated successfully</strong>
         <button
-          onClick={hideError}
+          onClick={hideUpdateSuccess}
           className="relative top-0.5 bottom-0 left-1"
         >
-          <span className="text-red-500 text-2xl">×</span>
+          <span className="text-blue-500 text-2xl">×</span>
         </button>
       </div>}
       <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">

@@ -113,19 +113,19 @@ const Login = () => {
             )}
           </button>
         </div>
-        <div className="flex justify-end items-center mb-4 ">
+        {/* <div className="flex justify-end items-center mb-4 ">
           <Link href="#" className="text-[#ffffff] text-sm hover:underline ">
             Forgot Password?
           </Link>
-        </div>
+        </div> */}
         <button
           type="submit"
-          className="w-full hover:bg-[#96653d] bg-[#DF8E51] text-white py-2 rounded  transition duration-300"
+          className="w-full mt-4 hover:bg-[#96653d] bg-[#DF8E51] text-white py-2 rounded  transition duration-300"
         >
           Login
         </button>
       </form>
-      <Link href="/termsAndConditions" id="termsAndConditions" className="absolute bottom-2 text-[#F3D46F] text-sm">
+      <Link href="/termsAndConditions" id="termsAndConditions" className="absolute bottom-4 text-[#F3D46F] text-sm">
         <div>Terms and conditions*</div>
       </Link>
       {apk && <Link href={apk} className="fixed bottom-4 right-5 h-20 w-20 md:w-21.375 rounded-full hover:bg-slate-900 bg-black text-white flex items-center justify-center">
