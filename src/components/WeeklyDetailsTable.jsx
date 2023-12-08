@@ -20,8 +20,8 @@ const columns = [
   { id: "date", label: "Date", minWidth: 200 },
   { id: "quantity", label: "Quantity", minWidth: 50 },
   // { id: "puritySpc", label: "Purity spc", minWidth: 100 },
-  { id: "price", label: "Price", minWidth: 50 },
-  { id: "total", label: "Total", minWidth: 50 },
+  { id: "price", label: "Product price", minWidth: 50 },
+  { id: "total", label: "Total price", minWidth: 50 },
   // { id: "actions", label: "", minWidth: 150 },
 ];
 

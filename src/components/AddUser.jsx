@@ -23,35 +23,41 @@ const AddUser = ({ addUser, setAddUser }) => {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    if (password !== "" && confirmPassword !== "" && password === confirmPassword && firstName !== "" && lastName !== "" && mobileNo !== "" && email !== "" || setMessage("Password does not match")) {
-      setMessage("");
-      dispatch(
-        createUserAsync({
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          mobile: mobileNo,
-          password: password,
-        })
-      ).then((result) => {
-        // Check if createUserAsync was successful
-        if (createUserAsync.fulfilled.match(result)) {
-          // Dispatch userDetailsAsync only if user creation is successful
-          dispatch(userDetailsAsync());
+    if (password !== "" && confirmPassword !== "" && firstName !== "" && lastName !== "" && mobileNo !== "" && email !== "") {
+      if (password === confirmPassword) {
+        // setMessage("Password does not match")
+        setMessage("");
+        dispatch(
+          createUserAsync({
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            mobile: mobileNo,
+            password: password,
+          })
+        ).then((result) => {
+          // Check if createUserAsync was successful
+          if (createUserAsync.fulfilled.match(result)) {
+            // Dispatch userDetailsAsync only if user creation is successful
+            dispatch(userDetailsAsync());
 
-          // Clearing the form fields by updating state variables to empty values
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setMobileNo("");
-          setPassword("");
-          setConfirmPassword("");
-          setSuccess(true);
-          setTimeout(() => {
-            setSuccess(false);
-          }, 3000)
-        }
-      });
+            // Clearing the form fields by updating state variables to empty values
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setMobileNo("");
+            setPassword("");
+            setConfirmPassword("");
+            setSuccess(true);
+            setTimeout(() => {
+              setSuccess(false);
+            }, 3000)
+          }
+        });
+      }
+      else {
+        setMessage("Password does not match")
+      }
     }
     else {
       e.preventDefault();
