@@ -127,3 +127,36 @@ export async function deleteUser(userId) {
     return { error }
   }
 };
+
+export async function userActive(userId, userStatus) {
+  try {
+    function getToken() {
+      return localStorage.getItem("token");
+    }
+    const token = getToken();
+    const header = {
+      "Content-type": "application/json",
+      Authorization: `Token ${token}`
+    }
+    const response = await fetch(
+      `http://195.35.22.200:8000/admin_panel/update-user/${userId}/`,
+      {
+        method: 'PUT',
+        headers: header,
+        body: JSON.stringify(userStatus)
+      }
+    )
+    if (response.ok) {
+      const data = await response.json();
+      return { data };
+    }
+    else {
+      const error = await response.text();
+      return { error };
+    }
+
+  }
+  catch (error) {
+    return { error }
+  }
+};

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { userDetails, createUser, searchUser, deleteUser } from "./userApi";
+import { userDetails, createUser, searchUser, deleteUser, userActive } from "./userApi";
 
 const initialState = {
   status: "idle",
@@ -58,6 +58,19 @@ export const deleteUserAsync = createAsyncThunk(
   }
 );
 
+export const userActiveAsync = createAsyncThunk(
+  "user/userActive",
+  async (userId, userStatus) => {
+    try {
+      const response = await userActive(userId, userStatus);
+      return response.data.data;
+    }
+    catch (error) {
+      return error;
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -96,6 +109,16 @@ export const userSlice = createSlice({
     });
     builder.addCase(searchUserAsync.rejected, (state, action) => {
       state.error = action.payload;
+    });
+    builder.addCase(userActiveAsync.pending, (state) => {
+      state.status = "loading";
+    });
+    builder.addCase(userActiveAsync.fulfilled, (state, action) => {
+      state.status = "idle";
+    });
+    builder.addCase(userActiveAsync.rejected, (state, action) => {
+      state.status = "idle";
+      state.createUserError = action.payload;
     });
   },
 });

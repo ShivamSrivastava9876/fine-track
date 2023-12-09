@@ -11,19 +11,21 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUserAsync, selectUserData, userDetailsAsync } from "@/redux/slice/user/userSlice";
+import { deleteUserAsync, selectUserData, userActiveAsync, userDetailsAsync } from "@/redux/slice/user/userSlice";
 import DeleteOption from "./DeleteOption";
 import { MdEdit, MdDelete } from 'react-icons/md';
+import { FaCheckSquare, FaSquare } from 'react-icons/fa';
 
-const createData = (srNo, id, userName, email, mobile) => {
-  return { srNo, id, userName, email, mobile };
+const createData = (srNo, id, userName, email, mobile, isActive) => {
+  return { srNo, id, userName, email, mobile, isActive };
 };
 
 const columns = [
   { id: "srNo", label: "Sr no", minWidth: 100 },
   { id: "userName", label: "Name", minWidth: 250 },
-  { id: "email", label: "Email", minWidth: 450 },
-  { id: "mobile", label: "Mobile number", minWidth: 280 },
+  { id: "email", label: "Email", minWidth: 300 },
+  { id: "mobile", label: "Mobile number", minWidth: 200 },
+  { id: "active", label: "Active user", minWidth: 100 },
   { id: "actions", label: "", minWidth: 100 },
 ];
 
@@ -33,6 +35,30 @@ export default function UserTables() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rows, setRows] = React.useState([]);
   const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
+  const [isChecked, setIsChecked] = React.useState(false);
+
+  const handleCheckboxChange = (activeStatus, rowId) => {
+    setIsChecked(!isChecked);
+    // if (activeStatus === true) {
+    //   dispatch(userActiveAsync(rowId, {is_active: false})).then((result) => {
+    //     if (userActiveAsync.fulfilled.match(result)) {
+    //       dispatch(userDetailsAsync());
+    //     }
+    //   })
+    // }
+    // else {
+    //   dispatch(userActiveAsync(rowId, {is_active: true})).then((result) => {
+    //     if (userActiveAsync.fulfilled.match(result)) {
+    //       dispatch(userDetailsAsync());
+    //     }
+    //   })
+    // }
+    dispatch(userActiveAsync(rowId, { is_active: activeStatus })).then((result) => {
+      if (userActiveAsync.fulfilled.match(result)) {
+        dispatch(userDetailsAsync());
+      }
+    })
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -52,14 +78,16 @@ export default function UserTables() {
       }
     })
   }
-  
+
   const handleDeleteCancel = () => {
     setSelectedRowToDelete(null);
   }
-  
+
   const handleDeletePopup = (selectedRowId) => {
     setSelectedRowToDelete(selectedRowId)
   }
+
+
 
   React.useEffect(() => {
     dispatch(userDetailsAsync());
@@ -76,7 +104,8 @@ export default function UserTables() {
           data.id,
           data.first_name + " " + data.last_name || "",
           data.email || "",
-          data.mobile || ""
+          data.mobile || "",
+          data.is_active
         );
         srNo = srNo + 1;
         return newRow;
@@ -116,16 +145,24 @@ export default function UserTables() {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.id === "actions" ? (
+                          {column.id === "active" ? (
+                            // Render a checkbox for the "Active user" column
+                            <label>
+                              <input type="checkbox" checked={row.isActive} onChange={() => handleCheckboxChange(row.isActive, row.id)} />
+                              {/* {isChecked ? <FaCheckSquare /> : <FaSquare />} */}
+                              {/* You can add text or label here if needed */}
+                            </label>
+                          ) : column.id === "actions" ? (
                             // Edit and Delete buttons
-                            <div className="space-x-2">
+                            <div className="space-x-2 flex">
                               {/* <Button className="bg-blue-400 hover:bg-blue-600 text-white  py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300 ease-in-out">
                                 Edit
                               </Button> */}
                               {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
                                 Delete
                               </Button> */}
-                              <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color:'red'}} />
+
+                              <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
                               {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "user" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
                             </div>
                           ) : // Render other columns
