@@ -8,6 +8,7 @@ const EditFormProductType = ({ image, row, openCategory, handleCategory, handleO
     const dispatch = useDispatch();
 
     const modalClasses = isOpen ? 'block' : 'hidden';
+    const [newImageStatus, setNewImageStatus] = useState(false);
 
     useEffect(() => {
         dispatch(getCategoriesAsync())
@@ -19,6 +20,7 @@ const EditFormProductType = ({ image, row, openCategory, handleCategory, handleO
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         setImage(selectedFile);
+        setNewImageStatus(!newImageStatus);
     }
 
     return (
@@ -84,7 +86,7 @@ const EditFormProductType = ({ image, row, openCategory, handleCategory, handleO
                     </div>
                     <div className="mb-4 flex justify-center items-center">
                         <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
-                            <FiImage className="mr-2" /> {image !== null ? 'New image uploaded' : 'Click here to update image'}
+                            <FiImage className="mr-2" /> {newImageStatus ? 'New image uploaded' : 'Click here to update image'}
                             <input
                                 type="file"
                                 id="fileInput"
