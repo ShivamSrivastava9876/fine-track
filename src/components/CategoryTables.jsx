@@ -22,8 +22,8 @@ const columns = [
   { id: "actions", label: "", minWidth: 100 },
 ];
 
-const createData = (srNo, Id, category) => {
-  return { srNo, Id, category };
+const createData = (srNo, Id, category, image) => {
+  return { srNo, Id, category, image };
 };
 
 export default function CategoryTables() {
@@ -44,9 +44,10 @@ export default function CategoryTables() {
 
   // const edits = [{name: "Category"}];
 
-  const handleEdit = (rowId, rowCategory) => {
+  const handleEdit = (rowId, rowCategory, rowImage) => {
     setEditedRow(rowId);
     setCategory(rowCategory);
+    setImage(rowImage);
   }
 
   const handleUpdateCategory = (rowCategory) => {
@@ -125,7 +126,8 @@ export default function CategoryTables() {
         const newRow = createData(
           srNo,
           data.id,
-          data.category_name || ""
+          data.category_name || "",
+          data.image
         );
         srNo = srNo + 1;
         return newRow;
@@ -190,7 +192,7 @@ export default function CategoryTables() {
                                 ) : (
                                   <div className="space-x-2 flex">
                                     {/* <Button onClick={() => handleEdit(row.Id, row.category)} className="border-black text-white rounded"></Button> */}
-                                    <MdEdit onClick={() => handleEdit(row.Id, row.category)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
+                                    <MdEdit onClick={() => handleEdit(row.Id, row.category, row.image)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
 
                                     {/* <Button onClick={() => handleDeletePopup(row.Id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
                                     Delete

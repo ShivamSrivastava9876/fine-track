@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from "@mui/material/Button";
 import { FiImage } from 'react-icons/fi';
 
 const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, setCategory, image, setImage }) => {
     const modalClasses = isOpen ? 'block' : 'hidden';
+    const [newImage, setNewImage] = useState(false);
 
     //To save new image
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
         setImage(selectedFile);
+        setNewImage(!newImage);
     }
 
     return (
@@ -74,7 +76,7 @@ const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, s
 
                     <div className="mb-4 flex justify-center items-center">
                         <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
-                            <FiImage className="mr-2" /> {image !== null ? 'New image uploaded' : 'Click here to update image'}
+                            <FiImage className="mr-2" /> {newImage ? 'Image updated' : 'Click here to update image'}
                             <input
                                 type="file"
                                 id="fileInput"
