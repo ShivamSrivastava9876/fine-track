@@ -107,7 +107,6 @@ export async function updateProductType(editProductTypeInfo) {
             Authorization: `Token ${token}`
         }
         const productTypeId = editProductTypeInfo.productTypeId;
-        console.log(productTypeId);
         const formData = new FormData();
         formData.append("category", editProductTypeInfo.category);
         formData.append("product_type", editProductTypeInfo.product_type);
@@ -187,7 +186,6 @@ export async function searchProductType(searchProductTypeInfo) {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             return { data };
         }
         else {

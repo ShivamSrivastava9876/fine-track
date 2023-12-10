@@ -9,7 +9,6 @@ const DashboardData = () => {
   const dispatch = useDispatch();
 
   const dashboardDetails = useSelector(getDashboardData);
-  console.log("dashboardDetails", dashboardDetails)
 
   useEffect(() => {
     dispatch(getDashboardDetailsAsync())

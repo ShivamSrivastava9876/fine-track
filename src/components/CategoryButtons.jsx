@@ -20,7 +20,6 @@ const CategoryComponent = ({
 
   const handleCategorySearch = (e) => {
     e.preventDefault();
-    console.log("search is working", searchParameter)
     dispatch(searchCategoryAsync(searchParameter)).then((result) => {
       if (searchCategoryAsync.fulfilled.match(result)) {
         // setSearchParameter("");

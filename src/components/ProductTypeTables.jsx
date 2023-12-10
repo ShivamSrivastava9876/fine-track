@@ -46,7 +46,6 @@ export default function ProductTypeTables() {
 
   const handleUpdateProductType = (e, rowProductType, rowCategory) => {
     e.preventDefault();
-    console.log(category, productType, image, editedRow);
     const updatedCategory = category !== "" ? category : rowCategory;
     const updatedProductType = productType !== "" ? productType : rowProductType;
     dispatch(updateProductTypeAsync({ category: updatedCategory, product_type: updatedProductType, image: image, productTypeId: editedRow })).then((result) => {
@@ -65,7 +64,6 @@ export default function ProductTypeTables() {
   };
 
   const handleDelete = (selectedRowId) => {
-    console.log("select", selectedRowId)
     const productTypeId = selectedRowId;
     dispatch(deleteProductTypeAsync(productTypeId)).then((result) => {
       if (deleteProductTypeAsync.fulfilled.match(result)) {
@@ -76,7 +74,6 @@ export default function ProductTypeTables() {
 
   //To open or close the category dropdown
   const handleCategory = (e) => {
-    console.log(e);
     setOpenCategory(!openCategory);
   };
 

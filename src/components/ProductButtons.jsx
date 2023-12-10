@@ -20,7 +20,6 @@ const ProductComponent = ({
 
   const handleProductSearch = (e) => {
     e.preventDefault();
-    console.log("search is working", searchParameter)
     dispatch(searchProductAsync(searchParameter)).then((result) => {
       if (searchProductAsync.fulfilled.match(result)) {
         // dispatch(searchUserAsync(searchParameter))

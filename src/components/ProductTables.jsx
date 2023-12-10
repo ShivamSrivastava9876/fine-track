@@ -96,7 +96,6 @@ export default function ProductTables() {
 
   const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType, rowImage) => {
     e.preventDefault();
-    console.log("eeeeeee2", image)
     const updatedImage = image !== null ? image : rowImage;
     const updatedHuId = huId !== "" ? huId : rowHuId;
     const updatedProductId = productId !== "" ? productId : rowProductId;
@@ -140,7 +139,6 @@ export default function ProductTables() {
   }
 
   const handleDelete = (selectedRowId) => {
-    console.log("select", selectedRowId)
     const productId = selectedRowId;
     dispatch(deleteProductAsync(productId)).then((result) => {
       if (deleteProductAsync.fulfilled.match(result)) {
@@ -179,7 +177,6 @@ export default function ProductTables() {
     setPrice(rowPrice);
     setQuantity(rowQuantity);
     setDescription(rowDescription);
-    console.log("rowrow1", rowImage);
     setImage(rowImage);
     setFiles(rowImage.length);
   }
@@ -236,12 +233,9 @@ export default function ProductTables() {
   }, [dispatch])
 
   React.useEffect(() => {
-    console.log("productList1", productList);
     if (productList && Array.isArray(productList)) {
       let srNo = 1;
-      console.log("propro", productList)
       const newRows = productList.map((data) => {
-        console.log("productImages",data.product_images)
         const newRow = createData(
           data.hu_id || "",
           data.product_id || "",

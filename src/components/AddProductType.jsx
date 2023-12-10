@@ -26,7 +26,6 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
   const handleAddProductType = (e) => {
     if (image && newCategory !== "" && productType !== "") {
       e.preventDefault();
-      console.log(image);
       dispatch(createProductTypeAsync({ category: newCategory, product_type: productType, image: image })).then((result) => {
         if (createProductTypeAsync.fulfilled.match(result)) {
           dispatch(getProductTypeAsync());
@@ -57,7 +56,6 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
 
   const handleCategory = () => {
     setOpenCategory(!openCategory);
-    console.log(categoryList)
   };
 
   const handleOptionClick = (option) => {

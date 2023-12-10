@@ -21,7 +21,6 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const apk = useSelector(selectApkLink);
   const isMobile = useMediaQuery({ maxWidth: 767 });
-  console.log("apkkkk", apk)
 
   useEffect(() => {
     dispatch(apkDownloadAsync());
@@ -33,7 +32,6 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log(usernameEntered, passwordEntered);
     dispatch(
       loginUserAsync({ username: usernameEntered, password: passwordEntered })
     ).then((result) => {

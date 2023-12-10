@@ -34,11 +34,9 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
     
     const selectedFile = e.target.files;
     const filesLength = selectedFile.length;
-    console.log("selectedFiles",selectedFile);
     
     setFiles(filesLength)
     setImage(selectedFile);
-    console.log("file length", files);
   }
 
   useEffect(() => {

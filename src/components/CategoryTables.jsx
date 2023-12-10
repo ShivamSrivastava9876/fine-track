@@ -40,7 +40,6 @@ export default function CategoryTables() {
 
   const [updateSuccess, setUpdateSuccess] = React.useState(false);
   const categoryList = useSelector(getCategoryList);
-  console.log(categoryList);
 
   // const edits = [{name: "Category"}];
 

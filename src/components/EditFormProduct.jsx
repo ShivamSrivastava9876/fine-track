@@ -25,11 +25,9 @@ const EditFormProduct = ({ files, setFiles, productImage, row, handleCategoryCli
     const handleFileChange = (e) => {
         const selectedFile = e.target.files;
         const filesLength = selectedFile.length;
-        console.log("selectedFiles", selectedFile);
 
         setFiles(filesLength)
         setImage(selectedFile);
-        console.log("file length", files);
     }
 
     return (
@@ -40,7 +38,6 @@ const EditFormProduct = ({ files, setFiles, productImage, row, handleCategoryCli
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        console.log("apna row", row);
                         handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType, row.image);
                     }}
                     className="p-8 rounded shadow-md flex flex-col justify-center w-auto h-28rem bg-white border border-blue-500"

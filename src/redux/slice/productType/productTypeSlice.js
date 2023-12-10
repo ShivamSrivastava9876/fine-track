@@ -52,9 +52,7 @@ export const updateProductTypeAsync = createAsyncThunk(
     "productType/update",
     async (editProductTypeInfo) => {
         try {
-            console.log(editProductTypeInfo);
             const response = await updateProductType(editProductTypeInfo);
-            console.log(response.data);
             return response.data;
         }
         catch (error) {
@@ -66,11 +64,8 @@ export const updateProductTypeAsync = createAsyncThunk(
 export const deleteProductTypeAsync = createAsyncThunk(
     "productType/delete",
     async (productTypeId) => {
-        console.log("productTypeId", productTypeId);
         try {
-            console.log(productTypeId);
             const response = await deleteProductType(productTypeId);
-            console.log(response.data);
             return response.data;
         }
         catch (error) {
@@ -84,7 +79,6 @@ export const searchProductTypeAsync = createAsyncThunk(
     async (searchProductTypeInfo) => {
       try {
         const response = await searchProductType(searchProductTypeInfo);
-        console.log(response.data);
         return response.data.data;
       }
       catch (error) {

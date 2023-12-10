@@ -21,7 +21,6 @@ const UserComponent = ({
 
   const handleUserSearch = (e) => {
     e.preventDefault();
-    console.log("search is working", searchParameter)
     dispatch(searchUserAsync(searchParameter)).then((result) => {
       if (searchUserAsync.fulfilled.match(result)) {
         // dispatch(searchUserAsync(searchParameter))

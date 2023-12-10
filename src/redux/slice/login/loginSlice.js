@@ -84,12 +84,10 @@ export const loginSlice = createSlice({
       .addCase(loginUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         if (action.payload.success) {
-          console.log("success", action.payload);
           state.userId = action.payload.data.user_id;
           state.accessToken = action.payload.data.auth_token.token;
         }
         else if (action.payload.success === false) {
-          console.log("fail", action.payload);
           state.errorMessage = action.payload.message;
         }
       })

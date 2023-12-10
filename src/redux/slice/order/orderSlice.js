@@ -57,7 +57,6 @@ export const getOrderListAsync = createAsyncThunk(
     async () => {
         try {
             const response = await getOrder();
-            console.log("order response", response)
             return response.data;
         }
         catch (error) {

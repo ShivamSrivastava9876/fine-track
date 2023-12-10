@@ -39,7 +39,6 @@ export default function DashboardTables() {
   const [rows, setRows] = React.useState([]);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const approvalList = useSelector(getApprovalList);
-  console.log("approvallist", approvalList)
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -77,7 +76,6 @@ export default function DashboardTables() {
   }, [approvalList]);
 
   const handleApprove = (orderId) => {
-    // console.log(orderId)
     dispatch(approveOrderAsync({ orderId: orderId, orderInfo: { "status": "approved" } })).then((result) => {
       if (approveOrderAsync.fulfilled.match(result)) {
         dispatch(getApproveListAsync());
@@ -87,7 +85,6 @@ export default function DashboardTables() {
   }
 
   const handleCancel = (orderId) => {
-    // console.log(orderId)
     dispatch(declineOrderAsync({ orderId: orderId, orderInfo: { "status": "decline" } })).then((result) => {
       if (declineOrderAsync.fulfilled.match(result)) {
         dispatch(getApproveListAsync());

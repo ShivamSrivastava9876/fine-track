@@ -65,12 +65,10 @@ export default function DeclinedOrderTables() {
   };
 
   React.useEffect(() => {
-    console.log("declined order working")
     dispatch(getDeclinedOrderAsync())
   }, [dispatch])
 
   React.useEffect(() => {
-    console.log("orderList", orderList);
     if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
       const newRows = orderList.map((data) => {

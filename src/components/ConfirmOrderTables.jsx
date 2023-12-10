@@ -65,12 +65,10 @@ export default function ConfirmOrderTables() {
   };
 
   React.useEffect(() => {
-    console.log("confirm order working")
     dispatch(getConfirmOrderAsync())
   }, [dispatch])
 
   React.useEffect(() => {
-    console.log("orderList", orderList);
     if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
       const newRows = orderList.map((data) => {

@@ -106,7 +106,6 @@ export async function getOrder() {
             // "Content-type": "application/json",
             Authorization: `Token ${token}`
         }
-        console.log("order api")
         const response = await fetch(
             'http://195.35.22.200:8000/orders/orderitem-list/',
             {
@@ -149,7 +148,6 @@ export async function searchOrder(searchOrderInfo) {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             return { data };
         }
         else {

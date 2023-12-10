@@ -65,12 +65,10 @@ export default function CancelledOrderTables() {
   };
 
   React.useEffect(() => {
-    console.log("cancelled order working")
     dispatch(getCancelledOrderAsync())
   }, [dispatch])
 
   React.useEffect(() => {
-    console.log("orderList", orderList);
     if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
       const newRows = orderList.map((data) => {

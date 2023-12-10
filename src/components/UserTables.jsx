@@ -70,7 +70,6 @@ export default function UserTables() {
   };
 
   const handleDelete = (selectedRowId) => {
-    console.log("select", selectedRowId)
     const userId = selectedRowId;
     dispatch(deleteUserAsync(userId)).then((result) => {
       if (deleteUserAsync.fulfilled.match(result)) {

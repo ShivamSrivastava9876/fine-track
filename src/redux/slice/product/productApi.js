@@ -40,16 +40,12 @@ export async function createProduct(newProductInfo) {
             Authorization: `Token ${token}`
         }
         const images = newProductInfo.image;
-        console.log("newProductInfo.image", newProductInfo.image);
         // const allImages = new FormData();
         const allImages = [];
         for (let i = 0; i < images.length; i++) {
             allImages.push(images[i]);
         }
-        console.log("allImages", allImages);
 
-        // console.log("category ",newProductInfo.category)
-        // console.log("product type ",newProductInfo.product_type)
         const formData = new FormData();
         formData.append("category", newProductInfo.category);
         formData.append("product_type", newProductInfo.product_type);
@@ -103,13 +99,11 @@ export async function updateProduct(updateProductInfo) {
             Authorization: `Token ${token}`
         }
         const images = updateProductInfo.image;
-        console.log("updateProductInfo.image", updateProductInfo.image);
         // const allImages = new FormData();
         const allImages = [];
         for (let i = 0; i < images.length; i++) {
             allImages.push(images[i]);
         }
-        console.log("allImages", allImages);
 
         //also get productId in updateProductInfo
         const formData = new FormData();
@@ -139,10 +133,8 @@ export async function updateProduct(updateProductInfo) {
                 body: formData
             }
         )
-        // console.log(response)
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             return { data };
         }
         else {

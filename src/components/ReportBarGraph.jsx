@@ -39,7 +39,6 @@ function ReportBarGraph() {
     }
 
     const reportData = useSelector(getReportData);
-    console.log("report data",reportData)
 
     useEffect(() => {
         if (reportData && reportData.daily_report) {
@@ -49,8 +48,7 @@ function ReportBarGraph() {
 
             const values = Object.values(reportData.daily_report);
             setValuesData(values);
-            console.log("keys", keys);
-            console.log("values", values);
+            
         }
         if (reportData && reportData.weekly_report) {
             setTitle("Weekly")
@@ -59,8 +57,7 @@ function ReportBarGraph() {
 
             const values = Object.values(reportData.weekly_report);
             setValuesData(values);
-            console.log("keys", keys);
-            console.log("values", values);
+           
         }
         if (reportData && reportData.monthly_report) {
             setTitle("Monthly")
@@ -69,8 +66,7 @@ function ReportBarGraph() {
 
             const values = Object.values(reportData.monthly_report);
             setValuesData(values);
-            console.log("keys", keys);
-            console.log("values", values);
+            
         }
         if (reportData && reportData.yearly_report) {
             setTitle("Yearly")
@@ -79,8 +75,7 @@ function ReportBarGraph() {
 
             const values = Object.values(reportData.yearly_report);
             setValuesData(values);
-            console.log("keys", keys);
-            console.log("values", values);
+            
         }
     }, [reportData]);
 

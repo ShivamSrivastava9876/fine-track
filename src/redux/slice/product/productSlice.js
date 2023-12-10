@@ -64,7 +64,6 @@ export const searchProductAsync = createAsyncThunk(
     async (searchProductInfo) => {
       try {
         const response = await searchProduct(searchProductInfo);
-        console.log(response.data);
         return response.data.data;
       }
       catch (error) {

@@ -20,7 +20,6 @@ const ProductTypeButtons = ({
 
   const handleProductTypeSearch = (e) => {
     e.preventDefault();
-    console.log("search is working", searchParameter)
     dispatch(searchProductTypeAsync(searchParameter)).then((result) => {
       if (searchProductTypeAsync.fulfilled.match(result)) {
         // dispatch(searchUserAsync(searchParameter))

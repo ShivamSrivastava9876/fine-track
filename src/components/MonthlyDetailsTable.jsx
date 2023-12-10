@@ -67,12 +67,10 @@ export default function MonthlyDetailsTables() {
   };
 
   React.useEffect(() => {
-    console.log("confirm order working")
     dispatch(getMonthlyReportDataAsync())
   }, [dispatch])
 
   React.useEffect(() => {
-    console.log("orderList", orderList);
     if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
       const newRows = orderList.map((data) => {

@@ -83,7 +83,6 @@ export async function searchUser(searchUserInfo) {
 
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       return { data };
     }
     else {

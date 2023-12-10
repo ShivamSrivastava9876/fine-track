@@ -66,12 +66,10 @@ export default function DailyDetailsTables() {
   };
 
   React.useEffect(() => {
-    console.log("confirm order working")
     dispatch(getDailyReportDataAsync())
   }, [dispatch])
 
   React.useEffect(() => {
-    console.log("orderList", orderList);
     if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
       const newRows = orderList.map((data) => {

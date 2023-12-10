@@ -65,12 +65,10 @@ export default function DeliveredOrderTables() {
   };
 
   React.useEffect(() => {
-    console.log("order working")
     dispatch(getDeliveredOrderAsync())
   }, [dispatch])
 
   React.useEffect(() => {
-    console.log("orderList", orderList);
     if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
       const newRows = orderList.map((data) => {

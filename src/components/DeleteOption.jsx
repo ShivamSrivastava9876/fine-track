@@ -3,7 +3,6 @@ import Button from "@mui/material/Button";
 
 const DeleteOption = ({ handleDeleteCancel, handleDelete, isOpen, rowId, deleteDetails }) => {
     const modalClasses = isOpen ? 'block' : 'hidden';
-    // console.log("rowId", rowId)
 
     return (
         <div className=''>
