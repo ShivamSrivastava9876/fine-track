@@ -41,15 +41,6 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
     console.log("file length", files);
   }
 
-  //Handling category dropdown
-  // useEffect(() => {
-  //   dispatch(getCategoriesAsync()).then((result) => {
-  //     if (getCategoriesAsync.fulfilled.match(result)) {
-  //       dispatch(getProductTypeAsync())
-  //     }
-  //   })
-  // }, [dispatch])
-
   useEffect(() => {
     dispatch(getCategoriesAsync()).then((result) => {
       if (getCategoriesAsync.fulfilled.match(result) && category !== "") {

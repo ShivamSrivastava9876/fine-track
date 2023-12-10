@@ -16,7 +16,7 @@ function ReportBarGraph() {
 
     useEffect(() => {
         dispatch(getDailyReportAsync());
-    },[])
+    },[dispatch])
 
     const handleDailyData = () => {
         dispatch(getDailyReportAsync());
@@ -154,7 +154,7 @@ function ReportBarGraph() {
 
             chartRef.current.chart = newChart
         }
-    }, [keysData])
+    }, [keysData, title, valuesData])
 
     return (
         <>

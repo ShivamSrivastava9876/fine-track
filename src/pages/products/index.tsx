@@ -15,7 +15,7 @@ const Products = () => {
     if (!token) {
       router.push('/login'); // Redirect to login page if token is not found
     }
-  }, []); 
+  }, [router]); 
 
   return (
     <Layout>

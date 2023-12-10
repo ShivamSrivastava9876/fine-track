@@ -145,7 +145,6 @@ export default function ProductTypeTables() {
         srNo = srNo + 1;
         return newRow;
       });
-      console.log(rows);
       setRows(newRows)
     }
   }, [productTypeList]);
