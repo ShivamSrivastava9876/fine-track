@@ -152,7 +152,7 @@ function ReportBarGraph() {
     }, [keysData, title, valuesData])
 
     return (
-        <>
+        <div>
             {/* Bar chart */}
             <h1 className="w-[150px] mx-auto mb-5 flex justify-center text-2xl font-bold capitalize ">Report</h1>
             <div className="flex justify-center space-x-1 ">
@@ -162,14 +162,13 @@ function ReportBarGraph() {
                 <button onClick={handleYearlyData} className={`px-4 py-2 ${active === "yearly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Yearly</button>
             </div>
             <h1 className="w-[150px] mx-auto m-5 flex justify-center text-s font-bold ">{title} report</h1>
-            <div className="w-4/5 mx-auto mt-4 flex flex-col">
-                <div className='border relative border-gray-400 rounded-xl overflow-hidden my-auto shadow-xl'>
+            <div className="w-full md:w-4/5 mx-auto mt-4 flex flex-col">
+                <div className='border relative border-gray-400 rounded-xl w-100% overflow-hidden my-auto shadow-xl'>
                     <canvas ref={chartRef} className="w-full h-auto"></canvas>
                 </div>
                 <Link href={`/${active}Reports`} className="mt-3 text-blue-500 underline ml-auto">View more ...</Link>
             </div>
-            
-        </>
+        </div>
     )
 }
 
