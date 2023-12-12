@@ -53,7 +53,7 @@ export default function UserTables() {
     //     }
     //   })
     // }
-    dispatch(userActiveAsync(rowId, { is_active: activeStatus })).then((result) => {
+    dispatch(userActiveAsync({ userId: rowId, userActiveStatus: { is_active: !activeStatus } })).then((result) => {
       if (userActiveAsync.fulfilled.match(result)) {
         dispatch(userDetailsAsync());
       }

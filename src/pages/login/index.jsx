@@ -56,12 +56,12 @@ const Login = () => {
       >
         <strong className="font-bold">Error!</strong>
         <span className="ml-2"> {errorMessage}</span>
-        <button
+        {/* <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"
         >
           <span className="text-red-500 text-2xl">×</span>
-        </button>
+        </button> */}
       </div>)}
       <div className="flex items-center justify-center w-[134px] h-[230px] mx-auto mt-4">
         <Image

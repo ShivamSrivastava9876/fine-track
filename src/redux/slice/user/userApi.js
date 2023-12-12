@@ -127,7 +127,7 @@ export async function deleteUser(userId) {
   }
 };
 
-export async function userActive(userId, userStatus) {
+export async function userActive(userStatusInfo) {
   try {
     function getToken() {
       return localStorage.getItem("token");
@@ -137,12 +137,13 @@ export async function userActive(userId, userStatus) {
       "Content-type": "application/json",
       Authorization: `Token ${token}`
     }
+    console.log(userStatusInfo.userActiveStatus)
     const response = await fetch(
-      `http://195.35.22.200:8000/admin_panel/update-user/${userId}/`,
+      `http://195.35.22.200:8000/admin_panel/update-user/${userStatusInfo.userId}/`,
       {
         method: 'PUT',
         headers: header,
-        body: JSON.stringify(userStatus)
+        body: JSON.stringify(userStatusInfo.userActiveStatus)
       }
     )
     if (response.ok) {

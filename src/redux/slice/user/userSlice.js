@@ -60,9 +60,10 @@ export const deleteUserAsync = createAsyncThunk(
 
 export const userActiveAsync = createAsyncThunk(
   "user/userActive",
-  async (userId, userStatus) => {
+  async (userStatusInfo) => {
     try {
-      const response = await userActive(userId, userStatus);
+      // console.log("user",userStatusInfo);
+      const response = await userActive(userStatusInfo);
       return response.data.data;
     }
     catch (error) {
