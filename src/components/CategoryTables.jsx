@@ -189,7 +189,7 @@ export default function CategoryTables() {
                                     <EditForm row={row} isOpen={true} handleUpdateCategory={handleUpdateCategory} handleCancel={handleCancel} handleCategoryChange={handleCategoryChange} category={category} setCategory={setCategory} image={image} setImage={setImage} edited={edited} />
                                   </div>
                                 ) : (
-                                  <div className="space-x-2 flex">
+                                  <div className="space-x-7 flex">
                                     {/* <Button onClick={() => handleEdit(row.Id, row.category)} className="border-black text-white rounded"></Button> */}
                                     <MdEdit onClick={() => handleEdit(row.Id, row.category, row.image)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
 

@@ -20,6 +20,7 @@ const SideBar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const modalClasses = isSidebarOpen ? 'block' : 'hidden';
 
   const handleLogout = () => {
 
@@ -29,11 +30,12 @@ const SideBar = () => {
 
   return (
     <>
+      <div className={`fixed inset-0 z-40 bg-whitesmoke opacity-80 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
       <button
         className="md:hidden absolute top-4 left-4 p-2 text-white"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? <FiX size={24} style={{ color: 'black', position: 'fixed', right: 10, top: 5 }} /> : <FiMenu size={24} style={{ color: 'black' }} />}
+        {isSidebarOpen ? <FiX size={24} style={{ color: 'black', position: 'fixed', right: 10, top: 5, zIndex: 1002 }} /> : <FiMenu size={24} style={{ color: 'black' }} />}
       </button>
       <div className={`fixed md:static left-0 z-50 top-0 h-full bg-[#3E301A] w-16.3125 md:translate-x-0 transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         {/* <div className="w-16.3125 h-full bg-[#3E301A] z-50"> */}

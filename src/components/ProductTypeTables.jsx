@@ -201,7 +201,7 @@ export default function ProductTypeTables() {
                                     <EditFormProductType image={image} openCategory={openCategory} handleCategory={handleCategory} handleOptionClick={handleOptionClick} handleUpdateProductType={handleUpdateProductType} isOpen={true} row={row} category={category} productType={productType} handleCancel={handleCancel} setProductType={setProductType} setImage={setImage} />
                                   </div>
                                 ) : (
-                                  <div className="space-x-2 flex">
+                                  <div className="space-x-7 flex">
                                     {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
                                     Edit
                                   </Button> */}

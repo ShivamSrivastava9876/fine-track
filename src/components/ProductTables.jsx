@@ -331,7 +331,7 @@ export default function ProductTables() {
                                     <EditFormProduct files={files} setFiles={setFiles} productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
                                   </div>
                                 ) : (
-                                  <div className="space-x-2 flex">
+                                  <div className="space-x-7 flex">
                                     {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
                                     Edit
                                   </Button> */}

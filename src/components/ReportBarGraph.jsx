@@ -128,20 +128,13 @@ function ReportBarGraph() {
                 },
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false, // Add this line
                     scales: {
                         x: {
                             type: "category",
-                            // title: {
-                            //     display: true,
-                            //     text: "Hello"
-                            // }
                         },
                         y: {
                             beginAtZero: true,
-                            // title: {
-                            //     display: true,
-                            //     text: "Revenue"
-                            // }
                         }
                     }
                 }
