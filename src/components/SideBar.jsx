@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { logoutUserAsync } from "@/redux/slice/login/loginSlice";
 import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faIndustry } from '@fortawesome/free-solid-svg-icons';
 
 import { FiMenu, FiX } from 'react-icons/fi';
 
@@ -128,6 +130,17 @@ const SideBar = () => {
             <Image src={UserIcon} alt="user-icon" />
 
             <span className=" text-base text-blue-200 font-normal">Orders</span>
+          </Link>
+
+          <Link
+            href="/manufacturingOrders"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+          >
+            <Image src={ProductsIcon} alt="products-icon" />
+            {/* <FontAwesomeIcon icon={faIndustry} /> */}
+            <span className=" text-base text-blue-200 font-normal">Manufacturing</span>
           </Link>
 
           <Link

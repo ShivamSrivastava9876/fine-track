@@ -84,7 +84,7 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
         role="alert"
         style={{ zIndex: 1000 }}
       >
-        <strong className="font-bold">Error! please fill all required fields</strong>
+        <strong className="font-bold">Error! Please fill all required fields</strong>
         <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"
