@@ -2,11 +2,11 @@ import SidebarLogo from "../../public/assets/LOGO.png";
 import Image from "next/image";
 import DashboardIcon from "../../public/assets/Icons/dashboard_icon.svg";
 import UserIcon from "../../public/assets/Icons/user_icon.svg";
-import OrderIcon from "../../public/assets/Icons/orders.png";
 import CategoryIcon from "../../public/assets/Icons/category_icon.svg";
 import ProductsIcon from "../../public/assets/Icons/products_icon.svg";
 import ReportsIcon from "../../public/assets/Icons/reports_icon.svg";
 import LogoutIcon from "../../public/assets/Icons/logout_icon.svg";
+import OrderIcon from "../../public/assets/Icons/order-ascending.svg";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -127,7 +127,7 @@ const SideBar = () => {
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
           >
-            <Image src={UserIcon} alt="user-icon" />
+            <Image src={OrderIcon} alt="user-icon" />
 
             <span className=" text-base text-blue-200 font-normal">Orders</span>
           </Link>
@@ -138,7 +138,7 @@ const SideBar = () => {
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
           >
-            <Image src={ProductsIcon} alt="products-icon" />
+            <Image src={OrderIcon} alt="products-icon" />
             {/* <FontAwesomeIcon icon={faIndustry} /> */}
             <span className=" text-base text-blue-200 font-normal">Manufacturing</span>
           </Link>

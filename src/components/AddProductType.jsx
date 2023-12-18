@@ -108,7 +108,7 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
       </div>}
       <div id="addProductType" className="flex justify-center m-8 relative">
         <button
-          className="absolute top-0 right-0 p-0.5 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
+          className="absolute top-2 right-2 md:right-4 p-1 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
           onClick={handleClose}
         >
           <svg

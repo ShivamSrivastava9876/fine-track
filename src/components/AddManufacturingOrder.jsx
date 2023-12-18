@@ -47,38 +47,28 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
 
     const handleManufacturingOrderSubmit = (e) => {
         if (user !== "", product !== "", workerName !== "", workerContact !== "", startDate !== "", endDate !== "", weight !== "", description !== "") {
-            const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
-            if (dateFormatRegex.test(startDate && endDate)) {
-                e.preventDefault();
-                console.log("description", description);
-                //logic for add product
-                dispatch(createManugfacturingOrderAsync({ customer: user, product: product, worker_name: workerName, worker_contact: workerContact, start_date: startDate, end_date: endDate, weight: weight, decription: description })).then((result) => {
-                    if (createManugfacturingOrderAsync.fulfilled.match(result)) {
-                        dispatch(getManufacturingOrderListAsync());
-                        setUser("");
-                        setProduct("");
-                        setWorkerName("");
-                        setWorkerContact("");
-                        setStartDate("");
-                        setEndDate("");
-                        setWeight("");
-                        setDescription("");
 
-                        setSuccess(true);
-                        setTimeout(() => {
-                            setSuccess(false);
-                        }, 3000)
-                    }
-                })
-            }
-            else {
-                e.preventDefault();
-                setFormatError(true);
-                setTimeout(() => {
-                    setFormatError(false);
-                }, 5000);
-            }
+            e.preventDefault();
+            console.log("description", description);
+            //logic for add product
+            dispatch(createManugfacturingOrderAsync({ customer: user, product: product, worker_name: workerName, worker_contact: workerContact, start_date: startDate, end_date: endDate, weight: weight, decription: description })).then((result) => {
+                if (createManugfacturingOrderAsync.fulfilled.match(result)) {
+                    dispatch(getManufacturingOrderListAsync());
+                    setUser("");
+                    setProduct("");
+                    setWorkerName("");
+                    setWorkerContact("");
+                    setStartDate("");
+                    setEndDate("");
+                    setWeight("");
+                    setDescription("");
 
+                    setSuccess(true);
+                    setTimeout(() => {
+                        setSuccess(false);
+                    }, 3000)
+                }
+            })
         }
         else {
             e.preventDefault();
@@ -140,20 +130,6 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 <strong className="font-bold">Error! Please fill all required fields</strong>
                 <button
                     onClick={hideError}
-                    className="relative top-0.5 bottom-0 left-1"
-                >
-                    <span className="text-red-500 text-2xl">×</span>
-                </button>
-            </div>}
-            {formatError && <div
-                // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
-                className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
-                role="alert"
-                style={{ zIndex: 1000 }}
-            >
-                <strong className="font-bold">Error! Date format should be YYYY-MM-DD</strong>
-                <button
-                    onClick={hideFormatError}
                     className="relative top-0.5 bottom-0 left-1"
                 >
                     <span className="text-red-500 text-2xl">×</span>
@@ -299,26 +275,34 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                     placeholder="Worker contact"
                                 />
                             </div>
-                            <div className={`mb-4 md:w-21.375 ${startDate === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <input
-                                    type="text"
-                                    className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                    value={startDate}
-                                    onChange={(e) => setStartDate(e.target.value)}
-                                    placeholder="Start date (YYYY-MM-DD)"
-                                />
+                            <div className={`mb-4 flex justify-center items-center ${startDate === '' && error ? 'border-2 border-red-500' : ''}`}>
+                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
+                                    Start date
+                                    <input
+                                        type="date"
+                                        id="startDate"
+                                        className="md:ml-10 text-[#595858] font-semibold cursor-pointer"
+                                        onChange={(e) => {
+                                            setStartDate(e.target.value)
+                                        }}
+                                    />
+                                </label>
                             </div>
 
 
-
-                            <div className={`mb-4 md:w-21.375 ${endDate === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <input
-                                    type="text"
-                                    className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                    value={endDate}
-                                    onChange={(e) => setEndDate(e.target.value)}
-                                    placeholder="End date (YYYY-MM-DD)"
-                                />
+                            <div className={`mb-4 flex justify-center items-center ${endDate === '' && error ? 'border-2 border-red-500' : ''}`}>
+                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
+                                    End date
+                                    <input
+                                        type="date"
+                                        id="endDate"
+                                        className="md:ml-10 text-[#595858] font-semibold cursor-pointer"
+                                        min={startDate}
+                                        onChange={(e) => {
+                                            setEndDate(e.target.value)
+                                        }}
+                                    />
+                                </label>
                             </div>
                             <div className={`mb-4 md:w-21.375 ${weight === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input

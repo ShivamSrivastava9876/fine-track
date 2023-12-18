@@ -86,7 +86,7 @@ const ProductTypeButtons = ({
         </Link>
 
         {/* Right-hand side Search Box */}
-        <form onSubmit={(e) => handleProductTypeSearch(e)} className="flex items-center w-80 border-2 border-solid border-gray-300 m-2 rounded-full px-4 py-2">
+        <form onSubmit={(e) => handleProductTypeSearch(e)} className="flex items-center md:w-80 border-2 border-solid border-gray-300 m-2 rounded-full px-4 py-2">
           <input
             type="search"
             placeholder="Search"

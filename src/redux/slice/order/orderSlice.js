@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { approveOrder, declineOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getOrder, searchOrder } from "./orderApi";
+import { approveOrder, declineOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getLiveManufacturingOrder, getOrder, searchOrder } from "./orderApi";
 
 const initialState = {
     status: "idle",
@@ -9,6 +9,7 @@ const initialState = {
     deliveredOrderData: [],
     cancelledOrderData: [],
     declinedOrderData: [],
+    liveManufacturingOrderData: [],
     dashboardDetails: null,
     error: null
 }
@@ -143,11 +144,11 @@ export const getDashboardDetailsAsync = createAsyncThunk(
     }
 );
 
-export const getDailyReportDataAsync = createAsyncThunk(
-    "order/dashboardDetails",
+export const getLiveManufacturingOrderAsync = createAsyncThunk(
+    "order/liveManufacturingOrder",
     async () => {
         try {
-            const response = await getDailyReportData();
+            const response = await getLiveManufacturingOrder();
             return response.data;
         }
         catch (error) {
@@ -282,6 +283,19 @@ const orderSlice = createSlice({
                 state.status = 'idle'
                 state.error = action.payload
             })
+            .addCase(getLiveManufacturingOrderAsync.pending, (state) => {
+                state.status = "loading"
+            })
+            .addCase(getLiveManufacturingOrderAsync.fulfilled, (state, action) => {
+                if (action.payload) {
+                    state.liveManufacturingOrderData.splice(0, 1, action.payload);
+                    state.liveManufacturingOrderData = state.liveManufacturingOrderData[0].data;
+                }
+            })
+            .addCase(getLiveManufacturingOrderAsync.rejected, (state, action) => {
+                state.status = 'idle'
+                state.error = action.payload
+            })
     }
 })
 
@@ -292,4 +306,5 @@ export const getDeliveredOrderData = (state) => state.order.deliveredOrderData;
 export const getCancelledOrderData = (state) => state.order.cancelledOrderData;
 export const getDeclinedOrderData = (state) => state.order.declinedOrderData;
 export const getDashboardData = (state) => state.order.dashboardDetails;
+export const getLiveManufacturingOrderData = (state) => state.order.liveManufacturingOrderData;
 export default orderSlice.reducer;

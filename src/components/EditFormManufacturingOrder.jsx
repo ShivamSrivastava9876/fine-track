@@ -117,7 +117,7 @@ const EditFormManufacturingOrder = ({ handleProductClick, handleUserClick, handl
                                 </div>
                             )}
                         </div>
-                        
+
                         <div className="mb-4 ">
                             <input
                                 type="text"
@@ -138,7 +138,7 @@ const EditFormManufacturingOrder = ({ handleProductClick, handleUserClick, handl
                                 placeholder="Worker contact"
                             />
                         </div>
-                        <div className="mb-4 ">
+                        {/* <div className="mb-4 ">
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -147,16 +147,31 @@ const EditFormManufacturingOrder = ({ handleProductClick, handleUserClick, handl
                                 onChange={(e) => setStartDate(e.target.value)}
                                 placeholder="Start date"
                             />
+                        </div> */}
+                        <div className="mb-4 flex justify-center items-center">
+                            <label htmlFor="startDate" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
+                                Start date
+                                <input
+                                    type="date"
+                                    id="startDate"
+                                    value={startDate}
+                                    className="md:ml-10 text-[#595858] font-semibold cursor-pointer"
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                />
+                            </label>
                         </div>
-                        <div className="mb-4 ">
-                            <input
-                                type="text"
-                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                defaultValue={row.end_date}
-                                value={endDate}
-                                onChange={(e) => setEndDate(e.target.value)}
-                                placeholder="End date"
-                            />
+                        <div className="mb-4 flex justify-center items-center">
+                            <label htmlFor="endDate" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
+                                End date
+                                <input
+                                    type="date"
+                                    id="endDate"
+                                    value={endDate}
+                                    min={startDate}
+                                    className="md:ml-10 ml-3 text-[#595858] font-semibold cursor-pointer"
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                />
+                            </label>
                         </div>
                         <div className="mb-4 ">
                             <input

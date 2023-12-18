@@ -68,7 +68,7 @@ const CategoryComponent = ({
         </div>
 
         {/* Right-hand side Search Box */}
-        <form onSubmit={(e) => handleCategorySearch(e)} className="flex items-center m-2 w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+        <form onSubmit={(e) => handleCategorySearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
           <input
             type="search"
             placeholder="Search"

@@ -91,7 +91,7 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
       </div>}
       <div id="addCategory" className="flex justify-center m-8 relative">
         <button
-          className="absolute top-0 right-0 p-0.5 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
+          className="absolute top-2 right-2 md:right-4 p-1 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
           onClick={handleClose}
         >
           <svg
@@ -123,7 +123,7 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
             <div className={`mb-4 md:w-21.375 ${newCategory === '' && error ? 'border-2 border-red-500' : ''}`}>
               <input
                 type="text"
-                className="w-full py-2 px-8 h-3.3125 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                className="w-full py-2 px-8 text-sm md:text-base h-3.3125 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
                 placeholder="New category"

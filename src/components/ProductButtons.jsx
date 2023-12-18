@@ -86,7 +86,7 @@ const ProductComponent = ({
         </Link>
 
         {/* Right-hand side Search Box */}
-        <form onSubmit={(e) => handleProductSearch(e)} className="flex items-center w-80 m-2 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+        <form onSubmit={(e) => handleProductSearch(e)} className="flex items-center md:w-80 m-2 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
           <input
             type="search"
             placeholder="Search"
