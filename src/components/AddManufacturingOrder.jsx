@@ -310,7 +310,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                     className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                     value={weight}
                                     onChange={(e) => setWeight(e.target.value)}
-                                    placeholder="Set weight"
+                                    placeholder="Issue weight"
                                 />
                             </div>
                             <div className={`mb-4 md:w-21.375 ${description === '' && error ? 'border-2 border-red-500' : ''}`}>

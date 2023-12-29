@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/categorySlice";
 import { getProductTypeAsync, getProductTypeList, getSelectedProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
 import { FiImage } from 'react-icons/fi';
+import AddIcon from "../../public/assets/Icons/add.svg";
+import Image from "next/image";
 
-const EditFormProduct = ({ files, setFiles, productImage, row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
+const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, productImage, row, handleCategoryClick, handleUpdateProduct, openProductType, description, setDescription, productType, setProductType, category, setCategory, quantity, setQuantity, price, setPrice, puritySpc, setPuritySpc, grossWeight, setGrossWeight, image, setImage, stoneWeight, setStoneWeight, subModel, setSubModel, model, setModel, productName, setProductName, productId, setProductId, huId, setHuId, openCategory, handleCategory, handleProductType, handleProductTypeClick, isOpen, handleCancel }) => {
     const dispatch = useDispatch();
 
     const modalClasses = isOpen ? 'block' : 'hidden';
@@ -30,15 +32,96 @@ const EditFormProduct = ({ files, setFiles, productImage, row, handleCategoryCli
         setImage(selectedFile);
     }
 
+    //Handling add weight
+    const [inputTextWeight, setInputTextWeight] = useState('');
+    const [weightArray, setWeightArray] = useState(row.grossWeight?.split(','));
+    const addInputWeight = (e) => {
+        e.preventDefault();
+        if (inputTextWeight.trim() !== '') {
+            setWeightArray([...weightArray, inputTextWeight]);
+            setGrossWeight([...weightArray, inputTextWeight]);
+            console.log("gross", grossWeight)
+            setInputTextWeight('');
+        }
+    };
+    const deleteInputWeight = (e, index) => {
+        e.preventDefault();
+        const updatedList = [...weightArray];
+        updatedList.splice(index, 1);
+        setWeightArray(updatedList);
+        setGrossWeight(updatedList);
+    };
+    //**
+    //Handling add stone weight
+    const [inputTextStoneWeight, setInputTextStoneWeight] = useState('');
+    const [stoneWeightArray, setStoneWeightArray] = useState(row.stoneWeight?.split(','));
+    const addInputStoneWeight = (e) => {
+        e.preventDefault();
+        if (inputTextStoneWeight.trim() !== '') {
+            setStoneWeightArray([...stoneWeightArray, inputTextStoneWeight]);
+            setStoneWeight([...stoneWeightArray, inputTextStoneWeight]);
+            setInputTextStoneWeight('');
+        }
+    };
+    const deleteInputStoneWeight = (e, index) => {
+        e.preventDefault();
+        const updatedList = [...stoneWeightArray];
+        updatedList.splice(index, 1);
+        setStoneWeightArray(updatedList);
+        setStoneWeight(updatedList);
+    };
+    //**
+    //Input box size handling
+    const [inputTextSize, setInputTextSize] = useState('');
+    const [sizeArray, setSizeArray] = useState(row.size?.split(','));
+    const addInputSize = (e) => {
+        e.preventDefault();
+        if (inputTextSize.trim() !== '') {
+            setSizeArray([...sizeArray, inputTextSize]);
+            setSize([...sizeArray, inputTextSize]);
+            setInputTextSize('');
+        }
+    };
+
+    const deleteInputSize = (e, index) => {
+        e.preventDefault();
+        const updatedList = [...sizeArray];
+        updatedList.splice(index, 1);
+        setSizeArray(updatedList);
+        setSize(updatedList);
+    };
+    // **
+    //Input box length handling
+    const [inputTextLength, setInputTextLength] = useState('');
+    const [lengthArray, setLengthArray] = useState(row.length?.split(','));
+
+    const addInputLength = (e) => {
+        e.preventDefault();
+        if (inputTextLength.trim() !== '') {
+            setLengthArray([...lengthArray, inputTextLength]);
+            setLength([...lengthArray, inputTextLength]);
+            setInputTextLength('');
+        }
+    };
+
+    const deleteInputLength = (e, index) => {
+        e.preventDefault();
+        const updatedList = [...lengthArray];
+        updatedList.splice(index, 1);
+        setLengthArray(updatedList);
+        setLength(updatedList);
+    };
+    // **
+
     return (
         <div>
             <div className={`fixed inset-0 z-40 bg-black opacity-10 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
-            <div className="flex justify-center items-center min-h-screen fixed inset-10 z-50">
+            <div className="flex justify-center items-center overflow-scroll min-h-screen fixed inset-3 z-50">
 
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType, row.image);
+                        handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.size, row.length, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType, row.image);
                     }}
                     className="p-8 rounded shadow-md flex flex-col justify-center w-auto h-28rem bg-white border border-blue-500"
                 >
@@ -159,36 +242,119 @@ const EditFormProduct = ({ files, setFiles, productImage, row, handleCategoryCli
                                 placeholder="Sub model"
                             />
                         </div>
+
                         <div className="mb-4 ">
-                            <input
+                            {/* <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                defaultValue={row.product}
-                                value={productName}
-                                onChange={(e) => setProductName(e.target.value)}
-                                placeholder="Product"
+                                defaultValue={row.grossWeight}
+                                value={grossWeight}
+                                onChange={(e) => setGrossWeight(e.target.value)}
+                                placeholder="Gross weight"
+                            /> */}
+                            <input
+                                type="text"
+                                value={inputTextWeight}
+                                onChange={(e) => setInputTextWeight(e.target.value)}
+                                placeholder="Weight"
+                                className={`py-2 px-8 border rounded-tl-xl w-4/5`}
                             />
+                            <button onClick={(e) => addInputWeight(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
+                                <Image src={AddIcon} alt="dashboard-icon" />
+                            </button>
+                            <div className="top-full left-0 right-0 md:w-21.375 overflow-x-auto p-2 bg-gray-100 rounded">
+                                {weightArray?.map((text, index) => (
+                                    <span key={index} className="inline-block bg-gray-200 p-2 rounded-md m-1">
+                                        {text}
+                                        <button
+                                            className="ml-2 text-red-500"
+                                            onClick={(e) => deleteInputWeight(e, index)}
+                                        >
+                                            &#10006;
+                                        </button>
+                                    </span>
+                                ))}
+                            </div>
                         </div>
-                        <div className="mb-4 ">
+
+                        {row.productType.toLowerCase() === 'chain' && <div className="mb-4 ">
                             <input
                                 type="text"
-                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                defaultValue={row.stoneWeight}
-                                value={stoneWeight}
-                                onChange={(e) => setStoneWeight(e.target.value)}
+                                value={inputTextStoneWeight}
+                                onChange={(e) => setInputTextStoneWeight(e.target.value)}
                                 placeholder="Stone weight"
+                                className={`py-2 px-8 border rounded-tl-xl w-4/5`}
                             />
-                        </div>
-                        {/* <div className="mb-4">
+                            <button onClick={(e) => addInputStoneWeight(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
+                                <Image src={AddIcon} alt="dashboard-icon" />
+                            </button>
+                            <div className="top-full left-0 right-0 md:w-21.375 overflow-x-auto p-2 bg-gray-100 rounded">
+                                {stoneWeightArray?.map((text, index) => (
+                                    <span key={index} className="inline-block bg-gray-200 p-2 rounded-md m-1">
+                                        {text}
+                                        <button
+                                            className="ml-2 text-red-500"
+                                            onClick={(e) => deleteInputStoneWeight(e, index)}
+                                        >
+                                            &#10006;
+                                        </button>
+                                    </span>
+                                ))}
+                            </div>
+                        </div>}
+                        
+                        {(row.productType.toLowerCase() === 'necklace' || row.productType.toLowerCase() === 'ring' || row.productType.toLowerCase() === 'bangle') && <div className="mb-4 ">
                             <input
-                                type="file"
-                                multiple
-                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                // value={image}
-                                onChange={handleFileChange}
-                                placeholder="Image"
+                                type="text"
+                                value={inputTextSize}
+                                onChange={(e) => setInputTextSize(e.target.value)}
+                                placeholder="Size"
+                                className={`py-2 px-8 border rounded-tl-xl w-4/5`}
                             />
-                        </div> */}
+                            <button onClick={(e) => addInputSize(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
+                                <Image src={AddIcon} alt="dashboard-icon" />
+                            </button>
+                            <div className="top-full left-0 right-0 md:w-21.375 overflow-x-auto p-2 bg-gray-100 rounded">
+                                {sizeArray?.map((text, index) => (
+                                    <span key={index} className="inline-block bg-gray-200 p-2 rounded-md m-1">
+                                        {text}
+                                        <button
+                                            className="ml-2 text-red-500"
+                                            onClick={(e) => deleteInputSize(e, index)}
+                                        >
+                                            &#10006;
+                                        </button>
+                                    </span>
+                                ))}
+                            </div>
+                        </div>}
+                        
+                        {row.productType.toLowerCase() === 'bracelet' && <div className="mb-4 ">
+                            <input
+                                type="text"
+                                value={inputTextLength}
+                                onChange={(e) => setInputTextLength(e.target.value)}
+                                placeholder="Length"
+                                className={`py-2 px-8 border rounded-tl-xl w-4/5`}
+                            />
+                            <button onClick={(e) => addInputLength(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
+                                <Image src={AddIcon} alt="dashboard-icon" />
+                            </button>
+                            <div className="top-full left-0 right-0 md:w-21.375 overflow-x-auto p-2 bg-gray-100 rounded">
+                                {lengthArray?.map((text, index) => (
+                                    <span key={index} className="inline-block bg-gray-200 p-2 rounded-md m-1">
+                                        {text}
+                                        <button
+                                            className="ml-2 text-red-500"
+                                            onClick={(e) => deleteInputLength(e, index)}
+                                        >
+                                            &#10006;
+                                        </button>
+                                    </span>
+                                ))}
+                            </div>
+                        </div>}
+                        
                         <div className="mb-4 flex justify-center items-center">
                             <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
                                 <FiImage className="mr-2" /> {files !== '' ? `${files} images` : 'Click here to update images'}
@@ -202,16 +368,7 @@ const EditFormProduct = ({ files, setFiles, productImage, row, handleCategoryCli
                             </label>
                         </div>
 
-                        <div className="mb-4 ">
-                            <input
-                                type="text"
-                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                defaultValue={row.grossWeight}
-                                value={grossWeight}
-                                onChange={(e) => setGrossWeight(e.target.value)}
-                                placeholder="Gross weight"
-                            />
-                        </div>
+
                         <div className="mb-4 ">
                             <input
                                 type="text"

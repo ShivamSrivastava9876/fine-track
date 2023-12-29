@@ -17,7 +17,8 @@ import DeleteOption from "./DeleteOption";
 const columns = [
   { id: "HuId", label: "HU ID", minWidth: 50 },
   { id: "productId", label: "Product ID", minWidth: 100 },
-  { id: "product", label: "Product", minWidth: 150 },
+  { id: "category", label: "Category", minWidth: 100 },
+  { id: "productType", label: "Product type", minWidth: 100 },
   { id: "quantity", label: "Quantity", minWidth: 50 },
   { id: "stoneWeight", label: "Stone weight(gm)", minWidth: 100 },
   { id: "grossWeight", label: "Gross weight(gm)", minWidth: 100 },
@@ -29,7 +30,6 @@ const columns = [
 const createData = (
   HuId,
   productId,
-  product,
   quantity,
   stoneWeight,
   grossWeight,
@@ -46,7 +46,6 @@ const createData = (
   return {
     HuId,
     productId,
-    product,
     quantity,
     stoneWeight,
     grossWeight,
@@ -70,15 +69,17 @@ export default function ProductTables() {
   const [productName, setProductName] = React.useState("");
   const [model, setModel] = React.useState("");
   const [subModel, setSubModel] = React.useState("");
-  const [stoneWeight, setStoneWeight] = React.useState("");
+  const [stoneWeight, setStoneWeight] = React.useState([]);
   const [image, setImage] = React.useState(null);
-  const [grossWeight, setGrossWeight] = React.useState("");
+  const [grossWeight, setGrossWeight] = React.useState([]);
   const [puritySpc, setPuritySpc] = React.useState("");
   const [price, setPrice] = React.useState("");
   const [quantity, setQuantity] = React.useState("");
   const [category, setCategory] = React.useState("");
   const [productType, setProductType] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [size, setSize] = React.useState([]);
+  const [length, setLength] = React.useState([]);
 
   const [files, setFiles] = React.useState("");
 
@@ -94,16 +95,19 @@ export default function ProductTables() {
   const [rows, setRows] = React.useState([]);
   const productList = useSelector(getProductList);
 
-  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType, rowImage) => {
+  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowSize, rowLength, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType, rowImage) => {
     e.preventDefault();
+    console.log("test weight", grossWeight)
     const updatedImage = image !== null ? image : rowImage;
     const updatedHuId = huId !== "" ? huId : rowHuId;
     const updatedProductId = productId !== "" ? productId : rowProductId;
     const updatedModel = model !== "" ? model : rowModel;
     const updatedSubModel = subModel !== "" ? subModel : rowSubModel;
     const updatedProduct = productName !== "" ? productName : rowProduct;
-    const updatedStoneWeight = stoneWeight !== "" ? stoneWeight : rowStoneWeight;
-    const updatedGrossWeight = grossWeight !== "" ? grossWeight : rowGrossWeight;
+    const updatedStoneWeight = stoneWeight.length !== 0 ? stoneWeight : rowStoneWeight;
+    const updatedGrossWeight = grossWeight.length !== 0 ? grossWeight : rowGrossWeight;
+    const updatedSize = size.length !== 0 ? size : rowSize;
+    const updatedLength = length.length !== 0 ? length : rowLength;
     const updatedPuritySpc = puritySpc !== "" ? puritySpc : rowPuritySpc;
     const updatedQuantity = quantity !== "" ? quantity : rowQuantity;
     const updatedPrice = price !== "" ? price : rowPrice;
@@ -111,7 +115,7 @@ export default function ProductTables() {
     const updatedCategory = category !== "" ? category : rowCategory;
     const updatedProductType = productType !== "" ? productType : rowProductType;
 
-    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
+    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
       if (updateProductAsync.fulfilled.match(result)) {
         dispatch(getProductAsync());
         setHuId("");
@@ -164,7 +168,7 @@ export default function ProductTables() {
     setOpenCategory(!openCategory);
   };
 
-  const handleEdit = (rowImage, rowId, rowCategory, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription) => {
+  const handleEdit = (rowImage, rowId, rowCategory, rowProductType, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription) => {
     setEditedRow(rowId);
     setHuId(rowHuId);
     setProductId(rowProductId);
@@ -239,7 +243,6 @@ export default function ProductTables() {
         const newRow = createData(
           data.hu_id || "",
           data.product_id || "",
-          data.product_name || "",
           data.quantity || "",
           data.stone_wt || "",
           data.gross_wt || "",
@@ -328,14 +331,14 @@ export default function ProductTables() {
 
                                 {editedRow === row.id ? (
                                   <div className="space-x-2">
-                                    <EditFormProduct files={files} setFiles={setFiles} productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
+                                    <EditFormProduct length={length} setLength={setLength} size={size} setSize={setSize} files={files} setFiles={setFiles} productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
                                   </div>
                                 ) : (
                                   <div className="space-x-7 flex">
                                     {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
                                     Edit
                                   </Button> */}
-                                    <MdEdit onClick={() => handleEdit(row.productImage, row.id, row.category, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
+                                    <MdEdit onClick={() => handleEdit(row.productImage, row.id, row.category, row.productType, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
                                     {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
                                     Delete
                                   </Button> */}
