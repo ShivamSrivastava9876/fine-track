@@ -8,7 +8,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { MdEdit, MdDelete, MdNote } from 'react-icons/md';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProductAsync, getProductAsync, getProductList, updateProductAsync } from "@/redux/slice/product/productSlice";
 import { getManufacturingOrderListAsync, getManufacturingOrderData } from "@/redux/slice/manufacturing/manufacturingSlice"
@@ -21,7 +21,7 @@ const columns = [
   { id: "customer", label: "Customer", minWidth: 100 },
   { id: "product", label: "Product", minWidth: 150 },
   { id: "workerName", label: "Worker name", minWidth: 50 },
-  { id: "workerContact", label: "Worker Contact", minWidth: 100 },
+  { id: "workerContact", label: "Worker contact", minWidth: 100 },
   { id: "startDate", label: "Start date", minWidth: 100 },
   { id: "endDate", label: "End date", minWidth: 100 },
   { id: "weight", label: "Weight", minWidth: 100 },
@@ -37,7 +37,13 @@ const createData = (
   startDate,
   endDate,
   weight,
-  description
+  description,
+  billNo,
+  status,
+  ornamentName,
+  wastageWeight,
+  returnWeight,
+  balance
 ) => {
   return {
     id,
@@ -48,7 +54,13 @@ const createData = (
     startDate,
     endDate,
     weight,
-    description
+    description,
+    billNo,
+    status,
+    ornamentName,
+    wastageWeight,
+    returnWeight,
+    balance
   };
 };
 
@@ -64,6 +76,12 @@ export default function ManufacturingOrderTable() {
   const [endDate, setEndDate] = React.useState("");
   const [weight, setWeight] = React.useState("");
   const [description, setDescription] = React.useState("");
+  const [billNo, setBillNo] = React.useState("");
+  const [ornamentName, setOrnamentName] = React.useState("");
+  const [wastageWeight, setWastageWeight] = React.useState("");
+  const [returnWeight, setReturnWeight] = React.useState("");
+  const [balance, setBalance] = React.useState("");
+  const [orderStatus, setOrderStatus] = React.useState("");
 
   const [openCategory, setOpenCategory] = React.useState(false);
   const [openProductType, setOpenProductType] = React.useState(false);
@@ -88,25 +106,35 @@ export default function ManufacturingOrderTable() {
     const updatedWeight = weight !== "" ? weight : rowWeight;
     const updatedDescription = description !== "" ? description : rowDescription;
 
-    dispatch(updateManugfacturingOrderAsync({ id: editedRow, customer: updatedCustomer, product: updatedProduct, worker_name: updatedWorkerName, worker_contact: updatedWorkerContact, start_date: updatedStartDate, end_date: updatedEndDate, weight: updatedWeight, decription: updatedDescription })).then((result) => {
-      if (updateManugfacturingOrderAsync.fulfilled.match(result)) {
-        dispatch(getManufacturingOrderListAsync());
-        setEditedRow("");
-        setCustomer("");
-        setProduct("");
-        setWorkerName("");
-        setWorkerContact("");
-        setStartDate("");
-        setEndDate("");
-        setWeight("");
-        setDescription("");
+    if (ornamentName !== "" && wastageWeight !== "" && returnWeight !== "" && balance !== "") {
+      dispatch(updateManugfacturingOrderAsync({ id: editedRow, customer: updatedCustomer, product: updatedProduct, worker_name: updatedWorkerName, worker_contact: updatedWorkerContact, start_date: updatedStartDate, end_date: updatedEndDate, weight: updatedWeight, decription: updatedDescription, ornament_name: ornamentName, wastage_weight: wastageWeight, return_weight: returnWeight, balance: balance, status: orderStatus })).then((result) => {
+        if (updateManugfacturingOrderAsync.fulfilled.match(result)) {
+          dispatch(getManufacturingOrderListAsync());
+          setEditedRow("");
+          setCustomer("");
+          setProduct("");
+          setWorkerName("");
+          setWorkerContact("");
+          setStartDate("");
+          setEndDate("");
+          setWeight("");
+          setDescription("");
 
-        setUpdateSuccess(true);
-        setTimeout(() => {
-          setUpdateSuccess(false);
-        }, 3000)
-      }
-    })
+          setUpdateSuccess(true);
+          setTimeout(() => {
+            setUpdateSuccess(false);
+          }, 3000)
+        }
+      })
+    }
+    else {
+      e.preventDefault();
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 3000);
+    }
+
   }
 
   const handleDelete = (selectedRowId) => {
@@ -131,11 +159,11 @@ export default function ManufacturingOrderTable() {
   };
 
   const handleUserClick = (option) => {
-    setCustomer(option);
+    setOrderStatus(option);
     setOpenCategory(!openCategory);
   };
 
-  const handleEdit = (rowId, rowCustomer, rowProduct, rowWorkerName, rowWorkerContact, rowStartDate, rowEndDate, rowWeight, rowDescription) => {
+  const handleEdit = (rowId, rowCustomer, rowProduct, rowWorkerName, rowWorkerContact, rowStartDate, rowEndDate, rowWeight, rowDescription, rowBillNo, rowStatus) => {
     setEditedRow(rowId);
     setCustomer(rowCustomer);
     setProduct(rowProduct);
@@ -145,6 +173,8 @@ export default function ManufacturingOrderTable() {
     setEndDate(rowEndDate);
     setWeight(rowWeight);
     setDescription(rowDescription);
+    setBillNo(rowBillNo);
+    setOrderStatus(rowStatus);
   }
 
   const handleProductType = () => {
@@ -166,6 +196,11 @@ export default function ManufacturingOrderTable() {
     setEndDate("");
     setWeight("");
     setDescription("");
+    setOrnamentName("");
+    setWastageWeight("");
+    setReturnWeight("");
+    setBalance("");
+    setOrderStatus("");
   }
 
   const handleChangePage = (event, newPage) => {
@@ -205,7 +240,13 @@ export default function ManufacturingOrderTable() {
           data.start_date || "",
           data.end_date || "",
           data.weight || "",
-          data.decription || ""
+          data.decription || "",
+          data.bill_no || "",
+          data.status || "",
+          data.ornament_name || "",
+          data.wastage_weight || "",
+          data.return_weight || "",
+          data.balance || "",
         );
         srNo = srNo + 1;
         return newRow;
@@ -231,21 +272,21 @@ export default function ManufacturingOrderTable() {
           <span className="text-blue-500 text-2xl">×</span>
         </button>
       </div>}
-      {/* {error && <div
+      {error && <div
         // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
         className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
         role="alert"
         style={{ zIndex: 1000 }}
       >
         <strong className="font-bold">Error!</strong>
-        <span className="ml-2">Upload the image</span>
+        <span className="ml-2">Please fill all the required fields</span>
         <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"
         >
           <span className="text-red-500 text-2xl">×</span>
         </button>
-      </div>} */}
+      </div>}
       <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -282,13 +323,24 @@ export default function ManufacturingOrderTable() {
 
                                 {editedRow === row.id ? (
                                   <div className="space-x-2">
-                                    <EditFormManufacturingOrder row={row} weight={weight} setWeight={setWeight} endDate={endDate} setEndDate={setEndDate} startDate={startDate} setStartDate={setStartDate} workerContact={workerContact} setWorkerContact={setWorkerContact} workerName={workerName} setWorkerName={setWorkerName} product={product} setProduct={setProduct} customer={customer} setCustomer={setCustomer} id={id} setId={setId} description={description} setDescription={setDescription} handleUserClick={handleUserClick} handleUpdateManufacturingOrder={handleUpdateManufacturingOrder} openCategory={openCategory} openProductType={openProductType} handleUser={handleUser} handleProductType={handleProductType} handleProductClick={handleProductClick} isOpen={true} handleCancel={handleCancel} />
+                                    <EditFormManufacturingOrder row={row} orderStatus={orderStatus} setOrderStatus={setOrderStatus} error={error} setError={setError} balance={balance} setBalance={setBalance} returnWeight={returnWeight} setReturnWeight={setReturnWeight} wastageWeight={wastageWeight} setWastageWeight={setWastageWeight} ornamentName={ornamentName} setOrnamentName={setOrnamentName} weight={weight} setWeight={setWeight} endDate={endDate} setEndDate={setEndDate} startDate={startDate} setStartDate={setStartDate} workerContact={workerContact} setWorkerContact={setWorkerContact} workerName={workerName} setWorkerName={setWorkerName} product={product} setProduct={setProduct} customer={customer} setCustomer={setCustomer} id={id} setId={setId} description={description} setDescription={setDescription} handleUserClick={handleUserClick} handleUpdateManufacturingOrder={handleUpdateManufacturingOrder} openCategory={openCategory} openProductType={openProductType} handleUser={handleUser} handleProductType={handleProductType} handleProductClick={handleProductClick} isOpen={true} handleCancel={handleCancel} />
                                   </div>
                                 ) : (
                                   <div className="space-x-7 flex">
 
-                                    <MdEdit onClick={() => handleEdit(row.id, row.customer, row.product, row.workerName, row.workerContact, row.startDate, row.endDate, row.weight, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
-
+                                    {row.status === "Pending" ? (
+                                      <MdEdit
+                                        onClick={() => handleEdit(row.id, row.customer, row.product, row.workerName, row.workerContact, row.startDate, row.endDate, row.weight, row.description, row.billNo, row.status)}
+                                        size={24}
+                                        style={{ cursor: 'pointer', color: 'black' }}
+                                      />
+                                    ) : (
+                                      <MdNote
+                                        onClick={() => handleEdit(row.id, row.customer, row.product, row.workerName, row.workerContact, row.startDate, row.endDate, row.weight, row.description, row.billNo, row.status)}
+                                        size={24}
+                                        style={{ cursor: 'pointer', color: 'black' }}
+                                      />
+                                    )}
                                     <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
                                     {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "order" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
 

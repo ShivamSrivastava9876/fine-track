@@ -410,7 +410,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 </div>
 
                 {openCategory && (
-                  <div class="origin-top-right absolute z-20 right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div class="origin-top-right absolute z-20 right-16 mt-2 w-32 max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                     {categoryList.map((category) => (
                       <div key={category.id} class="py-1">
@@ -447,7 +447,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 </div>
 
                 {openProductType && (
-                  <div class="origin-top-right absolute z-10 right-16 mt-2 w-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div class="origin-top-right absolute z-10 right-16 mt-2 w-auto max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                     {productTypeList.map((productType) => (
                       <div key={productType.id} class="py-1">
