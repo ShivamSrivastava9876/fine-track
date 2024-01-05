@@ -20,11 +20,11 @@ const columns = [
   { id: "id", label: "ID", minWidth: 50 },
   { id: "customer", label: "Customer", minWidth: 100 },
   { id: "product", label: "Product", minWidth: 150 },
-  { id: "workerName", label: "Worker name", minWidth: 50 },
+  { id: "workerName", label: "Worker name", minWidth: 100 },
   { id: "workerContact", label: "Worker contact", minWidth: 100 },
-  { id: "startDate", label: "Start date", minWidth: 100 },
-  { id: "endDate", label: "End date", minWidth: 100 },
-  { id: "weight", label: "Weight", minWidth: 100 },
+  { id: "startDate", label: "Start date", minWidth: 120 },
+  { id: "endDate", label: "End date", minWidth: 120 },
+  { id: "weight", label: "Issue weight (gm)", minWidth: 100 },
   { id: "actions", label: "", minWidth: 100 },
 ];
 
@@ -43,7 +43,8 @@ const createData = (
   ornamentName,
   wastageWeight,
   returnWeight,
-  balance
+  balance,
+  productWeight
 ) => {
   return {
     id,
@@ -60,7 +61,8 @@ const createData = (
     ornamentName,
     wastageWeight,
     returnWeight,
-    balance
+    balance,
+    productWeight
   };
 };
 
@@ -75,6 +77,7 @@ export default function ManufacturingOrderTable() {
   const [startDate, setStartDate] = React.useState("");
   const [endDate, setEndDate] = React.useState("");
   const [weight, setWeight] = React.useState("");
+  const [productWeight, setProductWeight] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [billNo, setBillNo] = React.useState("");
   const [ornamentName, setOrnamentName] = React.useState("");
@@ -106,8 +109,8 @@ export default function ManufacturingOrderTable() {
     const updatedWeight = weight !== "" ? weight : rowWeight;
     const updatedDescription = description !== "" ? description : rowDescription;
 
-    if (ornamentName !== "" && wastageWeight !== "" && returnWeight !== "" && balance !== "") {
-      dispatch(updateManugfacturingOrderAsync({ id: editedRow, customer: updatedCustomer, product: updatedProduct, worker_name: updatedWorkerName, worker_contact: updatedWorkerContact, start_date: updatedStartDate, end_date: updatedEndDate, weight: updatedWeight, decription: updatedDescription, ornament_name: ornamentName, wastage_weight: wastageWeight, return_weight: returnWeight, balance: balance, status: orderStatus })).then((result) => {
+    if ((productWeight !== "" && wastageWeight !== "" && returnWeight !== "" && balance !== "" && orderStatus === "completed") || orderStatus === "cancelled") {
+      dispatch(updateManugfacturingOrderAsync({ id: editedRow, customer: updatedCustomer, product: updatedProduct, worker_name: updatedWorkerName, worker_contact: updatedWorkerContact, start_date: updatedStartDate, end_date: updatedEndDate, weight: updatedWeight, decription: updatedDescription, ornament_name: ornamentName, product_weight: productWeight, wastage_weight: wastageWeight, return_weight: returnWeight, balance: balance, status: orderStatus })).then((result) => {
         if (updateManugfacturingOrderAsync.fulfilled.match(result)) {
           dispatch(getManufacturingOrderListAsync());
           setEditedRow("");
@@ -119,6 +122,12 @@ export default function ManufacturingOrderTable() {
           setEndDate("");
           setWeight("");
           setDescription("");
+          setOrnamentName("");
+          setProductWeight("");
+          setWastageWeight("");
+          setReturnWeight("");
+          setBalance("");
+          setOrderStatus("");
 
           setUpdateSuccess(true);
           setTimeout(() => {
@@ -201,6 +210,7 @@ export default function ManufacturingOrderTable() {
     setReturnWeight("");
     setBalance("");
     setOrderStatus("");
+    setProductWeight("");
   }
 
   const handleChangePage = (event, newPage) => {
@@ -247,6 +257,7 @@ export default function ManufacturingOrderTable() {
           data.wastage_weight || "",
           data.return_weight || "",
           data.balance || "",
+          data.product_weight || ""
         );
         srNo = srNo + 1;
         return newRow;
@@ -278,8 +289,7 @@ export default function ManufacturingOrderTable() {
         role="alert"
         style={{ zIndex: 1000 }}
       >
-        <strong className="font-bold">Error!</strong>
-        <span className="ml-2">Please fill all the required fields</span>
+        <strong className="font-bold">Error! Please fill all the required fields</strong>
         <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"
@@ -323,7 +333,7 @@ export default function ManufacturingOrderTable() {
 
                                 {editedRow === row.id ? (
                                   <div className="space-x-2">
-                                    <EditFormManufacturingOrder row={row} orderStatus={orderStatus} setOrderStatus={setOrderStatus} error={error} setError={setError} balance={balance} setBalance={setBalance} returnWeight={returnWeight} setReturnWeight={setReturnWeight} wastageWeight={wastageWeight} setWastageWeight={setWastageWeight} ornamentName={ornamentName} setOrnamentName={setOrnamentName} weight={weight} setWeight={setWeight} endDate={endDate} setEndDate={setEndDate} startDate={startDate} setStartDate={setStartDate} workerContact={workerContact} setWorkerContact={setWorkerContact} workerName={workerName} setWorkerName={setWorkerName} product={product} setProduct={setProduct} customer={customer} setCustomer={setCustomer} id={id} setId={setId} description={description} setDescription={setDescription} handleUserClick={handleUserClick} handleUpdateManufacturingOrder={handleUpdateManufacturingOrder} openCategory={openCategory} openProductType={openProductType} handleUser={handleUser} handleProductType={handleProductType} handleProductClick={handleProductClick} isOpen={true} handleCancel={handleCancel} />
+                                    <EditFormManufacturingOrder row={row} productWeight={productWeight} setProductWeight={setProductWeight} orderStatus={orderStatus} setOrderStatus={setOrderStatus} error={error} setError={setError} balance={balance} setBalance={setBalance} returnWeight={returnWeight} setReturnWeight={setReturnWeight} wastageWeight={wastageWeight} setWastageWeight={setWastageWeight} ornamentName={ornamentName} setOrnamentName={setOrnamentName} weight={weight} setWeight={setWeight} endDate={endDate} setEndDate={setEndDate} startDate={startDate} setStartDate={setStartDate} workerContact={workerContact} setWorkerContact={setWorkerContact} workerName={workerName} setWorkerName={setWorkerName} product={product} setProduct={setProduct} customer={customer} setCustomer={setCustomer} id={id} setId={setId} description={description} setDescription={setDescription} handleUserClick={handleUserClick} handleUpdateManufacturingOrder={handleUpdateManufacturingOrder} openCategory={openCategory} openProductType={openProductType} handleUser={handleUser} handleProductType={handleProductType} handleProductClick={handleProductClick} isOpen={true} handleCancel={handleCancel} />
                                   </div>
                                 ) : (
                                   <div className="space-x-7 flex">

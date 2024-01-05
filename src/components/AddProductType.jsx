@@ -157,7 +157,7 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
               </div>
 
               {openCategory && (
-                <div class="origin-top-right absolute z-20 right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                <div class="origin-top-right absolute z-20 right-12 mt-2 w-[180px] max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                   {categoryList.map((category) => (
                     <div key={category.id} class="py-1">
                       <div

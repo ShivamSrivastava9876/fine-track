@@ -6,27 +6,43 @@ import { getProductTypeAsync, getProductTypeList, getSelectedProductTypeAsync } 
 import { FiImage } from 'react-icons/fi';
 import { getManufacturingProductList, getManufacturingUserList, getManugfacturingProductListAsync, getManugfacturingUserListAsync } from "../redux/slice/manufacturing/manufacturingSlice";
 
-const EditFormManufacturingOrder = ({ orderStatus, handleProductClick, handleUserClick, handleUpdateManufacturingOrder, openProductType, handleProductType, openCategory, handleUser, row, weight, setWeight, endDate, setEndDate, startDate, setStartDate, workerContact, setWorkerContact, workerName, setWorkerName, product, setProduct, customer, setCustomer, description, setDescription, ornamentName, setOrnamentName, wastageWeight, setWastageWeight, returnWeight, setReturnWeight, balance, setBalance, isOpen, handleCancel, error }) => {
+const EditFormManufacturingOrder = ({ productWeight, setProductWeight, orderStatus, handleProductClick, handleUserClick, handleUpdateManufacturingOrder, openProductType, handleProductType, openCategory, handleUser, row, weight, setWeight, endDate, setEndDate, startDate, setStartDate, workerContact, setWorkerContact, workerName, setWorkerName, product, setProduct, customer, setCustomer, description, setDescription, ornamentName, setOrnamentName, wastageWeight, setWastageWeight, returnWeight, setReturnWeight, balance, setBalance, isOpen, handleCancel, error }) => {
     const dispatch = useDispatch();
+    const [returnWeightLimit, setReturnWeightLimit] = useState("");
 
     const modalClasses = isOpen ? 'block' : 'hidden';
 
-    useEffect(() => {
-        dispatch(getManugfacturingProductListAsync());
-        dispatch(getManugfacturingUserListAsync());
-    }, [dispatch]);
+    //Calculations
+    const calculateReturnWeight = () => {
+        const productWeightValue = parseFloat(productWeight) || 0;
+        const wastageWeightValue = parseFloat(wastageWeight) || 0;
+        const issueWeightValue = parseFloat(weight) || 0;
 
-    const userList = useSelector(getManufacturingUserList);
-    const productList = useSelector(getManufacturingProductList);
+        const calculatedReturnWeight = issueWeightValue - productWeightValue - wastageWeightValue;
 
-    //To save new image
-    const handleFileChange = (e) => {
-        const selectedFile = e.target.files;
-        const filesLength = selectedFile.length;
+        setReturnWeightLimit(calculatedReturnWeight.toFixed(4));
+    };
 
-        setFiles(filesLength)
-        setImage(selectedFile);
+    const calculateBalanceWeight = () => {
+        if (returnWeight !== "") {
+            const productWeightValue = parseFloat(productWeight) || 0;
+            const wastageWeightValue = parseFloat(wastageWeight) || 0;
+            const issueWeightValue = parseFloat(weight) || 0;
+            const returnWeightValue = parseFloat(returnWeight) || 0;
+
+            const calculateBalance = issueWeightValue - productWeightValue - wastageWeightValue - returnWeightValue;
+
+            setBalance(calculateBalance.toFixed(4));
+        }
     }
+
+    useEffect(() => {
+        calculateReturnWeight();
+    }, [productWeight, wastageWeight, weight]);
+
+    useEffect(() => {
+        calculateBalanceWeight();
+    }, [productWeight, wastageWeight, weight, returnWeight])
 
     return (
         <div className="">
@@ -65,7 +81,7 @@ const EditFormManufacturingOrder = ({ orderStatus, handleProductClick, handleUse
                         </div>
                         <div className="flex">
                             <h1 className="font-semibold">Issue weight:&nbsp;</h1>
-                            <div>{row.weight}</div>
+                            <div>{row.weight} gm</div>
                         </div>
                         <div className="flex">
                             <h1 className="font-semibold">Start date:&nbsp;</h1>
@@ -77,23 +93,27 @@ const EditFormManufacturingOrder = ({ orderStatus, handleProductClick, handleUse
                         </div>
                         <div className="flex">
                             <h1 className="font-semibold">Description:&nbsp;</h1>
-                            <div>{row.description}</div>
+                            <div className="max-h-10 overflow-y-scroll pr-2">{row.description}</div>
                         </div>
-                        {row.status === "completed" && <div className="flex">
+                        {(row.status === "completed" || row.status === "cancelled") && row.ornamentName !== "" && <div className="flex">
                             <h1 className="font-semibold">Ornament name:&nbsp;</h1>
                             <div>{row.ornamentName}</div>
                         </div>}
-                        {row.status === "completed" && <div className="flex">
+                        {(row.status === "completed" || row.status === "cancelled") && <div className="flex">
+                            <h1 className="font-semibold">Product weight:&nbsp;</h1>
+                            <div>{row.productWeight === "" ? "0 gm" : `${row.productWeight} gm`}</div>
+                        </div>}
+                        {(row.status === "completed" || row.status === "cancelled") && <div className="flex">
                             <h1 className="font-semibold">Wastage weight:&nbsp;</h1>
-                            <div>{row.wastageWeight}</div>
+                            <div>{row.wastageWeight === "" ? "0 gm" : `${row.wastageWeight} gm`}</div>
                         </div>}
-                        {row.status === "completed" && <div className="flex">
+                        {(row.status === "completed" || row.status === "cancelled") && <div className="flex">
                             <h1 className="font-semibold">Return weight:&nbsp;</h1>
-                            <div>{row.returnWeight}</div>
+                            <div>{row.returnWeight === "" ? "0 gm" : `${row.returnWeight} gm`}</div>
                         </div>}
-                        {row.status === "completed" && <div className="flex">
+                        {(row.status === "completed" || row.status === "cancelled") && <div className="flex">
                             <h1 className="font-semibold">Balance:&nbsp;</h1>
-                            <div>{row.balance}</div>
+                            <div>{row.balance === "" ? "0 gm" : `${row.balance} gm`}</div>
                         </div>}
                         <div className="flex">
                             <h1 className="font-semibold">Status:&nbsp;</h1>
@@ -102,7 +122,7 @@ const EditFormManufacturingOrder = ({ orderStatus, handleProductClick, handleUse
                     </div>
 
                     {row.status === "Pending" && <div className="grid md:grid-cols-2 gap-2">
-                        <div className={`mb-4 ${ornamentName === '' && error ? 'border-2 border-red-500' : ''}`}>
+                        <div className={`mb-4`}>
                             <input
                                 type="text"
                                 className="w-full h-9 py-2 px-8 text-xs border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
@@ -111,32 +131,42 @@ const EditFormManufacturingOrder = ({ orderStatus, handleProductClick, handleUse
                                 placeholder="Ornament name"
                             />
                         </div>
-                        <div className={`mb-4 ${wastageWeight === '' && error ? 'border-2 border-red-500' : ''}`}>
+                        <div className="mb-4">
                             <input
-                                type="text"
-                                className="w-full h-9 py-2 px-8 text-xs border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                type="number"
+                                className={`w-full h-9 py-2 px-8 text-xs border rounded-xl outline-none border-[#9C9C9C] text-[#111010] ${productWeight === '' && error ? 'border-2 border-red-500' : ''}`}
+                                value={productWeight}
+                                onChange={(e) => setProductWeight(e.target.value)}
+                                placeholder="Product weight (gm)"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <input
+                                type="number"
+                                className={`w-full h-9 py-2 px-8 text-xs border rounded-xl outline-none border-[#9C9C9C] text-[#111010] ${wastageWeight === '' && error ? 'border-2 border-red-500' : ''}`}
                                 value={wastageWeight}
                                 onChange={(e) => setWastageWeight(e.target.value)}
-                                placeholder="Wastage weight"
+                                placeholder="Wastage weight (gm)"
                             />
                         </div>
-                        <div className={`mb-4 ${returnWeight === '' && error ? 'border-2 border-red-500' : ''}`}>
+                        <div className="mb-4">
                             <input
-                                type="text"
-                                // disabled={true}
-                                className="w-full h-9 py-2 px-8 text-xs border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                type="number"
+                                className={`w-full h-9 py-2 px-8 text-xs border rounded-xl outline-none border-[#9C9C9C] text-[#111010] ${returnWeight === '' && error ? 'border-2 border-red-500' : ''}`}
                                 value={returnWeight}
                                 onChange={(e) => setReturnWeight(e.target.value)}
-                                placeholder="Return weight"
+                                placeholder="Return weight (gm)"
                             />
+                            <div className=" bg-yellow-100 text-xs">{`Return weight should be less than or equal to ${returnWeightLimit}gm`}</div>
                         </div>
-                        <div className={`mb-4 ${balance === '' && error ? 'border-2 border-red-500' : ''}`}>
+                        <div className="mb-4">
                             <input
-                                type="text"
-                                className="w-full h-9 py-2 px-8 text-xs border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                type="number"
+                                disabled={true}
+                                className={`w-full h-9 py-2 px-8 text-xs border rounded-xl outline-none border-[#9C9C9C] text-[#111010] ${balance === '' && error ? 'border-2 border-red-500' : ''}`}
                                 value={balance}
                                 onChange={(e) => setBalance(e.target.value)}
-                                placeholder="Balance"
+                                placeholder="Balance (gm)"
                             />
                         </div>
                         <div class="relative cursor-pointer inline-block text-left mb-2 h-10">
@@ -160,7 +190,7 @@ const EditFormManufacturingOrder = ({ orderStatus, handleProductClick, handleUse
                             </div>
 
                             {openCategory && (
-                                <div class="origin-top-right absolute right-0 mt-2 z-50 max-h-[100px] overflow-y-scroll w-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                <div class="origin-top-right absolute right-0 mt-2 z-50 max-h-[100px] w-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                     {["completed", "cancelled"].map((option) => (
                                         <div key={option} class="py-1">
                                             <div

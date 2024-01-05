@@ -20,8 +20,9 @@ const columns = [
   { id: "category", label: "Category", minWidth: 100 },
   { id: "productType", label: "Product type", minWidth: 100 },
   { id: "quantity", label: "Quantity", minWidth: 50 },
-  { id: "stoneWeight", label: "Stone weight(gm)", minWidth: 100 },
-  { id: "grossWeight", label: "Gross weight(gm)", minWidth: 100 },
+  { id: "grossWeight", label: "Weight (gm)", minWidth: 100 },
+  { id: "size", label: "Size (cm)", minWidth: 100 },
+  { id: "length", label: "Length (cm)", minWidth: 100 },
   { id: "puritySpc", label: "Purity spc", minWidth: 100 },
   { id: "price", label: "Price", minWidth: 100 },
   { id: "actions", label: "", minWidth: 100 },
@@ -30,8 +31,9 @@ const columns = [
 const createData = (
   HuId,
   productId,
+  product,
   quantity,
-  stoneWeight,
+  // stoneWeight,
   grossWeight,
   puritySpc,
   price,
@@ -41,13 +43,15 @@ const createData = (
   description,
   category,
   productType,
-  productImage
+  productImage,
+  size,
+  length
 ) => {
   return {
     HuId,
     productId,
+    product,
     quantity,
-    stoneWeight,
     grossWeight,
     puritySpc,
     price,
@@ -57,7 +61,9 @@ const createData = (
     description,
     category,
     productType,
-    productImage
+    productImage,
+    size,
+    length
   };
 };
 
@@ -97,14 +103,13 @@ export default function ProductTables() {
 
   const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowSize, rowLength, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType, rowImage) => {
     e.preventDefault();
-    console.log("test weight", grossWeight)
     const updatedImage = image !== null ? image : rowImage;
     const updatedHuId = huId !== "" ? huId : rowHuId;
     const updatedProductId = productId !== "" ? productId : rowProductId;
     const updatedModel = model !== "" ? model : rowModel;
     const updatedSubModel = subModel !== "" ? subModel : rowSubModel;
     const updatedProduct = productName !== "" ? productName : rowProduct;
-    const updatedStoneWeight = stoneWeight.length !== 0 ? stoneWeight : rowStoneWeight;
+    // const updatedStoneWeight = stoneWeight.length !== 0 ? stoneWeight : rowStoneWeight;
     const updatedGrossWeight = grossWeight.length !== 0 ? grossWeight : rowGrossWeight;
     const updatedSize = size.length !== 0 ? size : rowSize;
     const updatedLength = length.length !== 0 ? length : rowLength;
@@ -115,7 +120,7 @@ export default function ProductTables() {
     const updatedCategory = category !== "" ? category : rowCategory;
     const updatedProductType = productType !== "" ? productType : rowProductType;
 
-    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
+    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
       if (updateProductAsync.fulfilled.match(result)) {
         dispatch(getProductAsync());
         setHuId("");
@@ -243,8 +248,8 @@ export default function ProductTables() {
         const newRow = createData(
           data.hu_id || "",
           data.product_id || "",
+          data.product_name || "",
           data.quantity || "",
-          data.stone_wt || "",
           data.gross_wt || "",
           data.purity_spec || "",
           data.price || "",
@@ -254,7 +259,9 @@ export default function ProductTables() {
           data.description || "",
           data.category || "",
           data.product_type || "",
-          data.product_images
+          data.product_images,
+          data.size || [],
+          data.length || []
         );
         srNo = srNo + 1;
         return newRow;

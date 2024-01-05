@@ -49,6 +49,7 @@ export async function createProduct(newProductInfo) {
         formData.append("category", newProductInfo.category);
         formData.append("product_type", newProductInfo.product_type);
         formData.append("product_id", newProductInfo.product_id);
+        formData.append("product_name", newProductInfo.product_name);
         formData.append("hu_id", newProductInfo.hu_id);
         formData.append("model", newProductInfo.model);
         formData.append("sub_model", newProductInfo.sub_model);

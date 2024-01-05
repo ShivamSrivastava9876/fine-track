@@ -34,13 +34,12 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
 
     //Handling add weight
     const [inputTextWeight, setInputTextWeight] = useState('');
-    const [weightArray, setWeightArray] = useState(row.grossWeight?.split(','));
+    const [weightArray, setWeightArray] = useState(row.grossWeight && typeof row.grossWeight === 'string' ? row.grossWeight.split(',') : []);
     const addInputWeight = (e) => {
         e.preventDefault();
         if (inputTextWeight.trim() !== '') {
             setWeightArray([...weightArray, inputTextWeight]);
             setGrossWeight([...weightArray, inputTextWeight]);
-            console.log("gross", grossWeight)
             setInputTextWeight('');
         }
     };
@@ -53,27 +52,27 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
     };
     //**
     //Handling add stone weight
-    const [inputTextStoneWeight, setInputTextStoneWeight] = useState('');
-    const [stoneWeightArray, setStoneWeightArray] = useState(row.stoneWeight?.split(','));
-    const addInputStoneWeight = (e) => {
-        e.preventDefault();
-        if (inputTextStoneWeight.trim() !== '') {
-            setStoneWeightArray([...stoneWeightArray, inputTextStoneWeight]);
-            setStoneWeight([...stoneWeightArray, inputTextStoneWeight]);
-            setInputTextStoneWeight('');
-        }
-    };
-    const deleteInputStoneWeight = (e, index) => {
-        e.preventDefault();
-        const updatedList = [...stoneWeightArray];
-        updatedList.splice(index, 1);
-        setStoneWeightArray(updatedList);
-        setStoneWeight(updatedList);
-    };
+    // const [inputTextStoneWeight, setInputTextStoneWeight] = useState('');
+    // const [stoneWeightArray, setStoneWeightArray] = useState(row.stoneWeight?.split(','));
+    // const addInputStoneWeight = (e) => {
+    //     e.preventDefault();
+    //     if (inputTextStoneWeight.trim() !== '') {
+    //         setStoneWeightArray([...stoneWeightArray, inputTextStoneWeight]);
+    //         setStoneWeight([...stoneWeightArray, inputTextStoneWeight]);
+    //         setInputTextStoneWeight('');
+    //     }
+    // };
+    // const deleteInputStoneWeight = (e, index) => {
+    //     e.preventDefault();
+    //     const updatedList = [...stoneWeightArray];
+    //     updatedList.splice(index, 1);
+    //     setStoneWeightArray(updatedList);
+    //     setStoneWeight(updatedList);
+    // };
     //**
     //Input box size handling
     const [inputTextSize, setInputTextSize] = useState('');
-    const [sizeArray, setSizeArray] = useState(row.size?.split(','));
+    const [sizeArray, setSizeArray] = useState(row.size && typeof row.size === 'string' ? row.size.split(',') : []);
     const addInputSize = (e) => {
         e.preventDefault();
         if (inputTextSize.trim() !== '') {
@@ -93,7 +92,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
     // **
     //Input box length handling
     const [inputTextLength, setInputTextLength] = useState('');
-    const [lengthArray, setLengthArray] = useState(row.length?.split(','));
+    const [lengthArray, setLengthArray] = useState(row.length && typeof row.length === 'string' ? row.length.split(',') : []);
 
     const addInputLength = (e) => {
         e.preventDefault();
@@ -242,16 +241,9 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                                 placeholder="Sub model"
                             />
                         </div>
-
+                        
                         <div className="mb-4 ">
-                            {/* <input
-                                type="text"
-                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                defaultValue={row.grossWeight}
-                                value={grossWeight}
-                                onChange={(e) => setGrossWeight(e.target.value)}
-                                placeholder="Gross weight"
-                            /> */}
+
                             <input
                                 type="text"
                                 value={inputTextWeight}
@@ -277,7 +269,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             </div>
                         </div>
 
-                        {row.productType.toLowerCase() === 'chain' && <div className="mb-4 ">
+                        {/* {row.productType.toLowerCase() === 'chain' && <div className="mb-4 ">
                             <input
                                 type="text"
                                 value={inputTextStoneWeight}
@@ -301,8 +293,8 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                                     </span>
                                 ))}
                             </div>
-                        </div>}
-                        
+                        </div>} */}
+
                         {(row.productType.toLowerCase() === 'necklace' || row.productType.toLowerCase() === 'ring' || row.productType.toLowerCase() === 'bangle') && <div className="mb-4 ">
                             <input
                                 type="text"
@@ -328,8 +320,8 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                                 ))}
                             </div>
                         </div>}
-                        
-                        {row.productType.toLowerCase() === 'bracelet' && <div className="mb-4 ">
+
+                        {(row.productType.toLowerCase() === 'bracelet' || row.productType.toLowerCase() === 'chain') && <div className="mb-4 ">
                             <input
                                 type="text"
                                 value={inputTextLength}
@@ -354,6 +346,17 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                                 ))}
                             </div>
                         </div>}
+
+                        <div className="mb-4 ">
+                            <input
+                                type="text"
+                                className="w-full h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                defaultValue={row.product}
+                                value={productName}
+                                onChange={(e) => setProductName(e.target.value)}
+                                placeholder="Product name"
+                            />
+                        </div>
                         
                         <div className="mb-4 flex justify-center items-center">
                             <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">

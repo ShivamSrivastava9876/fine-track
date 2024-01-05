@@ -65,7 +65,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
       //logic for add product of chain
       if (productType.toLowerCase() === 'chain') {
         if (stoneWeight.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length })).then((result) => {
+          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, product_name: productName, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length })).then((result) => {
             if (createProductAsync.fulfilled.match(result)) {
               dispatch(getProductAsync());
               setCategory("");
@@ -106,7 +106,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
       //logic for add product of necklace, ring and bangle
       else if (productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') {
         if (size.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, weight: weight, size: size, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, length })).then((result) => {
+          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, size: size, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, length })).then((result) => {
             if (createProductAsync.fulfilled.match(result)) {
               dispatch(getProductAsync());
               setCategory("");
@@ -146,7 +146,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
       //logic for add product of bracelet
       else if (productType.toLowerCase() === 'bracelet') {
         if (length.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, weight: weight, length: length, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size })).then((result) => {
+          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, length: length, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size })).then((result) => {
             if (createProductAsync.fulfilled.match(result)) {
               dispatch(getProductAsync());
               setCategory("");
@@ -184,7 +184,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
       }
 
       else {
-        dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, weight: weight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size, length })).then((result) => {
+        dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size, length })).then((result) => {
           if (createProductAsync.fulfilled.match(result)) {
             dispatch(getProductAsync());
             setCategory("");
@@ -410,7 +410,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 </div>
 
                 {openCategory && (
-                  <div class="origin-top-right absolute z-20 right-16 mt-2 w-32 max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div class="origin-top-right absolute z-20 right-16 mt-2 w-[220px] max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                     {categoryList.map((category) => (
                       <div key={category.id} class="py-1">
@@ -447,7 +447,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 </div>
 
                 {openProductType && (
-                  <div class="origin-top-right absolute z-10 right-16 mt-2 w-auto max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                  <div class="origin-top-right absolute z-10 right-16 mt-2 w-[220px] max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                     {productTypeList.map((productType) => (
                       <div key={productType.id} class="py-1">
@@ -469,7 +469,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={huId}
                   onChange={(e) => setHuId(e.target.value)}
-                  placeholder="HU id"
+                  placeholder="HU Id"
                 />
               </div>}
               {productType && <div className={`mb-4 md:w-21.375 ${productId === '' && error ? 'border-2 border-red-500' : ''}`}>
@@ -499,19 +499,10 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   placeholder="Sub model"
                 />
               </div>}
-              {/* {productType && <div className={`mb-4 md:w-21.375 ${productName === '' && error ? 'border-2 border-red-500' : ''}`}>
-                <input
-                  type="text"
-                  className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                  value={productName}
-                  onChange={(e) => setProductName(e.target.value)}
-                  placeholder="Product name"
-                />
-              </div>} */}
               {productType && <div className={`mb-4 md:w-21.375`}>
                 <div className="relative md:w-21.375">
                   <input
-                    type="text"
+                    type="number"
                     value={inputTextWeight}
                     onChange={(e) => setInputTextWeight(e.target.value)}
                     placeholder="Weight"
@@ -535,7 +526,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   </div>
                 </div>
               </div>}
-              {productType.toLowerCase() === 'chain' && <div className={`mb-4 md:w-21.375`}>
+              {/* {productType.toLowerCase() === 'chain' && <div className={`mb-4 md:w-21.375`}>
                 <div className="relative md:w-21.375">
                   <input
                     type="text"
@@ -562,11 +553,11 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   </div>
                 </div>
 
-              </div>}
+              </div>} */}
               {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') && <div className="mb-4 md:w-21.375">
                 <div className="relative md:w-21.375">
                   <input
-                    type="text"
+                    type="number"
                     value={inputTextSize}
                     onChange={(e) => setInputTextSize(e.target.value)}
                     placeholder="Size"
@@ -590,10 +581,10 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   </div>
                 </div>
               </div>}
-              {productType.toLowerCase() === 'bracelet' && <div className="mb-4 md:w-21.375">
+              {(productType.toLowerCase() === 'bracelet' || productType.toLowerCase() === 'chain') && <div className="mb-4 md:w-21.375">
                 <div className="relative md:w-21.375">
                   <input
-                    type="text"
+                    type="number"
                     value={inputTextLength}
                     onChange={(e) => setInputTextLength(e.target.value)}
                     placeholder="Length"
@@ -617,7 +608,15 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   </div>
                 </div>
               </div>}
-
+              {productType && <div className={`mb-4 md:w-21.375 ${productName === '' && error ? 'border-2 border-red-500' : ''}`}>
+                <input
+                  type="text"
+                  className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  value={productName}
+                  onChange={(e) => setProductName(e.target.value)}
+                  placeholder="Product name"
+                />
+              </div>}
               {productType && <div className={`mb-4 flex justify-center items-center ${image === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <label htmlFor="fileInput" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
                   <FiImage className="mr-2" /> {files !== '' ? `${files} images` : 'Upload images'}
@@ -630,6 +629,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   />
                 </label>
               </div>}
+
 
               {productType && <div className="mb-4 md:w-21.375">
                 <input

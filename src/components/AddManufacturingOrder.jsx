@@ -204,7 +204,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                 </div>
 
                                 {openProductType && (
-                                    <div class="origin-top-right absolute z-10 right-16 mt-2 w-auto max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                    <div class="origin-top-right absolute z-30 right-16 mt-2 w-[220px] max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                                         {productList.map((product) => (
                                             <div key={product.product_name} class="py-1">
@@ -242,7 +242,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                 </div>
 
                                 {openUser && (
-                                    <div class="origin-top-right absolute z-10 right-16 mt-2 w-auto max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                    <div class="origin-top-right absolute z-10 right-16 mt-2 w-[220px] max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                                         {userList.map((user) => (
                                             <div key={user.email} class="py-1">
@@ -306,7 +306,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             </div>
                             <div className={`mb-4 md:w-21.375 ${weight === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input
-                                    type="text"
+                                    type="number"
                                     className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                     value={weight}
                                     onChange={(e) => setWeight(e.target.value)}
