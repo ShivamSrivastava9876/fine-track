@@ -7,6 +7,7 @@ import orderReducer from './slice/order/orderSlice';
 import productReducer from './slice/product/productSlice';
 import reportReducer from './slice/report/reportSlice';
 import manufacturingReducer from './slice/manufacturing/manufacturingSlice';
+import workerReducer from './slice/worker/workerSlice';
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
         order: orderReducer,
         product: productReducer,
         report: reportReducer,
-        manufacturing: manufacturingReducer
+        manufacturing: manufacturingReducer,
+        worker: workerReducer
     }
 })

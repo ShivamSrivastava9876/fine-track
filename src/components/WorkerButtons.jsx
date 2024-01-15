@@ -3,26 +3,25 @@ import { ReactNode, useState } from "react";
 import Image from "next/image";
 import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import { useDispatch } from "react-redux";
-import { searchProductAsync } from "@/redux/slice/product/productSlice";
+import { searchCategoryAsync } from "@/redux/slice/category/categorySlice";
 import Link from "next/link";
 
-const ProductComponent = ({
-  addProduct,
-  setAddProduct,
+const CategoryComponent = ({
+  addWorker,
+  setAddWorker,
 }) => {
 
   const dispatch = useDispatch();
   const [searchParameter, setSearchParameter] = useState("");
 
-  const handleAddProduct = () => {
-    setAddProduct(!addProduct);
+  const handleAddCategory = () => {
+    setAddWorker(!addWorker);
   };
 
-  const handleProductSearch = (e) => {
+  const handleCategorySearch = (e) => {
     e.preventDefault();
-    dispatch(searchProductAsync(searchParameter)).then((result) => {
-      if (searchProductAsync.fulfilled.match(result)) {
-        // dispatch(searchUserAsync(searchParameter))
+    dispatch(searchCategoryAsync(searchParameter)).then((result) => {
+      if (searchCategoryAsync.fulfilled.match(result)) {
         // setSearchParameter("");
       }
     })
@@ -34,37 +33,20 @@ const ProductComponent = ({
 
   return (
     <div className="flex items-center justify-between flex-wrap w-full mb-8">
+
       {/* User Title */}
-      <h1 className="text-2xl mx-2 m-2 font-bold">Products</h1>
+      <h1 className="text-2xl mx-2 m-2 font-bold">Workers</h1>
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
-        <Link href="#addProduct" className="flex items-center relative">
-          <div className="flex items-center space-x-4 mx-2 relative">
-            {/* Button 1 */}
-            {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-          Filters
-        </button> */}
+        <div className="flex items-center mx-2 space-x-4 relative">
 
-            {/* Button 2 */}
+          {/* Button */}
+          <Link href="#addWorker">
             <button
-              className={`flex items-center px-4 py-2 bg-[#DB8A4D] text-white rounded-full shadow transition-transform duration-300 transform ${addProduct ? "invisible" : ""
+              className={`flex items-center rounded-full px-4 py-2 bg-[#DB8A4D] text-white shadow transition-transform duration-300 transform ${addWorker ? "invisible" : ""
                 }`}
-              onClick={handleAddProduct}
+              onClick={handleAddCategory}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -80,13 +62,13 @@ const ProductComponent = ({
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Add product
+              Add worker
             </button>
-          </div>
-        </Link>
+          </Link>
+        </div>
 
         {/* Right-hand side Search Box */}
-        <form onSubmit={(e) => handleProductSearch(e)} className="flex items-center md:w-80 m-2 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+        {/* <form onSubmit={(e) => handleCategorySearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
           <input
             type="search"
             placeholder="Search"
@@ -96,16 +78,17 @@ const ProductComponent = ({
           />
           <div className="ml-2">
             <Image
-              onClick={handleProductSearch}
+              onClick={handleCategorySearch}
               src={SearchIcon}
               alt="search-icon"
               className="cursor-pointer"
             />
           </div>
-        </form>
+          {/* <input type="submit"></input> */}
+        {/* </form> */}
       </div>
     </div>
   );
 };
 
-export default ProductComponent;
+export default CategoryComponent;

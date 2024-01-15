@@ -17,17 +17,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faIndustry } from '@fortawesome/free-solid-svg-icons';
 
 import { FiMenu, FiX } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 const SideBar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [reportVisible, setReportVisible] = useState(false);
   const modalClasses = isSidebarOpen ? 'block' : 'hidden';
 
   const handleLogout = () => {
 
     router.push('/login');
     dispatch(logoutUserAsync());
+  }
+
+  const handleReportClick = () => {
+    setReportVisible(!reportVisible);
   }
 
   return (
@@ -133,6 +139,17 @@ const SideBar = () => {
           </Link>
 
           <Link
+            href="/workers"
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+            hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+            active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+          >
+            <Image src={UserIcon} alt="user-icon" />
+
+            <span className=" text-base text-blue-200 font-normal">Workers</span>
+          </Link>
+
+          <Link
             href="/manufacturingOrders"
             className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
@@ -143,9 +160,9 @@ const SideBar = () => {
             <span className=" text-base text-blue-200 font-normal">Manufacturing</span>
           </Link>
 
-          <Link
-            href="/report"
-            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out 
+          <div
+            onClick={handleReportClick}
+            className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
             hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
             active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
           >
@@ -153,8 +170,79 @@ const SideBar = () => {
 
             <span className=" text-base text-blue-200 font-normal">
               Reports
+
             </span>
-          </Link>
+            <div className="flex justify-start">
+              {reportVisible ? <FiChevronDown className="text-blue-200 transition-transform transform rotate-180" /> : <FiChevronDown className="text-blue-200 transition-transform transform rotate-0" />}
+            </div>
+          </div>
+
+
+          {/* Sub reports */}
+          <div
+            className={`relative transition-max-h duration-500 ease-in-out overflow-hidden ${reportVisible ? "" : "h-0"}`}
+          >
+            <Link
+              href=""
+              className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
+              hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+              active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+            >
+              {/* <Image src={ReportsIcon} alt="product-icon" /> */}
+
+              <span className=" text-sm text-blue-200 font-normal">
+                Manufacturing reports
+              </span>
+            </Link>
+            <Link
+              href="/report"
+              className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
+              hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+              active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+            >
+              {/* <Image src={ReportsIcon} alt="product-icon" /> */}
+
+              <span className=" text-sm text-blue-200 font-normal">
+                Order reports
+              </span>
+            </Link>
+            <Link
+              href=""
+              className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
+              hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+              active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+            >
+              {/* <Image src={ReportsIcon} alt="product-icon" /> */}
+
+              <span className=" text-sm text-blue-200 font-normal">
+                Product reports
+              </span>
+            </Link>
+            <Link
+              href=""
+              className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
+              hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+              active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+            >
+              {/* <Image src={ReportsIcon} alt="product-icon" /> */}
+
+              <span className=" text-sm text-blue-200 font-normal">
+                User reports
+              </span>
+            </Link>
+            <Link
+              href=""
+              className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
+              hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
+              active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
+            >
+              {/* <Image src={ReportsIcon} alt="product-icon" /> */}
+
+              <span className=" text-sm text-blue-200 font-normal">
+                Worker reports
+              </span>
+            </Link>
+          </div>
 
           <div onClick={handleLogout} className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer ">
             <Image src={LogoutIcon} alt="logout-icon" />
