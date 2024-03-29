@@ -9,7 +9,7 @@ export async function userDetails() {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://195.35.22.200:8000/admin_panel/userdetail/",
+      "http://77.37.44.105:8000/admin_panel/userdetail/",
       {
         method: "GET",
         headers: header,
@@ -41,7 +41,7 @@ export async function createUser(createUserInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://195.35.22.200:8000/admin_panel/create-new-user/",
+      "http://77.37.44.105:8000/admin_panel/create-new-user/",
       {
         method: "POST",
         headers: header,
@@ -74,7 +74,7 @@ export async function searchUser(searchUserInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      `http://195.35.22.200:8000/admin_panel/userdetail/?search=${searchUserInfo}`,
+      `http://77.37.44.105:8000/admin_panel/userdetail/?search=${searchUserInfo}`,
       {
         method: "GET",
         headers: header
@@ -106,7 +106,7 @@ export async function deleteUser(userId) {
       Authorization: `Token ${token}`
     }
     const response = await fetch(
-      `http://195.35.22.200:8000/admin_panel/${userId}/delete-user/`,
+      `http://77.37.44.105:8000/admin_panel/${userId}/delete-user/`,
       {
         method: 'DELETE',
         headers: header
@@ -139,7 +139,7 @@ export async function userActive(userStatusInfo) {
     }
     console.log(userStatusInfo.userActiveStatus)
     const response = await fetch(
-      `http://195.35.22.200:8000/admin_panel/update-user/${userStatusInfo.userId}/`,
+      `http://77.37.44.105:8000/admin_panel/update-user/${userStatusInfo.userId}/`,
       {
         method: 'PUT',
         headers: header,

@@ -10,7 +10,7 @@ export async function getCategory() {
         }
 
         const response = await fetch(
-            'http://195.35.22.200:8000/admin_panel/category-list/',
+            'http://77.37.44.105:8000/admin_panel/category-list/',
             {
                 method: "GET",
                 headers: header
@@ -43,7 +43,7 @@ export async function createCategory(categoryInfo) {
         formData.append("category_name", categoryInfo.category_name);
         formData.append("image", categoryInfo.image);
         const response = await fetch(
-            'http://195.35.22.200:8000/admin_panel/create-category/',
+            'http://77.37.44.105:8000/admin_panel/create-category/',
             {
                 method: "POST",
                 headers: header,
@@ -78,7 +78,7 @@ export async function editCategory(categoryInfo) {
         formData.append("category_name", categoryInfo.category);
         formData.append("image", categoryInfo.image);
         const response = await fetch(
-            `http://195.35.22.200:8000/admin_panel/${categoryInfo.id}/update-category/`,
+            `http://77.37.44.105:8000/admin_panel/${categoryInfo.id}/update-category/`,
             {
                 method: "PUT",
                 headers: header,
@@ -112,7 +112,7 @@ export async function deleteCategory (categoryId) {
         }
 
         const response = await fetch(
-            `http://195.35.22.200:8000/admin_panel/${categoryId}/delete-category/`,
+            `http://77.37.44.105:8000/admin_panel/${categoryId}/delete-category/`,
             {
                 method: "DELETE",
                 headers: header
@@ -144,7 +144,7 @@ export async function searchCategory(searchCategoryInfo) {
         Authorization: `Token ${token}`,
       };
       const response = await fetch(
-        `http://195.35.22.200:8000/admin_panel/category-list/?search=${searchCategoryInfo}`,
+        `http://77.37.44.105:8000/admin_panel/category-list/?search=${searchCategoryInfo}`,
         {
           method: "GET",
           headers: header
