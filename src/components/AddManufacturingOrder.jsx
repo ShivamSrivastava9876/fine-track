@@ -46,7 +46,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
     };
 
     const handleManufacturingOrderSubmit = (e) => {
-        if (user !== "", product !== "", workerName !== "", workerContact !== "", startDate !== "", endDate !== "", weight !== "", description !== "") {
+        if (user !== "" && product !== "" && workerName !== "" && workerContact !== "" && startDate !== "" && endDate !== "" && weight !== "" && description !== "") {
 
             e.preventDefault();
             console.log("description", description);
