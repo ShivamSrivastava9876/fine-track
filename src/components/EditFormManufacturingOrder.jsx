@@ -54,7 +54,7 @@ const EditFormManufacturingOrder = ({ productWeight, setProductWeight, orderStat
                         e.preventDefault();
                         handleUpdateManufacturingOrder(e, row.id, row.customer, row.product, row.workerName, row.workerContact, row.startDate, row.endDate, row.weight, row.description);
                     }}
-                    className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll no-scrollbar md:h-min h-full w-auto md:w-[500px] bg-white border border-blue-500"
+                    className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll no-scrollbar h-full w-auto md:w-[500px] bg-white border border-blue-500"
                 >
                     <div className="mb-4 space-y-1">
                         <h2 className=" flex items-center justify-center m-4 text-2xl font-bold">
@@ -64,60 +64,60 @@ const EditFormManufacturingOrder = ({ productWeight, setProductWeight, orderStat
 
                     <div className="grid md:grid-cols-1 gap-2 mb-4">
                         <div className="flex">
-                            <h1 className="font-semibold">Bill number:&nbsp;</h1>
-                            <div>{row.billNo}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Bill number:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.billNo}</div>
                         </div>
                         <div className="flex">
-                            <h1 className="font-semibold">Worker name:&nbsp;</h1>
-                            <div>{row.workerName}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Worker name:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.workerName}</div>
                         </div>
                         <div className="flex">
-                            <h1 className="font-semibold">Worker contact number:&nbsp;</h1>
-                            <div>{row.workerContact}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Worker contact number:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.workerContact}</div>
                         </div>
                         <div className="flex">
-                            <h1 className="font-semibold">Customer name:&nbsp;</h1>
-                            <div>{row.customer}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Customer name:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.customer}</div>
                         </div>
                         <div className="flex">
-                            <h1 className="font-semibold">Issue weight:&nbsp;</h1>
-                            <div>{row.weight} gm</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Issue weight:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.weight} gm</div>
                         </div>
                         <div className="flex">
-                            <h1 className="font-semibold">Start date:&nbsp;</h1>
-                            <div>{row.startDate}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Start date:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.startDate}</div>
                         </div>
                         <div className="flex">
-                            <h1 className="font-semibold">End date:&nbsp;</h1>
-                            <div>{row.endDate}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">End date:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.endDate}</div>
                         </div>
                         <div className="flex">
-                            <h1 className="font-semibold">Description:&nbsp;</h1>
-                            <div className="max-h-10 overflow-y-scroll pr-2">{row.description}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Description:&nbsp;</h1>
+                            <div className="max-h-10 overflow-y-scroll pr-2 text-xs md:text-sm">{row.description}</div>
                         </div>
                         {(row.status === "completed" || row.status === "cancelled") && row.ornamentName !== "" && <div className="flex">
-                            <h1 className="font-semibold">Ornament name:&nbsp;</h1>
-                            <div>{row.ornamentName}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Ornament name:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.ornamentName}</div>
                         </div>}
                         {(row.status === "completed" || row.status === "cancelled") && <div className="flex">
-                            <h1 className="font-semibold">Product weight:&nbsp;</h1>
-                            <div>{row.productWeight === "" ? "0 gm" : `${row.productWeight} gm`}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Product weight:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.productWeight === "" ? "0 gm" : `${row.productWeight} gm`}</div>
                         </div>}
                         {(row.status === "completed" || row.status === "cancelled") && <div className="flex">
-                            <h1 className="font-semibold">Wastage weight:&nbsp;</h1>
-                            <div>{row.wastageWeight === "" ? "0 gm" : `${row.wastageWeight} gm`}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Wastage weight:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.wastageWeight === "" ? "0 gm" : `${row.wastageWeight} gm`}</div>
                         </div>}
                         {(row.status === "completed" || row.status === "cancelled") && <div className="flex">
-                            <h1 className="font-semibold">Return weight:&nbsp;</h1>
-                            <div>{row.returnWeight === "" ? "0 gm" : `${row.returnWeight} gm`}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Return weight:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.returnWeight === "" ? "0 gm" : `${row.returnWeight} gm`}</div>
                         </div>}
                         {(row.status === "completed" || row.status === "cancelled") && <div className="flex">
-                            <h1 className="font-semibold">Balance:&nbsp;</h1>
-                            <div>{row.balance === "" ? "0 gm" : `${row.balance} gm`}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Balance:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.balance === "" ? "0 gm" : `${row.balance} gm`}</div>
                         </div>}
                         <div className="flex">
-                            <h1 className="font-semibold">Status:&nbsp;</h1>
-                            <div>{row.status}</div>
+                            <h1 className="text-xs md:text-sm font-semibold">Status:&nbsp;</h1>
+                            <div className="text-xs md:text-sm">{row.status}</div>
                         </div>
                     </div>
 
@@ -170,7 +170,7 @@ const EditFormManufacturingOrder = ({ productWeight, setProductWeight, orderStat
                             />
                         </div>
                         <div class="relative cursor-pointer inline-block text-left mb-2 h-10">
-                            <div onClick={handleUser} class={`inline-flex items-center justify-center font-semibold px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-xs text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600 ${orderStatus === 'Pending' && error ? 'border-2 border-red-500' : ''}`}>
+                            <div onClick={handleUser} class={`inline-flex items-center justify-center text-xs font-semibold px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600 ${orderStatus === 'Pending' && error ? 'border-2 border-red-500' : ''}`}>
                                 Status: {orderStatus}
                                 {/* Arrow icon (tailwindcss/heroicons) */}
                                 <svg
@@ -277,7 +277,7 @@ const EditFormManufacturingOrder = ({ productWeight, setProductWeight, orderStat
                                     type="date"
                                     id="startDate"
                                     value={startDate}
-                                    className="md:ml-10 text-[#595858] font-semibold cursor-pointer"
+                                    className="md:ml-10 text-[#595858] text-xs md:text-sm font-semibold cursor-pointer"
                                     onChange={(e) => setStartDate(e.target.value)}
                                 />
                             </label>
@@ -290,7 +290,7 @@ const EditFormManufacturingOrder = ({ productWeight, setProductWeight, orderStat
                                     id="endDate"
                                     value={endDate}
                                     min={startDate}
-                                    className="md:ml-10 ml-3 text-[#595858] font-semibold cursor-pointer"
+                                    className="md:ml-10 ml-3 text-[#595858] text-xs md:text-sm font-semibold cursor-pointer"
                                     onChange={(e) => setEndDate(e.target.value)}
                                 />
                             </label>

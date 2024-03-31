@@ -151,7 +151,7 @@ const AddUser = ({ addUser, setAddUser }) => {
           <div className={`mb-4 md:w-21.375 ${firstName === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type="text"
-              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               placeholder="First name"
@@ -160,7 +160,7 @@ const AddUser = ({ addUser, setAddUser }) => {
           <div className={`mb-4 md:w-21.375 ${lastName === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type="text"
-              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               placeholder="Last name"
@@ -169,7 +169,7 @@ const AddUser = ({ addUser, setAddUser }) => {
           <div className={`mb-4 md:w-21.375 ${email === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type="text"
-              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
@@ -178,7 +178,7 @@ const AddUser = ({ addUser, setAddUser }) => {
           <div className={`mb-4 md:w-21.375 ${mobileNo === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type="text"
-              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={mobileNo}
               onChange={(e) => setMobileNo(e.target.value)}
               placeholder="Mobile number"
@@ -187,7 +187,7 @@ const AddUser = ({ addUser, setAddUser }) => {
           <div className={`mb-4 md:w-21.375 relative ${password === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type={passwordVisible ? "text" : "password"}
-              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -207,7 +207,7 @@ const AddUser = ({ addUser, setAddUser }) => {
           <div className={`mb-4 md:w-21.375 relative ${confirmPassword === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type={confirmPasswordVisible ? "text" : "password"}
-              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+              className="w-full h-3.3125 py-2 px-6 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm password"

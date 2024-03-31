@@ -183,7 +183,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                         <div id="textFields" className="grid md:grid-cols-2 gap-4">
 
                             <div onClick={handleProductType} class={`relative inline-block cursor-pointer text-left mb-2 ${product === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <div class="inline-flex items-center justify-center px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+                                <div class="inline-flex items-center justify-center px-4 py-2 text-xs md:text-base font-semibold w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                                     {product || "Select product"}
                                     {/* Arrow icon (tailwindcss/heroicons) */}
                                     <svg
@@ -211,7 +211,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                                 <div
                                                     href="#"
                                                     onClick={() => handleProductClick(product.product_name)}
-                                                    class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
+                                                    class="block px-4 py-2 text-xs md:text-base font-semibold cursor-pointer text-[#595858] hover:bg-indigo-100"
                                                 >
                                                     {product.product_name}
                                                 </div>
@@ -221,7 +221,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             </div>
 
                             <div onClick={handleUser} class={`relative inline-block cursor-pointer text-left mb-2 ${user === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <div class="inline-flex items-center justify-center px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+                                <div class="inline-flex items-center justify-center text-xs md:text-base font-semibold px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                                     {user || "Select customer"}
                                     {/* Arrow icon (tailwindcss/heroicons) */}
                                     <svg
@@ -249,7 +249,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                                 <div
                                                     href="#"
                                                     onClick={() => handleUserClick(user.email)}
-                                                    class="block px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-100"
+                                                    class="block px-4 py-2 text-xs md:text-base font-semibold cursor-pointer text-[#595858] hover:bg-indigo-100"
                                                 >
                                                     {user.email}
                                                 </div>
@@ -260,7 +260,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             <div className={`mb-4 md:w-21.375 ${workerName === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input
                                     type="text"
-                                    className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                     value={workerName}
                                     onChange={(e) => setWorkerName(e.target.value)}
                                     placeholder="Worker name"
@@ -269,19 +269,19 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             <div className={`mb-4 md:w-21.375 ${workerContact === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input
                                     type="text"
-                                    className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                     value={workerContact}
                                     onChange={(e) => setWorkerContact(e.target.value)}
                                     placeholder="Worker contact"
                                 />
                             </div>
                             <div className={`mb-4 flex justify-center items-center ${startDate === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
+                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl text-xs md:text-base font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
                                     Start date&nbsp;&nbsp;&nbsp;
                                     <input
                                         type="date"
                                         id="startDate"
-                                        className="md:ml-10 text-[#595858] font-semibold cursor-pointer"
+                                        className="md:ml-10 text-[#595858] text-xs md:text-base font-semibold cursor-pointer"
                                         onChange={(e) => {
                                             setStartDate(e.target.value)
                                         }}
@@ -291,12 +291,12 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
 
 
                             <div className={`mb-4 flex justify-center items-center ${endDate === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
+                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl text-xs md:text-base font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
                                     End date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input
                                         type="date"
                                         id="endDate"
-                                        className="md:ml-10 text-[#595858] font-semibold cursor-pointer"
+                                        className="md:ml-10 text-[#595858] text-xs md:text-base font-semibold cursor-pointer"
                                         min={startDate}
                                         onChange={(e) => {
                                             setEndDate(e.target.value)
@@ -307,7 +307,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             <div className={`mb-4 md:w-21.375 ${weight === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input
                                     type="number"
-                                    className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                                     value={weight}
                                     onChange={(e) => setWeight(e.target.value)}
                                     placeholder="Issue weight (in gm)"
@@ -316,7 +316,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             <div className={`mb-4 md:w-21.375 ${description === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input
                                     type="text"
-                                    className="w-full h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     placeholder="Description"
