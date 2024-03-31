@@ -26,7 +26,7 @@ const EditFormProductType = ({ image, row, openCategory, handleCategory, handleO
     return (
         <div>
             <div className={`fixed inset-0 z-40 bg-black opacity-10 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
-            <div className="flex justify-center items-center min-h-screen fixed inset-10 z-50">
+            <div className="flex justify-center items-center fixed bottom-2 top-2 right-5 left-5 z-50">
 
                 <form
                     onSubmit={(e) => {

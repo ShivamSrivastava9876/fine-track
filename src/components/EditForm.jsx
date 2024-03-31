@@ -48,16 +48,16 @@ const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, s
 
         <div>
             <div className={`fixed inset-0 z-40 bg-black opacity-10 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
-            <div className="flex justify-center items-center min-h-screen fixed inset-10 z-50">
+            <div className="flex justify-center items-center fixed bottom-2 top-2 right-5 left-5 z-50">
 
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
                         handleUpdateCategory(row.category);
                     }}
-                    className="p-8 rounded shadow-md flex flex-col justify-center w-35rem h-28rem bg-white border border-blue-500"
+                    className="p-8 rounded shadow-md flex flex-col justify-start w-35rem h-28rem bg-white border border-blue-500"
                 >
-                    <div className="mb-4 space-y-1">
+                    <div className="mb-4">
                         <h2 className=" flex items-center m-4 text-2xl font-bold">
                             Edit category
                         </h2>

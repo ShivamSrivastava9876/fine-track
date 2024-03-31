@@ -47,14 +47,14 @@ const EditFormManufacturingOrder = ({ productWeight, setProductWeight, orderStat
     return (
         <div className="">
             <div className={`fixed inset-0 z-40 bg-black opacity-10 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
-            <div className="flex justify-center items-center m-1 fixed inset-0 z-50">
+            <div className="flex justify-center items-center fixed bottom-2 top-2 right-5 left-5 z-50">
 
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
                         handleUpdateManufacturingOrder(e, row.id, row.customer, row.product, row.workerName, row.workerContact, row.startDate, row.endDate, row.weight, row.description);
                     }}
-                    className="p-8 rounded shadow-md flex flex-col md:w-[500px] bg-white border border-blue-500"
+                    className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll md:h-min h-full w-auto bg-white border border-blue-500"
                 >
                     <div className="mb-4 space-y-1">
                         <h2 className=" flex items-center justify-center m-4 text-2xl font-bold">

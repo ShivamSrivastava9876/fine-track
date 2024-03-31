@@ -115,17 +115,17 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
     return (
         <div>
             <div className={`fixed inset-0 z-40 bg-black opacity-10 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
-            <div className="flex justify-center items-center overflow-scroll min-h-screen fixed inset-3 z-50">
+            <div className="flex justify-center items-center fixed bottom-2 top-2 right-5 left-5 z-50">
 
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
                         handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.size, row.length, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType, row.image);
                     }}
-                    className="p-8 rounded shadow-md flex flex-col justify-center w-auto h-28rem bg-white border border-blue-500"
+                    className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll h-full w-auto bg-white border border-blue-500"
                 >
-                    <div className="mb-4 space-y-1">
-                        <h2 className=" flex items-center m-4 text-2xl font-bold">
+                    <div className="my-2 bg-white">
+                        <h2 className="mx-2 my-3 text-2xl font-bold">
                             Edit product
                         </h2>
                     </div>
