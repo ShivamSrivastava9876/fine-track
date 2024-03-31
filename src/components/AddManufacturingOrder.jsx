@@ -277,7 +277,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             </div>
                             <div className={`mb-4 flex justify-center items-center ${startDate === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
-                                    Start date
+                                    Start date&nbsp;&nbsp;&nbsp;
                                     <input
                                         type="date"
                                         id="startDate"
@@ -292,7 +292,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
 
                             <div className={`mb-4 flex justify-center items-center ${endDate === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
-                                    End date
+                                    End date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input
                                         type="date"
                                         id="endDate"

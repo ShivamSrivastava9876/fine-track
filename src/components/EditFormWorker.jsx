@@ -22,7 +22,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                         e.preventDefault();
                         handleUpdateWorker(e, row.firstName, row.lastName, row.email, row.mobile, row.address, row.city, row.state, row.country, row.zipcode);
                     }}
-                    className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll md:h-min h-full w-auto bg-white border border-blue-500"
+                    className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll no-scrollbar md:h-min h-full w-auto bg-white border border-blue-500"
                 >
                     <div className="mb-4">
                         <h2 className=" flex items-center m-4 text-2xl font-bold">

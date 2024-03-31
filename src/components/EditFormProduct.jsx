@@ -122,7 +122,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                         e.preventDefault();
                         handleUpdateProduct(e, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.size, row.length, row.puritySpc, row.price, row.quantity, row.description, row.category, row.productType, row.image);
                     }}
-                    className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll h-full w-auto bg-white border border-blue-500"
+                    className="p-8 rounded shadow-md flex flex-col justify-start overflow-y-scroll no-scrollbar h-full w-auto bg-white border border-blue-500"
                 >
                     <div className="my-2 bg-white">
                         <h2 className="mx-2 my-3 text-2xl font-bold">
