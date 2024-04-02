@@ -197,7 +197,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
             />
           </svg>
         </button>
-        <div id="formTitle" className="w-52 h-4 m-4 font-bold text-center text-25">
+        <div id="formTitle" className="w-52 h-4 m-4 font-bold text-base text-center text-25">
           Add worker
         </div>
         <div id="formFields" className="">
@@ -210,7 +210,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               <div className={`mb-4 md:w-21.375 ${firstName === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   placeholder="First name"
@@ -220,7 +220,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               <div className={`mb-4 md:w-21.375 ${lastName === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   placeholder="Last name"
@@ -230,7 +230,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               <div className={`mb-4 md:w-21.375 ${email === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
@@ -240,7 +240,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               <div className={`mb-4 md:w-21.375 ${mobile === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="number"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
                   placeholder="Mobile"
@@ -250,7 +250,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               <div className={`mb-4 md:w-21.375 ${address === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="Address"
@@ -260,7 +260,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               <div className={`mb-4 md:w-21.375 ${city === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
                   placeholder="City"
@@ -270,7 +270,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               <div className={`mb-4 md:w-21.375 ${state === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   placeholder="State"
@@ -280,7 +280,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               <div className={`mb-4 md:w-21.375 ${country === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   placeholder="Country"
@@ -291,7 +291,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                 <input
                   type="number"
 
-                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                  className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={zipcode}
                   onChange={(e) => setZipcode(e.target.value)}
                   placeholder="PIN code"

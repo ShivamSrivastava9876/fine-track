@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createWorker, deleteWorker, editWorker, getWorker } from "./workerApi";
+import { createWorker, deleteWorker, editWorker, getWorker, getWorkersList } from "./workerApi";
 
 const initialState = {
     status: 'idle',
     workerData: [],
+    workerName: [],
     error: ""
 }
 
@@ -12,6 +13,7 @@ export const getWorkerAsync = createAsyncThunk(
     async () => {
         try {
             const response = await getWorker();
+            console.log(response.data);
             return response.data;
         }
         catch (error) {
@@ -70,18 +72,19 @@ export const deleteWorkerAsync = createAsyncThunk(
     }
 )
 
-// export const searchCategoryAsync = createAsyncThunk(
-//     "category/searchCategory",
-//     async (searchCategoryInfo) => {
-//         try {
-//             const response = await searchCategory(searchCategoryInfo);
-//             return response.data.data;
-//         }
-//         catch (error) {
-//             return error;
-//         }
-//     }
-// );
+export const getWorkersNameAsync = createAsyncThunk(
+    "worker/getDetails",
+    async () => {
+        try {
+            const response = await getWorkersList();
+            console.log("he",response.data);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+)
 
 const workerSlice = createSlice({
     name: "worker",
@@ -139,22 +142,23 @@ const workerSlice = createSlice({
             .addCase(deleteWorkerAsync.rejected, (state, action) => {
                 state.status = 'idle';
             })
-        // .addCase(searchCategoryAsync.pending, (state) => {
-        //     state.status = "loading";
-        // })
-        // .addCase(searchCategoryAsync.fulfilled, (state, action) => {
-        //     state.status = "idle";
-        //     if (action.payload) {
-        //         state.workerData = action.payload;
-        //         // state.workerData = state.workerData[0].data;
-        //     }
-        // })
-        // .addCase(searchCategoryAsync.rejected, (state, action) => {
-        //     state.error = action.payload;
-        // });
+            .addCase(getWorkersNameAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getWorkersNameAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.workerName.splice(0, 1, action.payload);
+                    state.workerName = state.workerName[0];
+                }
+            })
+            .addCase(getWorkersNameAsync.rejected, (state, action) => {
+                state.status = action.payload;
+            })
     }
 })
 
 export const getWorkerList = (state) => state.worker.workerData;
+export const getWorkerNames = (state) => state.worker.workerName;
 export const getWorkerError = (state) => state.worker.error;
 export default workerSlice.reducer;

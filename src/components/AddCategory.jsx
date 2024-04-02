@@ -123,14 +123,14 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
             <div className={`mb-4 md:w-21.375 ${newCategory === '' && error ? 'border-2 border-red-500' : ''}`}>
               <input
                 type="text"
-                className="w-full py-2 px-8 text-xs md:text-base font-semibold h-3.3125 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                className="w-full py-2 px-8 text-xs md:text-sm font-semibold h-3.3125 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
                 placeholder="New category"
               />
             </div>
             <div className={`mb-4 flex justify-center items-center ${image === null && error ? 'border-2 border-red-500' : ''}`}>
-              <label htmlFor="fileInput" className="w-full flex items-center text-xs md:text-base h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
+              <label htmlFor="fileInput" className="w-full flex items-center text-xs md:text-sm h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
                 <FiImage className="mr-2" /> {image !== null ? 'Image uploaded' : 'Upload image'}
                 <input
                   type="file"

@@ -2,6 +2,7 @@ import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/cate
 import { createProductAsync, getProductAsync } from "@/redux/slice/product/productSlice";
 import { getProductTypeList } from "@/redux/slice/productType/productTypeSlice";
 import { getManugfacturingProductListAsync, getManufacturingProductList, getManugfacturingUserListAsync, getManufacturingUserList, createManugfacturingOrderAsync, getManufacturingOrderListAsync } from "../redux/slice/manufacturing/manufacturingSlice";
+import { getWorkerNames, getWorkersNameAsync } from "../redux/slice/worker/workerSlice";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FiImage } from 'react-icons/fi';
@@ -12,6 +13,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
     const [user, setUser] = useState("");
     const [product, setProduct] = useState("");
     const [workerName, setWorkerName] = useState("");
+    const [workerId, setWorkerId] = useState("");
     const [workerContact, setWorkerContact] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
@@ -23,6 +25,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
     const [success, setSuccess] = useState(false);
     const [openProductType, setOpenProductType] = useState(false);
     const [openUser, setOpenUser] = useState(false);
+    const [openWorkerSelection, setOpenWorkerSelection] = useState(false);
 
     //Handling image file
     const handleFileChange = (e) => {
@@ -37,27 +40,29 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
     useEffect(() => {
         dispatch(getManugfacturingProductListAsync());
         dispatch(getManugfacturingUserListAsync());
+        dispatch(getWorkersNameAsync());
     }, [dispatch])
     const productList = useSelector(getManufacturingProductList);
     const userList = useSelector(getManufacturingUserList);
+    const workersNameList = useSelector(getWorkerNames);
 
     const handleClose = () => {
         setAddProduct(!addProduct);
     };
 
     const handleManufacturingOrderSubmit = (e) => {
-        if (user !== "" && product !== "" && workerName !== "" && workerContact !== "" && startDate !== "" && endDate !== "" && weight !== "" && description !== "") {
+        if (user !== "" && product !== "" && workerName !== "" && workerId !== "" && startDate !== "" && endDate !== "" && weight !== "" && description !== "") {
 
             e.preventDefault();
-            console.log("description", description);
+            
             //logic for add product
-            dispatch(createManugfacturingOrderAsync({ customer: user, product: product, worker_name: workerName, worker_contact: workerContact, start_date: startDate, end_date: endDate, weight: weight, decription: description })).then((result) => {
+            dispatch(createManugfacturingOrderAsync({ customer: user, product: product, worker: workerId, start_date: startDate, end_date: endDate, weight: weight, decription: description })).then((result) => {
                 if (createManugfacturingOrderAsync.fulfilled.match(result)) {
                     dispatch(getManufacturingOrderListAsync());
                     setUser("");
                     setProduct("");
                     setWorkerName("");
-                    setWorkerContact("");
+                    setWorkerId("");
                     setStartDate("");
                     setEndDate("");
                     setWeight("");
@@ -91,10 +96,20 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
 
     const handleProductType = () => {
         setOpenProductType(!openProductType)
+        setOpenUser(false)
+        setOpenWorkerSelection(false)
     }
 
     const handleUser = () => {
+        setOpenProductType(false)
         setOpenUser(!openUser)
+        setOpenWorkerSelection(false)  
+    }
+
+    const handleWorkerSelection = () => {
+        setOpenProductType(false)
+        setOpenUser(false)
+        setOpenWorkerSelection(!openWorkerSelection)
     }
 
     const handleProductClick = (option) => {
@@ -105,6 +120,12 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
     const handleUserClick = (option) => {
         setUser(option);
         setOpenUser(!openUser);
+    }
+
+    const handleWorkerNameClick = (option, id) => {
+        setWorkerName(option);
+        setOpenWorkerSelection(!openWorkerSelection);
+        setWorkerId(id);
     }
 
     const hideError = () => {
@@ -172,7 +193,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                         />
                     </svg>
                 </button>
-                <div id="formTitle" className="w-52 h-4 m-4 font-bold text-center text-25">
+                <div id="formTitle" className="w-52 h-4 m-4 font-bold text-base text-center text-25">
                     Gold issue
                 </div>
                 <div id="formFields" className="">
@@ -183,7 +204,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                         <div id="textFields" className="grid md:grid-cols-2 gap-4">
 
                             <div onClick={handleProductType} class={`relative inline-block cursor-pointer text-left mb-2 ${product === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <div class="inline-flex items-center justify-center px-4 py-2 text-xs md:text-base font-semibold w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+                                <div class="inline-flex items-center justify-center px-4 py-2 text-xs md:text-sm font-semibold w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                                     {product || "Select product"}
                                     {/* Arrow icon (tailwindcss/heroicons) */}
                                     <svg
@@ -211,7 +232,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                                 <div
                                                     href="#"
                                                     onClick={() => handleProductClick(product.product_name)}
-                                                    class="block px-4 py-2 text-xs md:text-base font-semibold cursor-pointer text-[#595858] hover:bg-indigo-100"
+                                                    class="block px-4 py-2 text-xs md:text-sm font-semibold cursor-pointer text-[#595858] hover:bg-indigo-100"
                                                 >
                                                     {product.product_name}
                                                 </div>
@@ -221,7 +242,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             </div>
 
                             <div onClick={handleUser} class={`relative inline-block cursor-pointer text-left mb-2 ${user === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <div class="inline-flex items-center justify-center text-xs md:text-base font-semibold px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+                                <div class="inline-flex items-center justify-center text-xs md:text-sm font-semibold px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                                     {user || "Select customer"}
                                     {/* Arrow icon (tailwindcss/heroicons) */}
                                     <svg
@@ -249,7 +270,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                                 <div
                                                     href="#"
                                                     onClick={() => handleUserClick(user.email)}
-                                                    class="block px-4 py-2 text-xs md:text-base font-semibold cursor-pointer text-[#595858] hover:bg-indigo-100"
+                                                    class="block px-4 py-2 text-xs md:text-sm font-semibold cursor-pointer text-[#595858] hover:bg-indigo-100"
                                                 >
                                                     {user.email}
                                                 </div>
@@ -257,31 +278,61 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                                     </div>
                                 )}
                             </div>
-                            <div className={`mb-4 md:w-21.375 ${workerName === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <input
-                                    type="text"
-                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                                    value={workerName}
-                                    onChange={(e) => setWorkerName(e.target.value)}
-                                    placeholder="Worker name"
-                                />
+
+                            <div onClick={handleWorkerSelection} class={`relative inline-block cursor-pointer text-left mb-2 ${user === '' && error ? 'border-2 border-red-500' : ''}`}>
+                                <div class="inline-flex items-center justify-center text-xs md:text-sm font-semibold px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
+                                    {workerName || "Select worker"}
+                                    {/* Arrow icon (tailwindcss/heroicons) */}
+                                    <svg
+
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 ml-2 -mr-1 text-gray-400"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M19 9l-7 7-7-7"
+                                        ></path>
+                                    </svg>
+                                </div>
+
+                                {openWorkerSelection && (
+                                    <div class="origin-top-right absolute z-10 right-16 mt-2 w-[220px] max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+
+                                        {workersNameList.map((workersName) => (
+                                            <div key={workersName.id} class="py-1">
+                                                <div
+                                                    href="#"
+                                                    onClick={() => handleWorkerNameClick(workersName.worker_name, workersName.id)}
+                                                    class="block px-4 py-2 text-xs md:text-sm font-semibold cursor-pointer text-[#595858] hover:bg-indigo-100"
+                                                >
+                                                    {workersName.worker_name}
+                                                </div>
+                                            </div>))}
+                                    </div>
+                                )}
                             </div>
-                            <div className={`mb-4 md:w-21.375 ${workerContact === '' && error ? 'border-2 border-red-500' : ''}`}>
+                            {/* <div className={`mb-4 md:w-21.375 ${workerContact === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input
                                     type="text"
-                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                                     value={workerContact}
                                     onChange={(e) => setWorkerContact(e.target.value)}
                                     placeholder="Worker contact"
                                 />
-                            </div>
+                            </div> */}
                             <div className={`mb-4 flex justify-center items-center ${startDate === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl text-xs md:text-base font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
+                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl text-xs md:text-sm font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
                                     Start date&nbsp;&nbsp;&nbsp;
                                     <input
                                         type="date"
                                         id="startDate"
-                                        className="md:ml-10 text-[#595858] text-xs md:text-base font-semibold cursor-pointer"
+                                        value={startDate}
+                                        className="md:ml-10 text-[#595858] text-xs md:text-sm font-semibold cursor-pointer"
                                         onChange={(e) => {
                                             setStartDate(e.target.value)
                                         }}
@@ -291,12 +342,13 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
 
 
                             <div className={`mb-4 flex justify-center items-center ${endDate === '' && error ? 'border-2 border-red-500' : ''}`}>
-                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl text-xs md:text-base font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
+                                <label htmlFor="startDate" className="w-full flex items-center h-3.3125 py-2 px-8 border rounded-xl text-xs md:text-sm font-semibold outline-none border-[#9C9C9C] text-[#9C9C9C] cursor-pointer">
                                     End date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <input
                                         type="date"
                                         id="endDate"
-                                        className="md:ml-10 text-[#595858] text-xs md:text-base font-semibold cursor-pointer"
+                                        value={endDate}
+                                        className="md:ml-10 text-[#595858] text-xs md:text-sm font-semibold cursor-pointer"
                                         min={startDate}
                                         onChange={(e) => {
                                             setEndDate(e.target.value)
@@ -307,7 +359,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             <div className={`mb-4 md:w-21.375 ${weight === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input
                                     type="number"
-                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
+                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                                     value={weight}
                                     onChange={(e) => setWeight(e.target.value)}
                                     placeholder="Issue weight (in gm)"
@@ -316,7 +368,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                             <div className={`mb-4 md:w-21.375 ${description === '' && error ? 'border-2 border-red-500' : ''}`}>
                                 <input
                                     type="text"
-                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-base font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
+                                    className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                                     value={description}
                                     onChange={(e) => setDescription(e.target.value)}
                                     placeholder="Description"
