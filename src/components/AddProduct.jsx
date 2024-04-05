@@ -64,7 +64,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
 
       //logic for add product of chain
       if (productType.toLowerCase() === 'chain') {
-        if (stoneWeight.length !== 0) {
+        if (length.length !== 0) {
           dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, product_name: productName, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length })).then((result) => {
             if (createProductAsync.fulfilled.match(result)) {
               dispatch(getProductAsync());

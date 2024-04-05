@@ -21,7 +21,7 @@ const createData = (srNo, id, userName, email, mobile, isActive) => {
 };
 
 const columns = [
-  { id: "srNo", label: "Sr no", minWidth: 100 },
+  { id: "srNo", label: "Sr No", minWidth: 100 },
   { id: "userName", label: "Name", minWidth: 250 },
   { id: "email", label: "Email", minWidth: 300 },
   { id: "mobile", label: "Mobile number", minWidth: 200 },
@@ -128,6 +128,7 @@ export default function UserTables() {
                     backgroundColor: "#F8F8F8",
                     color: "#4D586A",
                   }}
+                  className=" font-poppins font-semibold"
                 >
                   {column.label}
                 </TableCell>
@@ -143,7 +144,7 @@ export default function UserTables() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} className=" font-poppins">
                           {column.id === "active" ? (
                             // Render a checkbox for the "Active user" column
                             <label>

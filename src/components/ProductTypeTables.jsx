@@ -176,6 +176,7 @@ export default function ProductTypeTables() {
                       backgroundColor: "#F8F8F8",
                       color: "#4D586A",
                     }}
+                    className=" font-poppins font-semibold"
                   >
                     {column.label}
                   </TableCell>
@@ -191,7 +192,7 @@ export default function ProductTypeTables() {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell key={column.id} align={column.align} className=" font-poppins">
                             {column.id === "actions" ? (
                               // Render Edit and Delete buttons
                               <div className="space-x-2">

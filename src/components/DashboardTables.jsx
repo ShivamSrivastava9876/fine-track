@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { approveOrderAsync, declineOrderAsync, getApprovalList, getApproveListAsync, getDashboardDetailsAsync } from "@/redux/slice/order/orderSlice";
 
 const columns = [
-  { id: "srNo", label: "Sr no", minWidth: 80 },
+  { id: "srNo", label: "Sr No", minWidth: 80 },
   { id: "productName", label: "Product name", minWidth: 250 },
   { id: "quantity", label: "Quantity", minWidth: 80 },
   { id: "price", label: "Price", minWidth: 80 },
@@ -110,6 +110,7 @@ export default function DashboardTables() {
                     backgroundColor: "#F8F8F8",
                     color: "#4D586A",
                   }}
+                  className=" font-poppins font-semibold"
                 >
                   {column.label}
                 </TableCell>
@@ -125,7 +126,7 @@ export default function DashboardTables() {
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} className=" font-poppins">
                           {column.id === "actions" ? (
                             // Render Edit and Delete buttons
                             <div className="space-x-2 flex">
