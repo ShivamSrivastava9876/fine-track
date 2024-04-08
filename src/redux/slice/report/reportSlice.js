@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getDailyReport, getDailyReportData, getMonthlyReport, getMonthlyReportData, getWeeklyReport, getWeeklyReportData, getYearlyReport, getYearlyReportData, getDailyManufacturingReport, getDailyManufacturingReportData, getWeeklyManufacturingReport, getMonthlyManufacturingReport, getYearlyManufacturingReport, getWeeklyManufacturingReportData, getMonthlyManufacturingReportData, getYearlyManufacturingReportData, getWorkerReport, getManufacturingByWorkerReport } from "./reportApi";
+import { getDailyReport, getDailyReportData, getMonthlyReport, getMonthlyReportData, getWeeklyReport, getWeeklyReportData, getYearlyReport, getYearlyReportData, getDailyManufacturingReport, getDailyManufacturingReportData, getWeeklyManufacturingReport, getMonthlyManufacturingReport, getYearlyManufacturingReport, getWeeklyManufacturingReportData, getMonthlyManufacturingReportData, getYearlyManufacturingReportData, getWorkerReport, getManufacturingByWorkerReport, getUserReport, getOrderByUserReport, getProductReport, getOrderByProductReport } from "./reportApi";
 
 const initialState = {
     status: 'idle',
@@ -10,6 +10,13 @@ const initialState = {
     yearlyReportData: [],
     workerReportData: [],
     manufacturingByWorkerData: [],
+    selectedWorkerName: "",
+    userReportData: [],
+    orderByUserdata: [],
+    selectedUserName: "",
+    productReportData: [],
+    orderByProductData: [],
+    selectedProductName: "",
     error: null
 }
 
@@ -248,6 +255,60 @@ export const getManufacturingByWorkerReportAsync = createAsyncThunk(
     }
 );
 
+//User report APIs
+export const getUserReportAsync = createAsyncThunk(
+    "report/user",
+    async () => {
+        try {
+            const response = await getUserReport();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getOrderByUserReportAsync = createAsyncThunk(
+    "report/orderByuser",
+    async (userId) => {
+        try {
+            const response = await getOrderByUserReport(userId);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+//Product report APIs
+export const getProductReportAsync = createAsyncThunk(
+    "report/product",
+    async () => {
+        try {
+            const response = await getProductReport();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const getOrderByProductReportAsync = createAsyncThunk(
+    "report/orderByProduct",
+    async (productId) => {
+        try {
+            const response = await getOrderByProductReport(productId);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
 const reportSlice = createSlice({
     name: "report",
     initialState,
@@ -467,9 +528,64 @@ const reportSlice = createSlice({
                 if (action.payload) {
                     state.manufacturingByWorkerData.splice(0, 1, action.payload);
                     state.manufacturingByWorkerData = state.manufacturingByWorkerData[0].data;
+                    state.selectedWorkerName = action.payload.worker_full_name;
                 }
             })
             .addCase(getManufacturingByWorkerReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getUserReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getUserReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.userReportData.splice(0, 1, action.payload);
+                    state.userReportData = state.userReportData[0].data;
+                }
+            })
+            .addCase(getUserReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getOrderByUserReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getOrderByUserReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.orderByUserdata.splice(0, 1, action.payload);
+                    state.orderByUserdata = state.orderByUserdata[0].data;
+                    state.selectedUserName = action.payload.user_full_name;
+                }
+            })
+            .addCase(getOrderByUserReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getProductReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getProductReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.productReportData.splice(0, 1, action.payload);
+                    state.productReportData = state.productReportData[0].data;
+                }
+            })
+            .addCase(getProductReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(getOrderByProductReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(getOrderByProductReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.orderByProductData.splice(0, 1, action.payload);
+                    state.orderByProductData = state.orderByProductData[0].data;
+                    state.selectedProductName = action.payload.product_name;
+                }
+            })
+            .addCase(getOrderByProductReportAsync.rejected, (state, action) => {
                 state.status = 'idle';
             })
     }
@@ -483,3 +599,11 @@ export const getMonthlyReportList = (state) => state.report.monthlyReportData;
 export const getYearlyReportList = (state) => state.report.yearlyReportData;
 export const getWorkerReportList = (state) => state.report.workerReportData;
 export const getManufacturingByWorkerData = (state) => state.report.manufacturingByWorkerData;
+export const getSelectedWorkerName = (state) => state.report.selectedWorkerName;
+export const getUserReportList = (state) => state.report.userReportData;
+export const getOrderByUserData = (state) => state.report.orderByUserdata;
+export const getSelectedUserName = (state) => state.report.selectedUserName;
+export const getProductReportList = (state) => state.report.productReportData;
+export const getOrderByProductData = (state) => state.report.orderByProductData;
+export const getSelectedProductName = (state) => state.report.selectedProductName;
+

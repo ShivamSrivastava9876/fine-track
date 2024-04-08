@@ -39,7 +39,6 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
         }
       });
     }
-    
     else {
       e.preventDefault();
       setError(true);

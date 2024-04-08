@@ -575,3 +575,133 @@ export async function getManufacturingByWorkerReport(workerId) {
         return { error }
     }
 };
+
+//User report
+export async function getUserReport() {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            // "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            'http://77.37.44.105:8000/report/user-report-list/',
+            {
+                method: 'GET',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};
+
+export async function getOrderByUserReport(userId) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            // "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            `http://77.37.44.105:8000/report/order-by-user/${userId}/`,
+            {
+                method: 'GET',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};
+
+//Product report
+export async function getProductReport() {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            // "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            'http://77.37.44.105:8000/report/product-report-list/',
+            {
+                method: 'GET',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};
+
+export async function getOrderByProductReport(productId) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            // "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            `http://77.37.44.105:8000/report/product-order-report/${productId}/`,
+            {
+                method: 'GET',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};

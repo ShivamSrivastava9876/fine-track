@@ -10,52 +10,51 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
-import { getManufacturingByWorkerData, getSelectedWorkerName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
+import { getManufacturingByWorkerData, getOrderByUserData, getSelectedUserName, getSelectedWorkerName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
 
 const columns = [
     // { id: "HuId", label: "HU ID", minWidth: 80 },
-    { id: "customerName", label: "Customer name", minWidth: 150 },
-    { id: "productName", label: "Product name", minWidth: 200 },
-    { id: "issuedWeight", label: "Issued gold weight (in gm)", minWidth: 80 },
-    { id: "wastageWeight", label: "Wastage weight (in gm)", minWidth: 80 },
-    { id: "productWeight", label: "Product weight (in gm)", minWidth: 80 },
-    { id: "balanceWeight", label: "Balance weight (in gm)", minWidth: 150 },
-    { id: "issuedDate", label: "Issued date", minWidth: 80 },
-    { id: "receivedDate", label: "Received date", minWidth: 80 }
+    { id: "productName", label: "Product name", minWidth: 150 },
+    { id: "category", label: "Category", minWidth: 120 },
+    { id: "productType", label: "Product type", minWidth: 120 },
+    { id: "quantity", label: "Quantity", minWidth: 80 },
+    { id: "price", label: "Price (in INR)", minWidth: 150 },
+    { id: "orderDate", label: "Date of order placed", minWidth: 150 },
+    { id: "orderStatus", label: "Order status", minWidth: 100 }
 ];
 
 const createData = (
-    customerName,
+    user,
     productName,
-    issuedWeight,
-    wastageWeight,
-    productWeight,
-    balanceWeight,
-    issuedDate,
-    receivedDate,
-    workerName
+    category,
+    productType,
+    quantity,
+    price,
+    orderDate,
+    orderStatus,
+    orderId
 ) => {
     return {
-        customerName,
+        user,
         productName,
-        issuedWeight,
-        wastageWeight,
-        productWeight,
-        balanceWeight,
-        issuedDate,
-        receivedDate,
-        workerName
+        category,
+        productType,
+        quantity,
+        price,
+        orderDate,
+        orderStatus,
+        orderId
     };
 };
 
-export default function ManufactureByWorkerReportData() {
+export default function OrderByUserData() {
     const dispatch = useDispatch();
     const [page, setPage] = React.useState(0);
     const [rows, setRows] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const reportList = useSelector(getManufacturingByWorkerData);
-    const selectedWorkerName = useSelector(getSelectedWorkerName);
+    const reportList = useSelector(getOrderByUserData);
+    const selectedUserName = useSelector(getSelectedUserName);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -69,31 +68,27 @@ export default function ManufactureByWorkerReportData() {
     };
 
     React.useEffect(() => {
-        dispatch(getWorkerReportAsync())
-    }, [dispatch])
-
-    React.useEffect(() => {
         if (reportList && Array.isArray(reportList)) {
             let srNo = 1;
             const newRows = reportList.map((data) => {
-                // const date = data.order.order_date;
+                const date = data.created;
 
-                // const newDate = new Date(date)
-                // const formattedDate = newDate.toLocaleDateString('en-GB', {
-                //     day: '2-digit',
-                //     month: 'long',
-                //     year: '2-digit',
-                // });
+                const newDate = new Date(date)
+                const formattedDate = newDate.toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: '2-digit',
+                });
                 const newRow = createData(
-                    data.customer.first_name + " " + data.customer.last_name || "",
+                    data.user || "",
                     data.product.product_name || "",
-                    data.weight || "",
-                    data.wastage_weight || "",
-                    data.product_weight || "",
-                    data.balance || "",
-                    data.start_date || "",
-                    data.end_date || "",
-                    data.worker.first_name + " " + data.worker.last_name || ""
+                    data.product.category || "",
+                    data.product.product_type || "",
+                    data.quantity || "",
+                    data.price || "",
+                    formattedDate || "",
+                    data.status || "",
+                    data.order.id || ""
                 );
                 srNo = srNo + 1;
                 return newRow;
@@ -106,7 +101,7 @@ export default function ManufactureByWorkerReportData() {
     return (
         <div>
             <h1 className="text-xl mx-4 mb-4 font-bold text-gray-500">
-                Worker report of <span className=" text-black ">{selectedWorkerName}</span>
+                User report of <span className=" text-black ">{selectedUserName}</span>
             </h1>
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
                 <TableContainer sx={{ maxHeight: 440 }}>

@@ -19,12 +19,9 @@ const columns = [
     { id: "email", label: "Email Id", minWidth: 200 },
     { id: "mobile", label: "Contact No", minWidth: 80 },
     { id: "manufacturingCount", label: "Manufacturing count", minWidth: 80 },
-    { id: "totalBalance", label: "Total balance (in gm)", minWidth: 80 },
+    { id: "totalBalance", label: "Total balance (gm)", minWidth: 80 },
     { id: "address", label: "Address", minWidth: 150 },
     { id: "city", label: "City", minWidth: 80 },
-    { id: "state", label: "State", minWidth: 80 },
-    { id: "country", label: "Country", minWidth: 80 },
-    { id: "state", label: "State", minWidth: 80 },
     { id: "zipcode", label: "Pin Code", minWidth: 60 },
 ];
 
@@ -152,7 +149,7 @@ export default function WorkerReportTable() {
                                                 return (
                                                     <TableCell key={column.id} align={column.align} className=" font-poppins">
                                                         {column.id === "manufacturingCount" ? (
-                                                            <div className="text-blue-500">
+                                                            <div className="text-blue-500 font-semibold">
                                                                 <Link href="/manufactureByWorkerReportData" onClick={() => handleWorkerReportData(row.workerId)}>{value}</Link>
                                                             </div>
                                                         ) : // Render other columns

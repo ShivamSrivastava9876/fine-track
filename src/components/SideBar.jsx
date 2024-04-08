@@ -207,7 +207,7 @@ const SideBar = () => {
               </span>
             </Link>
             <Link
-              href=""
+              href="/productReports"
               className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
               hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
               active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"
@@ -219,7 +219,7 @@ const SideBar = () => {
               </span>
             </Link>
             <Link
-              href=""
+              href="/userReports"
               className="flex space-x-6 items-center px-6 py-4 relative cursor-pointer transition duration-300 ease-in-out 
               hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white 
               active:bg-blue-200 active:bg-opacity-20 active:border-l-4 focus:bg-blue-200 focus:bg-opacity-20 focus:border-l-4"

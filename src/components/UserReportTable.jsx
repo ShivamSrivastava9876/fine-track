@@ -1,5 +1,6 @@
 import * as React from "react";
 import Paper from "@mui/material/Paper";
+import Link from "next/link";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,52 +11,43 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
-import { getManufacturingByWorkerData, getSelectedWorkerName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
+import { getManufacturingByWorkerReportAsync, getOrderByUserReportAsync, getUserReportAsync, getUserReportList, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
 
 const columns = [
-    // { id: "HuId", label: "HU ID", minWidth: 80 },
-    { id: "customerName", label: "Customer name", minWidth: 150 },
-    { id: "productName", label: "Product name", minWidth: 200 },
-    { id: "issuedWeight", label: "Issued gold weight (in gm)", minWidth: 80 },
-    { id: "wastageWeight", label: "Wastage weight (in gm)", minWidth: 80 },
-    { id: "productWeight", label: "Product weight (in gm)", minWidth: 80 },
-    { id: "balanceWeight", label: "Balance weight (in gm)", minWidth: 150 },
-    { id: "issuedDate", label: "Issued date", minWidth: 80 },
-    { id: "receivedDate", label: "Received date", minWidth: 80 }
+    { id: "userId", label: "User Id", minWidth: 50 },
+    { id: "userName", label: "User name", minWidth: 150 },
+    { id: "email", label: "Email Id", minWidth: 200 },
+    { id: "mobile", label: "Contact No", minWidth: 100 },
+    { id: "orderCount", label: "Number of orders", minWidth: 100 }
 ];
 
 const createData = (
-    customerName,
-    productName,
-    issuedWeight,
-    wastageWeight,
-    productWeight,
-    balanceWeight,
-    issuedDate,
-    receivedDate,
-    workerName
+    userName,
+    email,
+    mobile,
+    orderCount,
+    userId
 ) => {
     return {
-        customerName,
-        productName,
-        issuedWeight,
-        wastageWeight,
-        productWeight,
-        balanceWeight,
-        issuedDate,
-        receivedDate,
-        workerName
+        userName,
+        email,
+        mobile,
+        orderCount,
+        userId
     };
 };
 
-export default function ManufactureByWorkerReportData() {
+export default function UserReportTable() {
     const dispatch = useDispatch();
     const [page, setPage] = React.useState(0);
     const [rows, setRows] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-    const reportList = useSelector(getManufacturingByWorkerData);
-    const selectedWorkerName = useSelector(getSelectedWorkerName);
+    const reportList = useSelector(getUserReportList);
+
+    const handleUserReportData = (userId) => {
+        dispatch(getOrderByUserReportAsync(userId));
+    }
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -69,31 +61,20 @@ export default function ManufactureByWorkerReportData() {
     };
 
     React.useEffect(() => {
-        dispatch(getWorkerReportAsync())
+        dispatch(getUserReportAsync())
     }, [dispatch])
 
     React.useEffect(() => {
         if (reportList && Array.isArray(reportList)) {
             let srNo = 1;
             const newRows = reportList.map((data) => {
-                // const date = data.order.order_date;
-
-                // const newDate = new Date(date)
-                // const formattedDate = newDate.toLocaleDateString('en-GB', {
-                //     day: '2-digit',
-                //     month: 'long',
-                //     year: '2-digit',
-                // });
+                
                 const newRow = createData(
-                    data.customer.first_name + " " + data.customer.last_name || "",
-                    data.product.product_name || "",
-                    data.weight || "",
-                    data.wastage_weight || "",
-                    data.product_weight || "",
-                    data.balance || "",
-                    data.start_date || "",
-                    data.end_date || "",
-                    data.worker.first_name + " " + data.worker.last_name || ""
+                    data.first_name + " " + data.last_name || "",
+                    data.email || "",
+                    data.mobile || "",
+                    data.order_count || "",
+                    data.id || ""
                 );
                 srNo = srNo + 1;
                 return newRow;
@@ -105,9 +86,7 @@ export default function ManufactureByWorkerReportData() {
 
     return (
         <div>
-            <h1 className="text-xl mx-4 mb-4 font-bold text-gray-500">
-                Worker report of <span className=" text-black ">{selectedWorkerName}</span>
-            </h1>
+            <h1 className="text-2xl mx-4 mb-4 font-bold">User report</h1>
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
@@ -122,7 +101,7 @@ export default function ManufactureByWorkerReportData() {
                                             backgroundColor: "#F8F8F8",
                                             color: "#4D586A",
                                         }}
-                                        className="font-poppins font-semibold"
+                                        className=" font-poppins font-semibold"
                                     >
                                         {column.label}
                                     </TableCell>
@@ -139,10 +118,9 @@ export default function ManufactureByWorkerReportData() {
                                                 const value = row[column.id];
                                                 return (
                                                     <TableCell key={column.id} align={column.align} className=" font-poppins">
-                                                        {column.id === "actions" ? (
-                                                            // Render Edit and Delete buttons
-                                                            <div className="space-x-2">
-
+                                                        {column.id === "orderCount" ? (
+                                                            <div className="text-blue-500 font-semibold">
+                                                                <Link href="/orderByUserData" onClick={() => handleUserReportData(row.userId)}>{value}</Link>
                                                             </div>
                                                         ) : // Render other columns
                                                             column.format && typeof value === "number" ? (
