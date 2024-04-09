@@ -16,14 +16,15 @@ import DeleteOption from "./DeleteOption";
 
 const columns = [
   { id: "HuId", label: "HU ID", minWidth: 50 },
+  { id: "product", label: "Product", minWidth: 100 },
   { id: "productId", label: "Product ID", minWidth: 100 },
   { id: "category", label: "Category", minWidth: 100 },
   { id: "productType", label: "Product type", minWidth: 100 },
   { id: "quantity", label: "Quantity", minWidth: 50 },
-  { id: "grossWeight", label: "Weight (gm)", minWidth: 100 },
-  { id: "size", label: "Size (cm)", minWidth: 100 },
-  { id: "length", label: "Length (cm)", minWidth: 100 },
-  { id: "puritySpc", label: "Purity spc", minWidth: 100 },
+  { id: "grossWeight", label: "Weight (gm)", minWidth: 80 },
+  { id: "size", label: "Size (cm)", minWidth: 80 },
+  { id: "length", label: "Length (cm)", minWidth: 80 },
+  { id: "puritySpc", label: "Purity spc", minWidth: 50 },
   { id: "price", label: "Price", minWidth: 100 },
   { id: "actions", label: "", minWidth: 100 },
 ];

@@ -8,10 +8,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import Image from "next/image";
+import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
-import { getManufacturingByWorkerReportAsync, getOrderByUserReportAsync, getUserReportAsync, getUserReportList, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
+import { getManufacturingByWorkerReportAsync, getOrderByUserReportAsync, getUserReportAsync, getUserReportList, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList, searchUserReportAsync } from "../redux/slice/report/reportSlice";
 
 const columns = [
     { id: "userId", label: "User Id", minWidth: 50 },
@@ -42,6 +44,7 @@ export default function UserReportTable() {
     const [page, setPage] = React.useState(0);
     const [rows, setRows] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [searchParameter, setSearchParameter] = React.useState("");
 
     const reportList = useSelector(getUserReportList);
 
@@ -60,6 +63,19 @@ export default function UserReportTable() {
         setPage(0);
     };
 
+    const handleSearchParameter = (searchParameter) => {
+        setSearchParameter(searchParameter);
+    }
+
+    const handleUserReportSearch = (e) => {
+        e.preventDefault();
+        dispatch(searchUserReportAsync(searchParameter)).then((result) => {
+            if (searchUserReportAsync.fulfilled.match(result)) {
+                // setSearchParameter("");
+            }
+        })
+    }
+
     React.useEffect(() => {
         dispatch(getUserReportAsync())
     }, [dispatch])
@@ -68,7 +84,7 @@ export default function UserReportTable() {
         if (reportList && Array.isArray(reportList)) {
             let srNo = 1;
             const newRows = reportList.map((data) => {
-                
+
                 const newRow = createData(
                     data.first_name + " " + data.last_name || "",
                     data.email || "",
@@ -86,7 +102,27 @@ export default function UserReportTable() {
 
     return (
         <div>
-            <h1 className="text-2xl mx-4 mb-4 font-bold">User report</h1>
+            <div className="flex items-center justify-between flex-wrap w-full mb-4">
+                <h1 className="text-2xl mx-4 mb-1 font-bold">User report</h1>
+                {/* Right-hand side Search Box */}
+                <form onSubmit={(e) => handleUserReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+                    <input
+                        type="search"
+                        placeholder="Search"
+                        value={searchParameter}
+                        onChange={(e) => handleSearchParameter(e.target.value)}
+                        className="w-full h-full outline-none bg-transparent text-blue-gray-700"
+                    />
+                    <div className="ml-2">
+                        <Image
+                            onClick={handleUserReportSearch}
+                            src={SearchIcon}
+                            alt="search-icon"
+                            className="cursor-pointer"
+                        />
+                    </div>
+                </form>
+            </div>
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
@@ -120,7 +156,7 @@ export default function UserReportTable() {
                                                     <TableCell key={column.id} align={column.align} className=" font-poppins">
                                                         {column.id === "orderCount" ? (
                                                             <div className="text-blue-500 font-semibold">
-                                                                <Link href="/orderByUserData" onClick={() => handleUserReportData(row.userId)}>{value}</Link>
+                                                                <Link href="/orderByUserData" onClick={() => handleUserReportData(row.userId)}>{value || "0"}</Link>
                                                             </div>
                                                         ) : // Render other columns
                                                             column.format && typeof value === "number" ? (

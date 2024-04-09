@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createManufacturingOrder, deleteManufacturingOrder, getManufacturingOrderList, getManufacturingProduct, getManufacturingUser, updateManufacturingOrder } from "./manufacturingApi";
+import { createManufacturingOrder, deleteManufacturingOrder, getManufacturingOrderList, getManufacturingProduct, getManufacturingUser, searchManufacturingOrder, updateManufacturingOrder } from "./manufacturingApi";
 
 const initialState = {
     status: 'idle',
@@ -86,6 +86,19 @@ export const deleteManufacturingOrderAsync = createAsyncThunk(
     }
 )
 
+export const searchManufacturingOrderAsync = createAsyncThunk(
+    "manufacturingOrder/search",
+    async (orderInfo) => {
+        try {
+            const response = await searchManufacturingOrder(orderInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+)
+
 const manufacturingSlice = createSlice({
     name: "manufacturing",
     initialState,
@@ -130,6 +143,19 @@ const manufacturingSlice = createSlice({
             }
         })
         .addCase(getManugfacturingUserListAsync.rejected, (state, action) => {
+            state.status = 'idle';
+        })
+        .addCase(searchManufacturingOrderAsync.pending, (state) => {
+            state.status = "loading"
+        })
+        .addCase(searchManufacturingOrderAsync.fulfilled, (state, action) => {
+            state.status = 'idle';
+            if (action.payload) {
+                state.manufacturingOrderData = action.payload.data;
+                // state.orderData.push(action.payload);
+            }
+        })
+        .addCase(searchManufacturingOrderAsync.rejected, (state, action) => {
             state.status = 'idle';
         })
     }

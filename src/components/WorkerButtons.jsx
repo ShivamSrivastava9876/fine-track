@@ -3,7 +3,7 @@ import { ReactNode, useState } from "react";
 import Image from "next/image";
 import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import { useDispatch } from "react-redux";
-import { searchCategoryAsync } from "@/redux/slice/category/categorySlice";
+import { searchWorkerAsync } from "@/redux/slice/worker/workerSlice";
 import Link from "next/link";
 
 const CategoryComponent = ({
@@ -18,10 +18,10 @@ const CategoryComponent = ({
     setAddWorker(!addWorker);
   };
 
-  const handleCategorySearch = (e) => {
+  const handleWorkerSearch = (e) => {
     e.preventDefault();
-    dispatch(searchCategoryAsync(searchParameter)).then((result) => {
-      if (searchCategoryAsync.fulfilled.match(result)) {
+    dispatch(searchWorkerAsync(searchParameter)).then((result) => {
+      if (searchWorkerAsync.fulfilled.match(result)) {
         // setSearchParameter("");
       }
     })
@@ -68,7 +68,7 @@ const CategoryComponent = ({
         </div>
 
         {/* Right-hand side Search Box */}
-        {/* <form onSubmit={(e) => handleCategorySearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+        <form onSubmit={(e) => handleWorkerSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
           <input
             type="search"
             placeholder="Search"
@@ -78,14 +78,13 @@ const CategoryComponent = ({
           />
           <div className="ml-2">
             <Image
-              onClick={handleCategorySearch}
+              onClick={handleWorkerSearch}
               src={SearchIcon}
               alt="search-icon"
               className="cursor-pointer"
             />
           </div>
-          {/* <input type="submit"></input> */}
-        {/* </form> */}
+        </form>
       </div>
     </div>
   );

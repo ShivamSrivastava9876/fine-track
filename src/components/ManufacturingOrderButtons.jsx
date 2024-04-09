@@ -3,7 +3,7 @@ import { ReactNode, useState } from "react";
 import Image from "next/image";
 import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import { useDispatch } from "react-redux";
-import { searchProductAsync } from "@/redux/slice/product/productSlice";
+import { searchManufacturingOrderAsync } from "../redux/slice/manufacturing/manufacturingSlice";
 import Link from "next/link";
 
 const ProductComponent = ({
@@ -18,11 +18,10 @@ const ProductComponent = ({
     setAddProduct(!addProduct);
   };
 
-  const handleProductSearch = (e) => {
+  const handleManufacturingOrderSearch = (e) => {
     e.preventDefault();
-    dispatch(searchProductAsync(searchParameter)).then((result) => {
-      if (searchProductAsync.fulfilled.match(result)) {
-        // dispatch(searchUserAsync(searchParameter))
+    dispatch(searchManufacturingOrderAsync(searchParameter)).then((result) => {
+      if (searchManufacturingOrderAsync.fulfilled.match(result)) {
         // setSearchParameter("");
       }
     })
@@ -86,7 +85,7 @@ const ProductComponent = ({
         </Link>
 
         {/* Right-hand side Search Box */}
-        {/* <form onSubmit={(e) => handleProductSearch(e)} className="flex items-center w-80 m-2 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+        <form onSubmit={(e) => handleManufacturingOrderSearch(e)} className="flex items-center w-80 m-2 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
           <input
             type="search"
             placeholder="Search"
@@ -96,13 +95,13 @@ const ProductComponent = ({
           />
           <div className="ml-2">
             <Image
-              onClick={handleProductSearch}
+              onClick={handleManufacturingOrderSearch}
               src={SearchIcon}
               alt="search-icon"
               className="cursor-pointer"
             />
           </div>
-        </form> */}
+        </form>
       </div>
     </div>
   );

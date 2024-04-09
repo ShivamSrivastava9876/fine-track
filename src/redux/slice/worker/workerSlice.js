@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createWorker, deleteWorker, editWorker, getWorker, getWorkersList } from "./workerApi";
+import { createWorker, deleteWorker, editWorker, getWorker, getWorkersList, searchWorker } from "./workerApi";
 
 const initialState = {
     status: 'idle',
@@ -86,6 +86,19 @@ export const getWorkersNameAsync = createAsyncThunk(
     }
 )
 
+export const searchWorkerAsync = createAsyncThunk(
+    "worker/searchWorker",
+    async (searchWorkerInfo) => {
+        try {
+            const response = await searchWorker(searchWorkerInfo);
+            return response.data.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
 const workerSlice = createSlice({
     name: "worker",
     initialState,
@@ -153,6 +166,18 @@ const workerSlice = createSlice({
                 }
             })
             .addCase(getWorkersNameAsync.rejected, (state, action) => {
+                state.status = action.payload;
+            })
+            .addCase(searchWorkerAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchWorkerAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.workerData = action.payload;
+                }
+            })
+            .addCase(searchWorkerAsync.rejected, (state, action) => {
                 state.status = action.payload;
             })
     }

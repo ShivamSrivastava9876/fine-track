@@ -705,3 +705,100 @@ export async function getOrderByProductReport(productId) {
         return { error }
     }
 };
+
+//Search 1. Product 2. User 3. Worker
+export async function searchProductReport(searchInfo) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            // "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            `http://77.37.44.105:8000/report/product-report-list/?search=${searchInfo}`,
+            {
+                method: 'GET',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};
+
+export async function searchUserReport(searchInfo) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            // "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            `http://77.37.44.105:8000/report/user-report-list/?search=${searchInfo}`,
+            {
+                method: 'GET',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};
+
+export async function searchWorkerReport(searchInfo) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            // "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            `http://77.37.44.105:8000/report/worker-report-list/?search=${searchInfo}`,
+            {
+                method: 'GET',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};

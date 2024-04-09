@@ -193,3 +193,35 @@ export async function deleteManufacturingOrder(orderId) {
         return { error }
     }
 };
+
+export async function searchManufacturingOrder(orderInfo) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            `http://77.37.44.105:8000/admin_panel/manufacturing-list/?search=${orderInfo}`,
+            {
+                method: 'GET',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};

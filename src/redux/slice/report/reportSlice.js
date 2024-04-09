@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getDailyReport, getDailyReportData, getMonthlyReport, getMonthlyReportData, getWeeklyReport, getWeeklyReportData, getYearlyReport, getYearlyReportData, getDailyManufacturingReport, getDailyManufacturingReportData, getWeeklyManufacturingReport, getMonthlyManufacturingReport, getYearlyManufacturingReport, getWeeklyManufacturingReportData, getMonthlyManufacturingReportData, getYearlyManufacturingReportData, getWorkerReport, getManufacturingByWorkerReport, getUserReport, getOrderByUserReport, getProductReport, getOrderByProductReport } from "./reportApi";
+import { getDailyReport, getDailyReportData, getMonthlyReport, getMonthlyReportData, getWeeklyReport, getWeeklyReportData, getYearlyReport, getYearlyReportData, getDailyManufacturingReport, getDailyManufacturingReportData, getWeeklyManufacturingReport, getMonthlyManufacturingReport, getYearlyManufacturingReport, getWeeklyManufacturingReportData, getMonthlyManufacturingReportData, getYearlyManufacturingReportData, getWorkerReport, getManufacturingByWorkerReport, getUserReport, getOrderByUserReport, getProductReport, getOrderByProductReport, searchProductReport, searchUserReport, searchWorkerReport } from "./reportApi";
 
 const initialState = {
     status: 'idle',
@@ -309,6 +309,46 @@ export const getOrderByProductReportAsync = createAsyncThunk(
     }
 );
 
+//search
+export const searchProductReportAsync = createAsyncThunk(
+    "report/searchProduct",
+    async (searchInfo) => {
+        try {
+            const response = await searchProductReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchUserReportAsync = createAsyncThunk(
+    "report/searchUser",
+    async (searchInfo) => {
+        try {
+            const response = await searchUserReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchWorkerReportAsync = createAsyncThunk(
+    "report/searchWorker",
+    async (searchInfo) => {
+        try {
+            const response = await searchWorkerReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
 const reportSlice = createSlice({
     name: "report",
     initialState,
@@ -588,6 +628,49 @@ const reportSlice = createSlice({
             .addCase(getOrderByProductReportAsync.rejected, (state, action) => {
                 state.status = 'idle';
             })
+            //Search 
+            //1. Product search
+            .addCase(searchProductReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchProductReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.productReportData.splice(0, 1, action.payload);
+                    state.productReportData = state.productReportData[0].data;
+                }
+            })
+            .addCase(searchProductReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            //2.User search
+            .addCase(searchUserReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchUserReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.userReportData.splice(0, 1, action.payload);
+                    state.userReportData = state.userReportData[0].data;
+                }
+            })
+            .addCase(searchUserReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(searchWorkerReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchWorkerReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.workerReportData.splice(0, 1, action.payload);
+                    state.workerReportData = state.workerReportData[0].data;
+                }
+            })
+            .addCase(searchWorkerReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+
     }
 })
 

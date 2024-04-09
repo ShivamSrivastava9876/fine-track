@@ -19,7 +19,7 @@ const columns = [
   { id: "workerContact", label: "Worker Contact", minWidth: 100 },
   { id: "startDate", label: "Start date", minWidth: 100 },
   { id: "endDate", label: "End date", minWidth: 100 },
-  { id: "weight", label: "Weight", minWidth: 100 },
+  { id: "weight", label: "Weight (gm)", minWidth: 100 },
   // { id: "actions", label: "", minWidth: 150 },
 ];
 

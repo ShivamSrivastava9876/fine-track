@@ -101,7 +101,9 @@ export default function OrderByUserData() {
     return (
         <div>
             <h1 className="text-xl mx-4 mb-4 font-bold text-gray-500">
-                Product report of <span className=" text-black ">{selectedProductName}</span>
+                {selectedProductName.length !== 0 ? (<span>Product report of <span className=" text-black ">{selectedProductName}</span></span>) : (
+                    <span>There is no data to be displayed</span>
+                )}
             </h1>
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
                 <TableContainer sx={{ maxHeight: 440 }}>
