@@ -129,7 +129,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             Edit product
                         </h2>
                     </div>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
                         <div class="relative cursor-pointer inline-block text-left mb-2 h-10 z-50">
                             <div onClick={handleCategory} class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
                                 {category || row.category || "Select category"}
@@ -151,7 +151,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             </div>
 
                             {openCategory && (
-                                <div class="origin-top-right absolute right-16 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                <div class="origin-top-right absolute z-10 right-16 mt-2 w-[220px] max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
                                     {categoryList.map((category) => (
                                         <div key={category.id} class="py-1">
                                             <div
@@ -186,7 +186,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             </div>
 
                             {openProductType && (
-                                <div class="origin-top-right absolute right-16 mt-2 w-auto rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                <div class="origin-top-right absolute z-10 right-16 mt-2 w-[220px] max-h-[150px] overflow-y-scroll rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
 
                                     {productTypeList.map((productType) => (
                                         <div key={productType.id} class="py-1">

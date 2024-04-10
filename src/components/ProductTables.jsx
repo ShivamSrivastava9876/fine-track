@@ -167,6 +167,7 @@ export default function ProductTables() {
 
   const handleCategory = () => {
     setOpenCategory(!openCategory);
+    setOpenProductType(false);
   };
 
   const handleCategoryClick = (option) => {
@@ -192,7 +193,8 @@ export default function ProductTables() {
   }
 
   const handleProductType = () => {
-    setOpenProductType(!openProductType)
+    setOpenProductType(!openProductType);
+    setOpenCategory(false);
   }
 
   const handleProductTypeClick = (option) => {

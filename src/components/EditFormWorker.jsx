@@ -29,7 +29,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                             Edit worker
                         </h2>
                     </div>
-                    <div className="grid grid-cols-2 gap-2">
+                    <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
 
                         <div className="mb-4 ">
                             <input
