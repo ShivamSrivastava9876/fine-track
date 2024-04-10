@@ -16,13 +16,13 @@ import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/o
 import { getManufacturingByWorkerReportAsync, getOrderByProductReportAsync, getProductReportAsync, getProductReportList, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList, searchProductReportAsync } from "../redux/slice/report/reportSlice";
 
 const columns = [
-    { id: "productId", label: "Product Id", minWidth: 50 },
-    { id: "productName", label: "Product name", minWidth: 150 },
-    { id: "huId", label: "Hu Id", minWidth: 200 },
-    { id: "category", label: "Category", minWidth: 80 },
-    { id: "productType", label: "Product type", minWidth: 80 },
+    { id: "productId", label: "Product Id", minWidth: 100 },
+    { id: "huId", label: "Hu Id", minWidth: 100 },
+    { id: "productName", label: "Product name", minWidth: 250 },
+    { id: "category", label: "Category", minWidth: 100 },
+    { id: "productType", label: "Product type", minWidth: 100 },
     { id: "orderCount", label: "Order count", minWidth: 80 },
-    { id: "totalPrice", label: "Total price", minWidth: 150 }
+    { id: "totalPrice", label: "Total price", minWidth: 80 }
 ];
 
 const createData = (
