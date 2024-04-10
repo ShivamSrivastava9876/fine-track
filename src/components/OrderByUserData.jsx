@@ -104,7 +104,7 @@ export default function OrderByUserData() {
                 {selectedUserName.length !== 0 ? (
                     <span>User report of <span className="text-black">{selectedUserName}</span></span>
                 ) : (
-                    <span>There is no data to be displayed</span>
+                    <span>User report</span>
                 )}
             </h1>
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
@@ -158,6 +158,7 @@ export default function OrderByUserData() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {selectedUserName.length === 0 && (<div className="text-black font-semibold text-base mx-4 mt-2 flex justify-center">No data found</div>)}
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"

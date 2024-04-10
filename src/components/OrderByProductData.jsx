@@ -102,7 +102,7 @@ export default function OrderByUserData() {
         <div>
             <h1 className="text-xl mx-4 mb-4 font-bold text-gray-500">
                 {selectedProductName.length !== 0 ? (<span>Product report of <span className=" text-black ">{selectedProductName}</span></span>) : (
-                    <span>There is no data to be displayed</span>
+                    <span>Product report</span>
                 )}
             </h1>
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
@@ -135,6 +135,7 @@ export default function OrderByUserData() {
                                             {columns.map((column) => {
                                                 const value = row[column.id];
                                                 return (
+                                                    
                                                     <TableCell key={column.id} align={column.align} className=" font-poppins">
                                                         {column.id === "actions" ? (
                                                             // Render Edit and Delete buttons
@@ -156,6 +157,7 @@ export default function OrderByUserData() {
                         </TableBody>
                     </Table>
                 </TableContainer>
+                {selectedProductName.length === 0 && (<div className="text-black font-semibold text-base mx-4 mt-2 flex justify-center">No data found</div>)}
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
