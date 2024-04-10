@@ -26,7 +26,7 @@ const DashboardData = () => {
           <div id="img" className="flex justify-center w-1/3">
             <Image src={UserIcon} alt="user-icon" className="w-8" />
           </div>
-          <div id="details" className="flex flex-col mx-2 my-2">
+          <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
             <span className="">Total users</span>
             <span id="data" className="font-bold">
               {dashboardDetails?.all_users}
@@ -41,7 +41,7 @@ const DashboardData = () => {
           <div id="img" className="flex justify-center w-1/3">
             <Image src={OrderIcon} alt="user-icon" className="w-8" />
           </div>
-          <div id="details" className="flex flex-col mx-2 my-2">
+          <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
             <span className="">New orders</span>
             <span id="data" className="font-bold ">
               {dashboardDetails?.new_orders}
@@ -57,7 +57,7 @@ const DashboardData = () => {
           <div id="img" className="flex justify-center w-1/3">
             <Image src={OrderIcon} alt="user-icon" className="w-8" />
           </div>
-          <div id="details" className="flex flex-col mx-2 my-2">
+          <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
             <span className="">Confirm orders</span>
             <span id="data" className="font-bold ">
             {dashboardDetails?.confirm_order}
@@ -73,7 +73,7 @@ const DashboardData = () => {
           <div id="img" className="flex justify-center w-1/3">
             <Image src={OrderIcon} alt="user-icon" className="w-8" />
           </div>
-          <div id="details" className="flex flex-col mx-2 my-2">
+          <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
             <span className="">Deliverd orders</span>
             <span id="data" className="font-bold ">
             {dashboardDetails?.delivered_order}
@@ -89,7 +89,7 @@ const DashboardData = () => {
           <div id="img" className="flex justify-center w-1/3">
             <Image src={OrderIcon} alt="user-icon" className="w-8" />
           </div>
-          <div id="details" className="flex flex-col mx-2 my-2">
+          <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
             <span className="">Cancelled orders</span>
             <span id="data" className="font-bold ">
             {dashboardDetails?.cancelled_order}
@@ -105,7 +105,7 @@ const DashboardData = () => {
           <div id="img" className="flex justify-center w-1/3">
             <Image src={OrderIcon} alt="user-icon" className="w-8" />
           </div>
-          <div id="details" className="flex flex-col mx-2 my-2">
+          <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
             <span className="">Declined orders</span>
             <span id="data" className="font-bold ">
             {dashboardDetails?.decline_order}
@@ -121,7 +121,7 @@ const DashboardData = () => {
           <div id="img" className="flex justify-center w-1/3">
             <Image src={OrderIcon} alt="user-icon" className="w-8" />
           </div>
-          <div id="details" className="flex flex-col mx-2 my-2">
+          <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
             <span className="">Manufacturing orders</span>
             <span id="data" className="font-bold ">
             {dashboardDetails?.manufacring_count}
