@@ -65,10 +65,6 @@ export default function WorkerReportTable() {
 
     const reportList = useSelector(getWorkerReportList);
 
-    const handleWorkerReportData = (workerId) => {
-        dispatch(getManufacturingByWorkerReportAsync(workerId));
-    }
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -186,7 +182,7 @@ export default function WorkerReportTable() {
                                                     <TableCell key={column.id} align={column.align} className=" font-poppins">
                                                         {column.id === "manufacturingCount" ? (
                                                             <div className="text-blue-500 font-semibold">
-                                                                <Link href="/manufactureByWorkerReportData" onClick={() => handleWorkerReportData(row.workerId)}>{value || "0"}</Link>
+                                                                <Link href={`/manufactureByWorkerReportData/${row.workerId}`}>{value || "0"}</Link>
                                                             </div>
                                                         ) : // Render other columns
                                                             column.format && typeof value === "number" ? (

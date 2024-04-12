@@ -10,7 +10,8 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
-import { getManufacturingByWorkerData, getOrderByProductData, getOrderByUserData, getProductReportAsync, getSelectedProductName, getSelectedUserName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
+import { getManufacturingByWorkerData, getOrderByProductData, getOrderByProductReportAsync, getOrderByUserData, getProductReportAsync, getSelectedProductName, getSelectedUserName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
+import { useRouter } from "next/router";
 
 const columns = [
     // { id: "HuId", label: "HU ID", minWidth: 80 },
@@ -56,6 +57,14 @@ export default function OrderByUserData() {
     const reportList = useSelector(getOrderByProductData);
     const selectedProductName = useSelector(getSelectedProductName);
 
+    const router = useRouter();
+    React.useEffect(() => {
+        if(router.query.productId){
+            dispatch(getOrderByProductReportAsync(router.query.productId));
+        }
+        
+    }, [dispatch, router])
+    
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };

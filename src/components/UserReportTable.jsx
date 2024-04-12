@@ -48,10 +48,6 @@ export default function UserReportTable() {
 
     const reportList = useSelector(getUserReportList);
 
-    const handleUserReportData = (userId) => {
-        dispatch(getOrderByUserReportAsync(userId));
-    }
-
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -156,7 +152,7 @@ export default function UserReportTable() {
                                                     <TableCell key={column.id} align={column.align} className=" font-poppins">
                                                         {column.id === "orderCount" ? (
                                                             <div className="text-blue-500 font-semibold">
-                                                                <Link href="/orderByUserData" onClick={() => handleUserReportData(row.userId)}>{value || "0"}</Link>
+                                                                <Link href={`/orderByUserData/${row.userId}`}>{value || "0"}</Link>
                                                             </div>
                                                         ) : // Render other columns
                                                             column.format && typeof value === "number" ? (

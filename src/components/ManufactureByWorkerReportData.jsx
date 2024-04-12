@@ -1,3 +1,5 @@
+// "use client"
+
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -10,7 +12,9 @@ import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
-import { getManufacturingByWorkerData, getSelectedWorkerName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
+import { getManufacturingByWorkerData, getManufacturingByWorkerReportAsync, getSelectedWorkerName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
+import { useParams, useSearchParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 const columns = [
     // { id: "HuId", label: "HU ID", minWidth: 80 },
@@ -56,6 +60,15 @@ export default function ManufactureByWorkerReportData() {
 
     const reportList = useSelector(getManufacturingByWorkerData);
     const selectedWorkerName = useSelector(getSelectedWorkerName);
+
+    const router = useRouter();
+    React.useEffect(() => {
+        if(router.query.workerId){
+            dispatch(getManufacturingByWorkerReportAsync(router.query.workerId));
+        }
+        
+    }, [dispatch, router])
+
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
