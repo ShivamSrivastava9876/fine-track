@@ -12,6 +12,7 @@ import { MdEdit, MdDelete } from 'react-icons/md';
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProductAsync, getProductAsync, getProductList, updateProductAsync } from "@/redux/slice/product/productSlice";
 import EditFormProduct from "@/components/EditFormProduct";
+import ViewImageOfProduct from "@/components/ViewPhotosOfProduct";
 import DeleteOption from "./DeleteOption";
 
 const columns = [
@@ -21,9 +22,11 @@ const columns = [
   { id: "category", label: "Category", minWidth: 100 },
   { id: "productType", label: "Product type", minWidth: 100 },
   { id: "quantity", label: "Quantity", minWidth: 50 },
+  { id: "stoneWeight", label: "Stone weight (gm)", minWidth: 50 },
   { id: "grossWeight", label: "Weight (gm)", minWidth: 80 },
   { id: "size", label: "Size (cm)", minWidth: 80 },
-  { id: "length", label: "Length (cm)", minWidth: 80 },
+  { id: "length", label: "Length (inch)", minWidth: 80 },
+  { id: "images", label: "Images", minWidth: 50 },
   { id: "puritySpc", label: "Purity spc", minWidth: 50 },
   { id: "price", label: "Price", minWidth: 100 },
   { id: "actions", label: "", minWidth: 100 },
@@ -34,7 +37,7 @@ const createData = (
   productId,
   product,
   quantity,
-  // stoneWeight,
+  stoneWeight,
   grossWeight,
   puritySpc,
   price,
@@ -48,11 +51,13 @@ const createData = (
   size,
   length
 ) => {
+  console.log(productImage, "hehe")
   return {
     HuId,
     productId,
     product,
     quantity,
+    stoneWeight,
     grossWeight,
     puritySpc,
     price,
@@ -77,7 +82,7 @@ export default function ProductTables() {
   const [model, setModel] = React.useState("");
   const [subModel, setSubModel] = React.useState("");
   const [stoneWeight, setStoneWeight] = React.useState([]);
-  const [image, setImage] = React.useState(null);
+  const [image, setImage] = React.useState([]);
   const [grossWeight, setGrossWeight] = React.useState([]);
   const [puritySpc, setPuritySpc] = React.useState("");
   const [price, setPrice] = React.useState("");
@@ -92,6 +97,7 @@ export default function ProductTables() {
 
   const [openCategory, setOpenCategory] = React.useState(false);
   const [openProductType, setOpenProductType] = React.useState(false);
+  const [openImage, setOpenImage] = React.useState(false);
   const [editedRow, setEditedRow] = React.useState(null);
   const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
   const [error, setError] = React.useState(false);
@@ -110,7 +116,7 @@ export default function ProductTables() {
     const updatedModel = model !== "" ? model : rowModel;
     const updatedSubModel = subModel !== "" ? subModel : rowSubModel;
     const updatedProduct = productName !== "" ? productName : rowProduct;
-    // const updatedStoneWeight = stoneWeight.length !== 0 ? stoneWeight : rowStoneWeight;
+    const updatedStoneWeight = stoneWeight.length !== 0 ? stoneWeight : rowStoneWeight;
     const updatedGrossWeight = grossWeight.length !== 0 ? grossWeight : rowGrossWeight;
     const updatedSize = size.length !== 0 ? size : rowSize;
     const updatedLength = length.length !== 0 ? length : rowLength;
@@ -121,7 +127,7 @@ export default function ProductTables() {
     const updatedCategory = category !== "" ? category : rowCategory;
     const updatedProductType = productType !== "" ? productType : rowProductType;
 
-    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
+    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
       if (updateProductAsync.fulfilled.match(result)) {
         dispatch(getProductAsync());
         setHuId("");
@@ -240,6 +246,12 @@ export default function ProductTables() {
     setUpdateSuccess(false);
   }
 
+  const handleImageClick = (rowId, selectedProductImage) => {
+    setOpenImage(true);
+    setImage(selectedProductImage);
+    console.log(selectedProductImage);
+  }
+
   React.useEffect(() => {
     dispatch(getProductAsync());
   }, [dispatch])
@@ -253,7 +265,8 @@ export default function ProductTables() {
           data.product_id || "",
           data.product_name || "",
           data.quantity || "",
-          data.gross_wt || "",
+          data.stone_wt || [],
+          data.gross_wt || [],
           data.purity_spec || "",
           data.price || "",
           data.id,
@@ -336,6 +349,16 @@ export default function ProductTables() {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align} className=" font-poppins">
+                            {column.id === "images" &&
+                              (
+                                <>
+                                  <button className=" text-blue-500 hover:underline font-semibold" onClick={() => handleImageClick(row.id, row.productImage)}>
+                                    View
+                                  </button>
+                                  {openImage && <ViewImageOfProduct rows={rows} selectedProductImages={image} openImage={openImage} setOpenImage={setOpenImage} isOpen={true}/>}
+                                </>
+                              )}
+
                             {column.id === "actions" ? (
                               // Render Edit and Delete buttons
                               <div className="space-x-2">
@@ -346,13 +369,9 @@ export default function ProductTables() {
                                   </div>
                                 ) : (
                                   <div className="space-x-7 flex">
-                                    {/* <Button onClick={() => handleEdit(row.id, row.category)} className="bg-blue-500 hover:bg-blue-800 active:bg-blue-800 border border-black text-white rounded">
-                                    Edit
-                                  </Button> */}
+
                                     <MdEdit onClick={() => handleEdit(row.productImage, row.id, row.category, row.productType, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
-                                    {/* <Button onClick={() => handleDeletePopup(row.id)} className="bg-red-500 hover:bg-red-700 active:bg-red-700 border border-black text-white rounded">
-                                    Delete
-                                  </Button> */}
+
                                     <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
                                     {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "product" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
 

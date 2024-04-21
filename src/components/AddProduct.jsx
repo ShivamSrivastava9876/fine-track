@@ -59,161 +59,36 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   };
 
   const handleProductSubmit = (e) => {
-    if (image && category !== "" && productType !== "" && huId !== "" && productId !== "" && price !== "" && quantity !== "" && description !== "" && weight.length !== 0) {
+    if (image && category !== "" && productType !== "" && huId !== "" && productId !== "" && weight.length !== 0 && productName !== "" && puritySpc !== "" && quantity !== "" && price !== "" && description !== "") {
       e.preventDefault();
+      dispatch(createProductAsync({ category: category, product_type: productType, hu_id: huId, product_id: productId, model, sub_model: subModel, product_name: productName, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length })).then((result) => {
+        if (createProductAsync.fulfilled.match(result)) {
+          dispatch(getProductAsync());
+          setCategory("");
+          setProductType("");
+          setHuId("");
+          setProductId("");
+          setProductName("");
+          setModel("");
+          setSubModel("");
+          setStoneWeight([]);
+          setImage("");
+          setWeight([]);
+          setPuritySpc("");
+          setPrice("");
+          setQuantity("");
+          setCategory("");
+          setProductType("");
+          setDescription("");
+          setFiles("");
 
-      //logic for add product of chain
-      if (productType.toLowerCase() === 'chain') {
-        if (length.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, hu_id: huId, model, sub_model: subModel, product_name: productName, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length })).then((result) => {
-            if (createProductAsync.fulfilled.match(result)) {
-              dispatch(getProductAsync());
-              setCategory("");
-              setProductType("");
-              setHuId("");
-              setProductId("");
-              setProductName("");
-              setModel("");
-              setSubModel("");
-              setStoneWeight([]);
-              setImage("");
-              setWeight([]);
-              setPuritySpc("");
-              setPrice("");
-              setQuantity("");
-              setCategory("");
-              setProductType("");
-              setDescription("");
-              setFiles("");
-
-              setSuccess(true);
-              setTimeout(() => {
-                setSuccess(false);
-              }, 3000)
-            }
-          })
-        }
-        else {
-          e.preventDefault();
-          setError(true);
+          setSuccess(true);
           setTimeout(() => {
-            setError(false);
-          }, 3000);
+            setSuccess(false);
+          }, 3000)
         }
-
-      }
-
-      //logic for add product of necklace, ring and bangle
-      else if (productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') {
-        if (size.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, size: size, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, length })).then((result) => {
-            if (createProductAsync.fulfilled.match(result)) {
-              dispatch(getProductAsync());
-              setCategory("");
-              setProductType("");
-              setHuId("");
-              setProductId("");
-              setProductName("");
-              setModel("");
-              setSubModel("");
-              setSize([]);
-              setImage("");
-              setWeight([]);
-              setPuritySpc("");
-              setPrice("");
-              setQuantity("");
-              setCategory("");
-              setProductType("");
-              setDescription("");
-              setFiles("");
-
-              setSuccess(true);
-              setTimeout(() => {
-                setSuccess(false);
-              }, 3000)
-            }
-          })
-        }
-        else {
-          e.preventDefault();
-          setError(true);
-          setTimeout(() => {
-            setError(false);
-          }, 3000);
-        }
-      }
-
-      //logic for add product of bracelet
-      else if (productType.toLowerCase() === 'bracelet') {
-        if (length.length !== 0) {
-          dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, length: length, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size })).then((result) => {
-            if (createProductAsync.fulfilled.match(result)) {
-              dispatch(getProductAsync());
-              setCategory("");
-              setProductType("");
-              setHuId("");
-              setProductId("");
-              setProductName("");
-              setModel("");
-              setSubModel("");
-              setLength([]);
-              setImage("");
-              setWeight([]);
-              setPuritySpc("");
-              setPrice("");
-              setQuantity("");
-              setCategory("");
-              setProductType("");
-              setDescription("");
-              setFiles("");
-
-              setSuccess(true);
-              setTimeout(() => {
-                setSuccess(false);
-              }, 3000)
-            }
-          })
-        }
-        else {
-          e.preventDefault();
-          setError(true);
-          setTimeout(() => {
-            setError(false);
-          }, 3000);
-        }
-      }
-
-      else {
-        dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, product_name: productName, hu_id: huId, model, sub_model: subModel, weight: weight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, stone_wt: stoneWeight, size, length })).then((result) => {
-          if (createProductAsync.fulfilled.match(result)) {
-            dispatch(getProductAsync());
-            setCategory("");
-            setProductType("");
-            setHuId("");
-            setProductId("");
-            setProductName("");
-            setModel("");
-            setSubModel("");
-            setImage("");
-            setWeight([]);
-            setPuritySpc("");
-            setPrice("");
-            setQuantity("");
-            setCategory("");
-            setProductType("");
-            setDescription("");
-            setFiles("");
-
-            setSuccess(true);
-            setTimeout(() => {
-              setSuccess(false);
-            }, 3000)
-          }
-        })
-      }
-
+      })
     }
-
     else {
       e.preventDefault();
       setError(true);
@@ -528,14 +403,14 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   </div>
                 </div>
               </div>}
-              {/* {productType.toLowerCase() === 'chain' && <div className={`mb-4 md:w-21.375`}>
+              {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring') && <div className={`mb-4 md:w-21.375`}>
                 <div className="relative md:w-21.375">
                   <input
                     type="text"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     placeholder="Stone weight"
-                    className={`py-2 px-8 border rounded-tl-xl w-4/5 ${stoneWeight.length === 0 && error ? 'border-2 border-red-500' : ''}`}
+                    className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5`}
                   />
                   <button onClick={(e) => addInput(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
                     <Image src={AddIcon} alt="dashboard-icon" />
@@ -555,7 +430,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   </div>
                 </div>
 
-              </div>} */}
+              </div>}
               {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') && <div className="mb-4 md:w-21.375">
                 <div className="relative md:w-21.375">
                   <input
@@ -563,7 +438,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     value={inputTextSize}
                     onChange={(e) => setInputTextSize(e.target.value)}
                     placeholder="Size"
-                    className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5 ${size.length === 0 && error ? 'border-2 border-red-500' : ''}`}
+                    className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5`}
                   />
                   <button onClick={(e) => addInputSize(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
                     <Image src={AddIcon} alt="dashboard-icon" />
@@ -590,7 +465,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     value={inputTextLength}
                     onChange={(e) => setInputTextLength(e.target.value)}
                     placeholder="Length"
-                    className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5 ${length.length === 0 && error ? 'border-2 border-red-500' : ''}`}
+                    className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5`}
                   />
                   <button onClick={(e) => addInputLength(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
                     <Image src={AddIcon} alt="dashboard-icon" />

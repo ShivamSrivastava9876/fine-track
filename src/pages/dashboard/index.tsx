@@ -1,3 +1,5 @@
+"use client"
+
 import Layout from "@/components/Layout";
 import DashboardData from "@/components/DashboardData";
 import DashboardButtons from "@/components/DashboardButtons";

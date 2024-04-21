@@ -125,7 +125,7 @@ const AddUser = ({ addUser, setAddUser }) => {
           className="p-8 shadow-md flex flex-col items-center justify-center rounded-2xl w-34.125 bg-white"
         >
           <button
-            className="absolute top-2 right-2 md:right-4 p-1 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
+            className="absolute top-1 right-2 md:right-4 p-1 rounded-full bg-red-500 text-white hover:bg-red-600 focus:outline-none"
             onClick={handleClose}
           >
             <svg

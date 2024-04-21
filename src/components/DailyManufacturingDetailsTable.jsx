@@ -9,8 +9,11 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
+import * as XLSX from 'xlsx'
+import Image from "next/image";
+import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
-import { getDailyManufacturingReportDataAsync, getDailyReportList } from "../redux/slice/report/reportSlice";
+import { getDailyManufacturingReportDataAsync, getDailyReportList, searchDailyManufacturingReportAsync } from "../redux/slice/report/reportSlice";
 
 const columns = [
     // { id: "HuId", label: "HU ID", minWidth: 80 },
@@ -54,6 +57,7 @@ export default function DailyManufacturingDetailsTable() {
     const [page, setPage] = React.useState(0);
     const [rows, setRows] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [searchParameter, setSearchParameter] = React.useState("");
 
     const reportList = useSelector(getDailyReportList);
 
@@ -67,6 +71,31 @@ export default function DailyManufacturingDetailsTable() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    const handleSearchParameter = (searchParameter) => {
+        setSearchParameter(searchParameter);
+    }
+
+    const handleDailyManufacturingReportSearch = (e) => {
+        e.preventDefault();
+        dispatch(searchDailyManufacturingReportAsync(searchParameter)).then((result) => {
+            if (searchDailyManufacturingReportAsync.fulfilled.match(result)) {
+                // setSearchParameter("");
+            }
+        })
+    }
+
+    const handleDownload = () => {
+        downloadExcel(reportList);
+    }
+
+    const downloadExcel = (data) => {
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        XLSX.utils.book_append_sheet(workbook, worksheet, "DailyManufacturingReport");
+        XLSX.writeFile(workbook, "daily_manufacturing_report.xlsx");
+    }
+
 
     React.useEffect(() => {
         dispatch(getDailyManufacturingReportDataAsync())
@@ -105,7 +134,49 @@ export default function DailyManufacturingDetailsTable() {
 
     return (
         <div>
-            <h1 className="text-2xl mx-4 mb-4 font-bold">Daily manufacturing report</h1>
+            <div className="flex items-center justify-between flex-wrap w-full mb-4">
+
+                <h1 className="text-2xl mx-4 mb-4 font-bold">Daily manufacturing report</h1>
+                <div className="flex flex-wrap">
+                    <button
+                        className={`flex items-center m-2 md:w-52 border-2 border-solid bg-[#DB8A4D] font-semibold rounded-full px-4 py-2`}
+                        onClick={handleDownload}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 mr-2"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Download report
+                    </button>
+                    <form onSubmit={(e) => handleDailyManufacturingReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+                        <input
+                            type="search"
+                            placeholder="Search"
+                            value={searchParameter}
+                            onChange={(e) => handleSearchParameter(e.target.value)}
+                            className="w-full h-full outline-none bg-transparent text-blue-gray-700"
+                        />
+                        <div className="ml-2">
+                            <Image
+                                onClick={handleDailyManufacturingReportSearch}
+                                src={SearchIcon}
+                                alt="search-icon"
+                                className="cursor-pointer"
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">

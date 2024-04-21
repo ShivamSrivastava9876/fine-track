@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import Image from "next/image";
 import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import Button from "@mui/material/Button";
+import * as XLSX from 'xlsx'
 import { useDispatch, useSelector } from "react-redux";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
 import { getManufacturingByWorkerReportAsync, getOrderByUserReportAsync, getUserReportAsync, getUserReportList, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList, searchUserReportAsync } from "../redux/slice/report/reportSlice";
@@ -63,6 +64,17 @@ export default function UserReportTable() {
         setSearchParameter(searchParameter);
     }
 
+    const handleDownload = () => {
+        downloadExcel(reportList);
+    }
+
+    const downloadExcel = (data) => {
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        XLSX.utils.book_append_sheet(workbook, worksheet, "UserReport");
+        XLSX.writeFile(workbook, "user_report.xlsx");
+    }
+
     const handleUserReportSearch = (e) => {
         e.preventDefault();
         dispatch(searchUserReportAsync(searchParameter)).then((result) => {
@@ -101,24 +113,48 @@ export default function UserReportTable() {
             <div className="flex items-center justify-between flex-wrap w-full mb-4">
                 <h1 className="text-2xl mx-4 mb-1 font-bold">User report</h1>
                 {/* Right-hand side Search Box */}
-                <form onSubmit={(e) => handleUserReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
-                    <input
-                        type="search"
-                        placeholder="Search"
-                        value={searchParameter}
-                        onChange={(e) => handleSearchParameter(e.target.value)}
-                        className="w-full h-full outline-none bg-transparent text-blue-gray-700"
-                    />
-                    <div className="ml-2">
-                        <Image
-                            onClick={handleUserReportSearch}
-                            src={SearchIcon}
-                            alt="search-icon"
-                            className="cursor-pointer"
+                <div className="flex flex-wrap">
+                    {/* <Button className="hover:underline hover:bg-blue-200 underline p-0 text-sm right-0 font-semibold font-poppins" style={{ textTransform: 'none' }} onClick={handleDownload}>Download report</Button> */}
+                    <button
+                        className={`flex items-center m-2 md:w-52 border-2 border-solid bg-[#DB8A4D] font-semibold rounded-full px-4 py-2`}
+                        onClick={handleDownload}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 mr-2"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Download report
+                    </button>
+                    <form onSubmit={(e) => handleUserReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+                        <input
+                            type="search"
+                            placeholder="Search"
+                            value={searchParameter}
+                            onChange={(e) => handleSearchParameter(e.target.value)}
+                            className="w-full h-full outline-none bg-transparent text-blue-gray-700"
                         />
-                    </div>
-                </form>
+                        <div className="ml-2">
+                            <Image
+                                onClick={handleUserReportSearch}
+                                src={SearchIcon}
+                                alt="search-icon"
+                                className="cursor-pointer"
+                            />
+                        </div>
+                    </form>
+                </div>
             </div>
+
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
@@ -179,18 +215,6 @@ export default function UserReportTable() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
 
-                {/* <div className="space-x-4">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onPageChange={handleChangePage}
-        >
-          Next
-        </button>
-
-        <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-          Previous
-        </button>
-      </div> */}
             </Paper>
         </div>
     );

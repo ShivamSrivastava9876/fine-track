@@ -1,5 +1,3 @@
-"use client"
-
 import './globals.css'
 import { Providers } from '../redux/provider'
 import Dashboard from '@/pages/dashboard'

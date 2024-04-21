@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getDailyReport, getDailyReportData, getMonthlyReport, getMonthlyReportData, getWeeklyReport, getWeeklyReportData, getYearlyReport, getYearlyReportData, getDailyManufacturingReport, getDailyManufacturingReportData, getWeeklyManufacturingReport, getMonthlyManufacturingReport, getYearlyManufacturingReport, getWeeklyManufacturingReportData, getMonthlyManufacturingReportData, getYearlyManufacturingReportData, getWorkerReport, getManufacturingByWorkerReport, getUserReport, getOrderByUserReport, getProductReport, getOrderByProductReport, searchProductReport, searchUserReport, searchWorkerReport } from "./reportApi";
+import { getDailyReport, getDailyReportData, getMonthlyReport, getMonthlyReportData, getWeeklyReport, getWeeklyReportData, getYearlyReport, getYearlyReportData, getDailyManufacturingReport, getDailyManufacturingReportData, getWeeklyManufacturingReport, getMonthlyManufacturingReport, getYearlyManufacturingReport, getWeeklyManufacturingReportData, getMonthlyManufacturingReportData, getYearlyManufacturingReportData, getWorkerReport, getManufacturingByWorkerReport, getUserReport, getOrderByUserReport, getProductReport, getOrderByProductReport, searchProductReport, searchUserReport, searchWorkerReport, searchOrderByUserReport, searchManufactureByWorkerReport, searchOrderByProductReport, searchDailyManufacturingReport, searchWeeklyManufacturingReport, searchMonthlyManufacturingReport, searchYearlyManufacturingReport, searchDailyOrderReportData, searchWeeklyOrderReportData, searchMonthlyOrderReportData, searchYearlyOrderReportData } from "./reportApi";
 
 const initialState = {
     status: 'idle',
@@ -349,6 +349,151 @@ export const searchWorkerReportAsync = createAsyncThunk(
     }
 );
 
+export const searchOrderByUserReportAsync = createAsyncThunk(
+    "report/searchOrderByUser",
+    async (searchInfo) => {
+        try {
+            const response = await searchOrderByUserReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchManufactureByWorkerReportAsync = createAsyncThunk(
+    "report/searchManufactureByWorker",
+    async (searchInfo) => {
+        try {
+            const response = await searchManufactureByWorkerReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchOrderByProductReportAsync = createAsyncThunk(
+    "report/searchOrderByProduct",
+    async (searchInfo) => {
+        try {
+            const response = await searchOrderByProductReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+//Manufacturing search APIs
+export const searchDailyManufacturingReportAsync = createAsyncThunk(
+    "report/searchDailyManufacturingReport",
+    async (searchInfo) => {
+        try {
+            const response = await searchDailyManufacturingReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchWeeklyManufacturingReportAsync = createAsyncThunk(
+    "report/searchWeeklyManufacturingReport",
+    async (searchInfo) => {
+        try {
+            const response = await searchWeeklyManufacturingReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchMonthlyManufacturingReportAsync = createAsyncThunk(
+    "report/searchMonthlyManufacturingReport",
+    async (searchInfo) => {
+        try {
+            const response = await searchMonthlyManufacturingReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchYearlyManufacturingReportAsync = createAsyncThunk(
+    "report/searchYearlyManufacturingReport",
+    async (searchInfo) => {
+        try {
+            const response = await searchYearlyManufacturingReport(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+//Search order report
+export const searchDailyOrderReportAsync = createAsyncThunk(
+    "report/searchDailyOrderReport",
+    async (searchInfo) => {
+        try {
+            const response = await searchDailyOrderReportData(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchWeeklyOrderReportAsync = createAsyncThunk(
+    "report/searchWeeklyOrderReport",
+    async (searchInfo) => {
+        try {
+            const response = await searchWeeklyOrderReportData(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchMonthlyOrderReportAsync = createAsyncThunk(
+    "report/searchMonthlyOrderReport",
+    async (searchInfo) => {
+        try {
+            const response = await searchMonthlyOrderReportData(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
+export const searchYearlyOrderReportAsync = createAsyncThunk(
+    "report/searchYearlyOrderReport",
+    async (searchInfo) => {
+        try {
+            const response = await searchYearlyOrderReportData(searchInfo);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
 const reportSlice = createSlice({
     name: "report",
     initialState,
@@ -657,6 +802,7 @@ const reportSlice = createSlice({
             .addCase(searchUserReportAsync.rejected, (state, action) => {
                 state.status = 'idle';
             })
+            //3. Worker search
             .addCase(searchWorkerReportAsync.pending, (state) => {
                 state.status = 'loading';
             })
@@ -670,7 +816,154 @@ const reportSlice = createSlice({
             .addCase(searchWorkerReportAsync.rejected, (state, action) => {
                 state.status = 'idle';
             })
-
+            //4. Order by user search
+            .addCase(searchOrderByUserReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchOrderByUserReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.userReportData.splice(0, 1, action.payload);
+                    state.userReportData = state.userReportData[0].data;
+                }
+            })
+            .addCase(searchOrderByUserReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            // 5. ManufactureByWorkerSearch
+            .addCase(searchManufactureByWorkerReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchManufactureByWorkerReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.manufacturingByWorkerData.splice(0, 1, action.payload);
+                    state.manufacturingByWorkerData = state.manufacturingByWorkerData[0].data;
+                }
+            })
+            .addCase(searchManufactureByWorkerReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            // 6. searchOrderByProduct
+            .addCase(searchOrderByProductReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchOrderByProductReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.orderByProductData.splice(0, 1, action.payload);
+                    state.orderByProductData = state.orderByProductData[0].data;
+                }
+            })
+            .addCase(searchOrderByProductReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            //Search daily manufacturing reports
+            .addCase(searchDailyManufacturingReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchDailyManufacturingReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.dailyReportData.splice(0, 1, action.payload);
+                    state.dailyReportData = state.dailyReportData[0].data;
+                }
+            })
+            .addCase(searchDailyManufacturingReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(searchWeeklyManufacturingReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchWeeklyManufacturingReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.weeklyReportData.splice(0, 1, action.payload);
+                    state.weeklyReportData = state.weeklyReportData[0].data;
+                }
+            })
+            .addCase(searchWeeklyManufacturingReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(searchMonthlyManufacturingReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchMonthlyManufacturingReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.monthlyReportData.splice(0, 1, action.payload);
+                    state.monthlyReportData = state.monthlyReportData[0].data;
+                }
+            })
+            .addCase(searchMonthlyManufacturingReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(searchYearlyManufacturingReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchYearlyManufacturingReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.yearlyReportData.splice(0, 1, action.payload);
+                    state.yearlyReportData = state.yearlyReportData[0].data;
+                }
+            })
+            .addCase(searchYearlyManufacturingReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            //Search order report
+            .addCase(searchDailyOrderReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchDailyOrderReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.dailyReportData.splice(0, 1, action.payload);
+                    state.dailyReportData = state.dailyReportData[0].data;
+                }
+            })
+            .addCase(searchDailyOrderReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(searchWeeklyOrderReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchWeeklyOrderReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.weeklyReportData.splice(0, 1, action.payload);
+                    state.weeklyReportData = state.weeklyReportData[0].data;
+                }
+            })
+            .addCase(searchWeeklyOrderReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(searchMonthlyOrderReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchMonthlyOrderReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.monthlyReportData.splice(0, 1, action.payload);
+                    state.monthlyReportData = state.monthlyReportData[0].data;
+                }
+            })
+            .addCase(searchMonthlyOrderReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
+            .addCase(searchYearlyOrderReportAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(searchYearlyOrderReportAsync.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    state.yearlyReportData.splice(0, 1, action.payload);
+                    state.yearlyReportData = state.yearlyReportData[0].data;
+                }
+            })
+            .addCase(searchYearlyOrderReportAsync.rejected, (state, action) => {
+                state.status = 'idle';
+            })
     }
 })
 

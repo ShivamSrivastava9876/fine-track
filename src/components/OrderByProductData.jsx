@@ -9,8 +9,11 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import { useDispatch, useSelector } from "react-redux";
+import * as XLSX from 'xlsx'
+import Image from "next/image";
+import SearchIcon from "../../public/assets/Icons/searchIcon.svg";
 import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/orderSlice";
-import { getManufacturingByWorkerData, getOrderByProductData, getOrderByProductReportAsync, getOrderByUserData, getProductReportAsync, getSelectedProductName, getSelectedUserName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList } from "../redux/slice/report/reportSlice";
+import { getManufacturingByWorkerData, getOrderByProductData, getOrderByProductReportAsync, getOrderByUserData, getProductReportAsync, getSelectedProductName, getSelectedUserName, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList, searchOrderByProductReportAsync } from "../redux/slice/report/reportSlice";
 import { useRouter } from "next/router";
 
 const columns = [
@@ -53,18 +56,19 @@ export default function OrderByUserData() {
     const [page, setPage] = React.useState(0);
     const [rows, setRows] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const [searchParameter, setSearchParameter] = React.useState("");
 
     const reportList = useSelector(getOrderByProductData);
     const selectedProductName = useSelector(getSelectedProductName);
 
     const router = useRouter();
     React.useEffect(() => {
-        if(router.query.productId){
+        if (router.query.productId) {
             dispatch(getOrderByProductReportAsync(router.query.productId));
         }
-        
+
     }, [dispatch, router])
-    
+
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -75,6 +79,30 @@ export default function OrderByUserData() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    const handleSearchParameter = (searchParameter) => {
+        setSearchParameter(searchParameter);
+    }
+
+    const handleDownload = () => {
+        downloadExcel(reportList);
+    }
+
+    const downloadExcel = (data) => {
+        const workbook = XLSX.utils.book_new();
+        const worksheet = XLSX.utils.json_to_sheet(data);
+        XLSX.utils.book_append_sheet(workbook, worksheet, "OrderByProductReport");
+        XLSX.writeFile(workbook, "order_by_product_report.xlsx");
+    }
+
+    const handleUserReportSearch = (e) => {
+        e.preventDefault();
+        dispatch(searchOrderByProductReportAsync({ productId: router.query.productId, data: searchParameter })).then((result) => {
+            if (searchOrderByProductReportAsync.fulfilled.match(result)) {
+                // setSearchParameter("");
+            }
+        })
+    }
 
     React.useEffect(() => {
         if (reportList && Array.isArray(reportList)) {
@@ -109,11 +137,53 @@ export default function OrderByUserData() {
 
     return (
         <div>
-            <h1 className="text-xl mx-4 mb-4 font-bold text-gray-500">
-                {selectedProductName.length !== 0 ? (<span>Product report of <span className=" text-black ">{selectedProductName}</span></span>) : (
-                    <span>Product report</span>
-                )}
-            </h1>
+            <div className="flex items-center justify-between flex-wrap w-full mb-4">
+                <h1 className="text-xl mx-4 mb-4 font-bold text-gray-500">
+                    {selectedProductName.length !== 0 ? (<span>Product report of <span className=" text-black ">{selectedProductName}</span></span>) : (
+                        <span>Product report</span>
+                    )}
+                </h1>
+                <div className="flex flex-wrap">
+                    {/* <Button className="hover:underline hover:bg-blue-200 underline p-0 text-sm right-0 font-semibold font-poppins" style={{ textTransform: 'none' }} onClick={handleDownload}>Download report</Button> */}
+                    <button
+                        className={`flex items-center m-2 md:w-52 border-2 border-solid bg-[#DB8A4D] font-semibold rounded-full px-4 py-2`}
+                        onClick={handleDownload}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 mr-2"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                        >
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        Download report
+                    </button>
+                    <form onSubmit={(e) => handleUserReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
+                        <input
+                            type="search"
+                            placeholder="Search"
+                            value={searchParameter}
+                            onChange={(e) => handleSearchParameter(e.target.value)}
+                            className="w-full h-full outline-none bg-transparent text-blue-gray-700"
+                        />
+                        <div className="ml-2">
+                            <Image
+                                onClick={handleUserReportSearch}
+                                src={SearchIcon}
+                                alt="search-icon"
+                                className="cursor-pointer"
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
             <Paper sx={{ width: "100%", overflow: "hidden" }} className="w-full">
                 <TableContainer sx={{ maxHeight: 440 }}>
                     <Table stickyHeader aria-label="sticky table">
@@ -144,7 +214,7 @@ export default function OrderByUserData() {
                                             {columns.map((column) => {
                                                 const value = row[column.id];
                                                 return (
-                                                    
+
                                                     <TableCell key={column.id} align={column.align} className=" font-poppins">
                                                         {column.id === "actions" ? (
                                                             // Render Edit and Delete buttons

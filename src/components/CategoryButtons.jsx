@@ -44,8 +44,7 @@ const CategoryComponent = ({
           {/* Button */}
           <Link href="#addCategory">
             <button
-              className={`flex items-center rounded-full px-4 py-2 bg-[#DB8A4D] text-white shadow transition-transform duration-300 transform ${addCategory ? "invisible" : ""
-                }`}
+              className={`flex items-center rounded-full px-4 py-2 bg-[#DB8A4D] text-white shadow transition-transform duration-300 transform ${addCategory ? "invisible" : ""}`}
               onClick={handleAddCategory}
             >
               <svg

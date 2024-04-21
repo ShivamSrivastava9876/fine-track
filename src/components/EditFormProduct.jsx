@@ -50,27 +50,27 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
         setWeightArray(updatedList);
         setGrossWeight(updatedList);
     };
-    //**
-    //Handling add stone weight
-    // const [inputTextStoneWeight, setInputTextStoneWeight] = useState('');
-    // const [stoneWeightArray, setStoneWeightArray] = useState(row.stoneWeight?.split(','));
-    // const addInputStoneWeight = (e) => {
-    //     e.preventDefault();
-    //     if (inputTextStoneWeight.trim() !== '') {
-    //         setStoneWeightArray([...stoneWeightArray, inputTextStoneWeight]);
-    //         setStoneWeight([...stoneWeightArray, inputTextStoneWeight]);
-    //         setInputTextStoneWeight('');
-    //     }
-    // };
-    // const deleteInputStoneWeight = (e, index) => {
-    //     e.preventDefault();
-    //     const updatedList = [...stoneWeightArray];
-    //     updatedList.splice(index, 1);
-    //     setStoneWeightArray(updatedList);
-    //     setStoneWeight(updatedList);
-    // };
-    //**
-    //Input box size handling
+    // **
+    // Handling add stone weight
+    const [inputTextStoneWeight, setInputTextStoneWeight] = useState('');
+    const [stoneWeightArray, setStoneWeightArray] = useState(row.stoneWeight && typeof row.stoneWeight === 'string' ? row.stoneWeight.split(',') : []);
+    const addInputStoneWeight = (e) => {
+        e.preventDefault();
+        if (inputTextStoneWeight.trim() !== '') {
+            setStoneWeightArray([...stoneWeightArray, inputTextStoneWeight]);
+            setStoneWeight([...stoneWeightArray, inputTextStoneWeight]);
+            setInputTextStoneWeight('');
+        }
+    };
+    const deleteInputStoneWeight = (e, index) => {
+        e.preventDefault();
+        const updatedList = [...stoneWeightArray];
+        updatedList.splice(index, 1);
+        setStoneWeightArray(updatedList);
+        setStoneWeight(updatedList);
+    };
+    // **
+    // Input box size handling
     const [inputTextSize, setInputTextSize] = useState('');
     const [sizeArray, setSizeArray] = useState(row.size && typeof row.size === 'string' ? row.size.split(',') : []);
     const addInputSize = (e) => {
@@ -269,7 +269,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             </div>
                         </div>
 
-                        {/* {row.productType.toLowerCase() === 'chain' && <div className="mb-4 ">
+                        {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring') && <div className="mb-4 ">
                             <input
                                 type="text"
                                 value={inputTextStoneWeight}
@@ -293,9 +293,9 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                                     </span>
                                 ))}
                             </div>
-                        </div>} */}
+                        </div>}
 
-                        {(row.productType.toLowerCase() === 'necklace' || row.productType.toLowerCase() === 'ring' || row.productType.toLowerCase() === 'bangle') && <div className="mb-4 ">
+                        {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') && <div className="mb-4 ">
                             <input
                                 type="text"
                                 value={inputTextSize}
@@ -321,7 +321,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             </div>
                         </div>}
 
-                        {(row.productType.toLowerCase() === 'bracelet' || row.productType.toLowerCase() === 'chain') && <div className="mb-4 ">
+                        {(productType.toLowerCase() === 'bracelet' || productType.toLowerCase() === 'chain') && <div className="mb-4 ">
                             <input
                                 type="text"
                                 value={inputTextLength}
