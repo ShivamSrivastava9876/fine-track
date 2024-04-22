@@ -84,7 +84,7 @@ export default function MonthlyDetailsTables() {
   }
 
   const handleDownload = () => {
-    downloadExcel(orderList);
+    downloadExcel(rows);
   }
 
   const downloadExcel = (data) => {

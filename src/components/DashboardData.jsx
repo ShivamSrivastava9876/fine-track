@@ -114,7 +114,7 @@ const DashboardData = () => {
         </Link>
 
         <Link
-        href="/liveManufacturingOrders"
+        href="/manufacturingOrders"
           id="manufacturingOrders"
           className="flex w-17.0125 h-24 px-4 py-2 bg-white border border-gray-300 rounded-2xl focus:outline-none outline-none hover:bg-gray-100"
         >

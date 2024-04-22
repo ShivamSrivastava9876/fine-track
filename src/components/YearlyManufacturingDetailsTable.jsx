@@ -89,7 +89,7 @@ export default function YearlyManufacturingDetailsTable() {
     }
 
     const handleDownload = () => {
-        downloadExcel(reportList);
+        downloadExcel(rows);
     }
 
     const downloadExcel = (data) => {

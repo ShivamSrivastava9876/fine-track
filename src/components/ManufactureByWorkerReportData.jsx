@@ -93,7 +93,7 @@ export default function ManufactureByWorkerReportData() {
     }
 
     const handleDownload = () => {
-        downloadExcel(reportList);
+        downloadExcel(rows);
     }
 
     const downloadExcel = (data) => {

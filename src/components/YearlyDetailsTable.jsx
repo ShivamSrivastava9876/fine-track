@@ -83,7 +83,7 @@ export default function YearlyDetailsTables() {
   }
 
   const handleDownload = () => {
-    downloadExcel(orderList);
+    downloadExcel(rows);
   }
 
   const downloadExcel = (data) => {

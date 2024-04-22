@@ -82,7 +82,7 @@ export default function WorkerReportTable() {
     }
 
     const handleDownload = () => {
-        downloadExcel(reportList);
+        downloadExcel(rows);
     }
 
     const downloadExcel = (data) => {

@@ -83,7 +83,7 @@ export default function WeeklyDetailsTables() {
   }
 
   const handleDownload = () => {
-    downloadExcel(orderList);
+    downloadExcel(rows);
   }
 
   const downloadExcel = (data) => {

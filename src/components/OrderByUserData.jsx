@@ -28,7 +28,6 @@ const columns = [
 ];
 
 const createData = (
-    user,
     productName,
     category,
     productType,
@@ -39,7 +38,6 @@ const createData = (
     orderId
 ) => {
     return {
-        user,
         productName,
         category,
         productType,
@@ -57,6 +55,7 @@ export default function OrderByUserData() {
     const [rows, setRows] = React.useState([]);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [searchParameter, setSearchParameter] = React.useState("");
+    let downloadReportFile;
 
     const reportList = useSelector(getOrderByUserData);
     const selectedUserName = useSelector(getSelectedUserName);
@@ -85,7 +84,7 @@ export default function OrderByUserData() {
     }
 
     const handleDownload = () => {
-        downloadExcel(reportList);
+        downloadExcel(rows);
     }
 
     const downloadExcel = (data) => {
@@ -117,7 +116,6 @@ export default function OrderByUserData() {
                     year: '2-digit',
                 });
                 const newRow = createData(
-                    data.user || "",
                     data.product.product_name || "",
                     data.product.category || "",
                     data.product.product_type || "",
