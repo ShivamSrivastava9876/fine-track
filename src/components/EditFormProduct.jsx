@@ -269,7 +269,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             </div>
                         </div>
 
-                        {(row.productType.toLowerCase() === 'necklace' || row.productType.toLowerCase() === 'ring') && <div className="mb-4 ">
+                        {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring') && <div className="mb-4 ">
                             <input
                                 type="text"
                                 value={inputTextStoneWeight}
@@ -295,7 +295,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             </div>
                         </div>}
 
-                        {(row.productType.toLowerCase() === 'necklace' || row.productType.toLowerCase() === 'ring' || row.productType.toLowerCase() === 'bangle') && <div className="mb-4 ">
+                        {(productType.toLowerCase() === 'necklace' || productType.toLowerCase() === 'ring' || productType.toLowerCase() === 'bangle') && <div className="mb-4 ">
                             <input
                                 type="text"
                                 value={inputTextSize}
@@ -321,7 +321,7 @@ const EditFormProduct = ({ size, setSize, length, setLength, files, setFiles, pr
                             </div>
                         </div>}
 
-                        {(row.productType.toLowerCase() === 'bracelet' || row.productType.toLowerCase() === 'chain') && <div className="mb-4 ">
+                        {(productType.toLowerCase() === 'bracelet' || productType.toLowerCase() === 'chain') && <div className="mb-4 ">
                             <input
                                 type="text"
                                 value={inputTextLength}

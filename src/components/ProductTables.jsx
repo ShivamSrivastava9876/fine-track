@@ -182,6 +182,8 @@ export default function ProductTables() {
   };
 
   const handleEdit = (rowImage, rowId, rowCategory, rowProductType, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription) => {
+    setCategory(rowCategory);
+    setProductType(rowProductType)
     setEditedRow(rowId);
     setHuId(rowHuId);
     setProductId(rowProductId);
