@@ -28,7 +28,8 @@ const columns = [
     { id: "productWeight", label: "Product weight (in gm)", minWidth: 80 },
     { id: "balanceWeight", label: "Balance weight (in gm)", minWidth: 150 },
     { id: "issuedDate", label: "Issued date", minWidth: 80 },
-    { id: "receivedDate", label: "Received date", minWidth: 80 }
+    { id: "receivedDate", label: "Received date", minWidth: 80 },
+    { id: "status", label: "Status", minWidth: 80 },
 ];
 
 const createData = (
@@ -40,7 +41,8 @@ const createData = (
     balanceWeight,
     issuedDate,
     receivedDate,
-    workerName
+    workerName,
+    status
 ) => {
     return {
         customerName,
@@ -51,7 +53,8 @@ const createData = (
         balanceWeight,
         issuedDate,
         receivedDate,
-        workerName
+        workerName,
+        status
     };
 };
 
@@ -134,7 +137,8 @@ export default function ManufactureByWorkerReportData() {
                     data.balance || "",
                     data.start_date || "",
                     data.end_date || "",
-                    data.worker.first_name + " " + data.worker.last_name || ""
+                    data.worker.first_name + " " + data.worker.last_name || "",
+                    data.status || ""
                 );
                 srNo = srNo + 1;
                 return newRow;

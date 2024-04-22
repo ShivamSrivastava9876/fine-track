@@ -26,6 +26,7 @@ const columns = [
     // { id: "puritySpc", label: "Purity spc", minWidth: 100 },
     { id: "issuedDate", label: "Issued date", minWidth: 120 },
     { id: "receiveDate", label: "Received date", minWidth: 120 },
+    { id: "status", label: "Status", minWidth: 80 },
     // { id: "actions", label: "", minWidth: 150 },
 ];
 
@@ -38,7 +39,8 @@ const createData = (
     goldBalance,
     goldReceived,
     issuedDate,
-    receiveDate
+    receiveDate,
+    status
 ) => {
     return {
         workerName,
@@ -48,7 +50,8 @@ const createData = (
         goldBalance,
         goldReceived,
         issuedDate,
-        receiveDate
+        receiveDate,
+        status
     };
 };
 
@@ -122,7 +125,8 @@ export default function WeeklyManufacturingDetailsTable() {
                     data.balance || "",
                     data.return_weight || "",
                     data.start_date || "",
-                    data.end_date || ""
+                    data.end_date || "",
+                    data.status || ""
                 );
                 srNo = srNo + 1;
                 return newRow;
