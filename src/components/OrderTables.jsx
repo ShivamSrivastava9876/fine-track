@@ -11,10 +11,12 @@ import Button from "@mui/material/Button";
 import { MdAdd, MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  deleteOrderAsync,
   getOrderList,
   getOrderListAsync,
 } from "@/redux/slice/order/orderSlice";
 import CreateCustomerOrder from "./CreateCustomerOrder";
+import DeleteOption from "./DeleteOption";
 
 const columns = [
   { id: "srNo", label: "Sr No", minWidth: 50 },
@@ -26,9 +28,21 @@ const columns = [
   { id: "size", label: "Size", minWidth: 40 },
   { id: "quantity", label: "Quantity", minWidth: 40 },
   { id: "fineRequired", label: "Total fine required (gm)", minWidth: 40 },
-  { id: "receivedFine", label: "Fine received from customer (gm)", minWidth: 40 },
-  { id: "remainingCash", label: "Remaining cash required (in ₹)", minWidth: 40 },
-  { id: "receivedCash", label: "Received cash from customer (in ₹)", minWidth: 40 },
+  {
+    id: "receivedFine",
+    label: "Fine received from customer (gm)",
+    minWidth: 40,
+  },
+  {
+    id: "remainingCash",
+    label: "Remaining cash required (in ₹)",
+    minWidth: 40,
+  },
+  {
+    id: "receivedCash",
+    label: "Received cash from customer (in ₹)",
+    minWidth: 40,
+  },
   { id: "makingCharges", label: "Making charges (in ₹)", minWidth: 40 },
   { id: "balancePending", label: "Pending balance (in ₹)", minWidth: 40 },
   { id: "dateOfOrderPlaced", label: "Date of order placed", minWidth: 60 },
@@ -70,7 +84,7 @@ const createData = (
     receivedCash,
     makingCharges,
     balancePending,
-    dateOfOrderPlaced
+    dateOfOrderPlaced,
   };
 };
 
@@ -110,6 +124,24 @@ export default function OrderTables() {
     setPage(0);
   };
 
+  const handleDelete = (selectedRowId) => {
+    const orderId = selectedRowId;
+    dispatch(deleteOrderAsync(orderId)).then((result) => {
+      if (deleteOrderAsync.fulfilled.match(result)) {
+        dispatch(getOrderListAsync());
+      }
+    });
+  };
+
+  const handleDeletePopup = (selectedRowId) => {
+    console.log("selectedRowId", selectedRowId)
+    setSelectedRowToDelete(selectedRowId);
+  };
+
+  const handleDeleteCancel = () => {
+    setSelectedRowToDelete(null);
+  };
+
   React.useEffect(() => {
     dispatch(getOrderListAsync());
   }, [dispatch]);
@@ -144,7 +176,6 @@ export default function OrderTables() {
           data.pending_balance || "",
           formattedDate || ""
           // data.status || "",
-          
         );
         srNo = srNo + 1;
         return newRow;
@@ -195,7 +226,7 @@ export default function OrderTables() {
                             <div className="space-x-2">
                               {editedRow === row.id ? (
                                 <div className="space-x-2">
-                                  <CreateCustomerOrder
+                                  <CreateCustomerOrder // This will change for edit form where worker is to be added
                                     length={length}
                                     setLength={setLength}
                                     size={size}
@@ -257,16 +288,18 @@ export default function OrderTables() {
                                   />
 
                                   <MdDelete
-                                    onClick={() => handleDeletePopup(row.orderId)}
+                                    onClick={() =>
+                                      handleDeletePopup(row.orderId)
+                                    }
                                     size={24}
                                     style={{ cursor: "pointer", color: "red" }}
                                   />
-                                  {selectedRowToDelete === row.id && (
+                                  {selectedRowToDelete === row.orderId && (
                                     <DeleteOption
                                       deleteDetails={{
                                         title: "order",
                                       }}
-                                      rowId={row.id}
+                                      rowId={row.orderId}
                                       isOpen={true}
                                       handleDelete={handleDelete}
                                       handleDeleteCancel={handleDeleteCancel}

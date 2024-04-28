@@ -177,18 +177,17 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
         }
       });
 
-      if (updatedPrevBalanceFine !== "" && customerId !== "") {
-        dispatch(
-          updatePreviousBalanceOfCustomerAsync({
-            balance_fine: updatedPrevBalanceFine,
-            customerId,
-          })
-        ).then((result) => {
-            if (createOrderAsync.fulfilled.match(result)) {
-                setUpdatedPrevBalanceFine("");
-              }
+      dispatch(
+        updatePreviousBalanceOfCustomerAsync({
+          balance_fine: updatedPrevBalanceFine,
+          customerId,
         })
-      }
+      ).then((result) => {
+        if (createOrderAsync.fulfilled.match(result)) {
+          setUpdatedPrevBalanceFine("");
+        }
+      });
+
     } else {
       e.preventDefault();
       setError(true);

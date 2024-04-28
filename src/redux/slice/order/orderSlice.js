@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { approveOrder, createOrder, declineOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getLiveManufacturingOrder, getOrder, searchOrder, updatePreviousBalanceOfCustomer } from "./orderApi";
+import { approveOrder, createOrder, declineOrder, deleteOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getLiveManufacturingOrder, getOrder, searchOrder, updatePreviousBalanceOfCustomer } from "./orderApi";
 
 const initialState = {
     status: "idle",
@@ -183,6 +183,19 @@ export const updatePreviousBalanceOfCustomerAsync = createAsyncThunk(
     }
 );
 
+export const deleteOrderAsync = createAsyncThunk(
+    "order/delete",
+    async (orderId) => {
+        try {
+            const response = await deleteOrder(orderId);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
 const orderSlice = createSlice({
     name: "order",
     initialState,
@@ -338,6 +351,15 @@ const orderSlice = createSlice({
                 state.status = 'idle';
             })
             .addCase(updatePreviousBalanceOfCustomerAsync.rejected, (state) => {
+                state.status = 'idle';
+            })
+            .addCase(deleteOrderAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(deleteOrderAsync.fulfilled, (state) => {
+                state.status = 'idle';
+            })
+            .addCase(deleteOrderAsync.rejected, (state) => {
                 state.status = 'idle';
             })
     }

@@ -419,3 +419,35 @@ export async function updatePreviousBalanceOfCustomer(updateInfo) {
         return { error }
     }
 }
+
+export async function deleteOrder(orderId) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            `http://77.37.44.105:7000/delete-order/${orderId}`,
+            {
+                method: 'DELETE',
+                headers: header
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};
