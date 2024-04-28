@@ -9,7 +9,7 @@ export async function getApproveList() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/approve-order-list/',
+            'http://77.37.44.105:7000/admin_panel/approve-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -41,7 +41,7 @@ export async function approveOrder(orderApproval) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/order-to-approve/${orderApproval.orderId}/`,
+            `http://77.37.44.105:7000/admin_panel/order-to-approve/${orderApproval.orderId}/`,
             {
                 method: 'PUT',
                 headers: header,
@@ -74,7 +74,7 @@ export async function declineOrder(orderDecline) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/order-to-approve/${orderDecline.orderId}/`,
+            `http://77.37.44.105:7000/admin_panel/order-to-approve/${orderDecline.orderId}/`,
             {
                 method: 'PUT',
                 headers: header,
@@ -96,6 +96,41 @@ export async function declineOrder(orderDecline) {
     }
 }
 
+//Create order on order table
+export async function createOrder(orderDetails) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            'http://77.37.44.105:7000/orders/create-order/',
+            {
+                method: 'POST',
+                headers: header,
+                body: JSON.stringify(orderDetails)
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+};
+
+//Get order list on order table
 export async function getOrder() {
     try {
         function getToken() {
@@ -107,7 +142,7 @@ export async function getOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/orders/orderitem-list/',
+            'http://77.37.44.105:7000/orders/order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -139,7 +174,7 @@ export async function searchOrder(searchOrderInfo) {
             Authorization: `Token ${token}`,
         };
         const response = await fetch(
-            `http://77.37.44.105:8000/orders/orderitem-search/?search=${searchOrderInfo}`,
+            `http://77.37.44.105:7000/orders/orderitem-search/?search=${searchOrderInfo}`,
             {
                 method: "GET",
                 headers: header
@@ -171,7 +206,7 @@ export async function getConfirmOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/cofirm-order-list/',
+            'http://77.37.44.105:7000/admin_panel/cofirm-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -203,7 +238,7 @@ export async function getDeliveredOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/delivered-order-list/',
+            'http://77.37.44.105:7000/admin_panel/delivered-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -235,7 +270,7 @@ export async function getCancelledOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/cancelled-order-list/',
+            'http://77.37.44.105:7000/admin_panel/cancelled-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -267,7 +302,7 @@ export async function getDeclinedOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/decline-order-list/',
+            'http://77.37.44.105:7000/admin_panel/decline-order-list/',
             {
                 method: 'GET',
                 headers: header
@@ -299,7 +334,7 @@ export async function getLiveManufacturingOrder() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/manufacture-list/',
+            'http://77.37.44.105:7000/admin_panel/manufacture-list/',
             {
                 method: 'GET',
                 headers: header
@@ -331,7 +366,7 @@ export async function getDashboardDetails() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/dashboard-details/',
+            'http://77.37.44.105:7000/admin_panel/dashboard-details/',
             {
                 method: 'GET',
                 headers: header
@@ -352,3 +387,35 @@ export async function getDashboardDetails() {
     }
 };
 
+export async function updatePreviousBalanceOfCustomer(updateInfo) {
+    try {
+        function getToken() {
+            return localStorage.getItem("token");
+        }
+        const token = getToken();
+        const header = {
+            "Content-type": "application/json",
+            Authorization: `Token ${token}`
+        }
+        const response = await fetch(
+            `http://77.37.44.105:7000 /orders/update-customer/previous-fine/${updateInfo.customerId}/`,
+            {
+                method: 'PUT',
+                headers: header,
+                body: JSON.stringify(updateInfo)
+            }
+        )
+        if (response.ok) {
+            const data = await response.json();
+            return { data };
+        }
+        else {
+            const error = await response.text();
+            return { error };
+        }
+
+    }
+    catch (error) {
+        return { error }
+    }
+}

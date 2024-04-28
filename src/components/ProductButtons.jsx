@@ -41,24 +41,6 @@ const ProductComponent = ({
         {/* Right-hand side Buttons */}
         <Link href="#addProduct" className="flex items-center relative">
           <div className="flex items-center space-x-4 mx-2 relative">
-            {/* Button 1 */}
-            {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-          Filters
-        </button> */}
 
             {/* Button 2 */}
             <button

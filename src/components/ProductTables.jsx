@@ -8,15 +8,19 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
-import { MdEdit, MdDelete } from 'react-icons/md';
+import { MdEdit, MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProductAsync, getProductAsync, getProductList, updateProductAsync } from "@/redux/slice/product/productSlice";
+import {
+  deleteProductAsync,
+  getProductAsync,
+  getProductList,
+  updateProductAsync,
+} from "@/redux/slice/product/productSlice";
 import EditFormProduct from "@/components/EditFormProduct";
 import ViewImageOfProduct from "@/components/ViewPhotosOfProduct";
 import DeleteOption from "./DeleteOption";
 
 const columns = [
-  { id: "HuId", label: "HU ID", minWidth: 50 },
   { id: "product", label: "Product", minWidth: 100 },
   { id: "productId", label: "Product ID", minWidth: 100 },
   { id: "category", label: "Category", minWidth: 100 },
@@ -33,7 +37,6 @@ const columns = [
 ];
 
 const createData = (
-  HuId,
   productId,
   product,
   quantity,
@@ -51,9 +54,8 @@ const createData = (
   size,
   length
 ) => {
-  console.log(productImage, "hehe")
+  console.log(productImage, "hehe");
   return {
-    HuId,
     productId,
     product,
     quantity,
@@ -69,7 +71,7 @@ const createData = (
     productType,
     productImage,
     size,
-    length
+    length,
   };
 };
 
@@ -108,7 +110,25 @@ export default function ProductTables() {
   const [rows, setRows] = React.useState([]);
   const productList = useSelector(getProductList);
 
-  const handleUpdateProduct = (e, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowSize, rowLength, rowPuritySpc, rowPrice, rowQuantity, rowDescription, rowCategory, rowProductType, rowImage) => {
+  const handleUpdateProduct = (
+    e,
+    rowHuId,
+    rowProductId,
+    rowModel,
+    rowSubModel,
+    rowProduct,
+    rowStoneWeight,
+    rowGrossWeight,
+    rowSize,
+    rowLength,
+    rowPuritySpc,
+    rowPrice,
+    rowQuantity,
+    rowDescription,
+    rowCategory,
+    rowProductType,
+    rowImage
+  ) => {
     e.preventDefault();
     const updatedImage = image !== null ? image : rowImage;
     const updatedHuId = huId !== "" ? huId : rowHuId;
@@ -116,18 +136,43 @@ export default function ProductTables() {
     const updatedModel = model !== "" ? model : rowModel;
     const updatedSubModel = subModel !== "" ? subModel : rowSubModel;
     const updatedProduct = productName !== "" ? productName : rowProduct;
-    const updatedStoneWeight = stoneWeight.length !== 0 ? stoneWeight : rowStoneWeight;
-    const updatedGrossWeight = grossWeight.length !== 0 ? grossWeight : rowGrossWeight;
+    const updatedStoneWeight =
+      stoneWeight.length !== 0 ? stoneWeight : rowStoneWeight;
+    const updatedGrossWeight =
+      grossWeight.length !== 0 ? grossWeight : rowGrossWeight;
     const updatedSize = size.length !== 0 ? size : rowSize;
     const updatedLength = length.length !== 0 ? length : rowLength;
     const updatedPuritySpc = puritySpc !== "" ? puritySpc : rowPuritySpc;
     const updatedQuantity = quantity !== "" ? quantity : rowQuantity;
     const updatedPrice = price !== "" ? price : rowPrice;
-    const updatedDescription = description !== "" ? description : rowDescription;
+    const updatedDescription =
+      description !== "" ? description : rowDescription;
     const updatedCategory = category !== "" ? category : rowCategory;
-    const updatedProductType = productType !== "" ? productType : rowProductType;
+    const updatedProductType =
+      productType !== "" ? productType : rowProductType;
 
-    dispatch(updateProductAsync({ productId: editedRow, category: updatedCategory, product_type: updatedProductType, product_id: updatedProductId, product_name: updatedProduct, hu_id: updatedHuId, model: updatedModel, sub_model: updatedSubModel, gross_wt: updatedGrossWeight, stone_wt: updatedStoneWeight, size: updatedSize, length: updatedLength, purity_spec: updatedPuritySpc, quantity: updatedQuantity, description: updatedDescription, price: updatedPrice, image: updatedImage, is_available: true })).then((result) => {
+    dispatch(
+      updateProductAsync({
+        productId: editedRow,
+        category: updatedCategory,
+        product_type: updatedProductType,
+        product_id: updatedProductId,
+        product_name: updatedProduct,
+        hu_id: updatedHuId,
+        model: updatedModel,
+        sub_model: updatedSubModel,
+        gross_wt: updatedGrossWeight,
+        stone_wt: updatedStoneWeight,
+        size: updatedSize,
+        length: updatedLength,
+        purity_spec: updatedPuritySpc,
+        quantity: updatedQuantity,
+        description: updatedDescription,
+        price: updatedPrice,
+        image: updatedImage,
+        is_available: true,
+      })
+    ).then((result) => {
       if (updateProductAsync.fulfilled.match(result)) {
         dispatch(getProductAsync());
         setHuId("");
@@ -149,10 +194,10 @@ export default function ProductTables() {
         setUpdateSuccess(true);
         setTimeout(() => {
           setUpdateSuccess(false);
-        }, 3000)
+        }, 3000);
       }
-    })
-  }
+    });
+  };
 
   const handleDelete = (selectedRowId) => {
     const productId = selectedRowId;
@@ -160,16 +205,16 @@ export default function ProductTables() {
       if (deleteProductAsync.fulfilled.match(result)) {
         dispatch(getProductAsync());
       }
-    })
-  }
+    });
+  };
 
   const handleDeleteCancel = () => {
     setSelectedRowToDelete(null);
-  }
+  };
 
   const handleDeletePopup = (selectedRowId) => {
-    setSelectedRowToDelete(selectedRowId)
-  }
+    setSelectedRowToDelete(selectedRowId);
+  };
 
   const handleCategory = () => {
     setOpenCategory(!openCategory);
@@ -181,9 +226,25 @@ export default function ProductTables() {
     setOpenCategory(!openCategory);
   };
 
-  const handleEdit = (rowImage, rowId, rowCategory, rowProductType, rowHuId, rowProductId, rowModel, rowSubModel, rowProduct, rowStoneWeight, rowGrossWeight, rowPuritySpc, rowPrice, rowQuantity, rowDescription) => {
+  const handleEdit = (
+    rowImage,
+    rowId,
+    rowCategory,
+    rowProductType,
+    rowHuId,
+    rowProductId,
+    rowModel,
+    rowSubModel,
+    rowProduct,
+    rowStoneWeight,
+    rowGrossWeight,
+    rowPuritySpc,
+    rowPrice,
+    rowQuantity,
+    rowDescription
+  ) => {
     setCategory(rowCategory);
-    setProductType(rowProductType)
+    setProductType(rowProductType);
     setEditedRow(rowId);
     setHuId(rowHuId);
     setProductId(rowProductId);
@@ -198,17 +259,17 @@ export default function ProductTables() {
     setDescription(rowDescription);
     setImage(rowImage);
     setFiles(rowImage.length);
-  }
+  };
 
   const handleProductType = () => {
     setOpenProductType(!openProductType);
     setOpenCategory(false);
-  }
+  };
 
   const handleProductTypeClick = (option) => {
     setProductType(option);
     setOpenProductType(!openProductType);
-  }
+  };
 
   const handleCancel = () => {
     setHuId("");
@@ -227,43 +288,40 @@ export default function ProductTables() {
     setDescription("");
     setEditedRow(null);
     setFiles("");
-  }
+  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (
-    event
-  ) => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   const hideError = () => {
     setError(false);
-  }
+  };
 
   const hideUpdateSuccess = () => {
     setUpdateSuccess(false);
-  }
+  };
 
   const handleImageClick = (rowId, selectedProductImage) => {
     setOpenImage(true);
     setImage(selectedProductImage);
     console.log(selectedProductImage);
-  }
+  };
 
   React.useEffect(() => {
     dispatch(getProductAsync());
-  }, [dispatch])
+  }, [dispatch]);
 
   React.useEffect(() => {
     if (productList && Array.isArray(productList)) {
       let srNo = 1;
       const newRows = productList.map((data) => {
         const newRow = createData(
-          data.hu_id || "",
           data.product_id || "",
           data.product_name || "",
           data.quantity || "",
@@ -285,26 +343,28 @@ export default function ProductTables() {
         return newRow;
       });
 
-      setRows(newRows)
+      setRows(newRows);
     }
   }, [productList]);
 
   return (
     <>
-      {updateSuccess && <div
-        // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        className="bg-blue-100 flex justify-between items-center border border-blue-400 text-blue-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
-        role="success"
-        style={{ zIndex: 1001 }}
-      >
-        <strong className="font-bold">Product updated successfully</strong>
-        <button
-          onClick={hideUpdateSuccess}
-          className="relative top-0.5 bottom-0 left-1"
+      {updateSuccess && (
+        <div
+          // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          className="bg-blue-100 flex justify-between items-center border border-blue-400 text-blue-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
+          role="success"
+          style={{ zIndex: 1001 }}
         >
-          <span className="text-blue-500 text-2xl">×</span>
-        </button>
-      </div>}
+          <strong className="font-bold">Product updated successfully</strong>
+          <button
+            onClick={hideUpdateSuccess}
+            className="relative top-0.5 bottom-0 left-1"
+          >
+            <span className="text-blue-500 text-2xl">×</span>
+          </button>
+        </div>
+      )}
       {/* {error && <div
         // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
         className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
@@ -346,46 +406,152 @@ export default function ProductTables() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.srNo}>
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.srNo}
+                    >
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align} className=" font-poppins">
-                            {column.id === "images" &&
-                              (
-                                <>
-                                  <button className=" text-blue-500 hover:underline font-semibold" onClick={() => handleImageClick(row.id, row.productImage)}>
-                                    View
-                                  </button>
-                                  {openImage && <ViewImageOfProduct rows={rows} selectedProductImages={image} openImage={openImage} setOpenImage={setOpenImage} isOpen={true}/>}
-                                </>
-                              )}
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            className=" font-poppins"
+                          >
+                            {column.id === "images" && (
+                              <>
+                                <button
+                                  className=" text-blue-500 hover:underline"
+                                  onClick={() =>
+                                    handleImageClick(row.id, row.productImage)
+                                  }
+                                >
+                                  View
+                                </button>
+                                {openImage && (
+                                  <ViewImageOfProduct
+                                    rows={rows}
+                                    selectedProductImages={image}
+                                    openImage={openImage}
+                                    setOpenImage={setOpenImage}
+                                    isOpen={true}
+                                  />
+                                )}
+                              </>
+                            )}
 
                             {column.id === "actions" ? (
                               // Render Edit and Delete buttons
                               <div className="space-x-2">
-
                                 {editedRow === row.id ? (
                                   <div className="space-x-2">
-                                    <EditFormProduct length={length} setLength={setLength} size={size} setSize={setSize} files={files} setFiles={setFiles} productImage={image} handleCategoryClick={handleCategoryClick} handleUpdateProduct={handleUpdateProduct} description={description} setDescription={setDescription} productType={productType} setProductType={setProductType} category={category} setCategory={setCategory} quantity={quantity} setQuantity={setQuantity} price={price} row={row} setPrice={setPrice} puritySpc={puritySpc} setPuritySpc={setPuritySpc} grossWeight={grossWeight} setGrossWeight={setGrossWeight} image={image} setImage={setImage} stoneWeight={stoneWeight} setStoneWeight={setStoneWeight} subModel={subModel} setSubModel={setSubModel} model={model} setModel={setModel} productName={productName} setProductName={setProductName} productId={productId} setProductId={setProductId} huId={huId} setHuId={setHuId} openCategory={openCategory} openProductType={openProductType} handleCategory={handleCategory} handleProductType={handleProductType} handleProductTypeClick={handleProductTypeClick} isOpen={true} handleCancel={handleCancel} />
+                                    <EditFormProduct
+                                      length={length}
+                                      setLength={setLength}
+                                      size={size}
+                                      setSize={setSize}
+                                      files={files}
+                                      setFiles={setFiles}
+                                      productImage={image}
+                                      handleCategoryClick={handleCategoryClick}
+                                      handleUpdateProduct={handleUpdateProduct}
+                                      description={description}
+                                      setDescription={setDescription}
+                                      productType={productType}
+                                      setProductType={setProductType}
+                                      category={category}
+                                      setCategory={setCategory}
+                                      quantity={quantity}
+                                      setQuantity={setQuantity}
+                                      price={price}
+                                      row={row}
+                                      setPrice={setPrice}
+                                      puritySpc={puritySpc}
+                                      setPuritySpc={setPuritySpc}
+                                      grossWeight={grossWeight}
+                                      setGrossWeight={setGrossWeight}
+                                      image={image}
+                                      setImage={setImage}
+                                      stoneWeight={stoneWeight}
+                                      setStoneWeight={setStoneWeight}
+                                      subModel={subModel}
+                                      setSubModel={setSubModel}
+                                      model={model}
+                                      setModel={setModel}
+                                      productName={productName}
+                                      setProductName={setProductName}
+                                      productId={productId}
+                                      setProductId={setProductId}
+                                      huId={huId}
+                                      setHuId={setHuId}
+                                      openCategory={openCategory}
+                                      openProductType={openProductType}
+                                      handleCategory={handleCategory}
+                                      handleProductType={handleProductType}
+                                      handleProductTypeClick={
+                                        handleProductTypeClick
+                                      }
+                                      isOpen={true}
+                                      handleCancel={handleCancel}
+                                    />
                                   </div>
                                 ) : (
                                   <div className="space-x-7 flex">
+                                    <MdEdit
+                                      onClick={() =>
+                                        handleEdit(
+                                          row.productImage,
+                                          row.id,
+                                          row.category,
+                                          row.productType,
+                                          row.HuId,
+                                          row.productId,
+                                          row.model,
+                                          row.subModel,
+                                          row.product,
+                                          row.stoneWeight,
+                                          row.grossWeight,
+                                          row.puritySpc,
+                                          row.price,
+                                          row.quantity,
+                                          row.description
+                                        )
+                                      }
+                                      size={24}
+                                      style={{
+                                        cursor: "pointer",
+                                        color: "black",
+                                      }}
+                                    />
 
-                                    <MdEdit onClick={() => handleEdit(row.productImage, row.id, row.category, row.productType, row.HuId, row.productId, row.model, row.subModel, row.product, row.stoneWeight, row.grossWeight, row.puritySpc, row.price, row.quantity, row.description)} size={24} style={{ cursor: 'pointer', color: 'black' }} />
-
-                                    <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
-                                    {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "product" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
-
+                                    <MdDelete
+                                      onClick={() => handleDeletePopup(row.id)}
+                                      size={24}
+                                      style={{
+                                        cursor: "pointer",
+                                        color: "red",
+                                      }}
+                                    />
+                                    {selectedRowToDelete === row.id && (
+                                      <DeleteOption
+                                        deleteDetails={{ title: "product" }}
+                                        rowId={row.id}
+                                        isOpen={true}
+                                        handleDelete={handleDelete}
+                                        handleDeleteCancel={handleDeleteCancel}
+                                      />
+                                    )}
                                   </div>
                                 )}
                               </div>
                             ) : // Render other columns
-                              column.format && typeof value === "number" ? (
-                                column.format(value)
-                              ) : (
-                                value
-                              )}
+                            column.format && typeof value === "number" ? (
+                              column.format(value)
+                            ) : (
+                              value
+                            )}
                           </TableCell>
                         );
                       })}

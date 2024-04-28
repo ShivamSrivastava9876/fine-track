@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { approveOrder, declineOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getLiveManufacturingOrder, getOrder, searchOrder } from "./orderApi";
+import { approveOrder, createOrder, declineOrder, getApproveList, getCancelledOrder, getConfirmOrder, getDashboardDetails, getDeclinedOrder, getDeliveredOrder, getLiveManufacturingOrder, getOrder, searchOrder, updatePreviousBalanceOfCustomer } from "./orderApi";
 
 const initialState = {
     status: "idle",
@@ -45,6 +45,19 @@ export const declineOrderAsync = createAsyncThunk(
     async (orderDecline) => {
         try {
             const response = await declineOrder(orderDecline);
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+)
+
+export const createOrderAsync = createAsyncThunk(
+    "order/create",
+    async (orderDetails) => {
+        try {
+            const response = await createOrder(orderDetails);
             return response.data;
         }
         catch (error) {
@@ -157,6 +170,19 @@ export const getLiveManufacturingOrderAsync = createAsyncThunk(
     }
 );
 
+export const updatePreviousBalanceOfCustomerAsync = createAsyncThunk(
+    "order/updatePreviousBalanceOfCustomer",
+    async () => {
+        try {
+            const response = await updatePreviousBalanceOfCustomer();
+            return response.data;
+        }
+        catch (error) {
+            return error;
+        }
+    }
+);
+
 const orderSlice = createSlice({
     name: "order",
     initialState,
@@ -192,6 +218,15 @@ const orderSlice = createSlice({
                 state.status = 'idle';
             })
             .addCase(declineOrderAsync.rejected, (state) => {
+                state.status = 'idle';
+            })
+            .addCase(createOrderAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(createOrderAsync.fulfilled, (state) => {
+                state.status = 'idle';
+            })
+            .addCase(createOrderAsync.rejected, (state) => {
                 state.status = 'idle';
             })
             .addCase(getOrderListAsync.pending, (state) => {
@@ -295,6 +330,15 @@ const orderSlice = createSlice({
             .addCase(getLiveManufacturingOrderAsync.rejected, (state, action) => {
                 state.status = 'idle'
                 state.error = action.payload
+            })
+            .addCase(updatePreviousBalanceOfCustomerAsync.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(updatePreviousBalanceOfCustomerAsync.fulfilled, (state) => {
+                state.status = 'idle';
+            })
+            .addCase(updatePreviousBalanceOfCustomerAsync.rejected, (state) => {
+                state.status = 'idle';
             })
     }
 })

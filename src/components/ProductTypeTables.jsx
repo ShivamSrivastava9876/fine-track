@@ -35,7 +35,6 @@ export default function ProductTypeTables() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [editedRow, setEditedRow] = React.useState(null);
-  // const [edited, setEdited] = React.useState("");
   const [rows, setRows] = React.useState([]);
   const [selectedRowToDelete, setSelectedRowToDelete] = React.useState(null);
   const [openCategory, setOpenCategory] = React.useState(false);

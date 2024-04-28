@@ -53,25 +53,6 @@ export const logoutUserAsync = createAsyncThunk(
   }
 );
 
-export const apkDownloadAsync = createAsyncThunk(
-  "login/apkDownload",
-  async () => {
-    try {
-      const response = await apkDownload();
-      if (response.data) {
-        return response.data;
-      }
-      else if (response.error) {
-        return response.error;
-      }
-
-    }
-    catch (error) {
-      return error;
-    }
-  }
-);
-
 export const loginSlice = createSlice({
   name: "login",
   initialState,
@@ -103,18 +84,6 @@ export const loginSlice = createSlice({
         state.logoutMessage = action.payload.message;
       })
       .addCase(logoutUserAsync.rejected, (state, action) => {
-        state.status = "idle";
-        state.errorMessage = action.payload;
-      })
-      .addCase(apkDownloadAsync.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(apkDownloadAsync.fulfilled, (state, action) => {
-        state.status = "idle";
-        state.apkData = action.payload;
-        state.apkLink = action.payload.data[0].apk;
-      })
-      .addCase(apkDownloadAsync.rejected, (state, action) => {
         state.status = "idle";
         state.errorMessage = action.payload;
       })

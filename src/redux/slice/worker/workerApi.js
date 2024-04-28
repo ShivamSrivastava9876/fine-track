@@ -9,7 +9,7 @@ export async function getWorker() {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://77.37.44.105:8000/admin_panel/worker-user-list/",
+      "http://77.37.44.105:7000/admin_panel/worker-user-list/",
       {
         method: "GET",
         headers: header,
@@ -41,7 +41,7 @@ export async function createWorker(createWorkerInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://77.37.44.105:8000/admin_panel/create-worker-user/",
+      "http://77.37.44.105:7000/admin_panel/create-worker-user/",
       {
         method: "POST",
         headers: header,
@@ -74,7 +74,7 @@ export async function searchUser(searchUserInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      `http://77.37.44.105:8000/admin_panel/userdetail/?search=${searchUserInfo}`,
+      `http://77.37.44.105:7000/admin_panel/userdetail/?search=${searchUserInfo}`,
       {
         method: "GET",
         headers: header
@@ -106,7 +106,7 @@ export async function deleteWorker(workerId) {
       Authorization: `Token ${token}`
     }
     const response = await fetch(
-      `http://77.37.44.105:8000/admin_panel/delete-worker-user/${workerId}/`,
+      `http://77.37.44.105:7000/admin_panel/delete-worker-user/${workerId}/`,
       {
         method: 'DELETE',
         headers: header
@@ -138,7 +138,7 @@ export async function editWorker(workerInfo) {
       Authorization: `Token ${token}`
     }
     const response = await fetch(
-      `http://77.37.44.105:8000/admin_panel/update-worker-user/${workerInfo.workerId}/`,
+      `http://77.37.44.105:7000/admin_panel/update-worker-user/${workerInfo.workerId}/`,
       {
         method: "PUT",
         headers: header,
@@ -171,7 +171,7 @@ export async function getWorkersList() {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://77.37.44.105:8000/admin_panel/worker-list-manufacturing/",
+      "http://77.37.44.105:7000/admin_panel/worker-list-manufacturing/",
       {
         method: "GET",
         headers: header,
@@ -203,7 +203,7 @@ export async function searchWorker(searchWorkerInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      `http://77.37.44.105:8000/admin_panel/worker-user-list/?search=${searchWorkerInfo}`,
+      `http://77.37.44.105:7000/admin_panel/worker-user-list/?search=${searchWorkerInfo}`,
       {
         method: "GET",
         headers: header,

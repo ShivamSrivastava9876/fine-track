@@ -9,7 +9,7 @@ export async function getProductType() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/product-type-list/',
+            'http://77.37.44.105:7000/admin_panel/product-type-list/',
             {
                 method: 'GET',
                 headers: header
@@ -40,7 +40,7 @@ export async function getSelectedProductType(selectedCategory) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/filter-by-category/?category=${selectedCategory}`,
+            `http://77.37.44.105:7000/admin_panel/filter-by-category/?category=${selectedCategory}`,
             {
                 method: 'GET',
                 headers: header
@@ -74,7 +74,7 @@ export async function createProductType(newProductType) {
         formData.append("product_type", newProductType.product_type);
         formData.append("image", newProductType.image);
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/create-product-type/',
+            'http://77.37.44.105:7000/admin_panel/create-product-type/',
             {
                 method: "POST",
                 headers: header,
@@ -112,7 +112,7 @@ export async function updateProductType(editProductTypeInfo) {
         formData.append("product_type", editProductTypeInfo.product_type);
         formData.append("image", editProductTypeInfo.image);
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/${productTypeId}/update-product-type/`,
+            `http://77.37.44.105:7000/admin_panel/${productTypeId}/update-product-type/`,
             {
                 method: "PUT",
                 headers: header,
@@ -145,7 +145,7 @@ export async function deleteProductType(productTypeId) {
         }
 
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/${productTypeId}/delete-product-type/`,
+            `http://77.37.44.105:7000/admin_panel/${productTypeId}/delete-product-type/`,
             {
                 method: "DELETE",
                 headers: header
@@ -177,7 +177,7 @@ export async function searchProductType(searchProductTypeInfo) {
             Authorization: `Token ${token}`,
         };
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/product-type-list/?search=${searchProductTypeInfo}`,
+            `http://77.37.44.105:7000/admin_panel/product-type-list/?search=${searchProductTypeInfo}`,
             {
                 method: "GET",
                 headers: header

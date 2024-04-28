@@ -27,7 +27,7 @@ const DashboardData = () => {
             <Image src={UserIcon} alt="user-icon" className="w-8" />
           </div>
           <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
-            <span className="">Total users</span>
+            <span className="">Total customers</span>
             <span id="data" className="font-bold">
               {dashboardDetails?.all_users}
             </span>

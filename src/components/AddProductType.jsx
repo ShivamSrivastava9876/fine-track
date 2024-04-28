@@ -5,7 +5,7 @@ import { getCategoriesAsync, getCategoryList } from "@/redux/slice/category/cate
 import { createProductTypeAsync, getProductTypeAsync } from "@/redux/slice/productType/productTypeSlice";
 import { FiImage } from 'react-icons/fi';
 
-const AddCategory = ({ addProductType, setAddProductType }) => {
+const AddProductType = ({ addProductType, setAddProductType }) => {
   const dispatch = useDispatch();
   const [newCategory, setNewCategory] = useState("");
   const [productType, setProductType] = useState("");
@@ -203,4 +203,4 @@ const AddCategory = ({ addProductType, setAddProductType }) => {
   );
 };
 
-export default AddCategory;
+export default AddProductType;

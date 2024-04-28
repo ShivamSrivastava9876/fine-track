@@ -10,7 +10,7 @@ export async function getDailyReport() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:8000/report/daily-report/',
+            'http://77.37.44.105:7000/report/daily-report/',
             {
                 method: "GET",
                 headers: header
@@ -42,7 +42,7 @@ export async function getWeeklyReport() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:8000/report/weekly-report/',
+            'http://77.37.44.105:7000/report/weekly-report/',
             {
                 method: "GET",
                 headers: header
@@ -74,7 +74,7 @@ export async function getMonthlyReport() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:8000/report/monthly-report/',
+            'http://77.37.44.105:7000/report/monthly-report/',
             {
                 method: "GET",
                 headers: header
@@ -106,7 +106,7 @@ export async function getYearlyReport() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:8000/report/yearly-report/',
+            'http://77.37.44.105:7000/report/yearly-report/',
             {
                 method: "GET",
                 headers: header
@@ -137,7 +137,7 @@ export async function getDailyReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/daily-list-report/',
+            'http://77.37.44.105:7000/report/daily-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -169,7 +169,7 @@ export async function getWeeklyReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/weekly-list-report/',
+            'http://77.37.44.105:7000/report/weekly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -201,7 +201,7 @@ export async function getMonthlyReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/monthly-list-report/',
+            'http://77.37.44.105:7000/report/monthly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -233,7 +233,7 @@ export async function getYearlyReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/yearly-list-report/',
+            'http://77.37.44.105:7000/report/yearly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -267,7 +267,7 @@ export async function getDailyManufacturingReport() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:8000/report/manufacturing-daily-report/',
+            'http://77.37.44.105:7000/report/manufacturing-daily-report/',
             {
                 method: "GET",
                 headers: header
@@ -299,7 +299,7 @@ export async function getWeeklyManufacturingReport() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:8000/report/manufacturing-weekly-report/',
+            'http://77.37.44.105:7000/report/manufacturing-weekly-report/',
             {
                 method: "GET",
                 headers: header
@@ -331,7 +331,7 @@ export async function getMonthlyManufacturingReport() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:8000/report/manufacturing-monthly-report/',
+            'http://77.37.44.105:7000/report/manufacturing-monthly-report/',
             {
                 method: "GET",
                 headers: header
@@ -363,7 +363,7 @@ export async function getYearlyManufacturingReport() {
         }
 
         const response = await fetch(
-            'http://77.37.44.105:8000/report/manufacturing-yearly-report/',
+            'http://77.37.44.105:7000/report/manufacturing-yearly-report/',
             {
                 method: "GET",
                 headers: header
@@ -394,7 +394,7 @@ export async function getDailyManufacturingReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/manufacturing-daily-list-report/',
+            'http://77.37.44.105:7000/report/manufacturing-daily-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -426,7 +426,7 @@ export async function getWeeklyManufacturingReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/manufacturing-weekly-list-report/',
+            'http://77.37.44.105:7000/report/manufacturing-weekly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -458,7 +458,7 @@ export async function getMonthlyManufacturingReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/manufacturing-monthly-list-report/',
+            'http://77.37.44.105:7000/report/manufacturing-monthly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -490,7 +490,7 @@ export async function getYearlyManufacturingReportData() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/manufacturing-yearly-list-report/',
+            'http://77.37.44.105:7000/report/manufacturing-yearly-list-report/',
             {
                 method: 'GET',
                 headers: header
@@ -523,7 +523,7 @@ export async function getWorkerReport() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/worker-report-list/',
+            'http://77.37.44.105:7000/report/worker-report-list/',
             {
                 method: 'GET',
                 headers: header
@@ -555,7 +555,7 @@ export async function getManufacturingByWorkerReport(workerId) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/manufacturing-by-worker/${workerId}/`,
+            `http://77.37.44.105:7000/report/manufacturing-by-worker/${workerId}/`,
             {
                 method: 'GET',
                 headers: header
@@ -588,7 +588,7 @@ export async function getUserReport() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/user-report-list/',
+            'http://77.37.44.105:7000/report/user-report-list/',
             {
                 method: 'GET',
                 headers: header
@@ -620,7 +620,7 @@ export async function getOrderByUserReport(userId) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/order-by-user/${userId}/`,
+            `http://77.37.44.105:7000/report/order-by-user/${userId}/`,
             {
                 method: 'GET',
                 headers: header
@@ -653,7 +653,7 @@ export async function getProductReport() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/report/product-report-list/',
+            'http://77.37.44.105:7000/report/product-report-list/',
             {
                 method: 'GET',
                 headers: header
@@ -685,7 +685,7 @@ export async function getOrderByProductReport(productId) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/product-order-report/${productId}/`,
+            `http://77.37.44.105:7000/report/product-order-report/${productId}/`,
             {
                 method: 'GET',
                 headers: header
@@ -718,7 +718,7 @@ export async function searchProductReport(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/product-report-list/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/product-report-list/?search=${searchInfo}`,
             {
                 method: 'GET',
                 headers: header
@@ -750,7 +750,7 @@ export async function searchUserReport(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/user-report-list/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/user-report-list/?search=${searchInfo}`,
             {
                 method: 'GET',
                 headers: header
@@ -782,7 +782,7 @@ export async function searchWorkerReport(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/worker-report-list/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/worker-report-list/?search=${searchInfo}`,
             {
                 method: 'GET',
                 headers: header
@@ -814,7 +814,7 @@ export async function searchOrderByUserReport(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/order-by-user/${searchInfo.userId}/?search=${searchInfo.data}`,
+            `http://77.37.44.105:7000/report/order-by-user/${searchInfo.userId}/?search=${searchInfo.data}`,
             {
                 method: 'GET',
                 headers: header
@@ -846,7 +846,7 @@ export async function searchManufactureByWorkerReport(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/manufacturing-by-worker/${searchInfo.workerId}/?search=${searchInfo.data}`,
+            `http://77.37.44.105:7000/report/manufacturing-by-worker/${searchInfo.workerId}/?search=${searchInfo.data}`,
             {
                 method: 'GET',
                 headers: header
@@ -878,7 +878,7 @@ export async function searchOrderByProductReport(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/product-order-report/${searchInfo.productId}/?search=${searchInfo.data}`,
+            `http://77.37.44.105:7000/report/product-order-report/${searchInfo.productId}/?search=${searchInfo.data}`,
             {
                 method: 'GET',
                 headers: header
@@ -912,7 +912,7 @@ export async function searchDailyManufacturingReport(searchInfo) {
         }
 
         const response = await fetch(
-            `http://77.37.44.105:8000/report/manufacturing-daily-list-report/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/manufacturing-daily-list-report/?search=${searchInfo}`,
             {
                 method: "GET",
                 headers: header
@@ -944,7 +944,7 @@ export async function searchWeeklyManufacturingReport(searchInfo) {
         }
 
         const response = await fetch(
-            `http://77.37.44.105:8000/report/manufacturing-weekly-list-report/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/manufacturing-weekly-list-report/?search=${searchInfo}`,
             {
                 method: "GET",
                 headers: header
@@ -976,7 +976,7 @@ export async function searchMonthlyManufacturingReport(searchInfo) {
         }
 
         const response = await fetch(
-            `http://77.37.44.105:8000/report/manufacturing-monthly-list-report/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/manufacturing-monthly-list-report/?search=${searchInfo}`,
             {
                 method: "GET",
                 headers: header
@@ -1008,7 +1008,7 @@ export async function searchYearlyManufacturingReport(searchInfo) {
         }
 
         const response = await fetch(
-            `http://77.37.44.105:8000/report/manufacturing-yearly-list-report/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/manufacturing-yearly-list-report/?search=${searchInfo}`,
             {
                 method: "GET",
                 headers: header
@@ -1040,7 +1040,7 @@ export async function searchDailyOrderReportData(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/daily-list-report/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/daily-list-report/?search=${searchInfo}`,
             {
                 method: 'GET',
                 headers: header
@@ -1072,7 +1072,7 @@ export async function searchWeeklyOrderReportData(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/weekly-list-report/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/weekly-list-report/?search=${searchInfo}`,
             {
                 method: 'GET',
                 headers: header
@@ -1104,7 +1104,7 @@ export async function searchMonthlyOrderReportData(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/monthly-list-report/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/monthly-list-report/?search=${searchInfo}`,
             {
                 method: 'GET',
                 headers: header
@@ -1136,7 +1136,7 @@ export async function searchYearlyOrderReportData(searchInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/report/yearly-list-report/?search=${searchInfo}`,
+            `http://77.37.44.105:7000/report/yearly-list-report/?search=${searchInfo}`,
             {
                 method: 'GET',
                 headers: header

@@ -36,7 +36,7 @@ const UserComponent = ({
   return (
     <div className="flex items-center justify-between flex-wrap w-full mb-8">
       {/* User Title */}
-      <h1 className="text-2xl mx-2 m-2 font-bold">Users</h1>
+      <h1 className="text-2xl mx-2 m-2 font-bold">Customers</h1>
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
@@ -86,7 +86,7 @@ const UserComponent = ({
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Add user
+              Add customer
             </button>
           </Link>
         </div>

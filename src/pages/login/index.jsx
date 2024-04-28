@@ -22,10 +22,6 @@ const Login = () => {
   const apk = useSelector(selectApkLink);
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  useEffect(() => {
-    dispatch(apkDownloadAsync());
-  }, [dispatch]);
-
   const hideError = () => {
 
   };

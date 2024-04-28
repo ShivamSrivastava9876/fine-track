@@ -9,7 +9,7 @@ export async function getManufacturingOrderList() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/manufacturing-list/',
+            'http://77.37.44.105:7000/admin_panel/manufacturing-list/',
             {
                 method: 'GET',
                 headers: header
@@ -41,7 +41,7 @@ export async function getManufacturingProduct() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/manufacturing-product-list/',
+            'http://77.37.44.105:7000/admin_panel/manufacturing-product-list/',
             {
                 method: 'GET',
                 headers: header
@@ -73,7 +73,7 @@ export async function getManufacturingUser() {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            'http://77.37.44.105:8000/admin_panel/manufacturing-user-list/',
+            'http://77.37.44.105:7000/orders/customer-list-order/',
             {
                 method: 'GET',
                 headers: header
@@ -105,7 +105,7 @@ export async function createManufacturingOrder(createManufacturingOrderInfo) {
         Authorization: `Token ${token}`,
       };
       const response = await fetch(
-        "http://77.37.44.105:8000/admin_panel/create-manufacturing/",
+        "http://77.37.44.105:7000/admin_panel/create-manufacturing/",
         {
           method: "POST",
           headers: header,
@@ -140,7 +140,7 @@ export async function createManufacturingOrder(createManufacturingOrderInfo) {
         }
         
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/${updateManufacturingOrderInfo.id}/update-manufacturing/`,
+            `http://77.37.44.105:7000/admin_panel/${updateManufacturingOrderInfo.id}/update-manufacturing/`,
             {
                 method: 'PUT',
                 headers: header,
@@ -173,7 +173,7 @@ export async function deleteManufacturingOrder(orderId) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/${orderId}/delete-manufacturing/`,
+            `http://77.37.44.105:7000/admin_panel/${orderId}/delete-manufacturing/`,
             {
                 method: 'DELETE',
                 headers: header
@@ -205,7 +205,7 @@ export async function searchManufacturingOrder(orderInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:8000/admin_panel/manufacturing-list/?search=${orderInfo}`,
+            `http://77.37.44.105:7000/admin_panel/manufacturing-list/?search=${orderInfo}`,
             {
                 method: 'GET',
                 headers: header

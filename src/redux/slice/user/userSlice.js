@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { userDetails, createUser, searchUser, deleteUser, userActive } from "./userApi";
+import { userDetails, createUser, searchUser, deleteUser, updateUser } from "./userApi";
 
 const initialState = {
   status: "idle",
@@ -58,13 +58,12 @@ export const deleteUserAsync = createAsyncThunk(
   }
 );
 
-export const userActiveAsync = createAsyncThunk(
-  "user/userActive",
-  async (userStatusInfo) => {
+export const updateUserAsync = createAsyncThunk(
+  "user/updateUser",
+  async (updateUserInfo) => {
     try {
-      // console.log("user",userStatusInfo);
-      const response = await userActive(userStatusInfo);
-      return response.data.data;
+      const response = await updateUser(updateUserInfo);
+      return response.data;
     }
     catch (error) {
       return error;
@@ -111,13 +110,13 @@ export const userSlice = createSlice({
     builder.addCase(searchUserAsync.rejected, (state, action) => {
       state.error = action.payload;
     });
-    builder.addCase(userActiveAsync.pending, (state) => {
+    builder.addCase(updateUserAsync.pending, (state) => {
       state.status = "loading";
     });
-    builder.addCase(userActiveAsync.fulfilled, (state, action) => {
+    builder.addCase(updateUserAsync.fulfilled, (state, action) => {
       state.status = "idle";
     });
-    builder.addCase(userActiveAsync.rejected, (state, action) => {
+    builder.addCase(updateUserAsync.rejected, (state, action) => {
       state.status = "idle";
       state.createUserError = action.payload;
     });

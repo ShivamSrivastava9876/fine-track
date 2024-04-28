@@ -59,14 +59,13 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
   };
 
   const handleProductSubmit = (e) => {
-    if (image && category !== "" && productType !== "" && huId !== "" && productId !== "" && weight.length !== 0 && productName !== "" && puritySpc !== "" && quantity !== "" && price !== "" && description !== "") {
+    if (image && category !== "" && productType !== "" && productId !== "" && weight.length !== 0 && productName !== "" && puritySpc !== "" && quantity !== "" && price !== "" && description !== "") {
       e.preventDefault();
-      dispatch(createProductAsync({ category: category, product_type: productType, hu_id: huId, product_id: productId, model, sub_model: subModel, product_name: productName, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length })).then((result) => {
+      dispatch(createProductAsync({ category: category, product_type: productType, product_id: productId, model, sub_model: subModel, product_name: productName, weight: weight, stone_wt: stoneWeight, purity_spec: puritySpc, price, image, quantity, description, is_available: true, size, length })).then((result) => {
         if (createProductAsync.fulfilled.match(result)) {
           dispatch(getProductAsync());
           setCategory("");
           setProductType("");
-          setHuId("");
           setProductId("");
           setProductName("");
           setModel("");
@@ -340,15 +339,6 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 )}
               </div>
 
-              {productType && <div className={`mb-4 md:w-21.375 ${huId === '' && error ? 'border-2 border-red-500' : ''}`}>
-                <input
-                  type="text"
-                  className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-                  value={huId}
-                  onChange={(e) => setHuId(e.target.value)}
-                  placeholder="HU Id"
-                />
-              </div>}
               {productType && <div className={`mb-4 md:w-21.375 ${productId === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <input
                   type="text"

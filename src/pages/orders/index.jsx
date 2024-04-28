@@ -1,12 +1,13 @@
 import Layout from "@/components/Layout";
 import OrderTables from "@/components/OrderTables";
 import OrderButtons from "@/components/OrderButtons";
+import CreateCustomerOrder from "@/components/CreateCustomerOrder";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const Orders = () => {
-  const [addProduct, setAddProduct] = useState(false);
+  const [createOrder, setCreateOrder] = useState(false);
   const router = useRouter(); 
 
   useEffect(() => {
@@ -19,8 +20,9 @@ const Orders = () => {
   return (
     <Layout>
       <div className="p-8">
-        <OrderButtons />
+        <OrderButtons createOrder={createOrder} setCreateOrder={setCreateOrder} />
         <OrderTables />
+        {createOrder && <CreateCustomerOrder createOrder={createOrder} setCreateOrder={setCreateOrder} />}
       </div>
     </Layout>
   );

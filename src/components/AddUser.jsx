@@ -9,13 +9,15 @@ import {
 const AddUser = ({ addUser, setAddUser }) => {
   const dispatch = useDispatch();
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [mobileNo, setMobileNo] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [businessName, setBusinessName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [contactNo, setContactNo] = useState("");
+  const [alternateContactNo, setAlternateContactNo] = useState("");
+  const [address, setAddress] = useState("");
+  const [shippingAddress, setShippingAddress] = useState("");
+  const [remark, setRemark] = useState("");
+  
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [error, setError] = useState(false);
@@ -23,17 +25,17 @@ const AddUser = ({ addUser, setAddUser }) => {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    if (password !== "" && confirmPassword !== "" && firstName !== "" && lastName !== "" && mobileNo !== "" && email !== "") {
-      if (password === confirmPassword) {
-        // setMessage("Password does not match")
-        setMessage("");
+    if (fullName !== "" && businessName !== "" && email !== "" && contactNo !== "" && address !== "" && shippingAddress !== "") {
         dispatch(
           createUserAsync({
-            first_name: firstName,
-            last_name: lastName,
+            full_name: fullName,
+            bussiness_name: businessName,
             email: email,
-            mobile: mobileNo,
-            password: password,
+            contact_no: contactNo,
+            alternate_contact_no: alternateContactNo,
+            address: address,
+            shipping_address: shippingAddress,
+            remark: remark
           })
         ).then((result) => {
           // Check if createUserAsync was successful
@@ -42,22 +44,21 @@ const AddUser = ({ addUser, setAddUser }) => {
             dispatch(userDetailsAsync());
 
             // Clearing the form fields by updating state variables to empty values
-            setFirstName("");
-            setLastName("");
+            setFullName("");
+            setBusinessName("");
             setEmail("");
-            setMobileNo("");
-            setPassword("");
-            setConfirmPassword("");
+            setContactNo("");
+            setAlternateContactNo("");
+            setAddress("");
+            setShippingAddress("");
+            setRemark("");
             setSuccess(true);
             setTimeout(() => {
               setSuccess(false);
             }, 3000)
           }
         });
-      }
-      else {
-        setMessage("Password does not match")
-      }
+      
     }
     else {
       e.preventDefault();
@@ -145,25 +146,25 @@ const AddUser = ({ addUser, setAddUser }) => {
           </button>
           <div className="mb-4 space-y-1">
             <h2 className=" text-[#0a0a0a] text-center font-bold text-base text-16px w-161">
-              Add user
+              Add customer
             </h2>
           </div>
-          <div className={`mb-4 md:w-21.375 ${firstName === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div className={`mb-4 md:w-21.375 ${fullName === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-              placeholder="First name"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="Full name"
             />
           </div>
-          <div className={`mb-4 md:w-21.375 ${lastName === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div className={`mb-4 md:w-21.375 ${businessName === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              placeholder="Last name"
+              value={businessName}
+              onChange={(e) => setBusinessName(e.target.value)}
+              placeholder="Business name"
             />
           </div>
           <div className={`mb-4 md:w-21.375 ${email === '' && error ? 'border-2 border-red-500' : ''}`}>
@@ -175,54 +176,50 @@ const AddUser = ({ addUser, setAddUser }) => {
               placeholder="Email"
             />
           </div>
-          <div className={`mb-4 md:w-21.375 ${mobileNo === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div className={`mb-4 md:w-21.375 ${contactNo === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-              value={mobileNo}
-              onChange={(e) => setMobileNo(e.target.value)}
-              placeholder="Mobile number"
+              value={contactNo}
+              onChange={(e) => setContactNo(e.target.value)}
+              placeholder="Contact number"
             />
           </div>
-          <div className={`mb-4 md:w-21.375 relative ${password === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div className={`mb-4 md:w-21.375`}>
             <input
-              type={passwordVisible ? "text" : "password"}
+              type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              value={alternateContactNo}
+              onChange={(e) => setAlternateContactNo(e.target.value)}
+              placeholder="Alternate contact no"
             />
-            <button
-              type="button"
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 focus:outline-none"
-              onClick={togglePasswordVisibility}
-            >
-              {passwordVisible ? (
-                <EyeOffIcon className="w-6 h-6 text-gray-400" />
-              ) : (
-                <EyeIcon className="w-6 h-6 text-gray-400" />
-              )}
-            </button>
           </div>
-          <div className={`mb-4 md:w-21.375 relative ${confirmPassword === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div className={`mb-4 md:w-21.375 ${address === '' && error ? 'border-2 border-red-500' : ''}`}>
             <input
-              type={confirmPasswordVisible ? "text" : "password"}
+              type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Confirm password"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Address"
             />
-            <button
-              type="button"
-              className="absolute top-1/2 right-4 transform -translate-y-1/2 focus:outline-none"
-              onClick={toggleConfirmPasswordVisibility}
-            >
-              {confirmPasswordVisible ? (
-                <EyeOffIcon className="w-6 h-6 text-gray-400" />
-              ) : (
-                <EyeIcon className="w-6 h-6 text-gray-400" />
-              )}
-            </button>
+          </div>
+          <div className={`mb-4 md:w-21.375 ${shippingAddress === '' && error ? 'border-2 border-red-500' : ''}`}>
+            <input
+              type="text"
+              className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+              value={shippingAddress}
+              onChange={(e) => setShippingAddress(e.target.value)}
+              placeholder="Shipping address"
+            />
+          </div>
+          <div className={`mb-4 md:w-21.375`}>
+            <input
+              type="text"
+              className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
+              value={remark}
+              onChange={(e) => setRemark(e.target.value)}
+              placeholder="Remark"
+            />
           </div>
 
           <button
@@ -231,9 +228,6 @@ const AddUser = ({ addUser, setAddUser }) => {
           >
             Add
           </button>
-          {message === "Password does not match" && (
-            <span className="text-red-500 font-bold">{message}</span>
-          )}
         </form>
       </div>
     </>

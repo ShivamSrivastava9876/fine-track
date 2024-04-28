@@ -2,8 +2,6 @@
 
 import Layout from "@/components/Layout";
 import DashboardData from "@/components/DashboardData";
-import DashboardButtons from "@/components/DashboardButtons";
-import DashboardTables from "@/components/DashboardTables";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
@@ -21,8 +19,6 @@ const Dashboard = () => {
     <Layout>
       <div className="p-8">
         <DashboardData />
-        <DashboardButtons />
-        <DashboardTables />
       </div>
     </Layout>
   );

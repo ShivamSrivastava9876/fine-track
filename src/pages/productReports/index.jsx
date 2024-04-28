@@ -19,7 +19,6 @@ const ProductReports = () => {
   return (
     <Layout>
       <div className="p-8">
-        {/* <OrderButtons /> */}
         <ProductReportTable />
       </div>
     </Layout>

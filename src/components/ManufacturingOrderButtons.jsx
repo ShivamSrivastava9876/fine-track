@@ -37,52 +37,6 @@ const ProductComponent = ({
       <h1 className="text-2xl mx-2 m-2 font-bold">Manufacturing orders</h1>
 
       <div className="flex flex-row flex-wrap">
-        {/* Right-hand side Buttons */}
-        <Link href="#addProduct" className="flex items-center relative">
-        <div className="flex items-center space-x-4 mx-2 relative">
-          {/* Button 1 */}
-          {/* <button className="flex items-center px-4 py-2 bg-white text-[#344054] rounded-xl border border-[#D0D5DD] shadow">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-6 h-6 mr-2"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-          Filters
-        </button> */}
-
-          {/* Button 2 */}
-          <button
-            className={`flex items-center px-4 py-2 bg-[#DB8A4D] text-white rounded-full shadow transition-transform duration-300 transform ${addProduct ? "invisible" : ""
-              }`}
-            onClick={handleAddManufacturingOrder}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-6 h-6 mr-2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-              />
-            </svg>
-            Add order
-          </button>
-        </div>
-        </Link>
 
         {/* Right-hand side Search Box */}
         <form onSubmit={(e) => handleManufacturingOrderSearch(e)} className="flex items-center w-80 m-2 border-2 border-solid border-gray-300 rounded-full px-4 py-2">

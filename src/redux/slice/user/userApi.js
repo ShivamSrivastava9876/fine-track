@@ -9,7 +9,7 @@ export async function userDetails() {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://77.37.44.105:8000/admin_panel/userdetail/",
+      "http://77.37.44.105:7000/admin_panel/customer-list/",
       {
         method: "GET",
         headers: header,
@@ -41,7 +41,7 @@ export async function createUser(createUserInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      "http://77.37.44.105:8000/admin_panel/create-new-user/",
+      "http://77.37.44.105:7000/admin_panel/create-customer/",
       {
         method: "POST",
         headers: header,
@@ -74,7 +74,7 @@ export async function searchUser(searchUserInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      `http://77.37.44.105:8000/admin_panel/userdetail/?search=${searchUserInfo}`,
+      `http://77.37.44.105:7000/admin_panel/customer-list/?search=${searchUserInfo}`,
       {
         method: "GET",
         headers: header
@@ -106,7 +106,7 @@ export async function deleteUser(userId) {
       Authorization: `Token ${token}`
     }
     const response = await fetch(
-      `http://77.37.44.105:8000/admin_panel/${userId}/delete-user/`,
+      `http://77.37.44.105:7000/admin_panel/delete-customer/${userId}/`,
       {
         method: 'DELETE',
         headers: header
@@ -127,7 +127,7 @@ export async function deleteUser(userId) {
   }
 };
 
-export async function userActive(userStatusInfo) {
+export async function updateUser(updateUserInfo) {
   try {
     function getToken() {
       return localStorage.getItem("token");
@@ -135,17 +135,17 @@ export async function userActive(userStatusInfo) {
     const token = getToken();
     const header = {
       "Content-type": "application/json",
-      Authorization: `Token ${token}`
-    }
-    console.log(userStatusInfo.userActiveStatus)
+      Authorization: `Token ${token}`,
+    };
     const response = await fetch(
-      `http://77.37.44.105:8000/admin_panel/update-user/${userStatusInfo.userId}/`,
+      `http://77.37.44.105:7000/admin_panel/update-customer/${updateUserInfo.id}`,
       {
-        method: 'PUT',
+        method: "PUT",
         headers: header,
-        body: JSON.stringify(userStatusInfo.userActiveStatus)
+        body: JSON.stringify(updateUserInfo),
       }
-    )
+    );
+
     if (response.ok) {
       const data = await response.json();
       return { data };
@@ -154,9 +154,8 @@ export async function userActive(userStatusInfo) {
       const error = await response.text();
       return { error };
     }
-
   }
   catch (error) {
-    return { error }
+    return { error };
   }
-};
+}
