@@ -16,36 +16,74 @@ import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/o
 import { getYearlyReportDataAsync, getYearlyReportList, searchYearlyOrderReportAsync } from "../redux/slice/report/reportSlice";
 
 const columns = [
-  // { id: "HuId", label: "HU ID", minWidth: 80 },
-  { id: "productId", label: "Product ID", minWidth: 100 },
-  { id: "product", label: "Product", minWidth: 150 },
-  { id: "user", label: "User", minWidth: 200 },
-  { id: "date", label: "Date", minWidth: 200 },
-  { id: "quantity", label: "Quantity", minWidth: 50 },
-  // { id: "puritySpc", label: "Purity spc", minWidth: 100 },
-  { id: "price", label: "Product price", minWidth: 50 },
-  { id: "total", label: "Total price", minWidth: 50 },
-  // { id: "actions", label: "", minWidth: 150 },
+  { id: "srNo", label: "अनुक्रमांक", minWidth: 50 },
+  { id: "product", label: "प्रोडक्ट", minWidth: 100 },
+  { id: "customer", label: "ग्राहक", minWidth: 100 },
+  { id: "prevBalanceFine", label: "मागविण्याचा शिल्लक (ग्राम)", minWidth: 50 },
+  { id: "goldRate", label: "सोन्याचा दर 24 कैरेट प्रति ग्राम", minWidth: 40 },
+  { id: "weight", label: "वजन (ग्राम)", minWidth: 40 },
+  { id: "size", label: "माप", minWidth: 40 },
+  { id: "quantity", label: "प्रमाण", minWidth: 40 },
+  { id: "fineRequired", label: "एकूण शिल्लक आवश्यक (ग्राम)", minWidth: 40 },
+  {
+    id: "receivedFine",
+    label: "ग्राहकपासून आलेला शिल्लक (ग्राम)",
+    minWidth: 40,
+  },
+  {
+    id: "remainingCash",
+    label: "रक्कम भरावी लागेल (₹)",
+    minWidth: 40,
+  },
+  {
+    id: "receivedCash",
+    label: "ग्राहकपासून मिळालेला रक्कम (₹)",
+    minWidth: 40,
+  },
+  { id: "makingCharges", label: "तयार करण्याचे रक्कम (₹)", minWidth: 40 },
+  { id: "balancePending", label: "बाकी रक्कम (₹)", minWidth: 40 },
+  { id: "dateOfOrderPlaced", label: "ऑर्डर दिल्याची तारीख", minWidth: 60 },
+  { id: "status", label: "स्टेटस", minWidth: 100 },
+  // { id: "actions", label: "", minWidth: 100 },
 ];
 
 const createData = (
-
-  productId,
+  srNo,
+  orderId,
   product,
-  user,
-  date,
+  customer,
+  prevBalanceFine,
+  goldRate,
+  weight,
+  size,
   quantity,
-  price,
-  total
+  fineRequired,
+  receivedFine,
+  remainingCash,
+  receivedCash,
+  makingCharges,
+  balancePending,
+  dateOfOrderPlaced,
+  status
 ) => {
   return {
-    productId,
+    srNo,
+    orderId,
     product,
-    user,
-    date,
+    customer,
+    prevBalanceFine,
+    goldRate,
+    weight,
+    size,
     quantity,
-    price,
-    total,
+    fineRequired,
+    receivedFine,
+    remainingCash,
+    receivedCash,
+    makingCharges,
+    balancePending,
+    dateOfOrderPlaced,
+    status
   };
 };
 
@@ -101,35 +139,45 @@ export default function YearlyDetailsTables() {
     if (orderList && Array.isArray(orderList)) {
       let srNo = 1;
       const newRows = orderList.map((data) => {
-        const date = data.order.order_date;
+        const date = data.created;
 
-        const newDate = new Date(date)
-        const formattedDate = newDate.toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: 'long',
-          year: '2-digit',
+        const newDate = new Date(date);
+        const formattedDate = newDate.toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "long",
+          year: "2-digit",
         });
         const newRow = createData(
-          data.product.product_id || "",
+          srNo,
+          data.id || "",
           data.product.product_name || "",
-          data.order.user || "",
-          formattedDate || "",
+          data.customer.full_name || "",
+          data.previous_balance_fine || 0,
+          data.today_gold_rate || "",
+          data.metal_weight || "",
+          data.size || "",
           data.quantity || "",
-          data.price || "",
-          data.order.total_price || ""
+          data.fine_required || "",
+          data.received_fine || "",
+          data.remainig_cash_required || "",
+          data.received_cash || "",
+          data.making_charges || "",
+          data.pending_balance || "",
+          formattedDate || "",
+          data.status || "",
         );
         srNo = srNo + 1;
         return newRow;
       });
 
-      setRows(newRows)
+      setRows(newRows);
     }
   }, [orderList]);
 
   return (
     <div>
       <div className="flex items-center justify-between flex-wrap w-full mb-4">
-        <h1 className="text-2xl mx-4 mb-4 font-bold">Yearly order report</h1>
+        <h1 className="text-2xl mx-4 mb-4 font-bold">वार्षिक ऑर्डर अहवाल</h1>
         <div className="flex flex-wrap">
           <button
             className={`flex items-center m-2 md:w-52 border-2 border-solid bg-[#DB8A4D] font-semibold rounded-full px-4 py-2`}
@@ -149,12 +197,12 @@ export default function YearlyDetailsTables() {
               <polyline points="7 10 12 15 17 10" />
               <line x1="12" y1="15" x2="12" y2="3" />
             </svg>
-            Download report
+            डाउनलोड अहवाल
           </button>
           <form onSubmit={(e) => handleYearlyOrderReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
             <input
               type="search"
-              placeholder="Search"
+              placeholder="शोधा"
               value={searchParameter}
               onChange={(e) => handleSearchParameter(e.target.value)}
               className="w-full h-full outline-none bg-transparent text-blue-gray-700"

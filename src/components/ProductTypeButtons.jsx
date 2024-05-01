@@ -35,7 +35,7 @@ const ProductTypeButtons = ({
   return (
     <div className="flex items-center justify-between flex-wrap w-full mb-8">
       {/* User Title */}
-      <h1 className="text-2xl mx-2 m-2 font-bold">Product type</h1>
+      <h1 className="text-2xl mx-2 m-2 font-bold">प्रोडक्टचा प्रकार</h1>
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
@@ -80,7 +80,7 @@ const ProductTypeButtons = ({
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Add product type
+              नवीन प्रोडक्टचा प्रकार
             </button>
           </div>
         </Link>
@@ -89,7 +89,7 @@ const ProductTypeButtons = ({
         <form onSubmit={(e) => handleProductTypeSearch(e)} className="flex items-center md:w-80 border-2 border-solid border-gray-300 m-2 rounded-full px-4 py-2">
           <input
             type="search"
-            placeholder="Search"
+            placeholder="शोधा"
             value={searchParameter}
             onChange={(e) => handleSearchParameter(e.target.value)}
             className="w-full h-full outline-none bg-transparent text-blue-gray-700"

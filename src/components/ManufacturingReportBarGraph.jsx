@@ -42,7 +42,7 @@ function ManufacturingReportBarGraph() {
 
     useEffect(() => {
         if (reportData && reportData.daily_report) {
-            setTitle("Daily manufacturing")
+            setTitle("दररोज उत्पादन")
             const keys = Object.keys(reportData.daily_report);
             setKeysData(keys);
 
@@ -51,7 +51,7 @@ function ManufacturingReportBarGraph() {
             
         }
         if (reportData && reportData.weekly_report) {
-            setTitle("Weekly manufacturing")
+            setTitle("साप्ताहिक उत्पादन")
             const keys = Object.keys(reportData.weekly_report);
             setKeysData(keys);
 
@@ -60,7 +60,7 @@ function ManufacturingReportBarGraph() {
            
         }
         if (reportData && reportData.monthly_report) {
-            setTitle("Monthly manufacturing")
+            setTitle("मासिक उत्पादन")
             const keys = Object.keys(reportData.monthly_report);
             setKeysData(keys);
 
@@ -69,7 +69,7 @@ function ManufacturingReportBarGraph() {
             
         }
         if (reportData && reportData.yearly_report) {
-            setTitle("Yearly manufacturing")
+            setTitle("वार्षिक उत्पादन")
             const keys = Object.keys(reportData.yearly_report);
             setKeysData(keys);
 
@@ -147,19 +147,19 @@ function ManufacturingReportBarGraph() {
     return (
         <div>
             {/* Bar chart */}
-            <h1 className="w-auto mx-auto mb-5 flex justify-center text-2xl font-bold ">Manufacturing report</h1>
+            <h1 className="w-auto mx-auto mb-5 flex justify-center text-2xl font-bold ">उत्पादन अहवाल</h1>
             <div className="flex justify-center space-x-1 ">
-                <button onClick={handleDailyData} className={`px-4 py-2 ${active === "daily" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Daily</button>
-                <button onClick={handleWeeklyData} className={`px-4 py-2 ${active === "weekly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Weekly</button>
-                <button onClick={handleMonthlyData} className={`px-4 py-2 ${active === "monthly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Monthly</button>
-                <button onClick={handleYearlyData} className={`px-4 py-2 ${active === "yearly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>Yearly</button>
+                <button onClick={handleDailyData} className={`px-4 py-2 ${active === "daily" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>दररोज</button>
+                <button onClick={handleWeeklyData} className={`px-4 py-2 ${active === "weekly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>साप्ताहिक</button>
+                <button onClick={handleMonthlyData} className={`px-4 py-2 ${active === "monthly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>मासिक</button>
+                <button onClick={handleYearlyData} className={`px-4 py-2 ${active === "yearly" ? "bg-orange-800" : "bg-[#DB8A4D]"}  hover:bg-orange-800 border border-black text-white rounded`}>वार्षिक</button>
             </div>
-            <h1 className="w-auto mx-auto m-5 flex justify-center text-s font-bold ">{title} report</h1>
+            <h1 className="w-auto mx-auto m-5 flex justify-center text-s font-bold ">{title} अहवाल</h1>
             <div className="w-full md:w-4/5 mx-auto mt-4 flex flex-col">
                 <div className='border relative border-gray-400 rounded-xl w-100% overflow-hidden my-auto shadow-xl'>
                     <canvas ref={chartRef} className="w-full h-auto"></canvas>
                 </div>
-                <Link href={`/${active}ManufacturingReports`} className="mt-3 text-blue-500 underline ml-auto">View more ...</Link>
+                <Link href={`/${active}ManufacturingReports`} className="mt-3 text-blue-500 hover:underline ml-auto">अधिक पहा ...</Link>
             </div>
         </div>
     )

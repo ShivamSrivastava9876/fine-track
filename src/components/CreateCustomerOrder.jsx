@@ -241,7 +241,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
           style={{ zIndex: 1000 }}
         >
           <strong className="font-bold">
-            Error! Please fill all required fields
+            कृपया सर्व आवश्यक फील्ड भरा
           </strong>
           <button
             onClick={hideError}
@@ -258,7 +258,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
           role="success"
           style={{ zIndex: 1001 }}
         >
-          <strong className="font-bold">Order added successfully</strong>
+          <strong className="font-bold">ऑर्डर ऐड झाले</strong>
           <button
             onClick={hideSuccess}
             className="relative top-0.5 bottom-0 left-1"
@@ -294,7 +294,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
           id="formTitle"
           className="w-52 h-4 m-4 font-bold text-base text-center text-25"
         >
-          Create customer order
+          नवीन ग्राहक ऑर्डर  
         </div>
         <div id="formFields" className="">
           <form
@@ -309,7 +309,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                 }`}
               >
                 <div class="inline-flex items-center justify-center px-4 py-2 text-xs md:text-sm font-semibold w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                  {product || "Select product"}
+                  {product || "प्रोडक्ट निवडा"}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="w-5 h-5 ml-2 -mr-1 text-gray-400"
@@ -352,7 +352,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                 }`}
               >
                 <div class="inline-flex items-center justify-center text-xs md:text-sm font-semibold px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-[#595858] hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                  {user || "Select customer"}
+                  {user || "ग्राहक निवडा"}
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="w-5 h-5 ml-2 -mr-1 text-gray-400"
@@ -405,7 +405,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={prevBalanceFine}
                   onChange={(e) => setPrevBalanceFine(e.target.value)}
-                  placeholder="Previous balance fine"
+                  placeholder="मागविण्याचा शिल्लक"
                 />
               </div>
 
@@ -419,7 +419,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={goldRate}
                   onChange={(e) => setGoldRate(e.target.value)}
-                  placeholder="Today's 24k gold rate per gm"
+                  placeholder="आजचा सोन्याचा दर 24 कैरेट प्रति ग्राम"
                 />
               </div>
 
@@ -433,7 +433,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={weight}
                   onChange={(e) => setWeight(e.target.value)}
-                  placeholder="Weight (gm)"
+                  placeholder="वजन (ग्राम)"
                 />
               </div>
 
@@ -443,7 +443,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={size}
                   onChange={(e) => setSize(e.target.value)}
-                  placeholder="Size"
+                  placeholder="माप"
                 />
               </div>
 
@@ -457,7 +457,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  placeholder="Quantity"
+                  placeholder="प्रमाण"
                 />
               </div>
 
@@ -472,7 +472,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={totalFine}
                   onChange={(e) => setTotalFine(e.target.value)}
-                  placeholder="Total fine required"
+                  placeholder="एकूण फाइन आवश्यक (ग्राम)" //Total fine required
                 />
               </div>
 
@@ -488,7 +488,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={receivedFineFromCustomer}
                   onChange={(e) => setReceivedFineFromCustomer(e.target.value)}
-                  placeholder="Received fine from customer"
+                  placeholder="ग्राहकपासून आलेला फाइन (ग्राम)"
                 />
               </div>
 
@@ -503,7 +503,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={remainingCash}
                   onChange={(e) => setRemainingCash(e.target.value)}
-                  placeholder="Remaining cash"
+                  placeholder="रक्कम भरावी लागेल (₹)"
                 />
               </div>
 
@@ -519,7 +519,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={receivedCashFromCustomer}
                   onChange={(e) => setReceivedCashFromCustomer(e.target.value)}
-                  placeholder="Received cash from customer"
+                  placeholder="ग्राहकपासून मिळालेला रक्कम (₹)"
                 />
               </div>
 
@@ -533,7 +533,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={makingCharges}
                   onChange={(e) => setMakingCharges(e.target.value)}
-                  placeholder="Making charges"
+                  placeholder="तयार करण्याचे रक्कम (₹)"
                 />
               </div>
 
@@ -550,7 +550,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={balancePending}
                   onChange={(e) => setBalancePending(e.target.value)}
-                  placeholder="Balance pending"
+                  placeholder="बाकी रक्कम (₹)"
                 />
               </div>
 
@@ -560,7 +560,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#595858]"
                   value={remark}
                   onChange={(e) => setRemark(e.target.value)}
-                  placeholder="Remark"
+                  placeholder="टिप्पणी"
                 />
               </div>
             </div>
@@ -569,7 +569,7 @@ const CreateCustomerOrder = ({ createOrder, setCreateOrder }) => {
               type="submit"
               className="rounded-xl bg-[#DF8E51] h-3.3125 w-10.0625 md:w-21.375 m-4 text-white py-2 transition duration-300"
             >
-              Add
+              ऐड करा
             </button>
           </form>
         </div>

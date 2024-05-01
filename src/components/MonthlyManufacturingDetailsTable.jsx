@@ -17,16 +17,16 @@ import { getDailyManufacturingReportDataAsync, getDailyReportList, getMonthlyMan
 
 const columns = [
     // { id: "HuId", label: "HU ID", minWidth: 80 },
-    { id: "workerName", label: "Worker name", minWidth: 200 },
-    { id: "productName", label: "Product name", minWidth: 200 },
-    { id: "goldIssued", label: "Gold issued (in gm)", minWidth: 80 },
-    { id: "goldWaste", label: "Gold waste (in gm)", minWidth: 80 },
-    { id: "goldBalance", label: "Gold balance (in gm)", minWidth: 80 },
-    { id: "goldReceived", label: "Gold received (in gm)", minWidth: 80 },
+    { id: "workerName", label: "कामगारचा नाव", minWidth: 200 },
+    { id: "productName", label: "प्रोडक्टचा नाव", minWidth: 200 },
+    { id: "goldIssued", label: "दीलेला वजन (ग्राम)", minWidth: 80 },
+    { id: "goldWaste", label: "वाया गेलेले वजन (ग्राम)", minWidth: 80 },
+    { id: "goldBalance", label: "शिल्लक (ग्राम)", minWidth: 80 },
+    { id: "goldReceived", label: "प्रोडक्टचे वजन (ग्राम)", minWidth: 80 },
     // { id: "puritySpc", label: "Purity spc", minWidth: 100 },
-    { id: "issuedDate", label: "Issued date", minWidth: 120 },
-    { id: "receiveDate", label: "Received date", minWidth: 120 },
-    { id: "status", label: "Status", minWidth: 80 },
+    { id: "issuedDate", label: "प्रारंभची तारीख", minWidth: 120 },
+    { id: "receiveDate", label: "शेवटची तारीख", minWidth: 120 },
+    { id: "status", label: "स्टेटस", minWidth: 80 },
     // { id: "actions", label: "", minWidth: 150 },
 ];
 
@@ -139,7 +139,7 @@ export default function MonthlyManufacturingDetailsTable() {
         <div>
             <div className="flex items-center justify-between flex-wrap w-full mb-4">
 
-                <h1 className="text-2xl mx-4 mb-4 font-bold">Monthly manufacturing report</h1>
+                <h1 className="text-2xl mx-4 mb-4 font-bold">मासिक उत्पादन अहवाल</h1>
                 <div className="flex flex-wrap">
                     <button
                         className={`flex items-center m-2 md:w-52 border-2 border-solid bg-[#DB8A4D] font-semibold rounded-full px-4 py-2`}
@@ -159,12 +159,12 @@ export default function MonthlyManufacturingDetailsTable() {
                             <polyline points="7 10 12 15 17 10" />
                             <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        Download report
+                        डाउनलोड अहवाल
                     </button>
                     <form onSubmit={(e) => handleMonthlyManufacturingReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
                         <input
                             type="search"
-                            placeholder="Search"
+                            placeholder="शोधा"
                             value={searchParameter}
                             onChange={(e) => handleSearchParameter(e.target.value)}
                             className="w-full h-full outline-none bg-transparent text-blue-gray-700"

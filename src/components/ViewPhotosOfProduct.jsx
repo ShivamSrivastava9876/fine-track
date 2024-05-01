@@ -30,7 +30,7 @@ const ViewPhotosOfProduct = ({ rows, selectedProductImages, openImage, setOpenIm
                     </button>
                     <div className="mb-4">
                         <h2 className=" flex items-center m-2 text-2xl font-bold">
-                            Images of selected product
+                            प्रोडक्टचे निवडलेले फोटो
                         </h2>
                     </div>
                     <div className="overflow-y-auto flex flex-wrap h-full justify-center">

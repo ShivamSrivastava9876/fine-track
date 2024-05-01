@@ -18,13 +18,13 @@ import { useRouter } from "next/router";
 
 const columns = [
     // { id: "HuId", label: "HU ID", minWidth: 80 },
-    { id: "productName", label: "Product name", minWidth: 150 },
-    { id: "category", label: "Category", minWidth: 120 },
-    { id: "productType", label: "Product type", minWidth: 120 },
-    { id: "quantity", label: "Quantity", minWidth: 80 },
-    { id: "price", label: "Price (in INR)", minWidth: 150 },
-    { id: "orderDate", label: "Date of order placed", minWidth: 150 },
-    { id: "orderStatus", label: "Order status", minWidth: 100 }
+    { id: "productName", label: "प्रोडक्ट", minWidth: 150 },
+    { id: "category", label: "कैटेगरी", minWidth: 120 },
+    { id: "productType", label: "प्रोडक्टचा प्रकार", minWidth: 120 },
+    { id: "quantity", label: "प्रमाण", minWidth: 80 },
+    { id: "price", label: "किमत (₹)", minWidth: 150 },
+    { id: "orderDate", label: "ऑर्डरची तारीख", minWidth: 150 },
+    { id: "orderStatus", label: "स्टेटस", minWidth: 100 }
 ];
 
 const createData = (
@@ -138,9 +138,9 @@ export default function OrderByUserData() {
             <div className="flex items-center justify-between flex-wrap w-full mb-4">
                 <h1 className="text-xl mx-4 mb-4 font-bold text-gray-500">
                     {selectedUserName.length !== 0 ? (
-                        <span>User report of <span className="text-black">{selectedUserName}</span></span>
+                        <span><span className="text-black">{selectedUserName}</span> चा ग्राहक अहवाल</span>
                     ) : (
-                        <span>User report</span>
+                        <span>ग्राहक अहवाल</span>
                     )}
                 </h1>
                 <div className="flex flex-wrap">
@@ -163,12 +163,12 @@ export default function OrderByUserData() {
                             <polyline points="7 10 12 15 17 10" />
                             <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        Download report
+                        डाउनलोड अहवाल
                     </button>
                     <form onSubmit={(e) => handleUserReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
                         <input
                             type="search"
-                            placeholder="Search"
+                            placeholder="शोधा"
                             value={searchParameter}
                             onChange={(e) => handleSearchParameter(e.target.value)}
                             className="w-full h-full outline-none bg-transparent text-blue-gray-700"
@@ -235,7 +235,7 @@ export default function OrderByUserData() {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                {selectedUserName.length === 0 && (<div className="text-black font-semibold text-base mx-4 mt-2 flex justify-center">No data found</div>)}
+                {selectedUserName.length === 0 && (<div className="text-black font-semibold text-base mx-4 mt-2 flex justify-center">माहिती उपलब्ध नाही</div>)}
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"
@@ -246,18 +246,6 @@ export default function OrderByUserData() {
                     onRowsPerPageChange={handleChangeRowsPerPage}
                 />
 
-                {/* <div className="space-x-4">
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onPageChange={handleChangePage}
-        >
-          Next
-        </button>
-
-        <button className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-          Previous
-        </button>
-      </div> */}
             </Paper>
         </div>
     );

@@ -148,7 +148,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 role="alert"
                 style={{ zIndex: 1000 }}
             >
-                <strong className="font-bold">Error! Please fill all required fields</strong>
+                <strong className="font-bold">कृपया सर्व आवश्यक फील्ड भरा</strong>
                 <button
                     onClick={hideError}
                     className="relative top-0.5 bottom-0 left-1"
@@ -162,7 +162,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                 role="success"
                 style={{ zIndex: 1001 }}
             >
-                <strong className="font-bold">Order added successfully</strong>
+                <strong className="font-bold">ऑर्डर ऐड झाले</strong>
                 <button
                     onClick={hideSuccess}
                     className="relative top-0.5 bottom-0 left-1"

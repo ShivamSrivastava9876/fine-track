@@ -58,7 +58,7 @@ const EditFormCustomer = ({
         >
           <div className="mb-4 space-y-1">
             <h2 className=" text-[#0a0a0a] text-center font-bold text-base text-16px w-161">
-              Update customer details
+            ग्राहक अपडेट करा
             </h2>
           </div>
           <div className="grid md:grid-cols-2 grid-cols-1 gap-2">
@@ -68,7 +68,7 @@ const EditFormCustomer = ({
                 className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                placeholder="Full name"
+                placeholder="पूर्ण नाव"
               />
             </div>
             <div className={`mb-4`}>
@@ -77,7 +77,7 @@ const EditFormCustomer = ({
                 className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={businessName}
                 onChange={(e) => setBusinessName(e.target.value)}
-                placeholder="Business name"
+                placeholder="व्यवसायाचे नाव"
               />
             </div>
             <div className={`mb-4`}>
@@ -86,7 +86,7 @@ const EditFormCustomer = ({
                 className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
+                placeholder="ईमेल"
               />
             </div>
             <div className={`mb-4`}>
@@ -95,7 +95,7 @@ const EditFormCustomer = ({
                 className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={contactNo}
                 onChange={(e) => setContactNo(e.target.value)}
-                placeholder="Contact number"
+                placeholder="संपर्क क्रमांक"
               />
             </div>
             <div className={`mb-4`}>
@@ -104,7 +104,7 @@ const EditFormCustomer = ({
                 className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={alternateContactNo}
                 onChange={(e) => setAlternateContactNo(e.target.value)}
-                placeholder="Alternate contact no"
+                placeholder="पर्यायी संपर्क क्रमांक"
               />
             </div>
             <div className={`mb-4`}>
@@ -113,7 +113,7 @@ const EditFormCustomer = ({
                 className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
-                placeholder="Address"
+                placeholder="पत्ता"
               />
             </div>
             <div className={`mb-4`}>
@@ -122,7 +122,7 @@ const EditFormCustomer = ({
                 className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={shippingAddress}
                 onChange={(e) => setShippingAddress(e.target.value)}
-                placeholder="Shipping address"
+                placeholder="शिपिंग पत्ता"
               />
             </div>
             <div className={`mb-4`}>
@@ -131,7 +131,7 @@ const EditFormCustomer = ({
                 className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={remark}
                 onChange={(e) => setRemark(e.target.value)}
-                placeholder="Remark"
+                placeholder="शेरा"
               />
             </div>
           </div>
@@ -141,13 +141,13 @@ const EditFormCustomer = ({
               type="submit"
               className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
             >
-              Update
+              अपडेट 
             </button>
             <button
               onClick={handleCancel}
               className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
             >
-              Cancel
+              रद्द करा
             </button>
           </div>
         </form>

@@ -38,7 +38,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.firstName}
                                 value={firstName}
                                 onChange={(e) => setFirstName(e.target.value)}
-                                placeholder="First name"
+                                placeholder="पहिला नाव"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -48,7 +48,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.lastName}
                                 value={lastName}
                                 onChange={(e) => setLastname(e.target.value)}
-                                placeholder="Last name"
+                                placeholder="शेवटचा नाव"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -58,7 +58,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.email}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Email"
+                                placeholder="ईमेल"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -68,7 +68,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.mobile}
                                 value={mobile}
                                 onChange={(e) => setMobile(e.target.value)}
-                                placeholder="Contact no"
+                                placeholder="संपर्क क्रमांक"
                             />
                         </div>
 
@@ -79,7 +79,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.address}
                                 value={address}
                                 onChange={(e) => setAddress(e.target.value)}
-                                placeholder="Address"
+                                placeholder="पत्ता"
                             />
                         </div>
 
@@ -91,7 +91,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.city}
                                 value={city}
                                 onChange={(e) => setCity(e.target.value)}
-                                placeholder="City"
+                                placeholder="शहर"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -101,7 +101,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.state}
                                 value={state}
                                 onChange={(e) => setState(e.target.value)}
-                                placeholder="State"
+                                placeholder="राज्य"
                             // field named original price is there in the prop of this form but not used yet
                             />
                         </div>
@@ -112,7 +112,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.country}
                                 value={country}
                                 onChange={(e) => setCountry(e.target.value)}
-                                placeholder="Country"
+                                placeholder="देश"
                             />
                         </div>
                         <div className="mb-4 ">
@@ -122,7 +122,7 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                                 defaultValue={row.zipcode}
                                 value={zipcode}
                                 onChange={(e) => setZipcode(e.target.value)}
-                                placeholder="PIN code"
+                                placeholder="पिन कोड"
                             />
                         </div>
                     </div>
@@ -132,13 +132,13 @@ const EditFormProduct = ({ row, handleUpdateWorker, firstName, setFirstName, las
                             type="submit"
                             className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
                         >
-                            Update
+                            अपडेट
                         </button>
                         <button
                             onClick={handleCancel}
                             className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
                         >
-                            Cancel
+                            रद्द करा
                         </button>
                     </div>
                 </form>

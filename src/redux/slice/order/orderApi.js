@@ -398,7 +398,7 @@ export async function updatePreviousBalanceOfCustomer(updateInfo) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:7000 /orders/update-customer/previous-fine/${updateInfo.customerId}/`,
+            `http://77.37.44.105:7000/orders/update-customer/previous-fine/${updateInfo.customerId}/`,
             {
                 method: 'PUT',
                 headers: header,
@@ -431,7 +431,7 @@ export async function deleteOrder(orderId) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:7000/delete-order/${orderId}`,
+            `http://77.37.44.105:7000/orders/delete-order/${orderId}`,
             {
                 method: 'DELETE',
                 headers: header

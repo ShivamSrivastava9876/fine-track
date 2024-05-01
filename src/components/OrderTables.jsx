@@ -15,44 +15,44 @@ import {
   getOrderList,
   getOrderListAsync,
 } from "@/redux/slice/order/orderSlice";
-import CreateCustomerOrder from "./CreateCustomerOrder";
+import CreateManufacturingOrder from "./CreateManufacturingOrder";
 import DeleteOption from "./DeleteOption";
 
 const columns = [
-  { id: "srNo", label: "Sr No", minWidth: 50 },
-  { id: "product", label: "Product", minWidth: 100 },
-  { id: "customer", label: "Customer", minWidth: 100 },
-  { id: "prevBalanceFine", label: "Previous balance fine (gm)", minWidth: 50 },
-  { id: "goldRate", label: "Gold rate (₹/gm)", minWidth: 40 },
-  { id: "weight", label: "Weight (gm)", minWidth: 40 },
-  { id: "size", label: "Size", minWidth: 40 },
-  { id: "quantity", label: "Quantity", minWidth: 40 },
-  { id: "fineRequired", label: "Total fine required (gm)", minWidth: 40 },
+  { id: "srNo", label: "अनुक्रमांक", minWidth: 50 },
+  { id: "product", label: "प्रोडक्ट", minWidth: 100 },
+  { id: "customer", label: "ग्राहक", minWidth: 100 },
+  { id: "prevBalanceFine", label: "मागील शिल्लक फाइन (ग्राम)", minWidth: 50 },
+  { id: "goldRate", label: "सोन्याचा दर 24 कैरेट प्रति ग्राम", minWidth: 40 },
+  { id: "weight", label: "वजन (ग्राम)", minWidth: 40 },
+  { id: "size", label: "माप", minWidth: 40 },
+  { id: "quantity", label: "प्रमाण", minWidth: 40 },
+  { id: "fineRequired", label: "एकूण फाइन आवश्यक (ग्राम)", minWidth: 40 },
   {
     id: "receivedFine",
-    label: "Fine received from customer (gm)",
+    label: "ग्राहकपासून आलेला फाइन (ग्राम)",
     minWidth: 40,
   },
   {
     id: "remainingCash",
-    label: "Remaining cash required (in ₹)",
+    label: "रक्कम भरावी लागेल (₹)",
     minWidth: 40,
   },
   {
     id: "receivedCash",
-    label: "Received cash from customer (in ₹)",
+    label: "ग्राहकपासून मिळालेला रक्कम (₹)",
     minWidth: 40,
   },
-  { id: "makingCharges", label: "Making charges (in ₹)", minWidth: 40 },
-  { id: "balancePending", label: "Pending balance (in ₹)", minWidth: 40 },
-  { id: "dateOfOrderPlaced", label: "Date of order placed", minWidth: 60 },
+  { id: "makingCharges", label: "तयार करण्याचे रक्कम (₹)", minWidth: 40 },
+  { id: "balancePending", label: "बाकी रक्कम (₹)", minWidth: 40 },
+  { id: "dateOfOrderPlaced", label: "ऑर्डर दिल्याची तारीख", minWidth: 60 },
   // { id: "status", label: "Status", minWidth: 100 },
   { id: "actions", label: "", minWidth: 100 },
 ];
 
 const createData = (
   srNo,
-  orderId,
+  id,
   product,
   customer,
   prevBalanceFine,
@@ -70,7 +70,7 @@ const createData = (
 ) => {
   return {
     srNo,
-    orderId,
+    id,
     product,
     customer,
     prevBalanceFine,
@@ -134,13 +134,23 @@ export default function OrderTables() {
   };
 
   const handleDeletePopup = (selectedRowId) => {
-    console.log("selectedRowId", selectedRowId)
+    console.log("selectedRowId", selectedRowId);
     setSelectedRowToDelete(selectedRowId);
   };
 
   const handleDeleteCancel = () => {
     setSelectedRowToDelete(null);
   };
+
+  const handleEdit = (rowId, row) => {
+    setEditedRow(rowId);
+  };
+
+  const handleCancel = () => {
+    setEditedRow(null);
+  };
+
+  
 
   React.useEffect(() => {
     dispatch(getOrderListAsync());
@@ -226,52 +236,8 @@ export default function OrderTables() {
                             <div className="space-x-2">
                               {editedRow === row.id ? (
                                 <div className="space-x-2">
-                                  <CreateCustomerOrder // This will change for edit form where worker is to be added
-                                    length={length}
-                                    setLength={setLength}
-                                    size={size}
-                                    setSize={setSize}
-                                    files={files}
-                                    setFiles={setFiles}
-                                    productImage={image}
-                                    handleCategoryClick={handleCategoryClick}
-                                    handleUpdateProduct={handleUpdateProduct}
-                                    description={description}
-                                    setDescription={setDescription}
-                                    productType={productType}
-                                    setProductType={setProductType}
-                                    category={category}
-                                    setCategory={setCategory}
-                                    quantity={quantity}
-                                    setQuantity={setQuantity}
-                                    price={price}
+                                  <CreateManufacturingOrder // This will change for edit form where worker is to be added
                                     row={row}
-                                    setPrice={setPrice}
-                                    puritySpc={puritySpc}
-                                    setPuritySpc={setPuritySpc}
-                                    grossWeight={grossWeight}
-                                    setGrossWeight={setGrossWeight}
-                                    image={image}
-                                    setImage={setImage}
-                                    stoneWeight={stoneWeight}
-                                    setStoneWeight={setStoneWeight}
-                                    subModel={subModel}
-                                    setSubModel={setSubModel}
-                                    model={model}
-                                    setModel={setModel}
-                                    productName={productName}
-                                    setProductName={setProductName}
-                                    productId={productId}
-                                    setProductId={setProductId}
-                                    huId={huId}
-                                    setHuId={setHuId}
-                                    openCategory={openCategory}
-                                    openProductType={openProductType}
-                                    handleCategory={handleCategory}
-                                    handleProductType={handleProductType}
-                                    handleProductTypeClick={
-                                      handleProductTypeClick
-                                    }
                                     isOpen={true}
                                     handleCancel={handleCancel}
                                   />
@@ -279,7 +245,7 @@ export default function OrderTables() {
                               ) : (
                                 <div className="space-x-7 flex">
                                   <MdAdd
-                                    onClick={() => handleEdit()}
+                                    onClick={() => handleEdit(row.id, row)}
                                     size={24}
                                     style={{
                                       cursor: "pointer",
@@ -297,7 +263,7 @@ export default function OrderTables() {
                                   {selectedRowToDelete === row.orderId && (
                                     <DeleteOption
                                       deleteDetails={{
-                                        title: "order",
+                                        title: "ऑर्डर",
                                       }}
                                       rowId={row.orderId}
                                       isOpen={true}

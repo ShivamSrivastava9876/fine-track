@@ -210,7 +210,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
         role="alert"
         style={{ zIndex: 1000 }}
       >
-        <strong className="font-bold">Error! Please fill all required fields</strong>
+        <strong className="font-bold">कृपया सर्व आवश्यक फील्ड भरा</strong>
         <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"
@@ -224,7 +224,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
         role="success"
         style={{ zIndex: 1001 }}
       >
-        <strong className="font-bold">Product added successfully</strong>
+        <strong className="font-bold">प्रोडक्ट ऐड झाले</strong>
         <button
           onClick={hideSuccess}
           className="relative top-0.5 bottom-0 left-1"
@@ -256,7 +256,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
           </svg>
         </button>
         <div id="formTitle" className="w-52 h-4 m-4 font-bold text-base text-center text-25">
-          Add product
+        नवीन प्रोडक्ट
         </div>
         <div id="formFields" className="">
           <form
@@ -266,7 +266,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
             <div id="textFields" className="grid md:grid-cols-2 gap-4">
               <div onClick={handleCategory} class={`relative inline-block cursor-pointer text-left mb-2 ${category === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <div class="inline-flex items-center justify-center text-xs md:text-sm font-semibold px-4 py-2 w-full md:w-21.375 h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                  {category || "Select category"}
+                  {category || "कैटेगरीचा नाव"}
                   {/* Arrow icon (tailwindcss/heroicons) */}
                   <svg
 
@@ -303,7 +303,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               </div>
               <div onClick={handleProductType} class={`relative inline-block cursor-pointer text-left mb-2 ${productType === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <div class="inline-flex items-center justify-center text-xs md:text-sm font-semibold px-4 py-2 w-full md:w-21.375 h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                  {productType || "Select product type"}
+                  {productType || "प्रोडक्टचा प्रकार"}
                   {/* Arrow icon (tailwindcss/heroicons) */}
                   <svg
 
@@ -345,7 +345,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={productId}
                   onChange={(e) => setProductId(e.target.value)}
-                  placeholder="Product Id"
+                  placeholder="प्रोडक्टची आयडी"
                 />
               </div>}
               {productType && <div className="mb-4 md:w-21.375">
@@ -354,7 +354,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={model}
                   onChange={(e) => setModel(e.target.value)}
-                  placeholder="Model"
+                  placeholder="मॉडल "
                 />
               </div>}
               {productType && <div className="mb-4 md:w-21.375">
@@ -363,7 +363,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={subModel}
                   onChange={(e) => setSubModel(e.target.value)}
-                  placeholder="Sub model"
+                  placeholder="सब मॉडल"
                 />
               </div>}
               {productType && <div className={`mb-4 md:w-21.375`}>
@@ -372,7 +372,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     type="number"
                     value={inputTextWeight}
                     onChange={(e) => setInputTextWeight(e.target.value)}
-                    placeholder="Weight"
+                    placeholder="वजन (ग्राम)"
                     className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5 ${weight.length === 0 && error ? 'border-2 border-red-500' : ''}`}
                   />
                   <button onClick={(e) => addInputWeight(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
@@ -399,7 +399,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     type="text"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
-                    placeholder="Stone weight"
+                    placeholder="दगडाचे वजन (ग्राम)"
                     className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5`}
                   />
                   <button onClick={(e) => addInput(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
@@ -427,7 +427,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     type="number"
                     value={inputTextSize}
                     onChange={(e) => setInputTextSize(e.target.value)}
-                    placeholder="Size"
+                    placeholder="माप"
                     className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5`}
                   />
                   <button onClick={(e) => addInputSize(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
@@ -454,7 +454,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                     type="number"
                     value={inputTextLength}
                     onChange={(e) => setInputTextLength(e.target.value)}
-                    placeholder="Length"
+                    placeholder="लांबी (इंच)"
                     className={`py-2 px-8 border text-xs md:text-sm font-semibold rounded-tl-xl w-4/5`}
                   />
                   <button onClick={(e) => addInputLength(e)} className="p-2 rounded-full hover:bg-[#f8af77] text-white">
@@ -481,12 +481,12 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
-                  placeholder="Product name"
+                  placeholder="प्रोडक्टचा नाव"
                 />
               </div>}
               {productType && <div className={`mb-4 flex justify-center items-center ${image === '' && error ? 'border-2 border-red-500' : ''}`}>
                 <label htmlFor="fileInput" className="w-full flex items-center text-xs md:text-sm font-semibold h-3.3125 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
-                  <FiImage className="mr-2" /> {files !== '' ? `${files} images` : 'Upload images'}
+                  <FiImage className="mr-2" /> {files !== '' ? `${files} फोटो` : 'फोटो टाका'}
                   <input
                     type="file"
                     id="fileInput"
@@ -504,7 +504,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 text-xs md:text-sm font-semibold py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={puritySpc}
                   onChange={(e) => setPuritySpc(e.target.value)}
-                  placeholder="Purity spc"
+                  placeholder="शुधता"
                 />
               </div>}
               {productType && <div className={`mb-4 md:w-21.375 ${price === '' && error ? 'border-2 border-red-500' : ''}`}>
@@ -513,7 +513,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                  placeholder="Price"
+                  placeholder="किमत"
                 />
               </div>}
               {productType && <div className={`mb-4 md:w-21.375 ${quantity === '' && error ? 'border-2 border-red-500' : ''}`}>
@@ -522,7 +522,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={quantity}
                   onChange={(e) => setQuantity(e.target.value)}
-                  placeholder="Quantity"
+                  placeholder="प्रमाण"
                 />
               </div>}
               {productType && <div className={`mb-4 md:w-21.375 ${description === '' && error ? 'border-2 border-red-500' : ''}`}>
@@ -531,7 +531,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Description"
+                  placeholder="वर्णन"
                 />
               </div>}
             </div>
@@ -540,7 +540,7 @@ const AddProduct = ({ addProduct, setAddProduct }) => {
               type="submit"
               className="rounded-xl bg-[#DF8E51] h-3.3125 w-10.0625 md:w-21.375 m-4 text-white py-2 transition duration-300"
             >
-              Add
+              ऐड करा
             </button>
           </form>
         </div >

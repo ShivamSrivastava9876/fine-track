@@ -49,14 +49,14 @@ const createData = (
 };
 
 const columns = [
-  { id: "srNo", label: "Sr No", minWidth: 100 },
-  { id: "customerName", label: "Customer name", minWidth: 200 },
-  { id: "businessName", label: "Business name", minWidth: 200 },
-  { id: "email", label: "Email", minWidth: 100 },
-  { id: "contactNo", label: "Contact number", minWidth: 50 },
-  { id: "alternateContactNo", label: "Alternate contact number", minWidth: 70 },
-  { id: "address", label: "Address", minWidth: 150 },
-  { id: "shippingAddress", label: "Shipping address", minWidth: 150 },
+  { id: "srNo", label: "अनुक्रमांक", minWidth: 100 },
+  { id: "customerName", label: "ग्राहकाचे नाव", minWidth: 200 },
+  { id: "businessName", label: "व्यवसायाचे नाव", minWidth: 200 },
+  { id: "email", label: "ईमेल", minWidth: 100 },
+  { id: "contactNo", label: "संपर्क क्रमांक", minWidth: 50 },
+  { id: "alternateContactNo", label: "पर्यायी संपर्क क्रमांक", minWidth: 70 },
+  { id: "address", label: "पत्ता", minWidth: 150 },
+  { id: "shippingAddress", label: "शिपिंग पत्ता", minWidth: 150 },
   { id: "actions", label: "", minWidth: 100 },
 ];
 
@@ -228,7 +228,7 @@ export default function UserTables() {
           role="success"
           style={{ zIndex: 1001 }}
         >
-          <strong className="font-bold">Customer details updated successfully</strong>
+          <strong className="font-bold">ग्राहकचे अपडेट पूर्ण झाले</strong>
           <button
             onClick={hideUpdateSuccess}
             className="relative top-0.5 bottom-0 left-1"
@@ -334,7 +334,7 @@ export default function UserTables() {
                                     />
                                     {selectedRowToDelete === row.id && (
                                       <DeleteOption
-                                        deleteDetails={{ title: "customer" }}
+                                        deleteDetails={{ title: "ग्राहक" }}
                                         rowId={row.id}
                                         isOpen={true}
                                         handleDelete={handleDelete}

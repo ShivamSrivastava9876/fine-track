@@ -59,7 +59,7 @@ const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, s
                 >
                     <div className="mb-4">
                         <h2 className=" flex items-center m-4 text-2xl font-bold">
-                            Edit category
+                        कैटेगरीला अपडेट करा 
                         </h2>
                     </div>
                     <div className="mb-2 h-10">
@@ -69,13 +69,13 @@ const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, s
                             defaultValue={row.category}
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            placeholder="Category name"
+                            placeholder="कैटेगरीच नाव"
                         />
                     </div>
 
                     <div className="mb-4 flex justify-center items-center">
                         <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
-                            <FiImage className="mr-2" /> {newImageStatus ? 'New image uploaded' : 'Click here to update image'}
+                            <FiImage className="mr-2" /> {newImageStatus ? 'नवीन फोटो अपडेट झाला' : 'फोटो अपडेट करण्यासाठी इथे क्लिक करा '}
                             <input
                                 type="file"
                                 id="fileInput"
@@ -90,13 +90,13 @@ const EditForm = ({ row, handleUpdateCategory, isOpen, handleCancel, category, s
                             type="submit"
                             className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
                         >
-                            Update
+                            अपडेट 
                         </button>
                         <button
                             onClick={handleCancel}
                             className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
                         >
-                            Cancel
+                            रद्द करा
                         </button>
                     </div>
                 </form>

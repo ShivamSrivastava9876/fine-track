@@ -17,7 +17,7 @@ const DashboardData = () => {
 
   return (
     <div className="mt-2 mb-8">
-      <h1 className="text-2xl mx-2 my-2 font-bold">Dashboard</h1>
+      <h1 className="text-2xl mx-2 my-2 font-bold">डॅशबोर्ड</h1>
       <div id="dashboardDataFields" className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <Link href="/users"
           id="totalUsers"
@@ -27,7 +27,7 @@ const DashboardData = () => {
             <Image src={UserIcon} alt="user-icon" className="w-8" />
           </div>
           <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
-            <span className="">Total customers</span>
+            <span className="">एकूण ग्राहक</span>
             <span id="data" className="font-bold">
               {dashboardDetails?.all_users}
             </span>

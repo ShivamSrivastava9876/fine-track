@@ -35,7 +35,7 @@ const CategoryComponent = ({
     <div className="flex items-center justify-between flex-wrap w-full mb-8">
 
       {/* User Title */}
-      <h1 className="text-2xl mx-2 m-2 font-bold">Categories</h1>
+      <h1 className="text-2xl mx-2 m-2 font-bold">कैटेगरी </h1>
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
@@ -61,7 +61,7 @@ const CategoryComponent = ({
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Add category
+              नवीन कैटेगरी
             </button>
           </Link>
         </div>
@@ -70,7 +70,7 @@ const CategoryComponent = ({
         <form onSubmit={(e) => handleCategorySearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
           <input
             type="search"
-            placeholder="Search"
+            placeholder="शोधा"
             value={searchParameter}
             onChange={(e) => handleSearchParameter(e.target.value)}
             className="w-full h-full outline-none bg-transparent text-blue-gray-700"

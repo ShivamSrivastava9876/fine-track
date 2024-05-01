@@ -83,7 +83,7 @@ const AddProductType = ({ addProductType, setAddProductType }) => {
         role="alert"
         style={{ zIndex: 1000 }}
       >
-        <strong className="font-bold">Error! Please fill all required fields</strong>
+        <strong className="font-bold">कृपया सर्व आवश्यक फील्ड भरा</strong>
         <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"
@@ -97,7 +97,7 @@ const AddProductType = ({ addProductType, setAddProductType }) => {
         role="success"
         style={{ zIndex: 1001 }}
       >
-        <strong className="font-bold">Product type added successfully</strong>
+        <strong className="font-bold">प्रोडक्ट प्रकार ऐड झाले</strong>
         <button
           onClick={hideSuccess}
           className="relative top-0.5 bottom-0 left-1"
@@ -131,13 +131,13 @@ const AddProductType = ({ addProductType, setAddProductType }) => {
         >
           <div className="mb-4">
             <h2 className=" text-[#0a0a0a] text-center text-base font-bold text-16px h-4 m-4 w-10.0625">
-              Add product type
+              नवीन प्रोडक्टचा प्रकार
             </h2>
           </div>
           <div className="grid md:grid-cols-1 gap-1">
             <div onClick={handleCategory} class={`relative inline-block cursor-pointer text-left mb-4 ${newCategory === '' && error ? 'border-2 border-red-500' : ''}`}>
               <div class="inline-flex items-center justify-center text-xs md:text-sm font-semibold px-4 py-2 w-full h-3.3125 rounded-xl border border-gray-300 shadow-sm bg-white text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                {newCategory || "Select category"}
+                {newCategory || "कैटेगरीचा नाव"}
                 {/* Arrow icon (tailwindcss/heroicons) */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -175,12 +175,12 @@ const AddProductType = ({ addProductType, setAddProductType }) => {
                 className="w-full py-2 px-8 text-xs md:text-sm font-semibold h-3.3125 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={productType}
                 onChange={(e) => setProductType(e.target.value)}
-                placeholder="Product type"
+                placeholder="प्रोडक्टचा प्रकार"
               />
             </div>
             <div className={`mb-4 flex justify-center items-center ${image === null && error ? 'border-2 border-red-500' : ''}`}>
               <label htmlFor="fileInput" className="w-full flex items-center text-xs md:text-sm h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
-                <FiImage className="mr-2" /> {image !== null ? 'Image uploaded' : 'Upload image'}
+                <FiImage className="mr-2" /> {image !== null ? 'नवीन फोटो अपलोड झाला' : 'नवीन फोटो टाका'}
                 <input
                   type="file"
                   id="fileInput"
@@ -195,7 +195,7 @@ const AddProductType = ({ addProductType, setAddProductType }) => {
             type="submit"
             className="rounded-xl bg-[#DF8E51] h-3.3125 w-10.0625 md:w-21.375 m-4 text-white py-2 transition duration-300"
           >
-            Add
+            ऐड
           </button>
         </form>
       </div>

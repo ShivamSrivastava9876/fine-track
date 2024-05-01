@@ -35,7 +35,7 @@ const ProductComponent = ({
   return (
     <div className="flex items-center justify-between flex-wrap w-full mb-8">
       {/* User Title */}
-      <h1 className="text-2xl mx-2 m-2 font-bold">Products</h1>
+      <h1 className="text-2xl mx-2 m-2 font-bold">प्रोडक्ट</h1>
 
       <div className="flex flex-row flex-wrap">
         {/* Right-hand side Buttons */}
@@ -62,7 +62,7 @@ const ProductComponent = ({
                   d="M12 6v6m0 0v6m0-6h6m-6 0H6"
                 />
               </svg>
-              Add product
+              नवीन प्रोडक्ट
             </button>
           </div>
         </Link>
@@ -71,7 +71,7 @@ const ProductComponent = ({
         <form onSubmit={(e) => handleProductSearch(e)} className="flex items-center md:w-80 m-2 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
           <input
             type="search"
-            placeholder="Search"
+            placeholder="शोधा"
             value={searchParameter}
             onChange={(e) => handleSearchParameter(e.target.value)}
             className="w-full h-full outline-none bg-transparent text-blue-gray-700"

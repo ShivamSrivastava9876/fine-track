@@ -67,7 +67,7 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
         role="alert"
         style={{ zIndex: 1000 }}
       >
-        <strong className="font-bold">Error! Please fill all required fields</strong>
+        <strong className="font-bold">कृपया सर्व आवश्यक फील्ड भरा</strong>
         <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"
@@ -81,7 +81,7 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
         role="success"
         style={{ zIndex: 1001 }}
       >
-        <strong className="font-bold">Category added successfully</strong>
+        <strong className="font-bold">कैटेगरी ऐड झाले</strong>
         <button
           onClick={hideSuccess}
           className="relative top-0.5 bottom-0 left-1"
@@ -115,7 +115,7 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
         >
           <div className="mb-4">
             <h2 className=" text-[#0a0a0a] text-center font-bold text-base text-16px m-3 w-161">
-              Add category
+            नवीन कैटेगरी ऐड करा
             </h2>
           </div>
 
@@ -126,12 +126,12 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
                 className="w-full py-2 px-8 text-xs md:text-sm font-semibold h-3.3125 flex flex-row items-center justify-center border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                 value={newCategory}
                 onChange={(e) => setNewCategory(e.target.value)}
-                placeholder="New category"
+                placeholder="नवीन कैटेगरीच नाव"
               />
             </div>
             <div className={`mb-4 flex justify-center items-center ${image === null && error ? 'border-2 border-red-500' : ''}`}>
               <label htmlFor="fileInput" className="w-full flex items-center text-xs md:text-sm h-3.3125 py-2 px-8 border rounded-xl font-semibold outline-none border-[#9C9C9C] text-[#595858] cursor-pointer">
-                <FiImage className="mr-2" /> {image !== null ? 'Image uploaded' : 'Upload image'}
+                <FiImage className="mr-2" /> {image !== null ? 'नवीन फोटो अपलोड झाला' : 'नवीन फोटो टाका'}
                 <input
                   type="file"
                   id="fileInput"
@@ -146,7 +146,7 @@ const AddCategory = ({ addCategory, setAddCategory }) => {
             type="submit"
             className="rounded-xl bg-[#DF8E51] h-3.3125 w-10.0625 md:w-21.375 m-4 text-white py-2 transition duration-300"
           >
-            Add
+            ऐड करा
           </button>
         </form>
       </div>

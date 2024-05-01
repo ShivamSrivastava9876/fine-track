@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className="w-full bg-white h-20 p-4 flex justify-center items-center shadow-md">
       <div className="text-2xl font-bold text-black">
-        <h2>Hello admin</h2>
+        <h2>नमस्कार प्रशासक</h2>
       </div>
 
       {/* <div className="flex w-2/5 justify-end">

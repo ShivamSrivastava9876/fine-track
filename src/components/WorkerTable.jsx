@@ -16,16 +16,16 @@ import EditFormWorker from "./EditFormWorker";
 import DeleteOption from "./DeleteOption";
 
 const columns = [
-  { id: "srNo", label: "Sr No", minWidth: 50 },
-  { id: "firstName", label: "First name", minWidth: 80 },
-  { id: "lastName", label: "Last name", minWidth: 80 },
-  { id: "email", label: "Email", minWidth: 80 },
-  { id: "mobile", label: "Contact number", minWidth: 80 },
-  { id: "address", label: "Address", minWidth: 100 },
-  { id: "city", label: "City", minWidth: 50 },
-  { id: "state", label: "State", minWidth: 100 },
-  { id: "country", label: "Country", minWidth: 50 },
-  { id: "zipcode", label: "PIN code", minWidth: 50 },
+  { id: "srNo", label: "अनुक्रमांक", minWidth: 50 },
+  { id: "firstName", label: "पहिला नाव", minWidth: 80 },
+  { id: "lastName", label: "शेवटचा नाव", minWidth: 80 },
+  { id: "email", label: "ईमेल", minWidth: 80 },
+  { id: "mobile", label: "संपर्क क्रमांक", minWidth: 80 },
+  { id: "address", label: "पत्ता", minWidth: 100 },
+  { id: "city", label: "शहर", minWidth: 50 },
+  { id: "state", label: "राज्य", minWidth: 100 },
+  { id: "country", label: "देश", minWidth: 50 },
+  { id: "zipcode", label: "पिन कोड", minWidth: 50 },
   { id: "actions", label: "", minWidth: 100 }
 ];
 
@@ -202,7 +202,7 @@ export default function ProductTypeTables() {
         role="success"
         style={{ zIndex: 1001 }}
       >
-        <strong className="font-bold">Worker updated successfully</strong>
+        <strong className="font-bold">कामगारचे अपडेट पूर्ण झाले</strong>
         <button
           onClick={hideUpdateSuccess}
           className="relative top-0.5 bottom-0 left-1"
@@ -255,7 +255,7 @@ export default function ProductTypeTables() {
 
                                     <MdDelete onClick={() => handleDeletePopup(row.id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
 
-                                    {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "worker" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
+                                    {selectedRowToDelete === row.id && <DeleteOption deleteDetails={{ title: "कामगार" }} rowId={row.id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
 
                                   </div>
                                 )}

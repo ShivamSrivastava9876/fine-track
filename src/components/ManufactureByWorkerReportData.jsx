@@ -21,15 +21,15 @@ import { useRouter } from "next/router";
 
 const columns = [
     // { id: "HuId", label: "HU ID", minWidth: 80 },
-    { id: "customerName", label: "Customer name", minWidth: 150 },
-    { id: "productName", label: "Product name", minWidth: 200 },
-    { id: "issuedWeight", label: "Issued gold weight (in gm)", minWidth: 80 },
-    { id: "wastageWeight", label: "Wastage weight (in gm)", minWidth: 80 },
-    { id: "productWeight", label: "Product weight (in gm)", minWidth: 80 },
-    { id: "balanceWeight", label: "Balance weight (in gm)", minWidth: 150 },
-    { id: "issuedDate", label: "Issued date", minWidth: 80 },
-    { id: "receivedDate", label: "Received date", minWidth: 80 },
-    { id: "status", label: "Status", minWidth: 80 },
+    { id: "customerName", label: "ग्राहक", minWidth: 150 },
+    { id: "productName", label: "प्रोडक्ट", minWidth: 200 },
+    { id: "issuedWeight", label: "दीलेला वजन (ग्राम)", minWidth: 80 },
+    { id: "wastageWeight", label: "वाया गेलेले वजन (ग्राम)", minWidth: 80 },
+    { id: "productWeight", label: "प्रोडक्टचा वजन (ग्राम)", minWidth: 80 },
+    { id: "balanceWeight", label: "शिल्लक वजन (ग्राम)", minWidth: 150 },
+    { id: "issuedDate", label: "प्रारंभची तारीख", minWidth: 80 },
+    { id: "receivedDate", label: "शेवटची तारीख", minWidth: 80 },
+    { id: "status", label: "स्टेटस", minWidth: 80 },
 ];
 
 const createData = (
@@ -153,8 +153,8 @@ export default function ManufactureByWorkerReportData() {
             <div className="flex items-center justify-between flex-wrap w-full mb-4">
 
                 <h1 className="text-xl mx-4 mb-4 font-bold text-gray-500">
-                    {selectedWorkerName.length !== 0 ? (<span>Worker report of <span className=" text-black ">{selectedWorkerName}</span></span>) : (
-                        <span>Worker report</span>
+                    {selectedWorkerName.length !== 0 ? (<span><span className=" text-black ">{selectedWorkerName}</span>चा कामगार अहवाल</span>) : (
+                        <span>कामगार अहवाल</span>
                     )}
                 </h1>
                 <div className="flex flex-wrap">
@@ -177,12 +177,12 @@ export default function ManufactureByWorkerReportData() {
                             <polyline points="7 10 12 15 17 10" />
                             <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        Download report
+                        डाउनलोड अहवाल
                     </button>
                     <form onSubmit={(e) => handleWorkerReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
                         <input
                             type="search"
-                            placeholder="Search"
+                            placeholder="शोधा"
                             value={searchParameter}
                             onChange={(e) => handleSearchParameter(e.target.value)}
                             className="w-full h-full outline-none bg-transparent text-blue-gray-700"
@@ -249,7 +249,7 @@ export default function ManufactureByWorkerReportData() {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                {selectedWorkerName.length === 0 && (<div className="text-black font-semibold text-base mx-4 mt-2 flex justify-center">No data found</div>)}
+                {selectedWorkerName.length === 0 && (<div className="text-black font-semibold text-base mx-4 mt-2 flex justify-center">माहिती उपलब्ध नाही</div>)}
                 <TablePagination
                     rowsPerPageOptions={[10, 25, 100]}
                     component="div"

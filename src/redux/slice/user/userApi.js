@@ -138,7 +138,7 @@ export async function updateUser(updateUserInfo) {
       Authorization: `Token ${token}`,
     };
     const response = await fetch(
-      `http://77.37.44.105:7000/admin_panel/update-customer/${updateUserInfo.id}`,
+      `http://77.37.44.105:7000/admin_panel/update-customer/${updateUserInfo.id}/`,
       {
         method: "PUT",
         headers: header,

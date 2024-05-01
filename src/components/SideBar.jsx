@@ -13,11 +13,11 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { logoutUserAsync } from "@/redux/slice/login/loginSlice";
 import { useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faIndustry } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faIndustry } from "@fortawesome/free-solid-svg-icons";
 
-import { FiMenu, FiX } from 'react-icons/fi';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { FiMenu, FiX } from "react-icons/fi";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 const SideBar = () => {
   const router = useRouter();
@@ -25,33 +25,53 @@ const SideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [reportVisible, setReportVisible] = useState(false);
   const [manufacturingVisible, setManufacturingVisible] = useState(false);
-  const modalClasses = isSidebarOpen ? 'block' : 'hidden';
+  const modalClasses = isSidebarOpen ? "block" : "hidden";
 
   const handleLogout = () => {
-
-    router.push('/login');
+    router.push("/login");
     dispatch(logoutUserAsync());
-  }
+  };
 
   const handleReportClick = () => {
     setReportVisible(!reportVisible);
-  }
+  };
 
   const handleManufacturingClick = () => {
     setManufacturingVisible(!manufacturingVisible);
-  }
+  };
 
   return (
     <>
-      <div className={`fixed inset-0 z-40 bg-whitesmoke opacity-80 backdrop-blur-md transition-opacity ${modalClasses}`}></div>
+      <div
+        className={`fixed inset-0 z-40 bg-whitesmoke opacity-80 backdrop-blur-md transition-opacity ${modalClasses}`}
+      ></div>
       <button
         className="md:hidden absolute top-4 left-4 p-2 text-white"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
       >
-        {isSidebarOpen ? <FiX size={24} style={{ color: 'black', position: 'fixed', right: 10, top: 5, zIndex: 1002 }} /> : <FiMenu size={24} style={{ color: 'black', position: 'absolute', top: 12 }} />}
+        {isSidebarOpen ? (
+          <FiX
+            size={24}
+            style={{
+              color: "black",
+              position: "fixed",
+              right: 10,
+              top: 5,
+              zIndex: 1002,
+            }}
+          />
+        ) : (
+          <FiMenu
+            size={24}
+            style={{ color: "black", position: "absolute", top: 12 }}
+          />
+        )}
       </button>
-      <div className={`fixed md:static left-0 z-50 top-0 h-full overflow-y-scroll md:overflow-y-auto bg-[#3E301A] w-16.3125 md:translate-x-0 transition-transform transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-
+      <div
+        className={`fixed md:static left-0 z-50 top-0 h-full overflow-y-scroll md:overflow-y-auto bg-[#3E301A] w-16.3125 md:translate-x-0 transition-transform transform ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
         {/* Side bar logo */}
         <div className="flex items-center justify-center w-12 h-24 mx-auto mt-4">
           <Image
@@ -59,7 +79,7 @@ const SideBar = () => {
             alt="logo"
             objectFit="contain"
             objectPosition="center"
-          // layout="fill"
+            // layout="fill"
           />
         </div>
 
@@ -73,7 +93,7 @@ const SideBar = () => {
             <Image src={DashboardIcon} alt="dashboard-icon" />
 
             <span className=" text-base font-montserrat text-blue-200 font-normal ">
-              Dashboard
+              डॅशबोर्ड
             </span>
           </Link>
           <Link
@@ -84,7 +104,7 @@ const SideBar = () => {
           >
             <Image src={UserIcon} alt="user-icon" />
 
-            <span className=" text-base text-blue-200 font-normal">Customers</span>
+            <span className=" text-base text-blue-200 font-normal">ग्राहक</span>
           </Link>
           <Link
             href="/category"
@@ -94,9 +114,7 @@ const SideBar = () => {
           >
             <Image src={CategoryIcon} alt="category-icon" />
 
-            <span className=" text-base text-blue-200 font-normal">
-              Categories
-            </span>
+            <span className=" text-base text-blue-200 font-normal">कैटेगरी</span>
           </Link>
           <Link
             href="/productType"
@@ -106,7 +124,7 @@ const SideBar = () => {
           >
             <Image src={ProductsIcon} alt="products-icon" />
             <span className=" text-base text-blue-200 font-normal">
-              Product type
+              प्रोडक्ट प्रकार
             </span>
           </Link>
           <Link
@@ -117,7 +135,7 @@ const SideBar = () => {
           >
             <Image src={ProductsIcon} alt="products-icon" />
             <span className=" text-base text-blue-200 font-normal">
-              Products
+              प्रोडक्ट 
             </span>
           </Link>
 
@@ -129,7 +147,7 @@ const SideBar = () => {
           >
             <Image src={OrderIcon} alt="user-icon" />
 
-            <span className=" text-base text-blue-200 font-normal">Orders</span>
+            <span className=" text-base text-blue-200 font-normal">ऑर्डर</span>
           </Link>
 
           <Link
@@ -140,7 +158,7 @@ const SideBar = () => {
           >
             <Image src={UserIcon} alt="user-icon" />
 
-            <span className=" text-base text-blue-200 font-normal">Workers</span>
+            <span className=" text-base text-blue-200 font-normal">कामगार</span>
           </Link>
 
           <Link
@@ -151,7 +169,9 @@ const SideBar = () => {
           >
             <Image src={UserIcon} alt="user-icon" />
 
-            <span className=" text-base text-blue-200 font-normal">Manufacturing</span>
+            <span className=" text-base text-blue-200 font-normal">
+              उत्पादन
+            </span>
           </Link>
 
           <div
@@ -162,19 +182,21 @@ const SideBar = () => {
           >
             <Image src={ReportsIcon} alt="product-icon" />
 
-            <span className=" text-base text-blue-200 font-normal">
-              Reports
-
-            </span>
+            <span className=" text-base text-blue-200 font-normal">अहवाल</span>
             <div className="flex justify-start">
-              {reportVisible ? <FiChevronDown className="text-blue-200 transition-transform transform rotate-180" /> : <FiChevronDown className="text-blue-200 transition-transform transform rotate-0" />}
+              {reportVisible ? (
+                <FiChevronDown className="text-blue-200 transition-transform transform rotate-180" />
+              ) : (
+                <FiChevronDown className="text-blue-200 transition-transform transform rotate-0" />
+              )}
             </div>
           </div>
 
-
           {/* Sub reports */}
           <div
-            className={`relative transition-max-h duration-500 ease-in-out overflow-hidden ${reportVisible ? "" : "h-0"}`}
+            className={`relative transition-max-h duration-500 ease-in-out overflow-hidden ${
+              reportVisible ? "" : "h-0"
+            }`}
           >
             <Link
               href="/manufacturingReports"
@@ -185,7 +207,7 @@ const SideBar = () => {
               {/* <Image src={ReportsIcon} alt="product-icon" /> */}
 
               <span className=" text-sm text-blue-200 font-normal">
-                Manufacturing reports
+                उत्पादन अहवाल
               </span>
             </Link>
             <Link
@@ -197,7 +219,7 @@ const SideBar = () => {
               {/* <Image src={ReportsIcon} alt="product-icon" /> */}
 
               <span className=" text-sm text-blue-200 font-normal">
-                Order reports
+                ऑर्डर अहवाल
               </span>
             </Link>
             <Link
@@ -209,7 +231,7 @@ const SideBar = () => {
               {/* <Image src={ReportsIcon} alt="product-icon" /> */}
 
               <span className=" text-sm text-blue-200 font-normal">
-                Product reports
+                प्रोडक्ट अहवाल
               </span>
             </Link>
             <Link
@@ -221,7 +243,7 @@ const SideBar = () => {
               {/* <Image src={ReportsIcon} alt="product-icon" /> */}
 
               <span className=" text-sm text-blue-200 font-normal">
-                User reports
+                ग्राहक अहवाल
               </span>
             </Link>
             <Link
@@ -233,19 +255,21 @@ const SideBar = () => {
               {/* <Image src={ReportsIcon} alt="product-icon" /> */}
 
               <span className=" text-sm text-blue-200 font-normal">
-                Worker reports
+                कामगार अहवाल
               </span>
             </Link>
           </div>
 
-          <div onClick={handleLogout} className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer ">
+          <div
+            onClick={handleLogout}
+            className="flex space-x-6 items-center px-6 py-4 relative transition duration-300 ease-in-out hover:bg-blue-200 hover:bg-opacity-20 hover:border-l-4 border-white cursor-pointer "
+          >
             <Image src={LogoutIcon} alt="logout-icon" />
 
-            <span className=" text-base text-blue-200 font-normal">Logout</span>
+            <span className=" text-base text-blue-200 font-normal">लॉग आउट</span>
           </div>
         </div>
       </div>
-
     </>
   );
 };

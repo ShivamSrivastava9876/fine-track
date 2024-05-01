@@ -17,7 +17,7 @@ const AddUser = ({ addUser, setAddUser }) => {
   const [address, setAddress] = useState("");
   const [shippingAddress, setShippingAddress] = useState("");
   const [remark, setRemark] = useState("");
-  
+
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   const [error, setError] = useState(false);
@@ -25,47 +25,52 @@ const AddUser = ({ addUser, setAddUser }) => {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    if (fullName !== "" && businessName !== "" && email !== "" && contactNo !== "" && address !== "" && shippingAddress !== "") {
-        dispatch(
-          createUserAsync({
-            full_name: fullName,
-            bussiness_name: businessName,
-            email: email,
-            contact_no: contactNo,
-            alternate_contact_no: alternateContactNo,
-            address: address,
-            shipping_address: shippingAddress,
-            remark: remark
-          })
-        ).then((result) => {
-          // Check if createUserAsync was successful
-          if (createUserAsync.fulfilled.match(result)) {
-            // Dispatch userDetailsAsync only if user creation is successful
-            dispatch(userDetailsAsync());
+    if (
+      fullName !== "" &&
+      businessName !== "" &&
+      email !== "" &&
+      contactNo !== "" &&
+      address !== "" &&
+      shippingAddress !== ""
+    ) {
+      dispatch(
+        createUserAsync({
+          full_name: fullName,
+          bussiness_name: businessName,
+          email: email,
+          contact_no: contactNo,
+          alternate_contact_no: alternateContactNo,
+          address: address,
+          shipping_address: shippingAddress,
+          remark: remark,
+        })
+      ).then((result) => {
+        // Check if createUserAsync was successful
+        if (createUserAsync.fulfilled.match(result)) {
+          // Dispatch userDetailsAsync only if user creation is successful
+          dispatch(userDetailsAsync());
 
-            // Clearing the form fields by updating state variables to empty values
-            setFullName("");
-            setBusinessName("");
-            setEmail("");
-            setContactNo("");
-            setAlternateContactNo("");
-            setAddress("");
-            setShippingAddress("");
-            setRemark("");
-            setSuccess(true);
-            setTimeout(() => {
-              setSuccess(false);
-            }, 3000)
-          }
-        });
-      
-    }
-    else {
+          // Clearing the form fields by updating state variables to empty values
+          setFullName("");
+          setBusinessName("");
+          setEmail("");
+          setContactNo("");
+          setAlternateContactNo("");
+          setAddress("");
+          setShippingAddress("");
+          setRemark("");
+          setSuccess(true);
+          setTimeout(() => {
+            setSuccess(false);
+          }, 3000);
+        }
+      });
+    } else {
       e.preventDefault();
       setError(true);
       setTimeout(() => {
         setError(false);
-      }, 3000)
+      }, 3000);
     }
   };
 
@@ -91,36 +96,41 @@ const AddUser = ({ addUser, setAddUser }) => {
 
   return (
     <>
-      {error && <div
-        // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
-        role="alert"
-        style={{ zIndex: 1000 }}
-      >
-        <strong className="font-bold">Error! Please fill all required fields</strong>
-        <button
-          onClick={hideError}
-          className="relative top-0.5 bottom-0 left-1"
+      {error && (
+        <div
+          // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
+          role="alert"
+          style={{ zIndex: 1000 }}
         >
-          <span className="text-red-500 text-2xl">×</span>
-        </button>
-      </div>}
-      {success && <div
-        // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
-        className="bg-green-100 flex justify-between items-center border border-green-400 text-green-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
-        role="success"
-        style={{ zIndex: 1001 }}
-      >
-        <strong className="font-bold">User added successfully</strong>
-        <button
-          onClick={hideSuccess}
-          className="relative top-0.5 bottom-0 left-1"
+          <strong className="font-bold">
+          कृपया सर्व आवश्यक फील्ड भरा
+          </strong>
+          <button
+            onClick={hideError}
+            className="relative top-0.5 bottom-0 left-1"
+          >
+            <span className="text-red-500 text-2xl">×</span>
+          </button>
+        </div>
+      )}
+      {success && (
+        <div
+          // className="bg-red-100 flex justify-between items-center border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          className="bg-green-100 flex justify-between items-center border border-green-400 text-green-700 px-4 py-3 rounded fixed top-0 left-0 right-0"
+          role="success"
+          style={{ zIndex: 1001 }}
         >
-          <span className="text-green-500 text-2xl">×</span>
-        </button>
-      </div>}
+          <strong className="font-bold">ग्राहक ऐड झाले</strong>
+          <button
+            onClick={hideSuccess}
+            className="relative top-0.5 bottom-0 left-1"
+          >
+            <span className="text-green-500 text-2xl">×</span>
+          </button>
+        </div>
+      )}
       <div id="addUser" className="flex justify-center m-8 relative">
-
         <form
           onSubmit={handleAddUser}
           className="p-8 shadow-md flex flex-col items-center justify-center rounded-2xl w-34.125 bg-white"
@@ -146,43 +156,59 @@ const AddUser = ({ addUser, setAddUser }) => {
           </button>
           <div className="mb-4 space-y-1">
             <h2 className=" text-[#0a0a0a] text-center font-bold text-base text-16px w-161">
-              Add customer
+            नवीन ग्राहक ऐड करा  
             </h2>
           </div>
-          <div className={`mb-4 md:w-21.375 ${fullName === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div
+            className={`mb-4 md:w-21.375 ${
+              fullName === "" && error ? "border-2 border-red-500" : ""
+            }`}
+          >
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              placeholder="Full name"
+              placeholder="पूर्ण नाव"
             />
           </div>
-          <div className={`mb-4 md:w-21.375 ${businessName === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div
+            className={`mb-4 md:w-21.375 ${
+              businessName === "" && error ? "border-2 border-red-500" : ""
+            }`}
+          >
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={businessName}
               onChange={(e) => setBusinessName(e.target.value)}
-              placeholder="Business name"
+              placeholder="व्यवसायाचे नाव"
             />
           </div>
-          <div className={`mb-4 md:w-21.375 ${email === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div
+            className={`mb-4 md:w-21.375 ${
+              email === "" && error ? "border-2 border-red-500" : ""
+            }`}
+          >
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email"
+              placeholder="ईमेल"
             />
           </div>
-          <div className={`mb-4 md:w-21.375 ${contactNo === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div
+            className={`mb-4 md:w-21.375 ${
+              contactNo === "" && error ? "border-2 border-red-500" : ""
+            }`}
+          >
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={contactNo}
               onChange={(e) => setContactNo(e.target.value)}
-              placeholder="Contact number"
+              placeholder="संपर्क क्रमांक"
             />
           </div>
           <div className={`mb-4 md:w-21.375`}>
@@ -191,25 +217,33 @@ const AddUser = ({ addUser, setAddUser }) => {
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={alternateContactNo}
               onChange={(e) => setAlternateContactNo(e.target.value)}
-              placeholder="Alternate contact no"
+              placeholder="पर्यायी संपर्क क्रमांक"
             />
           </div>
-          <div className={`mb-4 md:w-21.375 ${address === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div
+            className={`mb-4 md:w-21.375 ${
+              address === "" && error ? "border-2 border-red-500" : ""
+            }`}
+          >
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
-              placeholder="Address"
+              placeholder="पत्ता"
             />
           </div>
-          <div className={`mb-4 md:w-21.375 ${shippingAddress === '' && error ? 'border-2 border-red-500' : ''}`}>
+          <div
+            className={`mb-4 md:w-21.375 ${
+              shippingAddress === "" && error ? "border-2 border-red-500" : ""
+            }`}
+          >
             <input
               type="text"
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={shippingAddress}
               onChange={(e) => setShippingAddress(e.target.value)}
-              placeholder="Shipping address"
+              placeholder="शिपिंग पत्ता"
             />
           </div>
           <div className={`mb-4 md:w-21.375`}>
@@ -218,7 +252,7 @@ const AddUser = ({ addUser, setAddUser }) => {
               className="w-full h-3.3125 py-2 px-6 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
               value={remark}
               onChange={(e) => setRemark(e.target.value)}
-              placeholder="Remark"
+              placeholder="शेरा"
             />
           </div>
 
@@ -226,7 +260,7 @@ const AddUser = ({ addUser, setAddUser }) => {
             type="submit"
             className="rounded-xl bg-[#DF8E51] h-3.3125 w-10.0625 md:w-21.375 m-4 text-white py-2 transition duration-300"
           >
-            Add
+            ऐड करा 
           </button>
         </form>
       </div>

@@ -129,7 +129,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
         role="alert"
         style={{ zIndex: 1000 }}
       >
-        <strong className="font-bold">Error! Please fill all required fields</strong>
+        <strong className="font-bold">कृपया सर्व आवश्यक फील्ड भरा</strong>
         <button
           onClick={hideError}
           className="relative top-0.5 bottom-0 left-1"
@@ -144,7 +144,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
           style={{ zIndex: 1000 }}
         >
           <div className="flex-grow">
-            {Object.entries(errorAfterSubmit).map(([fieldName, errors]) => (
+            {errorAfterSubmit && Object.entries(errorAfterSubmit).map(([fieldName, errors]) => (
               errors.map((error, index) => (
                 <div key={`${fieldName}_${index}`} className="mb-1">
                   <strong className="font-bold">{`Error: ${error}`}</strong>
@@ -166,7 +166,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
         role="success"
         style={{ zIndex: 1001 }}
       >
-        <strong className="font-bold">Worker added successfully</strong>
+        <strong className="font-bold">कामगार ऐड झाले</strong>
         <button
           onClick={hideSuccess}
           className="relative top-0.5 bottom-0 left-1"
@@ -198,7 +198,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
           </svg>
         </button>
         <div id="formTitle" className="w-52 h-4 m-4 font-bold text-base text-center text-25">
-          Add worker
+          नवीन कामगार
         </div>
         <div id="formFields" className="">
           <form
@@ -213,7 +213,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  placeholder="First name"
+                  placeholder="पहिला नाव"
                 />
               </div>
 
@@ -223,7 +223,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  placeholder="Last name"
+                  placeholder="शेवटचा नाव"
                 />
               </div>
 
@@ -233,7 +233,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Email"
+                  placeholder="ईमेल"
                 />
               </div>
 
@@ -243,7 +243,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={mobile}
                   onChange={(e) => setMobile(e.target.value)}
-                  placeholder="Mobile"
+                  placeholder="संपर्क क्रमांक"
                 />
               </div>
 
@@ -253,7 +253,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Address"
+                  placeholder="पत्ता"
                 />
               </div>
 
@@ -263,7 +263,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={city}
                   onChange={(e) => setCity(e.target.value)}
-                  placeholder="City"
+                  placeholder="शहर"
                 />
               </div>
 
@@ -273,7 +273,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  placeholder="State"
+                  placeholder="राज्य"
                 />
               </div>
 
@@ -283,7 +283,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  placeholder="Country"
+                  placeholder="देश"
                 />
               </div>
 
@@ -294,7 +294,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
                   className="w-full h-3.3125 py-2 px-8 text-xs md:text-sm font-semibold border rounded-xl outline-none border-[#9C9C9C] text-[#111010]"
                   value={zipcode}
                   onChange={(e) => setZipcode(e.target.value)}
-                  placeholder="PIN code"
+                  placeholder="पिन कोड"
                 />
               </div>
             </div>
@@ -303,7 +303,7 @@ const AddProduct = ({ addWorker, setAddWorker }) => {
               type="submit"
               className="rounded-xl bg-[#DF8E51] h-3.3125 w-10.0625 md:w-21.375 m-4 text-white py-2 transition duration-300"
             >
-              Add
+              ऐड करा 
             </button>
           </form>
         </div >

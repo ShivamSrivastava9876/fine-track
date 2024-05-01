@@ -17,11 +17,11 @@ import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/o
 import { getManufacturingByWorkerReportAsync, getOrderByUserReportAsync, getUserReportAsync, getUserReportList, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList, searchUserReportAsync } from "../redux/slice/report/reportSlice";
 
 const columns = [
-    { id: "userId", label: "User Id", minWidth: 50 },
-    { id: "userName", label: "User name", minWidth: 150 },
-    { id: "email", label: "Email Id", minWidth: 200 },
-    { id: "mobile", label: "Contact No", minWidth: 100 },
-    { id: "orderCount", label: "Number of orders", minWidth: 100 }
+    { id: "userId", label: "ग्राहकची आयडी", minWidth: 50 },
+    { id: "userName", label: "नाव", minWidth: 150 },
+    { id: "email", label: "ईमेल", minWidth: 200 },
+    { id: "mobile", label: "संपर्क क्रमांक", minWidth: 100 },
+    { id: "orderCount", label: "ऑर्डर मोजणी", minWidth: 100 }
 ];
 
 const createData = (
@@ -111,7 +111,7 @@ export default function UserReportTable() {
     return (
         <div>
             <div className="flex items-center justify-between flex-wrap w-full mb-4">
-                <h1 className="text-2xl mx-4 mb-1 font-bold">User report</h1>
+                <h1 className="text-2xl mx-4 mb-1 font-bold">ग्राहक अहवाल</h1>
                 {/* Right-hand side Search Box */}
                 <div className="flex flex-wrap">
                     {/* <Button className="hover:underline hover:bg-blue-200 underline p-0 text-sm right-0 font-semibold font-poppins" style={{ textTransform: 'none' }} onClick={handleDownload}>Download report</Button> */}
@@ -133,12 +133,12 @@ export default function UserReportTable() {
                             <polyline points="7 10 12 15 17 10" />
                             <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        Download report
+                        डाउनलोड अहवाल
                     </button>
                     <form onSubmit={(e) => handleUserReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
                         <input
                             type="search"
-                            placeholder="Search"
+                            placeholder="शोधा"
                             value={searchParameter}
                             onChange={(e) => handleSearchParameter(e.target.value)}
                             className="w-full h-full outline-none bg-transparent text-blue-gray-700"

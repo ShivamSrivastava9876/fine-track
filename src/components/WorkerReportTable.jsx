@@ -17,15 +17,15 @@ import { getConfirmOrderAsync, getConfirmOrderData } from "@/redux/slice/order/o
 import { getManufacturingByWorkerReportAsync, getWorkerReportAsync, getWorkerReportList, getYearlyManufacturingReportDataAsync, getYearlyReportList, searchWorkerReportAsync } from "../redux/slice/report/reportSlice";
 
 const columns = [
-    { id: "workerId", label: "Worker Id", minWidth: 50 },
-    { id: "workerName", label: "Worker name", minWidth: 150 },
-    { id: "email", label: "Email Id", minWidth: 200 },
-    { id: "mobile", label: "Contact No", minWidth: 80 },
-    { id: "manufacturingCount", label: "Manufacturing count", minWidth: 80 },
-    { id: "totalBalance", label: "Total balance (gm)", minWidth: 80 },
-    { id: "address", label: "Address", minWidth: 150 },
-    { id: "city", label: "City", minWidth: 80 },
-    { id: "zipcode", label: "Pin Code", minWidth: 60 },
+    { id: "workerId", label: "कामगारची आयडी", minWidth: 50 },
+    { id: "workerName", label: "कामगाराचे नाव", minWidth: 150 },
+    { id: "email", label: "ईमेल", minWidth: 200 },
+    { id: "mobile", label: "संपर्क क्रमांक", minWidth: 80 },
+    { id: "manufacturingCount", label: "उत्पादन मोजणी", minWidth: 80 },
+    { id: "totalBalance", label: "एकूण शिल्लक (ग्राम)", minWidth: 80 },
+    { id: "address", label: "पता", minWidth: 150 },
+    { id: "city", label: "शहर", minWidth: 80 },
+    { id: "zipcode", label: "पिन कोड", minWidth: 60 },
 ];
 
 const createData = (
@@ -141,7 +141,7 @@ export default function WorkerReportTable() {
     return (
         <div>
             <div className="flex items-center justify-between flex-wrap w-full mb-4">
-                <h1 className="text-2xl mx-4 mb-1 font-bold">Worker report</h1>
+                <h1 className="text-2xl mx-4 mb-1 font-bold">कामगार अहवाल</h1>
                 {/* Right-hand side Search Box */}
                 <div className="flex flex-wrap">
                     {/* <Button className="hover:underline hover:bg-blue-200 underline p-0 text-sm right-0 font-semibold font-poppins" style={{ textTransform: 'none' }} onClick={handleDownload}>Download report</Button> */}
@@ -163,12 +163,12 @@ export default function WorkerReportTable() {
                             <polyline points="7 10 12 15 17 10" />
                             <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        Download report
+                        डाउनलोड अहवाल
                     </button>
                     <form onSubmit={(e) => handleWorkerReportSearch(e)} className="flex items-center m-2 md:w-80 border-2 border-solid border-gray-300 rounded-full px-4 py-2">
                         <input
                             type="search"
-                            placeholder="Search"
+                            placeholder="शोधा"
                             value={searchParameter}
                             onChange={(e) => handleSearchParameter(e.target.value)}
                             className="w-full h-full outline-none bg-transparent text-blue-gray-700"

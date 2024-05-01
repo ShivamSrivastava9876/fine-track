@@ -21,18 +21,18 @@ import ViewImageOfProduct from "@/components/ViewPhotosOfProduct";
 import DeleteOption from "./DeleteOption";
 
 const columns = [
-  { id: "product", label: "Product", minWidth: 100 },
-  { id: "productId", label: "Product ID", minWidth: 100 },
-  { id: "category", label: "Category", minWidth: 100 },
-  { id: "productType", label: "Product type", minWidth: 100 },
-  { id: "quantity", label: "Quantity", minWidth: 50 },
-  { id: "stoneWeight", label: "Stone weight (gm)", minWidth: 50 },
-  { id: "grossWeight", label: "Weight (gm)", minWidth: 80 },
-  { id: "size", label: "Size (cm)", minWidth: 80 },
-  { id: "length", label: "Length (inch)", minWidth: 80 },
-  { id: "images", label: "Images", minWidth: 50 },
-  { id: "puritySpc", label: "Purity spc", minWidth: 50 },
-  { id: "price", label: "Price", minWidth: 100 },
+  { id: "product", label: "प्रोडक्ट", minWidth: 100 },
+  { id: "productId", label: "प्रोडक्टची आयडी", minWidth: 100 },
+  { id: "category", label: "कैटेगरी", minWidth: 100 },
+  { id: "productType", label: "प्रोडक्टचा प्रकार", minWidth: 100 },
+  { id: "quantity", label: "प्रमाण", minWidth: 50 },
+  { id: "stoneWeight", label: "दगडाचे वजन (ग्राम)", minWidth: 50 },
+  { id: "grossWeight", label: "वजन (ग्राम)", minWidth: 80 },
+  { id: "size", label: "माप", minWidth: 80 },
+  { id: "length", label: "लांबी (इंच)", minWidth: 80 },
+  { id: "images", label: "फोटो", minWidth: 50 },
+  { id: "puritySpc", label: "शुधता", minWidth: 50 },
+  { id: "price", label: "किमत", minWidth: 100 },
   { id: "actions", label: "", minWidth: 100 },
 ];
 
@@ -356,7 +356,7 @@ export default function ProductTables() {
           role="success"
           style={{ zIndex: 1001 }}
         >
-          <strong className="font-bold">Product updated successfully</strong>
+          <strong className="font-bold">प्रोडक्टचे अपडेट पूर्ण झाले</strong>
           <button
             onClick={hideUpdateSuccess}
             className="relative top-0.5 bottom-0 left-1"
@@ -428,7 +428,7 @@ export default function ProductTables() {
                                     handleImageClick(row.id, row.productImage)
                                   }
                                 >
-                                  View
+                                  बघा
                                 </button>
                                 {openImage && (
                                   <ViewImageOfProduct
@@ -536,7 +536,7 @@ export default function ProductTables() {
                                     />
                                     {selectedRowToDelete === row.id && (
                                       <DeleteOption
-                                        deleteDetails={{ title: "product" }}
+                                        deleteDetails={{ title: "प्रोडक्ट" }}
                                         rowId={row.id}
                                         isOpen={true}
                                         handleDelete={handleDelete}

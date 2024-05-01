@@ -17,8 +17,8 @@ import EditForm from "./EditForm";
 import DeleteOption from "./DeleteOption";
 
 const columns = [
-  { id: "srNo", label: "Sr No", minWidth: 80 },
-  { id: "category", label: "Category name", minWidth: 1000 },
+  { id: "srNo", label: "अनुक्रमांक", minWidth: 80 },
+  { id: "category", label: "कैटेगरीचे नाव", minWidth: 1000 },
   { id: "actions", label: "", minWidth: 100 },
 ];
 
@@ -144,7 +144,7 @@ export default function CategoryTables() {
         role="success"
         style={{ zIndex: 1001 }}
       >
-        <strong className="font-bold">Category updated successfully</strong>
+        <strong className="font-bold">कैटेगरीचे अपडेट पूर्ण झाले</strong>
         <button
           onClick={hideUpdateSuccess}
           className="relative top-0.5 bottom-0 left-1"
@@ -198,7 +198,7 @@ export default function CategoryTables() {
                                     Delete
                                   </Button> */}
                                     <MdDelete onClick={() => handleDeletePopup(row.Id)} size={24} style={{ cursor: 'pointer', color: 'red' }} />
-                                    {selectedRowToDelete === row.Id && <DeleteOption deleteDetails={{ title: "category" }} rowId={row.Id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
+                                    {selectedRowToDelete === row.Id && <DeleteOption deleteDetails={{ title: "कैटेगरी" }} rowId={row.Id} isOpen={true} handleDelete={handleDelete} handleDeleteCancel={handleDeleteCancel} />}
 
                                   </div>
                                 )}

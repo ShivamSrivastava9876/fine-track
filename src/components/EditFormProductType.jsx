@@ -37,12 +37,12 @@ const EditFormProductType = ({ image, row, openCategory, handleCategory, handleO
                 >
                     <div className="mb-4 space-y-1">
                         <h2 className=" flex items-center m-4 text-2xl font-bold">
-                            Edit product type
+                        प्रोडक्टचा प्रकार अपडेट करा
                         </h2>
                     </div>
                     <div class="relative cursor-pointer inline-block text-left mb-2 h-10">
                         <div onClick={handleCategory} class="inline-flex items-center justify-center px-4 py-2 w-full rounded-xl border border-gray-300 shadow-sm bg-white text-sm font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:ring focus:ring-indigo-200 active:bg-gray-100 active:text-gray-600">
-                            { category || row.category || "Select category"}
+                            { category || row.category || "कैटेगरीचा नाव"}
                             {/* Arrow icon (tailwindcss/heroicons) */}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -81,12 +81,12 @@ const EditFormProductType = ({ image, row, openCategory, handleCategory, handleO
                             defaultValue={row.productType}
                             value={productType}
                             onChange={(e) => setProductType(e.target.value)}
-                            placeholder={row.productType}
+                            placeholder="प्रोडक्टचा प्रकार"
                         />
                     </div>
                     <div className="mb-4 flex justify-center items-center">
                         <label htmlFor="fileInput" className="w-full flex items-center cursor-pointer h-9 py-2 px-8 border rounded-xl outline-none border-[#9C9C9C] text-[#111010]">
-                            <FiImage className="mr-2" /> {newImageStatus ? 'New image uploaded' : 'Click here to update image'}
+                            <FiImage className="mr-2" /> {newImageStatus ? 'नवीन फोटो अपलोड झाला' : 'नवीन फोटो टाका'}
                             <input
                                 type="file"
                                 id="fileInput"
@@ -101,13 +101,13 @@ const EditFormProductType = ({ image, row, openCategory, handleCategory, handleO
                             type="submit"
                             className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
                         >
-                            Update
+                            अपडेट
                         </button>
                         <button
                             onClick={handleCancel}
                             className="w-full mt-2 rounded-xl bg-[#DF8E51] text-white py-2 transition duration-300"
                         >
-                            Cancel
+                            रद्द करा
                         </button>
                     </div>
                 </form>
