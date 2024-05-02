@@ -34,7 +34,7 @@ const DashboardData = () => {
           </div>
         </Link>
 
-        <div
+        <Link href="/orders"
           id="newOrders"
           className="flex w-17.0125 h-24 px-4 py-2 bg-white border border-gray-300 rounded-2xl focus:outline-none outline-none hover:bg-gray-100"
         >
@@ -42,14 +42,14 @@ const DashboardData = () => {
             <Image src={OrderIcon} alt="user-icon" className="w-8" />
           </div>
           <div id="details" className="flex flex-col mx-2 my-2 font-semibold">
-            <span className="">New orders</span>
+            <span className="">नवीन ऑर्डर्स</span>
             <span id="data" className="font-bold ">
               {dashboardDetails?.new_orders}
             </span>
           </div>
-        </div>
+        </Link>
 
-        <Link
+        {/* <Link
           href="/confirmOrders"
           id="confirmOrders"
           className="flex w-17.0125 h-24 px-4 py-2 bg-white border border-gray-300 rounded-2xl focus:outline-none outline-none hover:bg-gray-100"
@@ -127,7 +127,7 @@ const DashboardData = () => {
             {dashboardDetails?.manufacring_count}
             </span>
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

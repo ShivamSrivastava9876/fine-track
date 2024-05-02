@@ -431,7 +431,7 @@ export async function deleteOrder(orderId) {
             Authorization: `Token ${token}`
         }
         const response = await fetch(
-            `http://77.37.44.105:7000/orders/delete-order/${orderId}`,
+            `http://77.37.44.105:7000/orders/delete-order/${orderId}/`,
             {
                 method: 'DELETE',
                 headers: header
